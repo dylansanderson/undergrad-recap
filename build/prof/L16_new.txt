@@ -1,0 +1,352 @@
+﻿#### L16_egee303: EGEE 303 Electronics
+
+[s0] TITLE  Electronics
+  img: a:first_transistor
+  beat0:
+     0: Welcome to E G E E three oh three, electronics.
+     1: That odd looking object is a replica of the first transistor, built at Bell Labs in nineteen forty seven.
+     2: Transistors are now the most manufactured object in human history, with billions on a single chip.
+     3: In this lecture, you'll learn where their behavior comes from, how diodes and transistors work, how to use transistors as switches and amplifiers, and what limits how fast they can go.
+
+[s1] V  Semiconductors and the pn junction
+  img: fig:doping
+  • Pure silicon: a poor conductor
+  • Doping: add phosphorus → n-type (electrons), boron → p-type (holes)
+  • Junction: carriers diffuse, leaving a depletion region
+  • Built-in barrier ≈ 0.7 V in silicon
+  (pen marks: 4 )
+  beat0:
+     0: Pure silicon is a poor conductor.
+     1: Its electrons are locked in bonds, and only a few break free at room temperature, thanks to the band gap you met in physics.
+  beat1:
+     0: Doping changes that.
+     1: Add a tiny amount of phosphorus, which has one extra electron, and you get n type silicon with free electrons.
+     2: Add boron, which is missing one, and you get p type silicon, with holes: missing electrons that move like positive charges.
+  beat2:
+     0: Put p and n regions side by side and something interesting happens.
+     1: Electrons near the junction drift across and fill holes, leaving a thin region with no free carriers at all, the depletion region.
+  beat3:
+     0: The fixed charges left behind create a built in voltage barrier, about point seven volts in silicon.
+     1: Every diode, transistor and solar cell is built around junctions like this.
+
+[s2] V  The diode: a one-way valve
+  img: fig:diode_iv
+  • Forward bias: barrier lowered → current flows (≈ 0.7 V drop)
+  • Reverse bias: barrier raised → almost no current
+  • Shockley: I = I_S(e^(V/V_T) − 1), V_T ≈ 26 mV
+  • Every +60 mV → 10× more current
+  (pen marks: 4 )
+  beat0:
+     0: A pn junction makes a diode, which lets current flow one way only.
+     1: Apply a positive voltage to the p side, forward bias, and the barrier shrinks, so current flows.
+  beat1:
+     0: Reverse the voltage, and the barrier grows, so only a tiny leakage current flows.
+  beat2:
+     0: The Shockley equation describes it: current grows exponentially with voltage, with the thermal voltage, about twenty six millivolts at room temperature, setting the scale.
+  beat3:
+     0: Exponential is the key word.
+     1: Every extra sixty millivolts or so multiplies the current by ten.
+     2: That's why, in practice, we treat a conducting silicon diode as having a roughly constant point seven volt drop: the voltage barely changes while the current changes enormously.
+
+[s3] V  Solving diode circuits: the load line
+  img: fig:loadline
+  • Two equations: the diode curve + the circuit (KVL)
+  • Circuit: I = (5 V − V) / 1 kΩ → a straight line
+  • Intersection = operating point (Q-point)
+  • Quick model: assume 0.7 V → I = 4.3 mA
+  (pen marks: 4 )
+  beat0:
+     0: Since the diode is nonlinear, we can't just use Ohm's law.
+     1: Take a five volt source, a one k resistor and a diode in series.
+     2: Two things must both be true: the diode's own curve, and Kirchhoff's voltage law for the circuit.
+  beat1:
+     0: The circuit equation says the current equals five volts minus the diode voltage, divided by one k.
+     1: That's a straight line on the same axes, called the load line.
+  beat2:
+     0: Where the two cross is the only point satisfying both: the operating point, or Q point.
+     1: Here, about point six eight volts and four point three milliamps.
+  beat3:
+     0: Engineers usually skip the graph and use the constant drop model: assume point seven volts, so the current is four point three volts over one k, four point three milliamps.
+     1: Same answer, in your head.
+     2: Graphical load line analysis, though, is exactly how you understand transistors too.
+
+[s4] WB  Worked example: sizing an LED resistor
+  step0 board+: PEN None || $V_s = 5\ \mathrm{V}$,  $V_F = 2.0\ \mathrm{V}$,  $I = 10\ \
+     0: The most common diode calculation of all: an LED needs a series resistor, or it draws too much current and burns out.
+     1: Our supply is five volts.
+     2: The LED drops about two volts when lit, and we want ten milliamps.
+  step1 board+: PEN [('circle', 3, 1.5, 0.62, 1.2)] || $V_R = 5 - 2 = 3\ \mathrm{V}$ || PEN None || PEN [('circle', 1.5, 3, 1.15, 0.6)] || $R = \frac{3\ \mathrm{V}}{10\ \mathrm{mA}} = 300\ \Omega$
+     0: Kirchhoff's voltage law: whatever the LED doesn't drop, the resistor must.
+     1: Five minus two is three volts across the resistor.
+     2: Ohm's law: three volts over ten milliamps is three hundred ohms.
+  step2 board+: PEN ('underline',) on standard: $330 || standard: $330\ \Omega \Rightarrow I = 3/330 \approx 9.1\ \m || $P_R = 3 \times 0.0091 \approx 27\ \mathrm{mW}$  (1/4 W is f || PEN ('check',) on $P_R = 3
+     0: Three hundred ohms isn't a standard value, so round up to the next one, three thirty.
+     1: That gives three over three thirty, about nine point one milliamps.
+     2: Slightly dimmer, slightly safer.
+     3: The resistor dissipates three volts times nine point one milliamps, about twenty seven milliwatts, so a common quarter watt resistor is plenty.
+
+[s5] V  Power supplies: rectifiers and ripple
+  img: a:bridge_rect / fig:rectifier
+  • Bridge of 4 diodes: flips negative halves up
+  • Filter capacitor holds the peak between pulses
+  • Ripple ≈ V_p / (2 f R C) for full-wave
+  • Then a regulator gives clean DC
+  (pen marks: 3 )
+  beat0:
+     0: Every device that plugs into the wall needs to turn AC into DC.
+     1: The first step is a rectifier.
+     2: A bridge of four diodes, like the one in this package, steers current so that both halves of the AC wave come out positive.
+  beat1:
+     0: That bumpy output isn't DC yet, so we add a big filter capacitor.
+     1: It charges up to the peak, then slowly discharges into the load between peaks, leaving a small sawtooth called ripple.
+     2: For a full wave rectifier, the ripple is about the peak voltage divided by two times the frequency times R times C.
+     3: A bigger capacitor or a lighter load means less ripple.
+     4: Finally, a voltage regulator, often built from a Zener diode or a dedicated chip, smooths out what's left.
+     5: Modern phone chargers use high frequency switching converters instead, but the rectifier and filter capacitor are still right there at the input.
+
+[s6] WB  Worked example: how big is the ripple?
+  step0 board+: full-wave: peaks 12 V, $f_{ripple} = 2 \times 60 = 120\ \mat || PEN None
+     0: A full wave rectifier turns sixty hertz AC into bumps at twelve volts peak, a hundred twenty times a second.
+     1: Alone, that's useless for electronics.
+  step1 board+: PEN None || PEN [('box', 129.0, 492.40000000000003, 281.
+     0: A filter capacitor charges to the peak, then holds the voltage up while the load slowly drains it, until the next bump recharges it.
+     1: The voltage now sags only a little between peaks.
+     2: That sag is the ripple.
+  step2 board+: PEN None || $V_r \approx \frac{V_p}{2fRC} = \frac{12}{2(60)(1000)(0.001)
+     0: Estimate it: ripple is about the peak voltage over two f R C, using the line frequency f.
+     1: With a one kilohm load and a thousand microfarad capacitor: twelve over two times sixty times one thousand times point zero zero one, which is a tenth of a volt.
+  step3 board+: $R = 100\ \Omega$:  $V_r \approx 1\ \mathrm{V}$  (10× worse) || PEN ('underline',) on $R = 100\ \Omega$ || then a regulator cleans it up
+     0: Now draw ten times more current, with a hundred ohm load.
+     1: The ripple grows ten times, to a full volt.
+     2: Heavier loads need bigger capacitors, and a voltage regulator after the capacitor cleans up whatever ripple is left.
+
+[s7] V  The MOSFET: a voltage-controlled switch
+  img: fig:mosfet / fig:mos_iv
+  • Gate voltage creates a conducting channel
+  • Gate draws no DC current (insulated)
+  • Triode: acts like a resistor/switch ON
+  • Saturation: I_D = ½ k (V_GS − V_t)² — an amplifier
+  (pen marks: 7 )
+  beat0:
+     0: The MOSFET is the transistor inside every digital chip.
+     1: Here's an N channel MOSFET in cross section.
+     2: Two heavily doped n regions, the source and drain, sit in p type silicon.
+     3: Above the gap between them is the gate, separated by a very thin insulating oxide.
+     4: Apply a positive gate voltage above the threshold, and it attracts electrons up to the surface, forming a conducting channel from source to drain.
+     5: No gate voltage, no channel, no current.
+     6: And because the gate is insulated, it draws essentially no DC current at all.
+  beat1:
+     0: These are its output curves.
+     1: At small drain voltages, in the triode region, the channel acts like a resistor whose value is set by the gate voltage.
+     2: That's the switch on state used in logic.
+     3: At larger drain voltages, the current levels off, in the saturation region, at one half k times the overdrive voltage squared.
+     4: There, the gate voltage controls the current almost independently of the drain voltage, like a voltage controlled current source.
+     5: That's the amplifier region.
+     6: Logic uses the transistor as a switch.
+     7: Analog circuits use it as an amplifier.
+
+[s8] WB  Which region? The MOSFET checklist
+  step0 board+: 1.  $V_{GS} < V_t$  $\to$  cutoff:  $I_D = 0$
+     0: On every electronics exam, the first question about a MOSFET is: which region is it in?
+     1: Here's the checklist, in order.
+     2: First compare the gate source voltage with the threshold.
+     3: If V G S is below V t, there's no channel: cutoff, and no current.
+  step1 board+: 2.  overdrive  $V_{ov} = V_{GS} - V_t$ || PEN ('underline',) on overdrive  $V_{ov} || $V_{DS} < V_{ov}$  $\to$  triode (a resistor) || $V_{DS} \geq V_{ov}$  $\to$  saturation:  $I_D = \frac{1}{2}
+     0: If it's above threshold, compute the overdrive, V G S minus V t.
+     1: Then compare V D S with it.
+     2: If V D S is smaller, the channel is fully formed along its length, and it acts like a resistor: triode.
+     3: If V D S is at least the overdrive, the channel pinches off at the drain end: saturation.
+  step2 board+: $V_t = 1$, $k = 2\ \mathrm{mA/V^2}$, $V_{GS} = 3$:  $V_{ov}  || $V_{DS} = 5 \geq 2$:  saturation,  $I_D = \frac{1}{2}(2)(2^2 || PEN ('circle',) on = 4\ \mathrm{mA}$ || $V_{DS} = 1 < 2$:  triode
+     0: Numbers.
+     1: Threshold one volt, k equals two milliamps per volt squared.
+     2: With V G S equals three volts, the overdrive is two volts.
+     3: If V D S is five volts, that's more than two, so it's saturated, and the current is one half times two times two squared: four milliamps.
+     4: Drop V D S to one volt, and it's in triode instead.
+  step3 board+: MOSFET "saturation" = amplifier || PEN ('box',) on MOSFET "saturation" || BJT "saturation" = fully-on switch || PEN ('box',) on BJT "saturation"
+     0: And beware a famous naming trap.
+     1: For a MOSFET, saturation is the amplifier region, where the current saturates at a steady value.
+     2: For a B J T, saturation means the opposite: the transistor is jammed fully on, like a closed switch.
+     3: Same word, different meaning.
+     4: Always ask which device.
+
+[s9] V  Driving loads from a microcontroller pin
+  img: fig:switch
+  • MCU pins: a few mA, 3.3 V — too weak for motors, relays, LED strips
+  • Logic-level N-MOSFET as a low-side switch
+  • Pin high → transistor on → load powered
+  • Add a flyback diode for motors/relays (inductive kick)
+  (pen marks: 5 )
+  beat0:
+     0: Here's the transistor circuit computer engineers build most often.
+     1: A microcontroller pin can only supply a few milliamps at three point three volts.
+     2: That's fine for one small L E D, but not for a motor, a relay or an L E D strip.
+  beat1:
+     0: So the pin drives the gate of an N channel MOSFET, which switches the load's ground connection.
+     1: This is called a low side switch.
+     2: The load has its own power supply, here five volts.
+  beat2:
+     0: When the pin goes high, the transistor turns on and the load runs.
+     1: When the pin goes low, it turns off.
+     2: The MOSFET's gate draws almost no current, so the microcontroller barely notices.
+     3: Choose a logic level MOSFET, one that turns fully on at three point three volts.
+  beat3:
+     0: One warning for motors, solenoids and relays: they're inductors, and when you switch them off, their current can't stop instantly, so the voltage spikes.
+     1: Put a diode backwards across the load, a flyback diode, to give that current a safe path, or it can destroy the transistor.
+
+[s10] WB  Worked example: a MOSFET motor driver
+  step0 board+: pin: 3.3 V, few mA.  motor: 12 V, 1 A || PEN None
+     0: A microcontroller pin can supply a few milliamps at three point three volts.
+     1: A twelve volt motor needs an amp.
+     2: The fix is a logic level N channel MOSFET as a low side switch: the motor sits between twelve volts and the drain, and the source goes to ground.
+  step1 board+: PEN None || 100 Ω: tames the gate charging spike || PEN ('underline',) on 100 Ω: tames || 100 kΩ: OFF while the MCU boots || PEN ('underline',) on 100 kΩ: OFF
+     0: The gate connects to the pin through a small resistor, which limits the current spike when the gate capacitance charges.
+     1: A hundred kilohm pull down resistor keeps the motor off while the microcontroller is booting and the pin is floating.
+  step2 board+: ON: $P = I^2 R_{DS(on)} = 1^2 \times 0.05 = 50\ \mathrm{mW}$
+     0: Pin high: the MOSFET turns on, with an on resistance of about fifty milliohms.
+     1: At one amp, it dissipates one squared times point zero five, just fifty milliwatts.
+     2: No heatsink needed.
+  step3 board+: PEN None || PEN [('circle', 0, -2.1, 0.95, 1.25)] || flyback diode: absorbs the spike || PEN [('circle', 1.8, -2.1, 0.6, 1.3)]
+     0: And never forget the flyback diode.
+     1: A motor is an inductor, and when the MOSFET switches off, the current can't stop instantly.
+     2: Without a path, the voltage spikes high enough to destroy the transistor.
+     3: The diode gives that current somewhere safe to circulate.
+
+[s11] V  The BJT and the common-emitter amplifier
+  img: a:transistors / fig:ce / fig:ce_wave
+  • BJT: base current controls collector current, i_C = β i_B
+  • Active region: V_BE ≈ 0.7 V
+  • Divider bias + emitter resistor → stable Q-point
+  • Gain ≈ −R_C / R_E = −4.7
+  (pen marks: 6 )
+  beat0:
+     0: The bipolar junction transistor, or B J T, came first and is still widely used in analog circuits.
+     1: Transistors come in many packages, from tiny surface mount parts to big metal cans for high power.
+     2: In a B J T, a small base current controls a much larger collector current: i C equals beta times i B, where beta is typically around one hundred.
+     3: In the active region, the base emitter junction is forward biased, at about point seven volts.
+  beat1:
+     0: Here's the classic common emitter amplifier.
+     1: The resistor divider R one and R two sets the base voltage at about two point one volts, so the emitter sits near one point four volts, and with a one k emitter resistor that sets about one point four milliamps of collector current.
+     2: This four resistor bias network is popular because the current depends on the resistors, not on beta, which varies a lot from part to part.
+     3: The input capacitor blocks DC, so the signal rides on top of the bias.
+  beat2:
+     0: With the emitter resistor in place, the voltage gain is about minus R C over R E, minus four point seven here.
+     1: A twenty millivolt input becomes about ninety four millivolts at the output, inverted.
+     2: Notice the trade: removing R E's effect with a bypass capacitor would raise the gain a lot, but the gain would then depend on temperature and the transistor.
+     3: Engineers trade gain for stability all the time.
+
+[s12] WB  Worked example: DC bias of a common-emitter amplifier
+  step0 board+: step 1: DC bias first || PEN None
+     0: Before a transistor can amplify, we must find its DC operating point.
+     1: Here's a classic divider bias circuit: R one and R two set the base voltage, R E sits under the emitter, and R C is the collector load.
+  step1 board+: $V_B \approx 12\cdot\frac{10k}{47k + 10k} = 2.1\ \mathrm{V}$ || PEN None || PEN ('underline',) on $V_B \approx
+     0: The base current is tiny compared to the divider current, so treat R one and R two as a plain voltage divider: twelve times ten over fifty seven, about two point one volts at the base.
+  step2 board+: $V_E = 2.1 - 0.7 = 1.4\ \mathrm{V}$ || $I_C \approx I_E = \frac{1.4}{1k} = 1.4\ \mathrm{mA}$ || PEN None || PEN ('circle',) on $I_C \approx
+     0: The base emitter junction drops about point seven volts, so the emitter sits at one point four volts.
+     1: Across one kilohm, that's one point four milliamps, and the collector current is almost the same.
+  step3 board+: $V_C = 12 - (4.7k)(1.4\ \mathrm{mA}) \approx 5.4\ \mathrm{V} || PEN None || $V_{CE} \approx 4\ \mathrm{V}$: active region || PEN ('check',) on $V_{CE} \approx || gain $\approx -R_C/R_E = -4.7$ || PEN ('underline',) on gain $\approx -R_C
+     0: The collector sits at twelve minus four point seven k times one point four milliamps, about five point four volts.
+     1: That leaves four volts across the transistor, well inside the active region, with room to swing both ways.
+     2: And notice: beta never appeared.
+     3: That's what makes this bias stable.
+     4: The voltage gain is about minus R C over R E: minus four point seven.
+
+[s13] V  Small-signal analysis and amplifier types
+  img: fig:smallsig
+  • Bias at a DC Q-point, then linearize around it
+  • g_m = I_C / V_T: 1.4 mA → 54 mS
+  • Common emitter/source: gain, inverting
+  • Follower (common collector/drain): gain ≈ 1, a buffer
+  (pen marks: 5 )
+  beat0:
+     0: To analyze amplifiers, we use the linear approximation from Calculus one.
+     1: Set a DC bias point, then treat the transistor's response to tiny signals as a straight line: the tangent line at the Q point.
+  beat1:
+     0: The slope is the transconductance, g m: the change in output current per change in input voltage.
+     1: For a B J T, it's the collector current over the thermal voltage.
+     2: At one point four milliamps, that's about fifty four milli siemens.
+     3: We replace the transistor with a small signal model and use ordinary circuit analysis.
+     4: Here's why that number matters.
+     5: If the emitter resistor were bypassed by a capacitor, the gain would be minus g m times R C: fifty four milli siemens times four point seven k, about minus two hundred fifty.
+     6: With the emitter resistor in place, it was minus four point seven.
+     7: That's the gain you trade away for stability.
+  beat2:
+     0: Three basic configurations.
+     1: Common emitter, or common source for a MOSFET, provides voltage gain and inverts the signal.
+     2: It's the main amplifier stage.
+  beat3:
+     0: The emitter follower, or source follower, has a gain of about one, but a high input resistance and low output resistance, so it's a buffer: it can drive a heavy load without loading down the stage before it.
+     1: The third type, common base, is used at high frequencies.
+     2: Real amplifiers chain these stages together.
+
+[s14] V  Frequency response: amplifiers have a bandwidth
+  img: fig:bode
+  • Coupling capacitors block very low frequencies
+  • Internal capacitances short out high frequencies
+  • Miller effect: C_μ multiplied by (1 + gain)
+  • Bode plot: gain in dB vs log frequency
+  (pen marks: 5 )
+  beat0:
+     0: No amplifier works at every frequency.
+     1: At low frequencies, the coupling and bypass capacitors start to block the signal, setting a lower corner frequency.
+  beat1:
+     0: At high frequencies, tiny capacitances inside the transistor itself start shorting the signal away, setting an upper corner.
+  beat2:
+     0: In a common emitter stage, one capacitance, from base to collector, is especially harmful.
+     1: Because the output swings opposite to the input and much larger, that capacitance appears at the input multiplied by one plus the gain.
+     2: That's the Miller effect, and it's often what limits the bandwidth.
+  beat3:
+     0: We plot this on a Bode plot: gain in decibels against frequency on a log axis.
+     1: The corners are where the gain drops by three decibels, half power.
+     2: Here, the midband gain is forty decibels, which is a hundred times, from fifty hertz to two hundred kilohertz.
+     3: You'll use Bode plots constantly in signals and systems.
+
+[s15] V  Real op amps: gain–bandwidth and slew rate
+  img: fig:gbw
+  • Gain × bandwidth ≈ constant (GBW)
+  • 1 MHz op amp at gain 100 → only 10 kHz
+  • Slew rate limits how fast the output can swing
+  • Offsets, bias currents, output-swing limits
+  (pen marks: 5 )
+  beat0:
+     0: Op amps from the circuits course are built from transistors, so they inherit these limits.
+     1: The most important one: the product of closed loop gain and bandwidth is roughly constant, called the gain bandwidth product.
+  beat1:
+     0: An op amp with a one megahertz gain bandwidth product, set to a gain of ten, works up to about one hundred kilohertz.
+     1: Set it to a gain of one hundred, and it only works up to ten kilohertz.
+     2: If you need both high gain and wide bandwidth, use two stages.
+  beat2:
+     0: There's also a slew rate: the fastest the output can change, in volts per microsecond.
+     1: Ask for a big, fast swing, and the output turns into a triangle wave instead of a sine wave.
+  beat3:
+     0: And real op amps have small input offset voltages, input bias currents, and outputs that can't quite reach the supply rails, unless you choose a rail to rail part.
+     1: Reading these specs on a datasheet is a core analog design skill.
+
+[s16] WB  Worked example: will this op amp keep up?
+  step0 board+: GBW $= 1\ \mathrm{MHz}$,   slew rate $= 0.5\ \mathrm{V/\mu s || gain 100:  BW $= \frac{1\ \mathrm{MHz}}{100} = 10\ \mathrm{k || PEN ('circle',) on 10\ \mathrm{kHz}$
+     0: Real op amps have two speed limits.
+     1: Take a common part: a gain bandwidth product of one megahertz, and a slew rate of half a volt per microsecond.
+     2: First limit: bandwidth.
+     3: Set the gain to one hundred, and the bandwidth is one megahertz divided by one hundred: just ten kilohertz.
+  step1 board+: max slope of $V_p\sin(2\pi ft)$ is $2\pi fV_p$ || PEN ('underline',) on max slope of
+     0: Second limit: the slew rate, the fastest the output can move.
+     1: A sine wave of peak V p and frequency f changes fastest at its zero crossing, at a rate of two pi f V p.
+  step2 board+: $f_{max} = \frac{SR}{2\pi V_p} = \frac{0.5\times 10^6}{2\pi(
+     0: For a five volt peak output, set two pi f times five equal to half a volt per microsecond.
+     1: Solve: f is about sixteen kilohertz.
+     2: Above that, the sine wave turns into a triangle wave, no matter what the gain is.
+  step3 board+: usable to about 10 kHz: check BOTH limits || PEN ('underline',) on check BOTH limits
+     0: So for a gain of one hundred and a five volt swing, this op amp is good to about ten kilohertz, fine for audio bass, but not for ultrasound.
+     1: Always check both limits on the datasheet before choosing a part.
+
+[s17] Q  Key takeaways
+  BIG: Doped silicon makes **junctions**. Junctions make **diodes**; gates and junctions make **transistors** — switches for logic, amplifiers for analog.
+  cap: Next: EGEE 303L, the electronics lab — measuring all of this on the bench.
+  beat0:
+     0: To recap.
+     1: Doping silicon makes n and p regions, and their junction creates a barrier.
+     2: Diodes conduct one way with about point seven volts of drop, and power supplies use them in rectifiers.
+     3: MOSFETs are voltage controlled switches and current sources, and are the building block of digital chips.
+     4: B J Ts amplify with a stable bias network, and small signal models let us compute gain.
+     5: And every amplifier has a limited bandwidth, set by capacitances and the gain bandwidth product.
+     6: Next, we take this to the lab bench.
+     7: See you there.

@@ -1,0 +1,195 @@
+﻿#### L29_egcp470: EGCP 470 Senior Design I
+
+[s0] TITLE  Senior Design I
+  img: a:rpi_cam
+  beat0:
+     0: Welcome to E G C P four seventy, senior design one, the first half of the capstone.
+     1: For the first time, nobody hands you a problem with a known answer.
+     2: A team picks a real need, and over two semesters designs, builds and demonstrates a working system.
+     3: This first semester is about doing the engineering before the building: understanding the need, writing requirements you can test, choosing between concepts, planning the work, and budgeting.
+     4: As a running example, we'll use one kind of project teams take on: a voice commanded robotic arm assistant that recognizes small tools and fetches them, designed especially to help people with limited mobility, built around a Raspberry Pi and a camera.
+
+[s1] V  The engineering design process
+  img: fig:process
+  • Need → research → requirements → concepts → choose
+  • Then detailed design → build → test → iterate
+  • Research prior art, markets and standards first
+  • Every loop is cheaper on paper than in hardware
+  (pen marks: 9 )
+  beat0:
+     0: Engineering design follows a loop.
+     1: Start with a clear statement of the need: who has the problem, and why do current solutions fall short?
+     2: Then research: existing products and patents, the market, and relevant standards, such as electrical safety or accessibility guidelines.
+     3: From that research come requirements, then several candidate concepts, and a reasoned choice between them.
+  beat1:
+     0: Only then comes detailed design, building and testing, where every test is judged against the requirements.
+     1: Results feed back into the loop.
+     2: The point of front loading the thinking is cost: changing a block diagram costs an afternoon, changing a soldered prototype costs a week, and changing a product after release costs a fortune, the same lesson as software engineering.
+
+[s2] V  Requirements you can actually test
+  img: fig:reqs
+  • Specific, measurable, testable
+  • Functional requirements vs constraints vs nice-to-haves
+  • Include safety and accessibility
+  • Requirements become the final acceptance tests
+  (pen marks: 4 )
+  beat0:
+     0: The single most important skill in this course is writing good requirements.
+     1: Recognize tools is a wish, not a requirement: you can never prove you've met it.
+     2: Detect a stapler at half a meter, in office lighting, with at least ninety percent success, is a requirement.
+     3: You can set up that test and get a yes or no.
+  beat1:
+     0: Separate the functional requirements, what the system must do, from constraints, like budget, size, power and weight, and from nice to haves that you'll add only if time allows.
+  beat2:
+     0: For anything that moves, safety requirements come first: the arm must stop within half a second when a stop button is pressed.
+     1: For an assistive device, accessibility requirements matter just as much: commands that work for someone with limited speech, or a button fallback.
+  beat3:
+     0: Write requirements so they turn directly into the acceptance tests at the end of the second semester.
+     1: A team that does this well knows exactly what done means.
+
+[s3] V  Choosing a concept: the decision matrix
+  img: fig:matrix
+  • List criteria and agree on weights first
+  • Score each concept 1–5 per criterion
+  • Weighted sum ranks the options
+  • Then sanity-check the winner against requirements
+  (pen marks: 5 )
+  beat0:
+     0: Teams usually have several ways to solve each sub problem, and opinions get heated.
+     1: A decision matrix turns the argument into arithmetic.
+     2: First agree on the criteria and their weights, before looking at the options: say cost twenty five percent, feasibility thirty, performance twenty five and risk twenty.
+     3: Then score each concept from one to five on each criterion, multiply by the weights and add.
+     4: For the arm's gripper, a servo driven claw scores three point five five, an electromagnet three point seven five, and a suction cup two point five.
+     5: The electromagnet wins on cost and simplicity.
+     6: But the matrix doesn't end the discussion: it makes the trade off explicit.
+     7: An electromagnet only grabs iron and steel, so if the requirements include plastic objects, the team must either change the requirement or pick the claw.
+     8: The matrix's real value is that everyone can see, and challenge, exactly why a choice was made.
+
+[s4] WB  Worked example: scoring three concepts
+  step0 board+: weights first, then scores || PEN None
+     0: Our team has three concepts for the arm: A, a servo arm kit; B, a custom stepper motor arm; and C, a gantry on linear rails.
+     1: Before scoring anything, agree on the criteria and their weights.
+     2: Accuracy matters most, point four, then cost, build time, and safety.
+  step1 board+: PEN None || B: best accuracy, worst cost and time
+     0: Now score each concept from one to five on each criterion.
+     1: The custom arm is the most accurate, a five, but it's expensive and slow to build.
+  step2 board+: A $= 0.4(3) + 0.3(5) + 0.2(5) + 0.1(4) = 4.1$ || PEN None || A wins: 4.1 vs 3.4 vs 3.6
+     0: Multiply each score by its weight and add.
+     1: Concept A: point four times three, plus point three times five, plus point two times five, plus point one times four: four point one.
+     2: B gets three point four, and C gets three point six.
+     3: The kit wins, even though B won the most important criterion.
+  step3 board+: check the winner against must-haves
+     0: Finally, a sanity check: does A meet every hard requirement?
+     1: A matrix ranks options, but a concept that fails a must-have requirement is out, no matter its score.
+     2: Then write down why you chose it.
+     3: That paragraph goes straight into your design review.
+
+[s5] V  System architecture: blocks and interfaces
+  img: fig:blocks / a:rpi_camv2
+  • Block diagram: subsystems + data, power, mechanical links
+  • Define interfaces early so the team works in parallel
+  • Example split: voice, vision, path planning, arm control
+  • Watch power: servos need their own supply
+  (pen marks: 7 )
+  beat0:
+     0: Next, break the system into subsystems and define exactly what flows between them.
+     1: In the robotic arm example, a microphone and speech recognition produce a text command.
+     2: The camera and an object detector produce bounding boxes in pixel coordinates.
+     3: A path planning block converts a target into joint angles, and the arm controller drives the servos.
+     4: A Raspberry Pi ties it together.
+     5: Once the interface of each block is written down, for example, the vision block outputs a list of object names with x and y pixel positions, each team member can build and test their block in parallel, using fake inputs until the real ones exist.
+     6: Teams typically split the work exactly along these lines.
+  beat1:
+     0: Don't forget power and mechanics in the block diagram.
+     1: Servos draw large current spikes when they move, which can make a Raspberry Pi's supply sag and reboot it, so the arm needs its own supply with a common ground.
+     2: Problems like this live at the interfaces, which is why the architecture deserves careful thought before anything is bought.
+
+[s6] WB  Worked example: a power budget and battery life
+  step0 board+: list every load || PEN None
+     0: Before choosing a battery, list every load.
+     1: The single board computer draws one point two amps at five volts, six watts, all the time.
+  step1 board+: PEN None || servos: $9.6 \times 0.25 = 2.4$ W average
+     0: The four servos draw about point four amps each at six volts: nine point six watts while moving.
+     1: But the arm only moves about a quarter of the time, so they average two point four watts.
+  step2 board+: PEN None || regulators: size for PEAK (16.6 W) || battery: size for AVERAGE (9.4 W)
+     0: Add the camera and microphone, one watt.
+     1: Peak is sixteen point six watts, but the average is only nine point four.
+     2: Size the regulators for the peak, and the battery for the average.
+  step3 board+: battery draw $= 9.4 / 0.85 \approx 11.1$ W || $12\,\mathrm{V} \times 5\,\mathrm{Ah} = 60$ Wh, use 80% || runtime $= 48 / 11.1 \approx 4.3$ h
+     0: The regulators are about eighty five percent efficient, so the battery supplies nine point four over point eight five, about eleven point one watts.
+     1: A twelve volt, five amp hour battery stores sixty watt hours.
+     2: Using only eighty percent of it to protect the battery: forty eight over eleven point one is about four point three hours of runtime.
+
+[s7] V  Planning: schedule, risk and design reviews
+  img: fig:gantt
+  • Work breakdown → Gantt chart with milestones
+  • Critical path and part lead times
+  • Risk register: likelihood × impact → mitigation
+  • PDR and CDR before committing money
+  (pen marks: 6 )
+  beat0:
+     0: Break the work down into tasks small enough to estimate, then lay them out on a Gantt chart against the semester's weeks.
+     1: Mark the milestones, especially the design reviews.
+  beat1:
+     0: Find the critical path, the chain of tasks with no slack, and pay special attention to part lead times.
+     1: A component with a six week shipping time can sink a schedule all by itself, so order early and order spares.
+  beat2:
+     0: Keep a risk register: for each risk, its likelihood, its impact and a mitigation plan.
+     1: If voice recognition accuracy turns out too low, fall back to selecting objects with buttons.
+     2: If the object detector is too slow on the Raspberry Pi, reduce the image resolution.
+  beat3:
+     0: And hold formal design reviews: a preliminary design review to agree on the approach, and a critical design review before committing serious money.
+     1: Biweekly status reports summarize what was done, what's next, any blockers, and the budget, which is exactly how engineering projects are tracked in industry.
+
+[s8] V  Budget and procurement
+  img: fig:budget / a:servo
+  • Bill of materials: part numbers, quantities, suppliers, lead times
+  • Include spares, shipping and tax
+  • Track spending against the budget
+  • Follow the purchasing process (reimbursement forms!)
+  (pen marks: 3 )
+  beat0:
+     0: Every capstone has a budget, typically a few hundred dollars for a student team.
+     1: The bill of materials lists every part with its part number, quantity, supplier, price and lead time.
+     2: Include spares, because small servos and boards do get destroyed during testing, and include shipping, which students reliably forget.
+     3: This illustrative B O M for an arm project comes to about five hundred seventy dollars against a six hundred dollar budget.
+  beat1:
+     0: Then track actual spending as you go, and follow the university's purchasing process, which for student teams often means filling out reimbursement or check request forms and keeping every receipt.
+     1: It's unglamorous, but in industry, a project that's technically brilliant and over budget is still in trouble.
+
+[s9] V  Professional habits that make projects succeed
+  img: fig:status
+  • Keep an engineering notebook: decisions and why
+  • Version control for code — and for documents
+  • Write documentation someone else could pick up
+  • Consider standards, safety, ethics and accessibility
+  • Communicate early: a blocker reported on Monday is a small problem
+  (pen marks: 2 )
+  beat0:
+     0: A few habits separate successful capstone teams from struggling ones.
+     1: Keep an engineering notebook recording what you tried, what happened, and why you made each decision.
+  beat1:
+     0: Put all code in version control from day one, and keep documents versioned too.
+  beat2:
+     0: Write documentation clear enough that another team could pick up your project.
+     1: In industry, someone always does.
+  beat3:
+     0: Think about the standards that apply, about safety for anything that moves or plugs into the wall, about the ethics of what you're building, and about accessibility for the people who will use it.
+  beat4:
+     0: And communicate.
+     1: A teammate who reports on Monday that a part hasn't arrived creates a small scheduling problem.
+     2: One who reports it the night before the demo creates a crisis.
+     3: Next semester, the team builds it.
+
+[s10] Q  Key takeaways
+  BIG: Design before you build: **testable requirements**, a **justified concept**, clear **interfaces**, and a **schedule, risk list and budget** you actually track.
+  cap: Next: EGCP 471, Senior Design II — building a vision-guided robotic arm.
+  beat0:
+     0: To recap.
+     1: Senior design follows the engineering design process, front loading the thinking because changes get more expensive later.
+     2: Requirements must be specific, measurable and testable, including safety and accessibility.
+     3: Decision matrices make concept choices explicit.
+     4: Block diagrams with defined interfaces let a team work in parallel.
+     5: Gantt charts, risk registers and design reviews keep the project on track, and the bill of materials keeps it on budget.
+     6: Next, senior design two, where we build the robotic arm with computer vision.
+     7: See you there.

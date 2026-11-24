@@ -1,0 +1,472 @@
+﻿#### L03_cpsc120: CPSC 120 Introduction to Programming
+
+[s0] TITLE  Introduction to Programming
+  img: a:datacenter
+  beat0:
+     0: Welcome to C P S C one twenty, Introduction to Programming.
+     1: Every one of those blinking servers is running programs that people wrote, one line at a time.
+     2: In this lecture, you'll learn how a computer actually runs code, and the five building blocks behind every program ever written: variables, decisions, loops, functions and collections of data.
+     3: We'll use C plus plus, the language this course uses, but the ideas carry over to every language.
+
+[s1] V  What is a program?
+  img: a:lovelace / a:eniac / fig:compile
+  • A precise list of instructions
+  • Computers do exactly what you say — not what you mean
+  • Compiler: source code → machine code
+  (pen marks: 4 )
+  beat0:
+     0: A program is a precise list of instructions for a computer.
+     1: The idea is older than electronics.
+     2: In the eighteen forties, Ada Lovelace wrote what's often called the first computer program, an algorithm for Charles Babbage's mechanical Analytical Engine, which was never fully built.
+  beat1:
+     0: In the nineteen forties, the first general purpose electronic computer, ENIAC, was programmed by a team of women who set thousands of switches and plugged cables by hand.
+     1: Changing the program could take days.
+     2: Here's the most important lesson they learned, which is still true: a computer does exactly what you tell it, not what you meant.
+  beat2:
+     0: Today we write programs as text, called source code, in a language like C plus plus.
+     1: A program called a compiler translates that text into machine code, the ones and zeros a C P U can execute.
+     2: The compiler translates once, and then the processor runs billions of simple instructions every second.
+
+[s2] V  Why C++? Who uses it?
+  img: a:stroustrup
+  • Created by Bjarne Stroustrup (1979–85) as "C with classes"
+  • Fast, close to the hardware, yet high-level
+  • Game engines, web browsers, databases, robotics, trading systems
+  • Embedded C/C++ runs in cars, medical devices, appliances
+  (pen marks: 2 )
+  beat0:
+     0: Why C plus plus?
+     1: It was created by Bjarne Stroustrup, pictured here, starting in nineteen seventy nine, as C with classes: the speed of the C language plus tools for organizing big programs.
+     2: It gives you control over memory and hardware, which is why performance critical software is written in it.
+     3: Most major game engines, the core of web browsers like Chrome and Firefox, databases, robotics software and high speed trading systems all rely on C plus plus.
+     4: And its close cousin C runs inside the embedded computers in cars, medical devices and appliances.
+     5: For a computer engineer, that closeness to the hardware is exactly the point.
+     6: You'll write C for microcontrollers in later courses.
+
+[s3] EX  Your first program
+  CODE:
+    #include <iostream>
+    
+    int main() {
+      std::cout << "Hello, world!\n";
+      return 0;
+    }
+    
+    // in a terminal:
+    // $ g++ -std=c++17 hello.cc -o hello
+    // $ ./hello
+    // Hello, world!
+  (pen marks: 9 )
+  beat0:
+     0: Here's the classic first program.
+     1: The include line pulls in the input output library, so we can print.
+     2: Every C plus plus program starts running at the function called main.
+     3: Inside, s t d colon colon c out, with the two less than arrows, sends text to the screen.
+     4: The backslash n is a newline.
+     5: Return zero tells the operating system that the program finished successfully.
+     6: Notice the details: curly braces group statements, and every statement ends with a semicolon.
+     7: Leave one out and the compiler will refuse to build your program.
+     8: To run it, you compile in a terminal with g plus plus, which produces an executable file, and then run that file.
+     9: In this course, students do all of this on Linux, in a terminal, which is how professional developers work.
+
+[s4] V  Variables: named boxes in memory
+  img: fig:memory
+  • A variable = a name + a type + a value
+  • The type decides size and meaning of the bits
+  • int: about ±2.1 billion (4 bytes)
+  • Exceed it → overflow wraps to negative!
+  (pen marks: 5 )
+  beat0:
+     0: A variable is a named box in memory that holds a value.
+     1: Every variable has a name, a type and a value.
+  beat1:
+     0: The type tells the computer how many bytes to reserve and how to interpret the bits inside.
+     1: An int holds whole numbers, a double holds decimals, a char holds one character, a bool holds true or false, and a string holds text.
+  beat2:
+     0: An int is usually four bytes, thirty two bits, so it holds numbers from about negative two point one billion to positive two point one billion.
+  beat3:
+     0: Go past the top and it wraps around to a large negative number.
+     1: That's called overflow, and it's the same two's complement wheel you'll study in digital logic.
+     2: It's not just a classroom problem: in two thousand fourteen, a video's view count on YouTube passed the maximum of a thirty two bit integer, and YouTube had to upgrade to sixty four bit counters.
+
+[s5] EX  Arithmetic and its gotchas
+  • int / int throws away the fraction
+  • % gives the remainder — great for clocks, even/odd, digits
+  • Never compare doubles with ==
+  CODE:
+    int a = 7 / 2;        // 3   (integer division drops the .5)
+    int b = 7 % 2;        // 1   (remainder, 'modulo')
+    double c = 7.0 / 2;   // 3.5
+    
+    // convert 3725 seconds to h:m:s
+    int total = 3725;
+    int hours = total / 3600;           // 1
+    int minutes = (total % 3600) / 60;  // 2
+    int seconds = total % 60;           // 5
+    
+    // floating point is approximate:
+    // 0.1 + 0.2 == 0.30000000000000004
+  (pen marks: 10 )
+  beat0:
+     0: Arithmetic has a few traps.
+     1: Seven divided by two, with both numbers as ints, gives three, not three point five.
+     2: Integer division throws the fraction away.
+     3: The percent sign is the modulo operator, which gives the remainder: seven mod two is one.
+     4: These two operators together are incredibly useful.
+     5: Here's an example: convert three thousand seven hundred twenty five seconds into hours, minutes and seconds.
+     6: Hours: divide by thirty six hundred, giving one.
+     7: Minutes: take the remainder after removing the hours, which is one hundred twenty five, and divide by sixty, giving two.
+     8: Seconds: the total mod sixty, giving five.
+     9: So it's one hour, two minutes, five seconds.
+     10: Last trap: decimals are stored in binary, which can't represent point one exactly.
+     11: So point one plus point two is actually point three zero zero zero, with a tiny error at the end.
+     12: Never compare two doubles with double equals.
+     13: Check whether they're close enough instead.
+
+[s6] V  Decisions: if / else
+  img: fig:ifflow
+  • if (condition) { … } else { … }
+  • Comparisons: <  <=  >  >=  ==  !=
+  • Combine with && (and), || (or), ! (not)
+  • Order matters: check the strictest case first
+  (pen marks: 9 )
+  beat0:
+     0: Programs make decisions with if and else.
+     1: If a condition is true, run one block.
+     2: Otherwise, run another.
+     3: Here's a flowchart for assigning a letter grade.
+  beat1:
+     0: Conditions use comparison operators: less than, less than or equal, greater than, equal, and not equal.
+     1: Careful: a single equals sign assigns a value, and double equals compares.
+     2: Mixing them up is one of the most common beginner bugs.
+  beat2:
+     0: You can combine conditions with and, written as two ampersands, or, written as two vertical bars, and not, written as an exclamation point.
+     1: These are exactly the AND, OR and NOT gates you'll build in hardware.
+     2: Software logic and hardware logic are the same logic.
+  beat3:
+     0: And order matters.
+     1: We check ninety or above first, then eighty.
+     2: If we checked eighty first, a ninety five would get a B.
+     3: An else if chain stops at the first true condition.
+
+[s7] WB  Worked example: a letter-grade program
+  step0 board+: int score; || std::cin >> score; || PEN ('underline',) on int score || PEN ('circle',) on >> score
+     0: Let's write a real program together, one line at a time.
+     1: It reads a test score and prints a letter grade.
+     2: First, we make a variable called score to hold a whole number, and then we read it from the keyboard with c in.
+  step1 board+: if (score >= 90) { ||     std::cout << "A\n"; || } else if (score >= 80) { ||     std::cout << "B\n"; || } else if (score >= 70) { ||     std::cout << "C\n"; || } else { ||     std::cout << "F\n"; || }
+     0: Now the decision.
+     1: If the score is at least ninety, print A.
+     2: Else, if it's at least eighty, print B.
+     3: Else, if it's at least seventy, print C.
+     4: And if none of those were true, print F.
+  step2 board+: $ ./grade || 85 || PEN ('circle',) on score >= 90 || PEN ('cross',) on if (score >= 90) { || B || PEN ('circle',) on score >= 80 || PEN ('check',) on } else if (score >= 80) { || PEN ('highlight',) on std::cout << "B
+     0: Let's run it and type eighty five.
+     1: The computer checks the conditions in order, top to bottom.
+     2: Is eighty five at least ninety?
+     3: No.
+     4: Is it at least eighty?
+     5: Yes.
+     6: So it prints B, and skips every remaining branch.
+  step3 board+: PEN ('circle',) on score >= 70 || Order matters: the first true condition wins. || Check the strictest case first. || PEN ('underline',) on the first true condition wins
+     0: Here's the lesson hiding in this example.
+     1: If we had written the seventy check first, a score of ninety five would pass it immediately and print C.
+     2: In an else if chain, the first true condition wins, so always check the strictest case first.
+
+[s8] V  Loops: doing something many times
+  img: fig:loopflow
+  • while (condition) { … }  — repeat while true
+  • for (int i = 1; i <= 100; ++i) { … }
+  • Trace it by hand: i, sum after each pass
+  • Classic bugs: off-by-one, infinite loop
+  (pen marks: 8 )
+  beat0:
+     0: Computers are great at repetition.
+     1: A while loop repeats its body as long as a condition stays true.
+     2: Here, we start with sum equals zero and i equals one, and keep adding i to sum while i is at most one hundred.
+  beat1:
+     0: The for loop packs the three parts, start, condition and step, into one line.
+     1: This is the most common loop you'll write.
+  beat2:
+     0: Trace it by hand.
+     1: After the first pass, sum is one.
+     2: After the second, three.
+     3: Then six, then ten.
+     4: After one hundred passes, sum is five thousand fifty.
+     5: Fun fact: the mathematician Gauss supposedly found that answer as a child by pairing one with one hundred, two with ninety nine, and so on: fifty pairs of one hundred one.
+  beat3:
+     0: Two classic loop bugs.
+     1: Off by one: writing less than instead of less than or equal, and silently skipping the last value.
+     2: And the infinite loop: forgetting to change the variable, so the condition never becomes false, and your program hangs forever.
+
+[s9] WB  Worked example: tracing a loop by hand
+  step0 board+: int sum = 0; || PEN ('circle',) on sum = 0 || for (int i = 1; i <= 4; i++) { || PEN ('underline',) on int i = 1 || PEN ('circle',) on i <= 4 || PEN ('underline',) on i++ ||     sum += i * i; || } || std::cout << sum << "\n"; || PEN None || PEN ('highlight',) on sum += i * i
+     0: Programmers trace loops by hand to see exactly what they do.
+     1: Here's a loop that adds up the squares of one through four.
+     2: Sum starts at zero.
+     3: The loop variable i starts at one, keeps going while i is at most four, and goes up by one each pass.
+     4: Each pass adds i times i to the sum.
+  step1 board+: PEN None || PEN ('row', 0) || PEN None || PEN ('row', 1)
+     0: Now we trace it, one row per pass.
+     1: Pass one: i is one, i times i is one, and sum becomes one.
+     2: Pass two: i is two, its square is four, and sum becomes five.
+  step2 board+: PEN None || PEN ('row', 2) || PEN None || PEN [('row', 3), ('circle', 'r3c3', 34, 26)] || PEN None || PEN ('circle',) on i <= 4 || PEN ('cross',) on for (int i = 1; i <= 4; i++) {
+     0: Pass three: nine more makes fourteen.
+     1: Pass four: sixteen more makes thirty.
+     2: Then i becomes five, the test five is at most four is false, and the loop ends.
+  step3 board+: $ ./squares || 30 || PEN ('circle',) on <=
+     0: So the program prints thirty.
+     1: If you ever can't figure out why a loop gives the wrong answer, make this exact table on paper.
+     2: Off by one bugs, like writing less than instead of less than or equal, show up immediately.
+
+[s10] V  Functions: build big programs from small, tested pieces
+  img: fig:function / fig:stack
+  • A function takes inputs (parameters) and returns an output
+  • Name it, test it, reuse it
+  • Each call gets its own frame on the call stack
+  (pen marks: 5 )
+  beat0:
+     0: As programs grow, we split them into functions.
+     1: A function is a named black box: it takes inputs, called parameters, does some work, and returns an output.
+     2: Here, CircleArea takes a radius of two and returns about twelve point five seven.
+     3: Once it's written and tested, you can call it from anywhere, and you don't have to think about how it works inside.
+     4: That's called abstraction, and it's how million line programs stay manageable.
+  beat1:
+     0: How does the computer keep track of function calls?
+     1: With the call stack.
+     2: When main calls CircleArea, a new frame is pushed on top, holding CircleArea's own variables.
+     3: If that calls Square, another frame goes on top.
+     4: When a function returns, its frame is popped off and its variables disappear.
+     5: That's why a variable declared inside a function isn't visible outside it.
+     6: It's called the variable's scope.
+     7: And if a function calls itself forever, the stack overflows, which is where the famous website name comes from.
+
+[s11] WB  Worked example: what happens when you call a function
+  step0 board+: double Area(double w, double h) { || PEN ('underline',) on double w, double h ||     return w * h; || } || PEN ('circle',) on w * h
+     0: Let's write a small function and watch what the computer does when it's called.
+     1: The function is named Area.
+     2: It takes two doubles, a width and a height, and returns their product.
+  step1 board+: int main() { || PEN ('highlight',) on Area(3.0, 4.5) ||     double a = Area(3.0, 4.5); ||     std::cout << a << "\n"; || } || PEN None
+     0: Main calls it with three and four and a half, and stores the result in a.
+     1: When main starts, it gets a frame on the call stack, a little block of memory for its variables.
+  step2 board+: PEN None || PEN ('circle',) on 3.0, 4.5
+     0: When main calls Area, a new frame is pushed on top.
+     1: The parameter w gets a copy of three, and h gets a copy of four and a half.
+  step3 board+: PEN ('circle',) on return w * h || PEN None || PEN ('arrow',) on double a = Area || $ ./area || 13.5
+     0: Area computes three times four and a half, thirteen point five, and returns it.
+     1: Its frame is popped off the stack, so w and h disappear, and the value lands in main's variable a.
+     2: Finally main prints thirteen point five.
+     3: Every function call in every program works this way.
+
+[s12] V  Pass by value vs. pass by reference
+  img: fig:byref
+  • By value: the function gets a copy
+  • By reference (&): the function gets the original
+  • Use & to change the caller’s variable (e.g. swap)
+  • const & for big objects you only read
+  (pen marks: 7 )
+  beat0:
+     0: When you pass a variable to a function, C plus plus normally makes a copy.
+     1: That's pass by value.
+     2: The function can change its copy, and the caller's variable is untouched.
+  beat1:
+     0: If you add an ampersand to the parameter type, you pass by reference.
+     1: Now the parameter is just another name for the caller's variable.
+     2: One box, two names.
+  beat2:
+     0: That's how you write a function that changes its arguments, like a swap function that exchanges two variables.
+     1: With pass by value, swap would only swap the copies, and nothing would happen.
+  beat3:
+     0: And for big objects like long strings or vectors, copying is slow.
+     1: So professionals pass them as const reference: no copy, and the const keyword promises the function won't modify it.
+
+[s13] WB  Worked example: copy or reference?
+  step0 board+: void AddOneCopy(int x) { x = x + 1; } || void AddOneRef(int& x) { x = x + 1; } || PEN ('circle',) on int&
+     0: Here are two functions that look almost identical.
+     1: Both add one to their parameter.
+     2: The only difference is the ampersand in the second one.
+  step1 board+: int n = 5; || AddOneCopy(n);   // n is still 5 || PEN None || PEN None || PEN ('underline',) on AddOneCopy(int x) || PEN ('cross',) on AddOneCopy(n);   // n is still 5
+     0: Main makes n equal to five and calls the first one.
+     1: The function gets its own copy of five in a new box called x.
+     2: It changes the copy to six, then the box disappears when the function returns.
+     3: So n is still five.
+  step2 board+: AddOneRef(n);    // n is now 6 || PEN None || PEN ('circle',) on int& || PEN ('check',) on AddOneRef(n);    // n is now 6
+     0: Now call the reference version.
+     1: This time x isn't a new box.
+     2: It's just another name for n itself.
+     3: So adding one to x adds one to n, and n becomes six.
+  step3 board+: value: a private copy   ·   &: the original
+     0: Rule of thumb: pass by value when the function only needs to read a small value.
+     1: Pass by reference when the function must change the caller's variable, like a swap.
+     2: And pass large objects by const reference, which avoids the copy without allowing changes.
+
+[s14] V  Collections: arrays and vectors
+  img: fig:array
+  • Many values under one name, in a row in memory
+  • Index from 0 to size − 1
+  • std::vector grows as needed: push_back()
+  • Out-of-bounds access = undefined behavior (a top security bug)
+  (pen marks: 6 )
+  beat0:
+     0: Usually you have many values, like the scores of a whole class.
+     1: A vector stores them in one row in memory under a single name.
+  beat1:
+     0: Each element has an index, and indexes start at zero, not one.
+     1: So six scores live at indexes zero through five.
+  beat2:
+     0: A standard vector can grow: call push back to add an item to the end, and size to ask how many there are.
+     1: To find the maximum, loop through every element and remember the largest you've seen.
+     2: Here, that's ninety nine, at index four.
+  beat3:
+     0: And here's a serious danger.
+     1: Index six doesn't exist, but C plus plus won't stop you from reading it.
+     2: You'll get garbage, or a crash, or worse.
+     3: Reading or writing past the end of an array, called a buffer overflow, has been behind many of the most serious security vulnerabilities in history.
+     4: Use the at function, or check your bounds.
+
+[s15] EX  Putting it together: average and maximum
+  CODE:
+    double Average(const std::vector<int>& v) {
+      int sum = 0;
+      for (int x : v) {
+        sum += x;
+      }
+      return static_cast<double>(sum) / v.size();
+    }
+    
+    int Max(const std::vector<int>& v) {
+      int best = v.at(0);
+      for (int x : v) {
+        if (x > best) best = x;
+      }
+      return best;
+    }
+  (pen marks: 7 )
+  beat0:
+     0: Let's combine everything.
+     1: The Average function takes the vector by const reference, so nothing is copied.
+     2: It loops over every element with a range based for loop, adding to a sum.
+     3: Then it divides by the number of elements.
+     4: Notice the static cast to double.
+     5: Without it, we'd do integer division, and the average of these scores, which is about eighty three point two, would come out as just eighty three.
+     6: The Max function starts by assuming the first element is the best, then walks through the rest, replacing best whenever it finds something larger.
+     7: These two patterns, accumulate and keep the best so far, show up in almost every program you'll ever write.
+     8: One question to always ask: what happens if the vector is empty?
+     9: Here, both functions would fail.
+     10: Testing edge cases like empty inputs is what separates working code from fragile code.
+
+[s16] V  Text: strings are just numbers in disguise
+  img: fig:ascii
+  • Each char is stored as a number: 'H' = 72
+  • 'A'–'Z' are 65–90, 'a'–'z' are 97–122
+  • Strings: length(), indexing, +, comparisons
+  • Example: count vowels by looping over characters
+  (pen marks: 6 )
+  beat0:
+     0: Computers only store numbers, so text is stored as numbers too.
+     1: Each character has a code.
+     2: In the ASCII table, capital H is seventy two, lowercase e is one hundred one, and so on.
+  beat1:
+     0: Capital letters run from sixty five to ninety, lowercase from ninety seven to one twenty two.
+     1: So converting lowercase to uppercase is just subtracting thirty two.
+     2: Modern systems use Unicode, which extends this to every language and emoji.
+  beat2:
+     0: A string is a sequence of characters.
+     1: You can ask its length, read a character by index, join strings with plus, and compare them alphabetically.
+  beat3:
+     0: A classic exercise: count the vowels in a sentence.
+     1: Loop over each character, and if it's a, e, i, o or u, add one to a counter.
+     2: It's the same accumulate pattern as before, just on text.
+
+[s17] WB  Worked example: counting the vowels in a word
+  step0 board+: std::string word = "engineering"; || int vowels = 0;
+     0: Let's process text.
+     1: Our goal: count the vowels in the word engineering.
+     2: Start with a string variable holding the word, and a counter set to zero.
+  step1 board+: for (char c : word) { || PEN ('underline',) on char c : word ||     if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == ||         vowels++; ||     } || } || std::cout << vowels << "\n"; || PEN ('highlight',) on c == 'a' || c == 'e' || c == 'i' || c  || PEN ('circle',) on vowels++
+     0: Then loop over every character.
+     1: This kind of for loop reads: for each character c in word.
+     2: Inside, if c is an a, or an e, or an i, or an o, or a u, add one to the counter.
+  step2 board+: e n g i n e e r i n g     vowels: 5 || PEN ('circle',) on e n g i n e e r i n g || PEN ('circle',) on e n g i n e e r i n g || PEN ('circle',) on e n g i n e e r i n g || PEN ('circle',) on e n g i n e e r i n g || PEN ('circle',) on e n g i n e e r i n g || PEN ('circle',) on vowels: 5 || $ ./vowels || 5
+     0: Trace it: e, yes.
+     1: n, no.
+     2: g, no.
+     3: i, yes.
+     4: n, no.
+     5: e, yes.
+     6: e, yes.
+     7: r, no.
+     8: i, yes.
+     9: n, no.
+     10: g, no.
+     11: Five vowels, and the program prints five.
+  step3 board+: "Engineering" prints 4!  Capital E is a different code (69 v || PEN ('circle',) on "Engineering" prints 4! ||     char lower = std::tolower(c);   // fix: then test lower || PEN ('box',) on std::tolower(c)
+     0: One thing to test: capital letters.
+     1: The word Engineering, with a capital E, would print four, because a capital E is a different number than a lowercase e.
+     2: The fix is to convert each character to lowercase first, with tolower.
+     3: Thinking of these edge cases is what testing is all about.
+
+[s18] V  Debugging and version control
+  img: fig:errors / fig:git
+  • Read the FIRST compiler error first
+  • Print values or use a debugger (gdb) to see what really happens
+  • Write small tests for each function
+  • git: save snapshots, undo mistakes, collaborate
+  (pen marks: 5 )
+  beat0:
+     0: Every programmer spends a lot of time debugging, so let's talk about bugs.
+     1: There are three kinds.
+     2: Compile time errors, like a missing semicolon, are the easiest: the compiler tells you exactly where.
+     3: Always fix the first error first, because one mistake can cause dozens of follow on messages.
+     4: Run time errors crash the program, like dividing by zero or using a bad index.
+     5: Logic errors are the hardest: the program runs perfectly and gives the wrong answer.
+     6: To find those, print out values at key points, or step through the program line by line in a debugger like g d b, and compare what's happening to what you expected.
+     7: And write small tests for each function.
+  beat1:
+     0: Finally, version control.
+     1: Git saves a snapshot of your project every time you commit, with a message describing the change.
+     2: If you break something, you can go back.
+     3: If you work on a team, everyone's changes can be merged together.
+     4: This course uses Git and GitHub for assignments, and every software company in the world uses something like it.
+     5: Commit early, and commit often.
+
+[s19] B  Habits of good programmers
+  • Plan in plain English (or a flowchart) before coding
+  • Meaningful names: total_seconds, not ts
+  • Small functions that do one thing
+  • Test the edge cases: 0, 1, empty, negative, huge
+  • Follow a style guide; let tools format and check your code
+  • Commit often; read error messages carefully
+  (pen marks: 7 )
+  beat0:
+     0: Let's finish with the habits that make programming much less painful.
+  beat1:
+     0: Plan before you type.
+     1: Write the steps in plain English or draw a flowchart.
+     2: Most bugs are thinking bugs, not typing bugs.
+  beat2:
+     0: Use meaningful names.
+     1: Code is read far more often than it's written, including by you, six months from now.
+  beat3:
+     0: Keep functions small.
+     1: If a function does one thing, it's easy to test, and easy to reuse.
+  beat4:
+     0: Test the edge cases: zero, one, an empty list, negative numbers, very large numbers.
+     1: That's where bugs hide.
+  beat5:
+     0: Follow a consistent style guide, and let tools like formatters and linters check your code automatically.
+     1: This course follows a professional style guide, the same kind used at large software companies.
+  beat6:
+     0: And commit your work often, and read error messages slowly.
+     1: They usually tell you exactly what's wrong.
+
+[s20] Q  Key takeaways
+  BIG: Every program is built from **variables, decisions, loops, functions and data**. Master these five and you can learn any language.
+  cap: Next: CPSC 121, Object-Oriented Programming — organizing code around objects.
+  beat0:
+     0: To wrap up: a program is a precise list of instructions that a compiler turns into machine code.
+     1: Variables hold typed values in memory.
+     2: If statements make decisions, loops repeat work, functions break problems into small tested pieces, and vectors and strings hold collections of data.
+     3: Those five building blocks appear in every programming language, from Python to the assembly language you'll write for microcontrollers.
+     4: Next up, object oriented programming, where we learn to organize larger programs.
+     5: See you there.

@@ -1,0 +1,3 @@
+sn7400 | File:SN7400N.jpg
+rotary_encoder | File:RotaryIncrementalEncoder.jpg
+i4004_layout | File:Chip layout from the development phase of the Intel 4004 from 1971, the first microprocessor of the world (cropped and edited image).jpg

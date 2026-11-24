@@ -1,0 +1,8 @@
+fpga_board | File:TEI0003 Altera Cyclone 10 LP FPGA CYC1000.jpg
+fpga_chip | File:Xilinx Spartan XC2S100.jpg
+fpga_router | File:FRITZ!Box 7490 - board - Xilinx Spartan XC3S100E-4157.jpg
+antenna_5g | File:Antennes 5G o2 Munich.jpg
+perseverance | File:Perseverance Stuns in New Selfie.png
+sevenseg | File:LED-7-Segment-Display.jpg
+zedboard | File:Embedded World 2014 Xilinx ZedBoard Developer Board.jpg
+wafer_pentium | File:Wafer with Pentium chips.jpg

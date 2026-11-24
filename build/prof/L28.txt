@@ -1,0 +1,240 @@
+﻿#### L28_egcp447: EGCP 447 Cyber-Physical Systems Security
+
+[s0] TITLE  Hardware & Cyber-Physical Systems Security
+  img: a:smartcard
+  beat0:
+     0: Welcome to E G C P four forty seven, introduction to cyber physical systems security, with a focus on hardware.
+     1: Most security courses assume the hardware is trustworthy and defend the software.
+     2: This course asks what happens when the chip itself is the problem: when it was modified by someone in the supply chain, when it's a counterfeit, or when its power consumption leaks the secret key on a credit card chip like this one.
+     3: You'll learn how these attacks work, how engineers detect them, and how to design hardware that resists them.
+
+[s1] V  Why hardware security?
+  img: fig:supply
+  • Chips pass through many untrusted hands
+  • Malicious logic, overproduction, cloning, recycling
+  • Hardware flaws can’t be patched like software
+  • Physical access enables new attacks
+  (pen marks: 7 )
+  beat0:
+     0: A modern chip passes through many hands before it reaches a product.
+     1: Designers license third party I P cores, use commercial design tools, send the layout to a foundry that is often overseas, then to separate test and assembly houses, then through distributors.
+     2: Every one of those steps is a party you have to trust.
+     3: Any of them could insert hidden malicious logic, manufacture extra chips to sell on the side, clone the design, or sell old chips pulled from electronic waste as new.
+     4: And unlike software, you can't push an update to fix silicon.
+     5: A flaw in the hardware is there for the life of the product.
+     6: Finally, cyber physical systems, like cars, medical devices and power grid controllers, are often physically accessible, which opens attacks that never apply to a server in a locked data center.
+
+[s2] V  Hardware Trojans: trigger + payload
+  img: fig:trojan
+  • Trigger: rare input pattern, counter, or physical condition
+  • Payload: flip outputs, leak secrets, deny service
+  • Designed to escape functional testing
+  • Detection: rare-node testing, side-channel fingerprints, reverse engineering
+  (pen marks: 6 )
+  beat0:
+     0: A hardware Trojan is a malicious modification to a circuit.
+     1: It has two parts.
+     2: The trigger decides when it activates, and it's designed to be rare: here, three internal nodes that are almost never all one at the same time, perhaps a one in a million event.
+     3: A sequential trigger might instead count events, activating only after the thousandth occurrence.
+  beat1:
+     0: The payload is what it does: flip an output, as this X O R gate does, leak a secret key through an unused pin or a subtle power pattern, shut the chip down, or quietly reduce its reliability.
+  beat2:
+     0: Because the trigger is so rare, ordinary functional testing almost never activates it.
+     1: The Trojan sits silently through verification and manufacturing tests.
+     2: In this course, students design Trojans themselves, including a counter triggered Trojan inserted into a standard benchmark circuit in V H D L, to understand exactly why they're hard to find.
+  beat3:
+     0: Detection methods include test generation that deliberately drives rarely activated nodes, comparing a chip's power and timing fingerprint against a trusted golden chip, and in the extreme, destructively reverse engineering samples layer by layer.
+     1: Prevention includes design for trust techniques and on chip monitors.
+
+[s3] V  Counterfeit chips
+  img: a:fake_sd
+  • Recycled, remarked, overproduced, out-of-spec, cloned
+  • Detect: X-ray, decapsulation, electrical tests, aging sensors
+  • PUFs: chip fingerprints from manufacturing variation
+  • Buy through trusted, authorized supply chains
+  beat0:
+     0: Counterfeits are a huge problem, especially for military and aerospace systems that need parts long after they're out of production.
+     1: These microSD cards were opened up by a researcher: from the outside they look similar, but the dies inside reveal genuine, questionable and fake parts.
+     2: Counterfeits come in many forms: recycled chips pulled from old boards and sanded and remarked as new, chips remarked as a faster or higher temperature grade, overproduced chips sold out the back door of a foundry, out of spec rejects, and outright clones.
+     3: Detection uses physical inspection, X rays, decapsulation, electrical testing, and on chip aging sensors that reveal a used part.
+     4: A powerful defense is the physically unclonable function, or PUF.
+     5: Tiny random manufacturing variations make every chip slightly different, for example in which way each S RAM cell settles at power up, or which of two identical ring oscillators runs faster.
+     6: That gives each chip a fingerprint that even the manufacturer can't copy, usable for authentication and for generating keys.
+
+[s4] V  Protecting the design: locking, camouflage, split manufacturing
+  img: fig:lock
+  • Logic locking: key gates; chip works only with the secret key
+  • SAT attack breaks naive locking → Anti-SAT, SFLL
+  • Camouflaging: look-alike cells defeat image-based RE
+  • Split manufacturing: untrusted fab never sees the full design
+  (pen marks: 5 )
+  beat0:
+     0: How do you stop a foundry from overproducing or pirating your design?
+     1: Logic locking inserts extra key gates, like an X O R on an internal wire.
+     2: With the correct key bit, the signal passes unchanged.
+     3: With the wrong one, it's inverted.
+     4: Insert a hundred and twenty eight of these, load the key into tamper resistant memory only after manufacturing, and the foundry holds a chip that doesn't work.
+  beat1:
+     0: Researchers found a powerful attack: if you have one working chip as an oracle, a SAT solver can choose inputs that eliminate large groups of wrong keys at a time, recovering the key surprisingly quickly.
+     1: That led to SAT resistant schemes like Anti SAT and S F L L, a classic attack and defense arms race.
+  beat2:
+     0: Camouflaging uses cells that look identical under a microscope but implement different functions, defeating reverse engineering from layout images.
+  beat3:
+     0: And split manufacturing sends the transistor layers and lower wiring to an untrusted foundry, and adds the top metal layers at a trusted one, so the untrusted foundry never sees how the circuit is actually connected.
+
+[s5] WB  Worked example: logic locking with a key gate
+  step0 board+: original: $F = AB$ || PEN None
+     0: Logic locking hides a design from an untrusted factory.
+     1: Start with a simple function: F equals A and B.
+  step1 board+: PEN None || K = 0:  $F = AB$  correct || PEN ('check',) on K = 0: || K = 1:  $F = \overline{AB}$  wrong || PEN ('cross',) on K = 1:
+     0: Insert an XOR gate on the wire, with a secret key bit as its other input.
+     1: With K equals zero, XOR passes the signal unchanged: the chip works.
+     2: With K equals one, the output is inverted: the chip computes garbage.
+  step2 board+: 128 key gates: $2^{128}$ guesses || PEN ('circle',) on 128 key gates || but: SAT attacks, so research continues
+     0: The key is programmed into tamper-proof memory only after the chip returns from the foundry.
+     1: A real design uses a hundred or more key gates, so guessing means two to the hundred twenty eight possibilities.
+     2: Researchers then try clever attacks, like the SAT attack, which is why this is still an active research area.
+
+[s6] V  Side-channel attacks: power and timing
+  img: fig:spa / fig:cpa
+  • Secrets leak through power, timing, EM, even sound
+  • SPA: read operations straight off one trace
+  • DPA/CPA: statistics over many traces → AES key
+  • Defenses: constant time, masking, hiding
+  (pen marks: 8 )
+  beat0:
+     0: Side channel attacks don't break the math.
+     1: They watch the hardware.
+     2: Every operation draws a slightly different amount of power and takes a slightly different time.
+     3: Here's simple power analysis on R S A implemented with square and multiply.
+     4: For each key bit, the chip squares, and if the bit is one, it also multiplies.
+     5: On a single power trace, the pattern is visible: square multiply means one, square alone means zero.
+     6: You can literally read the key off the oscilloscope.
+  beat1:
+     0: Differential and correlation power analysis are subtler and more powerful.
+     1: Collect thousands of traces while the chip encrypts known inputs.
+     2: For each guess of one key byte, predict the power the chip should draw, using the Hamming weight of an intermediate value, and correlate the prediction with the measurements.
+     3: Wrong guesses give near zero correlation, the right guess stands out clearly, here hex three C.
+     4: Repeat for each byte and you have the whole A E S key.
+     5: Defenses include constant time code, masking, which randomizes intermediate values so they don't correlate with the key, and hiding, which adds noise or shuffles operations.
+     6: Fault injection, glitching the clock or voltage, and timing attacks on caches, like Spectre and Meltdown, belong to the same family.
+
+[s7] V  Testing: stuck-at faults and test vectors
+  img: fig:stuck
+  • Model: any net stuck at 0 or stuck at 1
+  • A test must activate the fault and propagate it
+  • Fault coverage = detected / total faults
+  • Scan chains: testable — and an attack surface
+  (pen marks: 6 )
+  beat0:
+     0: Security and manufacturing test share tools.
+     1: To check that a chip was built correctly, engineers use the stuck at fault model: assume any wire might be stuck permanently at zero or one.
+  beat1:
+     0: A test vector detects a fault only if it activates the fault, driving the wire to the opposite value, and propagates the difference to an output you can observe.
+     1: Here, to test the AND gate's output stuck at zero, set a and b to one so the good circuit produces a one there, and c to zero so the OR gate doesn't mask it.
+     2: The good circuit outputs one, the faulty circuit outputs zero.
+     3: Detected.
+  beat2:
+     0: Automatic test pattern generators find small sets of vectors that cover nearly all possible faults, and fault coverage measures the fraction detected.
+     1: In this course's first homework, students identify fault sites and test vectors for a small circuit.
+  beat3:
+     0: For sequential chips, scan chains link all the flip flops into a long shift register, so testers can load and read internal state directly.
+     1: But that same access lets an attacker dump the internal state of a crypto engine, so secure chips lock down or scramble their scan chains.
+
+[s8] WB  Worked example: finding a test vector for a stuck-at fault
+  step0 board+: $F = AB + C$ || PEN None || PEN None
+     0: Here's a tiny circuit: F equals A and B, or C.
+     1: Suppose a manufacturing defect shorts the AND gate's output to ground.
+     2: That's a stuck at zero fault.
+     3: Which input pattern will reveal it?
+  step1 board+: activate: AND output = 1  so A = B = 1 || PEN ('underline',) on activate: || propagate: C = 0 (non-controlling) || PEN None || PEN ('underline',) on propagate:
+     0: Two jobs.
+     1: First, activate the fault: drive the faulty wire to the opposite of its stuck value.
+     2: To make the AND output one, A and B must both be one.
+     3: Second, propagate it: make the difference visible at F.
+     4: The OR gate passes its first input through only if its other input is zero, so C must be zero.
+  step2 board+: test vector ABC = 110 || PEN None || PEN ('check',) on test vector ABC = 110
+     0: So the test vector is A B C equals one one zero.
+     1: A good chip outputs one; the faulty chip outputs zero.
+     2: Different answers, so the tester catches it.
+     3: Automatic test pattern generators do exactly this reasoning, for millions of wires, before a chip ships.
+
+[s9] V  Error-correcting codes: Hamming (7,4)
+  img: fig:hamming
+  • 4 data bits + 3 parity bits at positions 1, 2, 4
+  • Parity bit k covers positions with bit k set
+  • Syndrome = position of a single-bit error
+  • SECDED (ECC RAM) adds an overall parity bit
+  (pen marks: 12 )
+  beat0:
+     0: Not every error is malicious.
+     1: Radiation, noise and aging flip bits too, and error correcting codes fix them.
+     2: The classic is the Hamming seven four code.
+     3: Four data bits are placed at positions three, five, six and seven, and three parity bits at the power of two positions one, two and four.
+  beat1:
+     0: Each parity bit covers the positions whose binary index has that bit set.
+     1: Parity one covers one, three, five and seven.
+     2: Parity two covers two, three, six and seven.
+     3: Parity four covers four through seven.
+     4: To send data one zero one one, the parity bits come out zero, one and zero, giving the codeword zero one one zero zero one one.
+  beat2:
+     0: Now suppose bit six flips in transit.
+     1: The receiver recomputes the three parity checks.
+     2: Check one passes, checks two and four fail, so the syndrome, read as a binary number, is one one zero: six.
+     3: The syndrome literally points at the bad bit, so the receiver flips it back.
+     4: If the syndrome is zero, there was no error.
+  beat3:
+     0: Hamming codes correct any single bit error, or detect two.
+     1: Adding one more overall parity bit gives SECDED, single error correct, double error detect, which is exactly what E C C memory in servers uses.
+     2: In this course's project, students implement a Hamming encoder and decoder in V H D L.
+
+[s10] WB  Worked example: Hamming(7,4) finds and fixes a flipped bit
+  step0 board+: data: 1011 || parity at positions 1, 2, 4 || PEN None
+     0: Protect the four data bits one zero one one.
+     1: Put them in positions three, five, six and seven.
+     2: Positions one, two and four, the powers of two, will hold parity bits.
+  step1 board+: p1: 1,3,5,7  (1+0+1)  p1 = 0 || PEN ('underline',) on p1: 1,3,5,7 || p2: 2,3,6,7  (1+1+1)  p2 = 1 || PEN ('underline',) on p2: 2,3,6,7 || p4: 4,5,6,7  (0+1+1)  p4 = 0 || PEN None || PEN ('underline',) on p4: 4,5,6,7
+     0: Each parity bit makes its group even.
+     1: P one covers positions one, three, five and seven: data one, zero, one, so p one is zero.
+     2: P two covers two, three, six, seven: one, one, one, so p two is one.
+     3: P four covers four through seven: zero, one, one, so p four is zero.
+  step2 board+: sent 0110011, received 0110001 || PEN None || PEN ('circle',) on received 0110001
+     0: Send zero one one zero zero one one.
+     1: Noise flips position six.
+     2: The receiver gets zero one one zero zero zero one.
+  step3 board+: s1 = 0,  s2 = 1,  s4 = 1 || PEN ('underline',) on s1 = 0 || syndrome = 110 = 6: flip bit 6 || PEN None || PEN ('check',) on syndrome = 110
+     0: The receiver rechecks each group.
+     1: Group one: even, so s one is zero.
+     2: Group two: odd, s two is one.
+     3: Group four: odd, s four is one.
+     4: Read the checks as binary, s four s two s one: one one zero, which is six.
+     5: The syndrome is the exact position of the error.
+     6: Flip bit six back, and the data is recovered with no retransmission.
+
+[s11] V  IoT security
+  img: a:ip_camera
+  • Constrained devices, long lifetimes, physical access
+  • Mirai (2016): default passwords → huge botnet
+  • Secure boot + root of trust + hardware crypto
+  • PUF keys, signed updates, network segmentation
+  beat0:
+     0: The internet of things puts small computers everywhere: cameras, thermostats, door locks, medical devices, factory sensors.
+     1: They're hard to secure.
+     2: They have little processing power or energy for heavy cryptography, they stay deployed for years, often with no update mechanism, and attackers can get their hands on them physically.
+     3: In two thousand sixteen, the Mirai malware scanned the internet for cameras and routers still using factory default passwords, took over hundreds of thousands of them, and used them to launch some of the largest denial of service attacks ever seen, knocking major websites offline.
+     4: The defenses start in hardware: secure boot, which only runs firmware signed by the manufacturer, anchored in an immutable root of trust; hardware crypto accelerators; keys derived from PUFs instead of stored in memory; signed over the air updates; lightweight cryptography; and network segmentation so a compromised camera can't reach anything important.
+     5: A term paper in this course explores hardware Trojans in IoT devices specifically.
+
+[s12] Q  Key takeaways
+  BIG: Hardware is part of the attack surface: **trust the supply chain carefully**, assume **physical leakage**, and build security in from the **root of trust**.
+  cap: Next: EGCP 470, Senior Design I — planning a real engineering project.
+  beat0:
+     0: To recap.
+     1: Chips pass through many untrusted hands, and hardware can't be patched.
+     2: Hardware Trojans hide behind rare triggers.
+     3: Counterfeits are detected by inspection, testing and PUF fingerprints.
+     4: Logic locking, camouflaging and split manufacturing protect designs, while SAT attacks keep defenders honest.
+     5: Side channels leak keys through power and timing, countered by constant time code, masking and hiding.
+     6: Stuck at fault testing and Hamming codes catch accidental errors, and IoT security starts with secure boot and a hardware root of trust.
+     7: Next, senior design.
+     8: See you there.

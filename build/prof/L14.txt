@@ -1,0 +1,754 @@
+﻿#### L14_egcp281: EGCP 281 Designing with VHDL
+
+[s0] TITLE  Designing with VHDL
+  img: a:fpga_board
+  beat0:
+     0: Welcome to E G C P two eighty one, Designing with V H D L.
+     1: In this lecture you'll learn how engineers describe digital hardware using code, how that code becomes a real circuit on a chip, and who actually does this for a living.
+     2: We'll go from the very first idea, all the way to adders, state machines, timing, and test benches.
+     3: That little board on the screen is an F P G A board, and by the end of this lesson you'll understand exactly what's inside that chip and how to program it.
+
+[s1] V  Why describe hardware with code?
+  img: fig:scale
+  • 1971: ~2,300 transistors — drawn by hand
+  • Today: **tens of billions** per chip
+  • Nobody can draw that. We **describe behavior** and let tools build the gates
+  (pen marks: 1 )
+  beat0:
+     0: Let's start with the why.
+     1: In nineteen seventy one, Intel's first microprocessor, the four zero zero four, had about two thousand three hundred transistors.
+     2: Engineers literally drew the circuit by hand on large sheets.
+  beat1:
+     0: Today, a laptop processor like Apple's M one has sixteen billion transistors.
+     1: Look at the chart.
+     2: That's a log scale, so every grid line is ten times more than the one below it.
+  beat2:
+     0: No human team can draw sixteen billion transistors.
+     1: So instead, engineers write a precise description of what the hardware should do, in a hardware description language, and software tools turn that description into gates.
+     2: That's what this course teaches.
+     3: V H D L is one of the two big hardware description languages, and Verilog is the other.
+
+[s2] V  Where did VHDL come from?
+  img: fig:timeline
+  beat0:
+     0: V H D L stands for V H S I C Hardware Description Language, and V H S I C stands for Very High Speed Integrated Circuit.
+     1: It was a U S Department of Defense program in the early nineteen eighties.
+     2: The military was buying chips from many suppliers, and the documentation was written in plain English, which was ambiguous.
+     3: Worse, when a part became obsolete, nobody could rebuild it exactly.
+  beat1:
+     0: So the D o D funded a language that could describe a chip so precisely that a computer could simulate it.
+     1: The syntax was borrowed from the Ada programming language, which is why V H D L is wordy and strict.
+     2: It became I E E E standard ten seventy six in nineteen eighty seven.
+     3: Around the same time, a company called Gateway Design Automation created Verilog, which has a shorter, C like syntax.
+     4: Both languages are still alive, both are I E E E standards, and most professional engineers can read both.
+
+[s3] V  Who uses VHDL today — and why?
+  img: a:antenna_5g / a:antenna_5g / a:perseverance / a:fpga_router / a:wafer_pentium|0.2,0,1,1
+  • **Telecom:** 4G/5G radios and network gear
+  • **Aerospace & defense:** satellites, rovers, radar
+  • **Products:** routers, cameras, medical imaging, factory robots
+  • **Chip companies:** prototype and verify before manufacturing
+  beat0:
+     0: So who writes V H D L for a living?
+     1: Mostly people who design F P G A based products and custom chips.
+     2: Let's look at four real examples.
+  beat1:
+     0: Telecom.
+     1: Cell towers like these process radio signals in real time, billions of samples per second.
+     2: Software on a normal processor is too slow, so that processing is done in custom hardware, very often on F P G As, designed in V H D L or Verilog.
+  beat2:
+     0: Aerospace and defense, which is V H D L's home turf, especially in Europe.
+     1: Spacecraft need hardware that's reliable and well documented.
+     2: NASA's Perseverance rover used an F P G A based vision computer to recognize the terrain and steer its own landing on Mars.
+     3: And the European Space Agency's LEON family of processors, which fly in many satellites, was written in V H D L.
+  beat3:
+     0: Everyday products.
+     1: This is the circuit board inside a home internet router.
+     2: That square chip is a Xilinx Spartan F P G A.
+     3: Companies use F P G As when they need custom, very fast logic but can't afford to manufacture their own chip.
+  beat4:
+     0: And chip companies.
+     1: Before spending millions of dollars to manufacture a chip on a silicon wafer like this one, designers write the whole thing in a hardware description language, simulate it, and often prototype it on F P G As first.
+     2: A mistake found in simulation costs minutes.
+     3: A mistake found after manufacturing can cost months.
+
+[s4] V  What is an FPGA?
+  img: fig:fpga / fig:lut / a:fpga_chip
+  • Field-Programmable Gate Array
+  • Thousands to millions of small **logic blocks**
+  • Each block: a **look-up table** + a flip-flop
+  • Programmable wiring connects them
+  beat0:
+     0: Since V H D L is so often used with F P G As, let's open one up.
+     1: F P G A stands for field programmable gate array.
+     2: Field programmable means you can reconfigure it after it leaves the factory, right on your desk.
+  beat1:
+     0: Inside is a grid of small logic blocks, shown in blue.
+     1: Between them is a mesh of programmable wiring, the orange lines, with switches where wires cross.
+     2: Around the edge are the input and output pins, in green.
+  beat2:
+     0: Here's the clever part.
+     1: Each logic block contains a look-up table, which is just a tiny memory that holds a truth table.
+     2: This one has three inputs, so it has eight memory cells, one for every input combination.
+     3: Store the right eight bits and it becomes any three input logic function you want.
+     4: Here it's programmed as a majority function.
+     5: Next to each look-up table is a flip-flop, so the block can also remember a bit.
+  beat3:
+     0: So when you program an F P G A, you're loading a configuration file that fills in all of those truth tables and closes all the right wiring switches.
+     1: In about a second, this chip becomes your circuit.
+     2: Change your code, reload, and it becomes a different circuit.
+     3: That's why F P G As are perfect for learning, prototyping, and products that need updates.
+
+[s5] V  From code to chip: the design flow
+  img: fig:flow0 / fig:flow1 / fig:flow2 / fig:flow3 / fig:flow4 / fig:flow5 / fig:flow6
+  beat0:
+     0: Here's the workflow you'll repeat for every design, whether you're a student or working at a chip company.
+  beat1:
+     0: Step one, write the V H D L.
+     1: You describe what the hardware should do.
+  beat2:
+     0: Step two, simulate.
+     1: You write a test bench that feeds inputs to your design and checks the outputs, and a simulator shows you waveforms.
+     2: This is where you catch most bugs, because it's fast and cheap.
+  beat3:
+     0: Step three, synthesis.
+     1: The tool reads your code and turns it into a netlist, which is a list of gates or look-up tables and flip-flops, plus how they connect.
+  beat4:
+     0: Step four, place and route.
+     1: The tool decides which physical logic blocks on the chip to use and which wires connect them, while trying to meet your timing goals.
+  beat5:
+     0: Step five, generate the bitstream, the configuration file for the F P G A.
+  beat6:
+     0: And step six, load it onto the board and test it in the real world.
+     1: The tools you'd use are Vivado from Xilinx, which is now part of A M D, Quartus from Intel's Altera, ModelSim or Questa for simulation, and GHDL, which is a free, open source V H D L simulator you can install today.
+
+[s6] V  The big mindset shift: everything runs at once
+  img: fig:seqpar
+  (pen marks: 6 )
+  beat0:
+     0: Now the single most important idea in this course.
+     1: On the left is ordinary C code.
+     2: The computer runs line one, then line two, then line three.
+     3: Order matters, and each line happens once.
+  beat1:
+     0: On the right is the same logic as hardware.
+     1: In V H D L, each of those statements becomes a physical gate.
+     2: The AND gate, the NOT gate, and the OR gate all exist at the same time, and they're all working continuously, forever.
+     3: If input a changes, the output z changes a few nanoseconds later, automatically.
+     4: There's no program counter stepping through lines.
+  beat2:
+     0: So here's the rule I want you to carry for the rest of your career.
+     1: Before you write a line of hardware description code, picture the circuit it will become.
+     2: If you can't picture the gates or flip-flops, you don't really understand that line yet.
+     3: Code is just a way to draw a schematic.
+
+[s7] EX  Anatomy of a design: entity + architecture
+  img: fig:entity
+  CODE:
+    library ieee;
+    use ieee.std_logic_1164.all;
+    
+    entity full_adder is
+      port ( a, b, cin : in  std_logic;
+             s, cout   : out std_logic );
+    end full_adder;
+    
+    architecture dataflow of full_adder is
+    begin
+      s    <= a xor b xor cin;
+      cout <= (a and b) or (cin and (a xor b));
+    end dataflow;
+  (pen marks: 9 )
+  beat0:
+     0: Every V H D L design has the same skeleton.
+     1: First, we include the I E E E library, which gives us the standard logic type we'll use for wires.
+  beat1:
+     0: Next is the entity.
+     1: Think of it as the outside of the chip: its name, and its ports, which are the pins.
+     2: Each port has a direction, in or out, and a type.
+     3: Our full adder has three inputs, a, b and carry in, and two outputs, sum and carry out.
+     4: Look at the diagram on the right: the entity is exactly that black box with five pins.
+  beat2:
+     0: Then the architecture describes what's inside the box.
+     1: Here we use two concurrent assignment statements, one for the sum and one for the carry.
+     2: The arrow made of a less than sign and an equals sign means: this signal is driven by this logic.
+     3: Remember, both lines are hardware that exists at the same time.
+     4: The order you write them in doesn't matter at all.
+
+[s8] V  Designing a full adder, step by step
+  img: fig:fa_table / fig:fa_table / fig:fa_gates / fig:fa_table_hl
+  • Add three bits: a + b + carry-in
+  • **Sum** is 1 when an odd number of inputs are 1 → XOR
+  • **Carry** is 1 when two or more inputs are 1
+  • Check: 1 + 1 + 0 = binary 10 = 2 ✓
+  (pen marks: 4 )
+  beat0:
+     0: But where did those equations come from?
+     1: Let's derive them, the way you would on an exam.
+     2: A full adder adds three single bits: a, b, and a carry coming in from the previous column.
+     3: The result is two bits, a carry out and a sum.
+  beat1:
+     0: Here's the full truth table, all eight combinations.
+     1: Look at the sum column.
+     2: It's one whenever an odd number of the inputs are one.
+     3: That's exactly what X O R does, so the sum is a X O R b X O R carry in.
+  beat2:
+     0: Now the carry column.
+     1: It's one when at least two inputs are one.
+     2: You can write that as: a AND b, OR carry in AND, a X O R b.
+     3: Here's that circuit drawn as gates.
+     4: Two X O R gates make the sum.
+     5: Two AND gates and an OR gate make the carry.
+     6: Notice the first X O R is shared by both outputs.
+     7: Real designers love sharing logic, because it saves gates.
+  beat3:
+     0: Let's check one row.
+     1: a equals one, b equals one, carry in equals zero.
+     2: The sum: one X O R one is zero, X O R zero is still zero.
+     3: The carry: a AND b is one, so carry out is one.
+     4: Reading carry then sum gives one zero, which is binary for two.
+     5: And one plus one plus zero is two.
+     6: The table, the equations, and the circuit all agree.
+
+[s9] V  Real gates have delay — and delay causes glitches
+  img: fig:glitch
+  • Every gate takes time: **propagation delay**
+  • Inputs that change at slightly different times → brief wrong output
+  • VHDL can model it:  s <= a xor b after 2 ns;
+  (pen marks: 4 )
+  beat0:
+     0: Here's something software never makes you think about.
+     1: Every real gate takes time to respond, usually a few picoseconds to nanoseconds.
+     2: That's called propagation delay.
+  beat1:
+     0: Now look at this timing diagram.
+     1: Input a rises, and b is supposed to fall at the same moment, but b's path is a little slower.
+     2: For a brief instant, both a and b are one, so a X O R b drops to zero, then pops back up.
+     3: That spike is called a glitch, or a hazard.
+     4: The final answer is right, but for a moment the output lied.
+  beat2:
+     0: V H D L lets you model this with the keyword after, like s gets a X O R b after two nanoseconds.
+     1: In this course's first lab, students add delays like that to a full adder and watch glitches appear in the simulator.
+     2: Later we'll see the professional fix: synchronous design, where we only look at outputs on a clock edge, after everything has settled.
+
+[s10] V  Structural design: chaining four full adders
+  img: fig:rca0 / fig:rca1 / fig:rca2 / fig:rca3 / fig:rca4
+  beat0:
+     0: One full adder adds one column.
+     1: To add whole numbers, we copy it.
+     2: Here are four full adders in a row, making a four bit ripple carry adder.
+     3: Each carry out feeds the next adder's carry in, exactly like carrying a one in grade school addition.
+     4: Let's add seven plus three: zero one one one, plus zero zero one one.
+  beat1:
+     0: Column zero: one plus one plus a carry in of zero gives sum zero, carry one.
+  beat2:
+     0: Column one: one plus one plus that carry of one gives sum one, carry one.
+  beat3:
+     0: Column two: one plus zero plus one gives sum zero, carry one.
+  beat4:
+     0: Column three: zero plus zero plus one gives sum one, carry zero.
+     1: Reading the sums from left to right: one zero one zero, which is ten.
+     2: Seven plus three is ten.
+     3: Notice the catch, though.
+     4: Each stage had to wait for the carry from its neighbor.
+     5: The carry ripples through, so a thirty two bit ripple adder waits through thirty two stages.
+     6: That's why real processors use faster carry look ahead adders, which compute all the carries in parallel.
+
+[s11] EX  Port maps: wiring components like a schematic
+  • Internal **signals** are the wires between components
+  • **port map** connects each pin to a wire
+  • **for … generate** stamps out copies — 4 or 64 adders, same code
+  CODE:
+    architecture structural of adder4 is
+      signal c : std_logic_vector(4 downto 0);
+    begin
+      c(0) <= cin;
+      stages: for i in 0 to 3 generate
+        fa: entity work.full_adder
+          port map ( a => a(i), b => b(i), cin => c(i),
+                     s => s(i), cout => c(i+1) );
+      end generate;
+      cout <= c(4);
+    end structural;
+  (pen marks: 7 )
+  beat0:
+     0: Here's how you build that in V H D L.
+     1: This is called structural design.
+     2: First, declare internal signals, which are wires.
+     3: Here, c is a five bit bus of carry wires.
+     4: Then instantiate the full adder four times.
+     5: The port map connects each pin of the component to a wire: a goes to a of i, carry in goes to c of i, carry out goes to c of i plus one.
+     6: And instead of typing it four times, a for generate loop stamps out the copies.
+     7: Change the three to a sixty three and you have a sixty four bit adder.
+     8: This is exactly how big designs are built: small, tested pieces, wired together like a schematic.
+     9: In this course's second lab, students build this adder and then extend it.
+
+[s12] V  Negative numbers: two's complement
+  img: fig:wheel / fig:addsub
+  • −x = (NOT x) + 1
+  • 4 bits hold −8 … +7
+  • Subtract = add the complement → one adder does both
+  • Overflow: carry into MSB ≠ carry out
+  (pen marks: 5 )
+  beat0:
+     0: How does hardware handle negative numbers?
+     1: Almost every computer uses two's complement.
+     2: Picture the sixteen four bit patterns arranged on a wheel.
+     3: Adding one means stepping clockwise.
+     4: The top half of the patterns represents zero through seven, and the patterns with a leading one represent minus eight through minus one.
+     5: To negate a number, flip every bit and add one.
+     6: Five is zero one zero one.
+     7: Flip it to get one zero one zero, add one, and you get one zero one one, which is minus five.
+     8: The beautiful part is that the same adder circuit works for negative numbers with no changes.
+     9: But watch the orange line.
+     10: Seven plus one wraps around to minus eight.
+     11: That's overflow: the true answer didn't fit in four bits.
+     12: The hardware detects it when the carry into the top bit differs from the carry out of it.
+  beat1:
+     0: And here's the payoff.
+     1: Since A minus B equals A plus NOT B plus one, we can build a subtractor from our adder with almost no extra hardware.
+     2: Put an X O R gate on each B input, controlled by a single SUB line.
+     3: When SUB is zero, X O R passes B through unchanged and the circuit adds.
+     4: When SUB is one, X O R flips every bit of B, and SUB also feeds the carry in, supplying the plus one.
+     5: One control wire turns an adder into a subtractor.
+     6: That's the heart of every A L U you'll ever meet.
+
+[s13] WB  Worked example: 6 + (−5) with two's complement
+  step0 board+:   +5  =   0101
+     0: Let's compute six plus negative five in four bit two's complement, exactly as the adder hardware does.
+     1: First, build negative five.
+     2: Start from five: zero one zero one.
+  step1 board+: flip  =   1010 || PEN ('circle',) on 1010 ||   +1  =   1011   = -5 || PEN ('circle',) on 1011   = -5
+     0: Flip every bit: one zero one zero.
+     1: Then add one: one zero one one.
+     2: That's negative five.
+  step2 board+: carry    111 ||           0110   (+6) ||        +  1011   (-5) || PEN ('span',) on 0110   (+6) ||        -------- || PEN ('span',) on 0110   (+6) || PEN ('span',) on 0110   (+6) || PEN ('span',) on 0110   (+6) ||          10001
+     0: Now add six, zero one one zero, and negative five, one zero one one, with an ordinary binary adder.
+     1: Column by column from the right: zero plus one is one.
+     2: One plus one is zero, carry one.
+     3: One plus zero plus the carry is zero, carry one.
+     4: Zero plus one plus the carry is zero, carry one, out of the top.
+  step3 board+: drop the carry:  0001 = +1 || the same adder does subtraction || PEN ('underline',) on the same adder does subtraction
+     0: Drop the carry out of the fourth bit, and the answer is zero zero zero one: plus one.
+     1: Correct!
+     2: The same adder handles subtraction for free, which is exactly why every processor uses two's complement.
+
+[s14] V  std_logic: a wire has nine possible values
+  img: fig:stdlogic
+  (pen marks: 4 )
+  beat0:
+     0: In V H D L, wires usually have the type standard logic, and it has nine possible values, not two.
+     1: That sounds strange, but it's because real wires do more than zero and one.
+     2: The important ones are highlighted.
+     3: Capital U means uninitialized.
+     4: If you see U in your simulation, something never got a value, usually because you forgot a reset.
+     5: Capital X means unknown, and it usually means two different circuits are driving the same wire, one pushing a zero and the other a one.
+     6: That's a real short circuit in hardware, so treat X as an alarm bell.
+     7: Capital Z means high impedance: the driver has disconnected itself.
+     8: That's how many devices can share one bus, taking turns, with everyone else in Z.
+     9: The weak values model pull up and pull down resistors, and the dash means don't care, which gives the synthesis tool freedom to optimize.
+     10: Rule of thumb: a clean simulation shows only zeros and ones where it matters.
+
+[s15] EX  Three ways to write combinational logic
+  img: fig:mux
+  CODE:
+    -- 1. simple concurrent assignment
+    y1 <= (a and b) or c;
+    
+    -- 2. conditional: when / else  (priority)
+    y2 <= a when sel = "00" else
+          b when sel = "01" else
+          c when sel = "10" else d;
+    
+    -- 3. selected: with / select  (a true mux)
+    with sel select
+      y3 <= a when "00",
+            b when "01",
+            c when "10",
+            d when others;
+  (pen marks: 5 )
+  beat0:
+     0: For combinational logic, logic with no memory, V H D L gives you three styles outside of processes.
+     1: The first is the plain concurrent assignment you've already seen: a Boolean equation.
+  beat1:
+     0: The second is the conditional assignment, using when and else.
+     1: It checks conditions in order, so it naturally builds a priority structure: the first true condition wins.
+  beat2:
+     0: The third is the selected assignment, with select.
+     1: Every choice has equal priority, so it maps directly onto a multiplexer, like the four to one mux on the right.
+     2: The two select bits choose which of the four inputs reaches the output.
+     3: Notice the when others line at the end.
+     4: Standard logic has nine values, so two select bits have far more than four combinations.
+     5: When others covers all the rest, and it keeps the synthesis tool from inventing memory.
+     6: You'll see why that matters in a minute.
+
+[s16] V  Example: driving a seven-segment display
+  img: a:sevenseg / fig:seg2 / fig:seg2
+  • Seven LEDs, named a through g
+  • Decoder: 4-bit number in → 7 segment bits out
+  • Perfect job for **with … select**
+  (pen marks: 1 )
+  beat0:
+     0: Here's a real, everyday example: the seven segment display, used in microwaves, alarm clocks, gas pumps and lab equipment.
+  beat1:
+     0: Each digit is just seven L E Ds, named a through g, going around the outside and then the middle bar.
+     1: To show a two, we turn on segments a, b, g, e and d.
+     2: So the pattern for a, b, c, d, e, f, g is one one zero one one zero one.
+  beat2:
+     0: A seven segment decoder is a circuit that takes a four bit number and outputs those seven bits.
+     1: It's a perfect job for with select: one line per digit, zero through nine, plus when others to blank the display.
+     2: In this course's third lab, students build exactly this decoder, along with a small arithmetic logic unit, and see their numbers light up on the board.
+     3: One practical gotcha: many boards use active low segments, meaning a zero turns the L E D on.
+     4: Always check the board's manual.
+
+[s17] EX  Processes: how VHDL describes memory
+  img: fig:dff
+  CODE:
+    process (clk)
+    begin
+      if rising_edge(clk) then
+        if reset = '1' then
+          q <= '0';
+        else
+          q <= d;
+        end if;
+      end if;
+    end process;
+  (pen marks: 5 )
+  beat0:
+     0: So far, everything has been combinational.
+     1: Now let's add memory.
+     2: In V H D L, memory is described inside a process.
+     3: A process is a block whose statements read top to bottom, like software, but it still becomes hardware.
+     4: The list in parentheses is the sensitivity list: the process wakes up whenever one of those signals changes.
+  beat1:
+     0: The key phrase is if rising edge of clock.
+     1: Any signal you assign inside that if becomes a flip-flop, a one bit memory that only updates on the clock's rising edge.
+     2: Look at the timing diagram.
+     3: The input d can wiggle whenever it likes, but q only copies d at the instant the clock goes from zero to one, then holds that value until the next edge.
+     4: That's the foundation of every register, counter and state machine.
+     5: The reset branch gives the flip-flop a known starting value, which is how you avoid those U values in simulation.
+     6: In this course's fourth lab, students build flip-flops, then registers, then a small accumulator machine out of them.
+
+[s18] EX  Signals vs. variables
+  img: fig:swap
+  CODE:
+    -- signals: update when the process suspends
+    process (clk) begin
+      if rising_edge(clk) then
+        a <= b;      -- uses OLD b
+        b <= a;      -- uses OLD a  → swap!
+      end if;
+    end process;
+    
+    -- variables: update immediately
+    process (x)
+      variable t : integer;
+    begin
+      t := x * 2;    -- t changes right now
+      y <= t + 1;
+    end process;
+  (pen marks: 4 )
+  beat0:
+     0: Here's a subtle rule that trips up every beginner.
+     1: Inside a process, a signal assignment doesn't take effect immediately.
+     2: All signal updates are scheduled, and they happen together when the process finishes.
+     3: So look at the top example: a gets b, and b gets a.
+     4: In software, that would make both equal.
+     5: In V H D L, both assignments use the old values, so the two registers genuinely swap on every clock edge, just like the picture: two flip-flops feeding each other.
+     6: That's exactly how real hardware behaves, because both flip-flops sample at the same instant.
+     7: Variables are different.
+     8: They use the colon equals symbol, they live only inside the process, and they update immediately, like software.
+     9: Use signals for wires and registers.
+     10: Use variables only for temporary calculations inside a process.
+
+[s19] EX  The #1 beginner bug: the accidental latch
+  img: fig:latch
+  CODE:
+    -- BAD: no else branch
+    process (a, en) begin
+      if en = '1' then
+        y <= a;
+      end if;        -- en = '0' → y must
+    end process;     -- REMEMBER → latch!
+    
+    -- GOOD: default first
+    process (a, en) begin
+      y <= '0';      -- default value
+      if en = '1' then
+        y <= a;
+      end if;
+    end process;
+  (pen marks: 5 )
+  beat0:
+     0: Now the most common bug in all of beginner H D L.
+     1: Look at the top process.
+     2: If enable is one, y gets a.
+     3: But what happens to y when enable is zero?
+     4: The code doesn't say.
+     5: In software, nothing happens and y keeps its old value.
+     6: In hardware, keeping an old value requires memory, so the synthesis tool quietly builds a latch, a level sensitive memory element, to remember it.
+     7: You meant to build a simple gate and you got a storage element with tricky timing.
+     8: The tool usually just prints a warning that's easy to miss.
+  beat1:
+     0: The fix is simple.
+     1: In a combinational process, give every output a default value at the very top, then override it in the branches.
+     2: Now y is defined on every path, so the tool builds pure logic: a multiplexer that outputs a or zero.
+     3: The two rules for combinational processes: list every input in the sensitivity list, or use the V H D L twenty oh eight keyword all, and assign every output on every path.
+
+[s20] V  How fast can your design run?
+  img: fig:timingpath
+  • Data leaves a flip-flop (clock-to-Q)
+  • Travels through logic
+  • Must arrive **before** the next edge (setup)
+  • f max = 1 / (t clk→q + t logic + t setup)
+  (pen marks: 5 )
+  beat0:
+     0: Every synchronous design is a loop: flip-flop, then some combinational logic, then another flip-flop.
+     1: On each clock edge, data leaves the first flip-flop.
+     2: That takes the clock to Q delay, say half a nanosecond.
+  beat1:
+     0: Then it travels through the logic.
+     1: Say the slowest path, called the critical path, takes three nanoseconds.
+  beat2:
+     0: It has to arrive at the next flip-flop a little before the next clock edge.
+     1: That's the setup time, say zero point three nanoseconds.
+  beat3:
+     0: Add them up: three point eight nanoseconds is the shortest legal clock period.
+     1: One divided by three point eight nanoseconds is about two hundred sixty three megahertz.
+     2: That's the maximum clock frequency.
+     3: If you want it faster, you have to shorten the critical path, for example by using a faster adder, or by splitting the logic in half with another register in the middle.
+     4: That trick is called pipelining, and it's how processors reach gigahertz speeds.
+     5: The tools report this for you after place and route, in a timing report, and learning to read it is a real job skill.
+
+[s21] WB  Worked example: finding the maximum clock speed
+  step0 board+: register to register path || PEN None
+     0: Every clocked design has a slowest path between two flip-flops.
+     1: Here, data leaves the first flip-flop, passes through some logic, and must reach the second flip-flop before the next clock edge.
+  step1 board+: PEN None || $T_{min} = t_{cq} + t_{logic} + t_{setup}$ || PEN ('underline',) on $T_{min} || $= 0.8 + 5.2 + 0.5 = 6.5\ \mathrm{ns}$ || PEN ('circle',) on $= 0.8 + 5.2
+     0: The datasheet and timing report give us three delays.
+     1: The clock to Q delay of the first flip-flop: point eight nanoseconds.
+     2: The logic: five point two.
+     3: And the setup time of the second flip-flop: point five.
+  step2 board+: $f_{max} = \frac{1}{6.5\ \mathrm{ns}} \approx 154\ \mathrm{M
+     0: The clock period can't be shorter than the sum, six point five nanoseconds.
+     1: So the maximum frequency is one over six point five nanoseconds, about one hundred fifty four megahertz.
+  step3 board+: PEN None || pipelined: $1/3.9\ \mathrm{ns} \approx 256\ \mathrm{MHz}$ || PEN ('check',) on pipelined:
+     0: Need it faster?
+     1: Split the logic in half with an extra register in the middle.
+     2: Each stage now needs point eight plus two point six plus point five, three point nine nanoseconds, about two hundred fifty six megahertz.
+     3: That's pipelining, and you'll see it again when we build a processor.
+
+[s22] EX  Clock dividers: slowing 100 MHz down to human speed
+  img: fig:clkdiv
+  CODE:
+    process (clk) begin
+      if rising_edge(clk) then
+        if count = N - 1 then
+          count   <= 0;
+          slow_clk <= not slow_clk;
+        else
+          count <= count + 1;
+        end if;
+      end if;
+    end process;
+  (pen marks: 3 )
+  beat0:
+     0: Lab boards usually run at a hundred megahertz, a hundred million ticks per second.
+     1: If you blink an L E D at that rate, it just looks dimly on.
+     2: So we build a clock divider: a counter that counts input cycles and flips a slow output every N cycles.
+     3: Each full cycle of the output takes two N input cycles, so the output frequency is the input frequency divided by two N.
+     4: In the diagram, N is four, so the output is eight times slower.
+     5: Now a real calculation.
+     6: To get one hertz from a hundred megahertz, N must be fifty million.
+     7: How many bits does the counter need?
+     8: Two to the twenty fifth is about thirty three million, too small.
+     9: Two to the twenty sixth is about sixty seven million, enough.
+     10: So you need a twenty six bit counter.
+     11: One professional tip: in real designs, we usually don't use the divided signal as a new clock.
+     12: We generate a one cycle enable pulse instead and keep the whole design on a single clock.
+     13: It avoids a whole class of timing problems.
+
+[s23] V  Multiplexed displays: tricking your eyes
+  img: a:sevenseg / fig:muxdisp
+  • 4 digits share the same 7 segment wires
+  • Light **one digit at a time**
+  • Cycle at ~1 kHz → persistence of vision
+  (pen marks: 1 )
+  beat0:
+     0: Here's a lovely engineering trick that combines everything so far.
+     1: A four digit display has four times seven, which is twenty eight L E Ds.
+     2: Giving each one its own pin would waste pins.
+  beat1:
+     0: So all four digits share the same seven segment wires, and each digit gets its own enable line, called an anode.
+     1: A circuit turns on one digit at a time, putting that digit's pattern on the shared segment lines, then moves to the next digit, about a thousand times per second.
+     2: Each digit is actually lit only a quarter of the time, but your eye blends it together, an effect called persistence of vision, so you see all four steadily.
+     3: In this course's sixth lab, students build exactly this: a clock divider, a counter that selects the digit, a multiplexer for the data, and the seven segment decoder from earlier.
+     4: It's a small but complete digital system.
+
+[s24] V  Finite state machines
+  img: fig:fsm101 / fig:fsm101 / fig:fsm101_s3 / fig:mealy
+  • State register + next-state logic + output logic
+  • Example: detect the bit pattern 1-0-1
+  • **Moore:** outputs depend only on the state
+  • **Mealy:** outputs depend on state **and** input
+  (pen marks: 5 )
+  beat0:
+     0: Now the most useful design pattern in all of digital logic: the finite state machine.
+     1: Every state machine has three parts: a register holding the current state, logic that computes the next state from the current state and the inputs, and logic that computes the outputs.
+  beat1:
+     0: Let's design one.
+     1: A serial input delivers one bit per clock cycle, and we want to raise an output whenever the last three bits were one, zero, one.
+     2: We start in IDLE.
+     3: If we see a one, we move to got one.
+     4: From there, a zero moves us to got one zero.
+     5: A one in got one also keeps us there, because that one could be the start of a new pattern.
+  beat2:
+     0: From got one zero, a one completes the pattern, so we go to FOUND, where the output is one.
+     1: A zero there breaks the pattern and sends us back to IDLE.
+     2: And from FOUND, the final one can begin a new pattern, so a following zero takes us straight to got one zero.
+     3: This is a Moore machine, because the output depends only on which state we're in.
+  beat3:
+     0: Here's the Mealy version.
+     1: Outputs are written on the arrows as input slash output, because they depend on the current state and the input.
+     2: The output fires on the transition itself, the orange arrow, so we don't need a FOUND state.
+     3: That's one fewer state, and the answer arrives one cycle sooner.
+     4: The trade off is that a Mealy output can glitch if the input glitches, while a Moore output is clean.
+     5: Simplicity versus speed is a trade off you'll make over and over as an engineer.
+
+[s25] WB  Worked example: designing a '101' detector
+  step0 board+: S0: nothing yet || S1: saw 1 || S2: saw 10 || S3: saw 101: output 1 || PEN None || PEN ('box',) on S3: saw 101
+     0: Let's design a state machine that outputs one whenever the last three input bits were one, zero, one.
+     1: Name each state after what it remembers.
+     2: S zero: nothing useful yet.
+     3: S one: just saw a one.
+     4: S two: saw one zero.
+     5: S three: saw one zero one, so output one.
+     6: This is a Moore machine: the output depends only on the state.
+  step1 board+: PEN None
+     0: Now the arrows.
+     1: From S zero, a one moves to S one.
+     2: In S one, a zero moves to S two, but another one stays put, since that one could start a new pattern.
+     3: From S two, a one completes the pattern: go to S three.
+     4: A zero means one zero zero, so start over at S zero.
+     5: From S three, a zero gives one zero again, S two.
+     6: A one starts fresh at S one.
+  step2 board+: in:     1  1  0  1  0  1  1 || state:  S1 S1 S2 S3 S2 S3 S1 || PEN ('underline',) on state:  S1 || out:    0  0  0  1  0  1  0 || PEN ('circle',) on out:
+     0: Let's trace the input one, one, zero, one, zero, one, one.
+     1: The states go: S one, S one, S two, S three, S two, S three, S one.
+     2: The output is one exactly twice, once for each one zero one in the input.
+     3: And notice they overlap, sharing a one.
+  step3 board+: diagram first, then one case per state || PEN ('underline',) on diagram first
+     0: Once the diagram is right, the VHDL is mechanical: one case branch per state, one if per arrow.
+     1: Always draw the diagram first.
+
+[s26] EX  Writing a state machine in VHDL
+  img: fig:traffic
+  CODE:
+    type state_t is (NS_GREEN, NS_YELLOW,
+                     EW_GREEN, EW_YELLOW);
+    signal state : state_t;
+    
+    process (clk) begin
+      if rising_edge(clk) then
+        if reset = '1' then state <= NS_GREEN;
+        else
+          case state is
+            when NS_GREEN  => if t = 30 then
+                                state <= NS_YELLOW; end if;
+            when NS_YELLOW => if t = 4 then
+                                state <= EW_GREEN; end if;
+            -- ... and so on
+          end case;
+        end if;
+      end if;
+    end process;
+  (pen marks: 3 )
+  beat0:
+     0: Let's turn a real controller into code: a traffic light at an intersection, a classic state machine.
+     1: There are four states: north south green, north south yellow, east west green, and east west yellow.
+     2: Each state lasts a set number of seconds, which we measure with a counter that counts ticks of a divided clock.
+     3: In V H D L, you first declare an enumerated type listing the states by name, which makes the code readable and lets the tool choose the binary encoding.
+     4: Then a clocked process uses a case statement: in each state, check the condition, and move to the next state when it's met.
+     5: The outputs, which lights are on, come from the state.
+     6: Real intersections add sensor inputs, for example staying green for the main road until a car arrives on the side street, which is just another condition on an arrow.
+     7: In this course's fifth lab, students design state machines like this, including counters and a controller, in Vivado.
+
+[s27] EX  Test benches: prove it before you build it
+  img: fig:tb
+  CODE:
+    entity tb is end tb;      -- no ports!
+    
+    architecture sim of tb is
+      signal a, b, cin, s, cout : std_logic;
+    begin
+      dut: entity work.full_adder
+        port map (a, b, cin, s, cout);
+    
+      process
+        variable v : unsigned(2 downto 0);
+      begin
+        for i in 0 to 7 loop
+          v := to_unsigned(i, 3);
+          a <= v(2); b <= v(1); cin <= v(0);
+          wait for 10 ns;
+          assert (s = (a xor b xor cin))
+            report "sum wrong" severity error;
+        end loop;
+        wait;
+      end process;
+    end sim;
+  (pen marks: 6 )
+  beat0:
+     0: Finally, how do professionals know their design works?
+     1: A test bench.
+     2: It's a V H D L entity with no ports, a closed world that exists only in the simulator and is never turned into hardware.
+     3: Inside, it instantiates your design, called the D U T, the design under test.
+     4: A process then drives the inputs.
+     5: Here, a loop walks through all eight combinations, waits ten nanoseconds for things to settle, and uses assert to check the answer.
+     6: If the output is wrong, the simulator prints an error message.
+     7: That's a self checking test bench: instead of staring at waveforms and hoping you notice a mistake, the test tells you.
+     8: In industry, verification engineers often outnumber design engineers, because finding a bug before manufacturing is so valuable.
+     9: Wait statements like wait for ten nanoseconds only make sense in simulation, which is one reason a test bench can't be synthesized.
+
+[s28] B  Pro tips and common mistakes
+  • Draw the circuit (or block diagram) **before** coding
+  • Combinational process: default every output — no latches
+  • Clocked process: one clock, reset everything
+  • Treat **U** and **X** in simulation as bugs
+  • Read the synthesis warnings and the timing report
+  • Write a self-checking test bench for every module
+  (pen marks: 6 )
+  beat0:
+     0: Let's collect the habits that separate working designs from frustrating ones.
+  beat1:
+     0: First, draw the circuit or at least a block diagram before you write code.
+     1: Code is the schematic written in words.
+  beat2:
+     0: Second, in combinational processes, give every output a default, so you never infer latches.
+  beat3:
+     0: Third, in clocked processes, use one clock for the whole design and reset everything that matters.
+  beat4:
+     0: Fourth, if your simulation shows U or X, stop and find out why.
+     1: It's almost always a missing reset or two drivers on one wire.
+  beat5:
+     0: Fifth, read the warnings and the timing report.
+     1: The tools tell you about latches, unused signals and slow paths, but only if you look.
+  beat6:
+     0: And sixth, write a test bench for every module, ideally self checking.
+     1: A small tested module is worth more than a big untested one.
+
+[s29] Q  Key takeaways
+  BIG: VHDL is a precise way to **draw circuits with words**. Picture the hardware, simulate it, then build it.
+  cap: Next: EGEE 203 Electric Circuits.  Later: build a whole CPU (EGCP 381) and do it all again in Verilog (EGCP 446).
+  beat0:
+     0: Let's wrap up.
+     1: V H D L is a precise way to draw circuits with words.
+     2: Concurrent statements are gates that all run at once.
+     3: Processes with rising edge build flip-flops.
+     4: State machines organize behavior over time.
+     5: Timing sets your speed limit.
+     6: And test benches prove it all works before you build it.
+     7: These ideas come back again and again: in computer design you'll use them to build an entire processor, and in the Verilog course you'll see the very same concepts in a different language.
+     8: If you remember one thing from today, make it this: picture the hardware first.
+     9: Thanks for watching, and I'll see you in the next lecture.

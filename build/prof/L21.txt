@@ -1,0 +1,300 @@
+﻿#### L21_cpsc351: CPSC 351 Operating Systems Concepts
+
+[s0] TITLE  Operating Systems
+  img: a:tux
+  beat0:
+     0: Welcome to C P S C three fifty one, operating systems.
+     1: The operating system is the program that runs all other programs.
+     2: Whether it's Linux, mascotted by this penguin, Windows, mac O S, Android or the tiny real time kernels in embedded devices, every O S solves the same problems: sharing one machine among many programs, safely and efficiently.
+     3: In this lecture we'll cover processes and threads, scheduling, synchronization and deadlock, and virtual memory, with the C and POSIX examples this course uses on Linux.
+
+[s1] V  What an operating system does
+  img: a:thompson_ritchie / fig:layers
+  • Resource manager: CPU, memory, storage, devices
+  • Abstraction: files, processes, sockets
+  • Protection: user mode vs kernel mode
+  • System calls are the only door into the kernel
+  (pen marks: 3 )
+  beat0:
+     0: In nineteen sixty nine, Ken Thompson and Dennis Ritchie, pictured here, began writing Unix at Bell Labs, and soon rewrote it in the new C language they created for the purpose.
+     1: Its ideas, processes, files and a small set of system calls, live on in Linux, mac O S, Android and i O S.
+  beat1:
+     0: An operating system does three jobs.
+     1: It manages resources: deciding which program gets the C P U, how memory is divided, and who can use the disk and network.
+     2: It provides abstractions: instead of disk sectors you get files, instead of a raw C P U you get processes.
+     3: And it protects programs from each other.
+     4: The processor itself enforces this with two modes.
+     5: Applications run in user mode, unable to touch hardware directly.
+     6: The kernel runs in kernel mode.
+     7: The only way across is a system call, like open, read or fork, which traps into the kernel, does the privileged work, and returns.
+
+[s2] V  Processes
+  img: fig:states / fig:fork
+  • Process = program in execution + its own address space
+  • PCB: PID, state, registers, PC, memory map, open files
+  • Context switch: save one PCB, load another
+  • Unix: fork() clones · exec() replaces · wait() reaps
+  (pen marks: 7 )
+  beat0:
+     0: A process is a program in execution: its code, data, heap and stack, plus the kernel's bookkeeping record, the process control block, which holds its I D, state, saved registers, program counter, memory map and open files.
+     1: A process moves through states.
+     2: It's admitted as ready, gets scheduled to running, and goes back to ready when its time slice expires.
+     3: If it starts a disk read or waits for input, it moves to waiting, and when the I O completes, back to ready.
+     4: Switching the C P U from one process to another is a context switch: save one P C B, load another.
+     5: It's pure overhead, so schedulers try not to do it too often.
+  beat1:
+     0: On Unix, new processes are made with fork, which clones the calling process.
+     1: Fork returns twice: zero in the child, and the child's I D in the parent.
+     2: The child usually calls exec, which replaces its program with a new one, and the parent calls wait to collect the child's exit status.
+     3: If the parent never waits, the finished child lingers as a zombie.
+     4: Every time you type a command in a shell, this is exactly what happens.
+     5: In this course, students write a time utility this way: fork a child, exec a command, and measure how long it takes.
+
+[s3] WB  Worked example: creating a process with fork()
+  step0 board+: int main(void) { ||   pid_t pid = fork(); || PEN None || PEN ('circle',) on fork() || PEN None
+     0: Here's how every Unix program starts another process.
+     1: Call fork.
+     2: It creates an almost exact copy of the running process.
+     3: Both copies continue from the very next line.
+  step1 board+:   if (pid == 0) { ||     printf("child: my pid is %d\n", getpid()); ||   } else { ||     wait(NULL);           // block until the child exits ||     printf("parent: child %d done\n", pid); ||   } || } || PEN None || PEN ('circle',) on pid == 0 || PEN ('underline',) on } else {
+     0: The only difference is fork's return value.
+     1: In the child it returns zero.
+     2: In the parent it returns the child's process I D.
+     3: So one if statement splits the two paths.
+  step2 board+: PEN ('box',) on wait(NULL); || $ ./forkdemo || child: my pid is 4012 || parent: child 4012 done || PEN ('link',) on child: my pid is 4012 || shell = fork + exec + wait || PEN ('underline',) on shell = fork + exec + wait
+     0: The parent calls wait, so it blocks until the child finishes.
+     1: That guarantees the order of the output: the child's line, then the parent's.
+     2: Without wait, the two lines could come out in either order, depending on the scheduler.
+     3: A shell runs every command you type with exactly this pattern: fork, then exec in the child, then wait in the parent.
+
+[s4] V  Threads and parallelism
+  img: fig:threads / fig:amdahl
+  • Threads share code, heap and files; each has its own stack
+  • Cheaper to create & switch than processes
+  • pthread_create / pthread_join
+  • Amdahl’s law caps the speedup
+  (pen marks: 6 )
+  beat0:
+     0: A thread is a lighter unit of execution inside a process.
+     1: Threads share the process's code, global data, heap and open files, but each has its own stack and registers.
+     2: They're cheap to create and switch, and on a multicore C P U, they truly run at the same time.
+     3: In C on Linux, you create them with p thread create and wait for them with p thread join.
+     4: A classic course exercise: two worker threads each sort half of an array, and a third thread merges the results.
+  beat1:
+     0: But parallelism has limits, captured by Amdahl's law.
+     1: If a fraction S of a program is inherently serial, the speedup on N cores is at most one over S plus one minus S over N.
+     2: With ten percent serial code, even infinitely many cores give at most a ten times speedup.
+     3: With half the program serial, you never get past two times.
+     4: So the serial parts, often the parts protected by locks, end up dominating.
+
+[s5] V  CPU scheduling
+  img: fig:gantt
+  • FCFS: simple, but short jobs wait behind long ones
+  • SJF: optimal average wait (needs burst estimates)
+  • Round robin: time slices → responsive
+  • Real OSes: multilevel feedback queues + priorities
+  (pen marks: 4 )
+  beat0:
+     0: When several processes are ready, the scheduler picks which runs next.
+     1: First come, first served is simplest.
+     2: But look what happens when a twenty four millisecond job arrives just before two three millisecond jobs.
+     3: The waits are zero, twenty four and twenty seven milliseconds, an average of seventeen.
+     4: The short jobs are stuck behind the long one, called the convoy effect.
+  beat1:
+     0: Run the shortest job first, and the waits become zero, three and six: an average of three milliseconds, for exactly the same work.
+     1: Shortest job first is provably optimal for average waiting time, but the O S can't know the future, so real systems estimate burst lengths from past behavior.
+  beat2:
+     0: Round robin gives each ready process a short time slice in turn, which keeps interactive programs responsive.
+     1: A tiny slice means lots of context switches.
+     2: A huge one turns back into first come, first served.
+  beat3:
+     0: Real operating systems combine these ideas with priorities and multilevel feedback queues: interactive tasks that block often stay at high priority, while long C P U bound jobs drift down.
+     1: Priorities need aging, so low priority tasks don't starve forever.
+
+[s6] WB  Worked example: three schedulers, one workload
+  step0 board+: P1 = 24,  P2 = 3,  P3 = 3 ms || PEN None || FCFS: (0 + 24 + 27)/3 = 17 || PEN ('underline',) on FCFS:
+     0: Three processes arrive at time zero: P one needs twenty four milliseconds of CPU, P two and P three need three each.
+     1: First come, first served runs them in arrival order.
+     2: P one waits zero, P two waits twenty four, P three waits twenty seven.
+     3: Average: seventeen milliseconds.
+  step1 board+: PEN None || SJF: (0 + 3 + 6)/3 = 3 || PEN ('check',) on SJF:
+     0: Shortest job first runs the short ones first.
+     1: Waits: zero, three and six.
+     2: Average: three milliseconds.
+     3: Same work, almost six times less waiting.
+     4: That's why shortest job first is provably optimal for average wait.
+  step2 board+: PEN None || RR: (6 + 4 + 7)/3 ≈ 5.7 || PEN ('circle',) on RR:
+     0: But the OS can't know the future.
+     1: Round robin with a four millisecond slice gives each process a turn.
+     2: P one runs four, P two finishes at seven, P three at ten, then P one gets the rest.
+     3: Average wait: about five point seven.
+     4: Nearly as good, and nobody is stuck behind a long job, which is why interactive systems use time slices.
+
+[s7] V  Race conditions and critical sections
+  img: fig:race
+  • count++ is really load → add → store
+  • Interleaving can lose updates
+  • Critical section: one thread at a time
+  • Mutex lock / unlock around shared data
+  (pen marks: 5 )
+  beat0:
+     0: Here's the bug that makes concurrent programming hard.
+     1: Count plus plus looks like one step, but the machine does three: load count into a register, add one, store it back.
+  beat1:
+     0: Suppose count is five, and two threads increment it.
+     1: Thread one loads five.
+     2: Before it stores, thread two also loads five.
+     3: Both add one, and both store six.
+     4: Two increments happened, but count is six, not seven.
+     5: The result depends on timing, which is called a race condition.
+     6: It might work perfectly a million times and fail on the million and first.
+  beat2:
+     0: The fix is to make the read modify write a critical section, a region of code only one thread may execute at a time.
+  beat3:
+     0: The standard tool is a mutex lock: lock before touching the shared data, unlock after.
+     1: In this course, students make a linked list stack thread safe exactly this way.
+     2: Semaphores, condition variables and monitors build on the same idea, and solve classic problems like the bounded buffer between a producer and a consumer.
+
+[s8] V  Deadlock
+  img: fig:deadlock / a:dining
+  • Four conditions: mutual exclusion, hold-and-wait, no preemption, circular wait
+  • Break any one → no deadlock
+  • Simplest: global lock ordering
+  • Classic puzzle: the dining philosophers
+  (pen marks: 5 )
+  beat0:
+     0: Locks bring a new danger.
+     1: Thread one holds lock A and waits for lock B.
+     2: Thread two holds lock B and waits for lock A.
+     3: Neither can proceed, ever.
+     4: That's deadlock.
+     5: It requires four conditions at once: mutual exclusion, holding while waiting, no forced preemption, and a circular wait.
+     6: Break any one and deadlock is impossible.
+     7: The most practical fix is to break circular wait: assign every lock a global order, and always acquire locks in that order.
+     8: If everyone takes A before B, the cycle can't form.
+  beat1:
+     0: The classic illustration is the dining philosophers.
+     1: Five philosophers sit around a table with one fork between each pair, and each needs both neighboring forks to eat.
+     2: If everyone picks up their left fork at the same moment, everyone waits for the right fork forever.
+     3: Ordering the forks, or allowing at most four to sit down at once, solves it.
+     4: Operating systems mostly prevent deadlock by design and leave detection to tools, because full deadlock avoidance algorithms, like the Banker's algorithm, are too expensive to run all the time.
+
+[s9] V  Virtual memory and paging
+  img: fig:paging
+  • Every process sees its own private address space
+  • Address = page number + offset (4 KB pages)
+  • Page table maps pages → physical frames
+  • TLB caches recent translations
+  (pen marks: 5 )
+  beat0:
+     0: Every process believes it has a huge private memory starting at address zero.
+     1: That's virtual memory, and it's one of the most important ideas in computing.
+  beat1:
+     0: Memory is divided into fixed size pages, typically four kilobytes.
+     1: A virtual address splits into a page number and an offset within the page.
+     2: With four kilobyte pages, the low twelve bits are the offset.
+     3: Here, hex one A two B is page one, offset A two B.
+  beat2:
+     0: The page table, maintained by the O S, maps each virtual page to a physical frame.
+     1: Page one maps to frame four, so the physical address is hex four A two B.
+     2: The hardware memory management unit does this translation on every single access.
+  beat3:
+     0: Because looking up the page table would double every memory access, the processor caches recent translations in a translation lookaside buffer, the T L B.
+     1: Virtual memory gives each process isolation, since it can't even name another process's memory, and it lets the O S load only the pages a program actually uses.
+
+[s10] WB  Worked example: translating a virtual address
+  step0 board+: 4 KB page $= 2^{12}$: 12-bit offset || 0x3A7F: page 3, offset 0xA7F || PEN None || PEN ('circle',) on 0x3A7F: page 3
+     0: A small system uses sixteen bit virtual addresses and four kilobyte pages.
+     1: Four K is two to the twelfth, so the low twelve bits are the offset within a page, and the top four bits are the page number.
+     2: Translate hex three A seven F.
+     3: Each hex digit is four bits, so the page is three and the offset is A seven F.
+  step1 board+: PEN None || page table[3] = frame 7 || PEN ('underline',) on page table[3]
+     0: Look up page three in this process's page table.
+     1: It says page three lives in physical frame seven.
+  step2 board+: PEN None || PEN ('underline',) on 0x3A7F: page 3 || physical = 0x7A7F
+     0: The offset never changes.
+     1: Glue frame seven onto offset A seven F: the physical address is hex seven A seven F.
+     2: Another process could use the same virtual address three A seven F and land in a completely different frame.
+     3: That's how processes are isolated from each other, and the T L B caches these lookups so they cost almost nothing.
+
+[s11] V  Page faults, replacement and thrashing
+  img: fig:faults
+  • Page not in RAM → page fault → load it from disk
+  • Memory full → evict a page (LRU ≈ best practical)
+  • FIFO can suffer Belady’s anomaly
+  • Too little RAM → thrashing
+  (pen marks: 4 )
+  beat0:
+     0: If a program touches a page that isn't currently in memory, the hardware raises a page fault.
+     1: The O S finds a free frame, loads the page from disk, updates the page table, and restarts the instruction.
+     2: The program never knows.
+     3: This is demand paging.
+  beat1:
+     0: When memory is full, the O S must evict a page.
+     1: The optimal choice is the page that won't be needed for the longest time, but that requires knowing the future.
+     2: Least recently used is an excellent approximation, and real systems use cheap versions of it, like the clock algorithm.
+  beat2:
+     0: Simple first in, first out replacement has a strange flaw called Belady's anomaly: for some access patterns, giving it more memory produces more page faults.
+     1: In this course, students analyze a virtual memory simulation where doubling physical memory cut page faults from five hundred thirty nine to two hundred forty four.
+  beat3:
+     0: But starve a system of memory, and it thrashes: the working sets of the running programs don't fit, so it spends almost all its time moving pages to and from disk, and almost none doing useful work.
+     1: The cure is more memory, or running fewer programs at once.
+
+[s12] WB  Worked example: LRU page replacement, step by step
+  step0 board+: 3 frames || refs: 7 0 1 2 0 3 0 4 || PEN ('underline',) on refs: 7 0 1 2 0 3 0 4 || PEN None
+     0: Three frames of RAM, and the program touches pages seven, zero, one, two, zero, three, zero, four.
+     1: Let's run least recently used.
+     2: The first three references fill empty frames: three page faults.
+     3: Then page two arrives.
+     4: Memory is full, so we evict the page used longest ago, seven.
+     5: Four faults.
+  step1 board+: PEN None
+     0: Page zero is already in memory: a hit.
+     1: Then page three.
+     2: The least recently used page is now one, so one goes.
+     3: Five faults.
+  step2 board+: PEN None || LRU: 6 faults || PEN ('circle',) on LRU: 6 faults
+     0: Zero: another hit.
+     1: Then four replaces two, the least recently used.
+     2: Six faults in total.
+  step3 board+: PEN None || FIFO: 7 faults || PEN ('circle',) on FIFO: 7 faults
+     0: First in, first out ignores recent use.
+     1: It throws out zero just before zero is needed again, and ends with seven faults.
+     2: Every fault costs a disk access, millions of times slower than RAM, so a smarter policy pays off enormously.
+
+[s13] V  Storage, files and the rest of the OS
+  img: a:unix_v5 / a:unix_v5 / a:unix_v5 / fig:raid / fig:raid
+  • Files & directories; inodes point to data blocks
+  • Free-space management, journaling for crash safety
+  • Disk scheduling: SCAN (elevator); SSDs: wear leveling, TRIM
+  • RAID 0 (stripe) · 1 (mirror) · 5 (striped parity)
+  • IPC: shared memory (fast) vs message passing (simple, networkable)
+  (pen marks: 3 )
+  beat0:
+     0: A few more pieces complete the picture.
+     1: File systems organize disk blocks into files and directories.
+     2: On Unix style systems, an inode records each file's metadata and points to its data blocks.
+  beat1:
+     0: The file system tracks free space, and modern ones keep a journal, logging changes before making them, so a crash can't leave the disk inconsistent.
+  beat2:
+     0: For spinning disks, the O S reorders requests to reduce head movement, for example the elevator algorithm.
+     1: S S Ds have no moving parts, but their flash cells wear out, so they spread writes around, called wear leveling, and the O S tells them which blocks are free with the TRIM command.
+  beat3:
+     0: RAID combines disks: level zero stripes data for speed, level one mirrors it for safety, level five stripes with parity so any single disk can fail without losing data.
+  beat4:
+     0: And processes communicate either through shared memory, which is fast but needs synchronization, or by message passing through pipes, queues and sockets, which is simpler and works across machines.
+     1: Choosing between them for a mission critical system is a classic design question in this course.
+
+[s14] Q  Key takeaways
+  BIG: The OS **shares one machine safely**: processes & threads for the CPU, **locks** for shared data, **virtual memory** for isolation.
+  cap: Next: CPSC 362, Foundations of Software Engineering.
+  beat0:
+     0: To recap.
+     1: The operating system is a resource manager, an abstraction layer and a protector, entered only through system calls.
+     2: Processes are isolated programs in execution, created with fork, exec and wait.
+     3: Threads share a process and run in parallel, limited by Amdahl's law.
+     4: Schedulers trade off average wait, fairness and responsiveness.
+     5: Shared data needs locks to avoid races, and lock ordering avoids deadlock.
+     6: And virtual memory gives each process a private address space, with paging, the T L B and page replacement making it efficient.
+     7: Next, software engineering.
+     8: See you there.

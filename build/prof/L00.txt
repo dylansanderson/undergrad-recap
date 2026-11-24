@@ -1,0 +1,85 @@
+﻿#### L00_welcome: Welcome A Computer Engineering Degree, Re-Taught
+
+[s0] TITLE  Computer Engineering, Re-Taught
+  img: a:wafer_pentium|0.18,0,1,1
+  beat0:
+     0: Welcome.
+     1: This series re-teaches a complete computer engineering bachelor's degree, one course at a time, following the curriculum of the computer engineering program at California State University, Fullerton.
+     2: It's meant for anyone who wants to learn this material properly: current students who want a second explanation, graduates who want to refresh what didn't stick, and curious people starting from scratch.
+     3: Every lecture assumes nothing was retained, explains why each idea matters in the real world, and works through concrete examples with diagrams.
+
+[s1] V  What computer engineers do
+  img: a:eniac / a:fpga_board / a:robot_arm
+  • Bridge hardware and software
+  • Design chips, boards, embedded systems and the code that runs them
+  • From ENIAC (1945) to billions of transistors per chip
+  • Phones, cars, medical devices, robots, data centers
+  beat0:
+     0: Computer engineering sits between electrical engineering and computer science.
+     1: Computer engineers design the hardware that computes, and write the software that runs closest to it.
+     2: This is ENIAC, one of the first general purpose electronic computers, built in the nineteen forties with about eighteen thousand vacuum tubes.
+     3: It filled a room.
+  beat1:
+     0: Today, a single chip holds billions of transistors, and computer engineers design them, often in hardware description languages on boards like this F P G A, which you'll learn to program.
+  beat2:
+     0: They also build embedded systems, computers hidden inside other products, from phones and cars to pacemakers and robots like this one.
+     1: Every one of those systems needs people who understand both the transistors and the code.
+     2: That's what this degree trains you to do.
+
+[s2] V  The map: thirty courses in five tracks
+  img: fig:map
+  (pen marks: 6 )
+  beat0:
+     0: Here's the whole degree on one slide, grouped into five tracks.
+     1: Math and physics come first.
+     2: They're the language everything else is written in: calculus, discrete math, differential equations, linear algebra, probability, mechanics, and electricity and magnetism.
+  beat1:
+     0: The software track runs from a first programming course through object oriented programming and data structures, to operating systems, software engineering and databases.
+  beat2:
+     0: The circuits and devices track starts with circuit laws, moves to diodes and transistors, and ends inside the chip with CMOS design, plus signals and systems, the math of filters and frequencies.
+  beat3:
+     0: The digital systems track is the heart of computer engineering: digital logic, microcontrollers, hardware description languages, processor design, embedded systems and hardware security.
+  beat4:
+     0: And finally, engineering economics and ethics, and a two semester senior design project that ties it all together.
+     1: The lectures follow roughly the order a student takes them, so each builds on the ones before.
+
+[s3] V  The big idea: layers of abstraction
+  img: fig:stack
+  • Every layer hides the details of the one below
+  • This degree climbs the whole stack
+  • Physics → transistors → logic → processors → software
+  • Engineers who understand several layers solve the hardest bugs
+  (pen marks: 7 )
+  beat0:
+     0: One idea organizes the entire degree: abstraction.
+     1: A computer is built in layers.
+     2: Physics explains how electrons move.
+     3: Transistors use that physics to make switches.
+     4: Switches make logic gates, gates make processors, processors run instructions, and instructions build operating systems and applications.
+     5: Each layer hides the details of the one below, so a programmer doesn't need to think about electrons.
+     6: This degree is unusual because it climbs every one of those layers, from physics at the bottom to applications at the top.
+     7: That's its real value: when something goes wrong at the boundary between layers, like a timing bug, a power glitch or a slow program caused by the cache, the engineer who understands more than one layer is the one who can fix it.
+     8: Keep this picture in mind.
+     9: At the end of the series, we'll come back to it.
+
+[s4] B  How to use this series
+  img: a:wafer_pentium|0.18,0,1,1
+  • Each course: one lecture video + a slide deck
+  • Watch in order, or jump to what you need (chapters)
+  • Pause on the worked examples and try them first
+  • Re-derive, don’t just re-watch: write it out by hand
+  • Every image is credited at the end of the series
+  beat0:
+     0: Each course has its own lecture video and a matching slide deck.
+  beat1:
+     0: You can watch in order, which is how the material builds, or jump straight to a course using the chapter markers.
+  beat2:
+     0: When a worked example appears, pause and try it yourself before listening to the answer.
+     1: That's where real learning happens.
+  beat3:
+     0: And don't just re watch.
+     1: Write things out by hand: derive the formula, draw the circuit, trace the code.
+     2: Retention comes from doing, not from watching.
+  beat4:
+     0: The photographs come from Wikimedia Commons under free licenses, and every one is credited.
+     1: Let's begin, with calculus.

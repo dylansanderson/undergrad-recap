@@ -1,0 +1,267 @@
+﻿#### L25_egcp441: EGCP 441 Advanced Electronics for Computer Engineers
+
+[s0] TITLE  CMOS Circuit Design
+  img: a:cleanroom
+  beat0:
+     0: Welcome to E G C P four forty one, advanced electronics for computer engineers.
+     1: In digital logic, gates were ideal boxes that switched instantly and cost nothing.
+     2: In this course we open the boxes.
+     3: Every gate is built from MOS transistors, and their physics decides how fast a chip can run, how much power it burns, and how small it can be.
+     4: Chips like the ones made in clean rooms like this are designed from the ideas in this lecture: the CMOS inverter, static logic gates, delay and power, interconnect, and physical layout.
+
+[s1] V  MOSFETs as switches: NMOS and PMOS
+  img: fig:switches
+  • NMOS: on when gate high — good at pulling DOWN
+  • PMOS: on when gate low — good at pulling UP
+  • Threshold V_t: below it, (mostly) off
+  • In this course’s labs: measure V_t and I–V curves of real MOSFETs
+  (pen marks: 6 )
+  beat0:
+     0: Recall the MOSFET from electronics.
+     1: An N channel MOSFET conducts when its gate is high.
+     2: It passes a strong zero, pulling a node all the way to ground, but only a weak one, because it turns off as the output rises to within a threshold voltage of the gate.
+  beat1:
+     0: A P channel MOSFET is the mirror image.
+     1: It conducts when its gate is low, and it passes a strong one but a weak zero.
+  beat2:
+     0: So CMOS, complementary MOS, uses each where it's strong: PMOS transistors to pull outputs up to the supply, and NMOS transistors to pull them down to ground.
+     1: Below the threshold voltage, a transistor is mostly off, though a small leakage current still flows.
+  beat3:
+     0: In this course's first labs, students characterize real MOSFETs on the bench, measuring threshold voltages and current voltage curves for both N and P channel devices, to see the square law models from electronics in actual hardware.
+
+[s2] V  The CMOS inverter
+  img: fig:inv / fig:vtc
+  • PMOS on top, NMOS on bottom, gates tied together
+  • IN = 0 → PMOS on → OUT = V_DD; IN = 1 → NMOS on → OUT = 0
+  • Switching threshold V_M set by PMOS/NMOS strength
+  • Noise margins: how much noise an input can tolerate
+  (pen marks: 9 )
+  beat0:
+     0: The simplest CMOS gate is the inverter: a PMOS transistor from the supply to the output, an NMOS from the output to ground, and both gates tied to the input.
+     1: When the input is low, the PMOS is on and the NMOS is off, so the output is pulled up to V D D.
+     2: When the input is high, the NMOS is on and the PMOS is off, so the output is pulled to ground.
+     3: In either steady state, one transistor is always off, so there's no path from supply to ground and almost no current flows.
+     4: That's why CMOS took over the industry.
+  beat1:
+     0: Sweep the input slowly and plot the output, and you get the voltage transfer characteristic.
+     1: The switching threshold, V M, is where input equals output.
+     2: It depends on the relative strength of the two transistors.
+     3: Holes move more slowly than electrons, so designers make the PMOS two to three times wider to center V M at half the supply.
+     4: The noise margins measure how much noise an input can tolerate and still be read correctly.
+     5: They're set by the points where the curve's slope is minus one, V I L and V I H.
+     6: A steep curve, like this one, means large noise margins, which is why digital logic is so robust.
+     7: In the labs, students measure exactly this curve, then the inverter's switching delay.
+
+[s3] WB  Worked example: building an inverter from two transistors
+  step0 board+: PMOS: ON when its gate is LOW || PEN None || PEN ('underline',) on gate is LOW
+     0: Let's draw the most important circuit in digital electronics.
+     1: Put a P M O S transistor at the top, with its source connected to the supply, V D D.
+  step1 board+: NMOS: ON when its gate is HIGH || PEN ('underline',) on gate is HIGH || PEN None
+     0: Below it, an N M O S transistor, with its source at ground.
+     1: Their drains meet in the middle, and that's the output.
+  step2 board+: PEN None || IN = 0: PMOS on, NMOS off  so OUT = 1 || PEN ('circle',) on IN = 0 || IN = 1: NMOS on, PMOS off  so OUT = 0 || PEN ('circle',) on IN = 1
+     0: Tie both gates together as the input.
+     1: Now, input low: the P M O S turns on and the N M O S turns off, so the output connects to V D D.
+     2: A one.
+     3: Input high: the N M O S turns on, the P M O S off, and the output connects to ground.
+     4: A zero.
+     5: It's a NOT gate.
+  step3 board+: never a path VDD to GND in steady state
+     0: Here's the magic.
+     1: In either steady state, one transistor is always off, so there's no path from the supply to ground.
+     2: A CMOS gate burns almost no power while it sits still.
+     3: That one property is why CMOS won, and why your phone can have billions of these.
+
+[s4] V  Static CMOS gates: NAND and NOR
+  img: fig:nand
+  • Pull-down network (NMOS) + complementary pull-up (PMOS)
+  • Series in one ⇔ parallel in the other
+  • NAND: NMOS in series, PMOS in parallel
+  • CMOS gates invert naturally; AND = NAND + inverter
+  (pen marks: 7 )
+  beat0:
+     0: Every static CMOS gate follows one recipe.
+     1: Build a pull down network of NMOS transistors that conducts exactly when the output should be zero.
+     2: Then build the complementary pull up network of PMOS transistors: wherever the NMOS network has transistors in series, the PMOS network has them in parallel, and vice versa.
+     3: It's De Morgan's law in silicon.
+  beat1:
+     0: Look at the NAND gate.
+     1: The output should be zero only when A and B are both one, so the two NMOS transistors are in series: both must be on to pull the output down.
+     2: The PMOS transistors are in parallel: if either input is zero, its PMOS pulls the output up.
+     3: A NOR gate is the opposite, with NMOS in parallel and PMOS in series.
+  beat2:
+     0: Because NMOS transistors are faster, NAND gates, with their series NMOS, are usually preferred over NOR gates, whose slow PMOS transistors end up in series.
+  beat3:
+     0: Notice that CMOS gates naturally invert.
+     1: An AND gate is really a NAND followed by an inverter, costing six transistors instead of four.
+     2: That's why logic synthesis tools love NAND and NOR.
+     3: In this course's labs, students build NOT, NAND, NOR, and three input versions as transistor level schematics and physical layouts.
+
+[s5] WB  Worked example: a CMOS NAND gate, transistor by transistor
+  step0 board+: NAND: OUT = 0 only if A = B = 1 || PEN ('underline',) on OUT = 0 only if || PEN None
+     0: A NAND output should be zero only when A and B are both one.
+     1: Build the pull up network first: two P M O S transistors in parallel from V D D to the output.
+     2: If either input is low, at least one of them conducts, and the output is pulled high.
+  step1 board+: PEN None || series in one network ⇔ parallel in the other || PEN ('underline',) on series in one network
+     0: The pull down network is the complement: two N M O S transistors in series from the output to ground.
+     1: Current only gets through if both are on, which needs A and B both high.
+  step2 board+: A B | OUT || 0 0 |  1 || PEN ('highlight',) on 0 0 |  1 || 0 1 |  1 || 1 0 |  1 || PEN ('highlight',) on 0 1 |  1 || 1 1 |  0 || PEN None || PEN ('highlight',) on 1 1 |  0
+     0: Check every row.
+     1: Zero zero: both P M O S on, output one.
+     2: Zero one, and one zero: one P M O S on, and the series N M O S chain is broken, so output one.
+     3: One one: both P M O S off, both N M O S on, output zero.
+     4: That's NAND, with just four transistors.
+
+[s6] V  Delay: it’s all R and C
+  img: fig:delay
+  • On transistor ≈ resistor R; everything it drives ≈ capacitor C
+  • t_p ≈ 0.69 RC (time to cross 50%)
+  • Wider transistor → lower R, but more input C
+  • Logical effort: size stages ≈ 4× apart (fanout-of-4)
+  (pen marks: 3 )
+  beat0:
+     0: Why does a gate take time to switch?
+     1: Model the on transistor as a resistor, and everything the output drives, the gates of the next stage, the wire, and the transistor's own diffusion regions, as a capacitor.
+  beat1:
+     0: When the input switches, the output charges or discharges through that resistor, the R C exponential from the circuits course.
+     1: The propagation delay is the time to cross fifty percent of the swing, which is the natural log of two, about point six nine, times R C.
+     2: Average the rising and falling delays, t P L H and t P H L, to get the gate's delay.
+  beat2:
+     0: To go faster, make the transistor wider to lower its resistance.
+     1: But a wider transistor also has a bigger gate capacitance, which slows down whatever drives it.
+     2: There's no free lunch.
+  beat3:
+     0: The method of logical effort optimizes this trade off.
+     1: One famous result: to drive a big load, use a chain of inverters that grow by about a factor of four at each stage, called the fanout of four rule.
+     2: Chip designers use F O four delays as a technology independent unit of speed.
+
+[s7] WB  Worked example: how long does a gate take?
+  step0 board+: $R_{on} \approx 10\ \mathrm{k\Omega}$,   $C_{load} \approx 1
+     0: Model an on transistor as a resistor, about ten kilohms for a small one in this example, and everything it drives as a capacitor, say ten femtofarads for one gate input plus wire.
+  step1 board+: $t_p = 0.69\,RC = 0.69(10^4)(10^{-14})$ || PEN ('circle',) on 0.69 || $t_p \approx 69\ \mathrm{ps}$
+     0: The output is an RC circuit charging or discharging.
+     1: It crosses the halfway point after point six nine times R C.
+     2: Ten thousand times ten femtofarads is a hundred picoseconds, so the delay is about sixty nine picoseconds.
+  step2 board+: fan-out 4: $C = 40\ \mathrm{fF} \Rightarrow t_p \approx 276\ || PEN ('circle',) on fan-out 4
+     0: Now make this gate drive four others, a fan out of four.
+     1: The load capacitance quadruples to forty femtofarads, and so does the delay: two hundred seventy six picoseconds.
+  step3 board+: wider: lower R, but more input C || PEN ('underline',) on wider: lower R || size each stage about 4× the previous
+     0: The fix is to make the driving transistor wider, which lowers its resistance.
+     1: But a wider transistor has more gate capacitance, which slows down whatever drives it.
+     2: That trade off is exactly what logical effort and gate sizing are about.
+
+[s8] V  Power: why chips get hot
+  img: fig:power
+  • Dynamic: P = α C V_DD² f
+  • Voltage is the biggest lever (squared!)
+  • Short-circuit power during transitions
+  • Leakage (static) dominates at nanometer scales
+  (pen marks: 4 )
+  beat0:
+     0: Every time a node switches, its capacitance is charged from the supply and then dumped to ground, burning energy C V squared per full cycle.
+     1: Multiply by how often nodes switch, the activity factor alpha, and the clock frequency, and you get dynamic power: alpha C V D D squared f.
+  beat1:
+     0: Voltage is the biggest lever, because it's squared.
+     1: With an activity factor of point one, ten nanofarads of total switched capacitance and a three gigahertz clock, a one point two volt chip burns over four watts.
+     2: Drop to point eight volts and it's under two watts, less than half.
+     3: That's why phones constantly scale voltage and frequency up and down, called D V F S.
+  beat2:
+     0: During each transition, both networks are briefly on at once, so a little short circuit current flows straight from supply to ground.
+  beat3:
+     0: And in modern nanometer transistors, which can't fully turn off, leakage current flows all the time, even when nothing switches.
+     1: Leakage is a major part of a modern chip's power, which is why unused blocks are power gated, switched off completely.
+     2: In this course's labs, students measure the power and energy of their gates in simulation.
+
+[s9] WB  Worked example: the power equation in numbers
+  step0 board+: $P = \alpha\,C\,V_{DD}^2\,f$ || PEN ('circle',) on $P = \alpha || $\alpha = 0.1$,  $C = 1\ \mathrm{nF}$,  $V = 1.0\ \mathrm{V}
+     0: Dynamic power is alpha times C times V squared times f.
+     1: Take a chip whose switched capacitance totals one nanofarad, with ten percent of nodes switching each cycle, at one volt and two gigahertz.
+  step1 board+: $P = 0.1\times 10^{-9}\times 1^2\times 2\times 10^9 = 0.2\ \
+     0: Point one times ten to the minus nine times one squared times two times ten to the ninth: point two watts.
+  step2 board+: $V = 0.8\ \mathrm{V}$:  $P = 0.2\times 0.8^2 = 0.128\ \mathr || PEN ('circle',) on 0.8^2 || 20% less voltage  =  36% less power
+     0: Now lower the supply to point eight volts.
+     1: Voltage is squared, so power drops to point six four of the original: point one two eight watts, thirty six percent less, for a twenty percent voltage cut.
+  step3 board+: DVFS: lower V and f together when idle || PEN ('underline',) on DVFS
+     0: That's why phones and laptops constantly scale voltage and frequency together, running slow and low when idle, and only boosting when you need speed.
+     1: The quadratic dependence on voltage is the biggest power lever in chip design.
+
+[s10] V  Interconnect: wires are the new bottleneck
+  img: fig:wire
+  • Wires have distributed resistance and capacitance
+  • Unbuffered delay grows with length² (Elmore)
+  • Fix: insert repeaters → roughly linear
+  • Crosstalk couples neighboring wires
+  (pen marks: 6 )
+  beat0:
+     0: Transistors have shrunk enormously, but the wires connecting them haven't kept up.
+     1: A wire has resistance along its length and capacitance to everything around it, distributed all along it.
+  beat1:
+     0: For a long wire, both resistance and capacitance grow with length, so the delay grows with length squared.
+     1: The Elmore delay of a distributed R C line is about point three eight times r times c times L squared.
+     2: Double a wire's length, and its delay quadruples.
+  beat2:
+     0: The fix is to break long wires into segments with buffers, called repeaters, in between.
+     1: Each segment is short, so the total delay grows roughly linearly with length instead.
+  beat3:
+     0: Wires also couple to their neighbors.
+     1: When one switches, it can inject noise into the wire next to it, called crosstalk.
+     2: In many modern chips, the critical path is dominated by wires, not transistors.
+     3: In the interconnect lab, students model exactly this R C wire delay.
+
+[s11] V  Transmission gates and other logic styles
+  img: fig:tgate
+  • Transmission gate: NMOS ∥ PMOS with complementary controls
+  • Passes both 0 and 1 cleanly
+  • Ideal for multiplexers, XORs and latches
+  • Other styles: pass-transistor, pseudo-NMOS, dynamic/domino
+  (pen marks: 3 )
+  beat0:
+     0: A single NMOS transistor passes zeros well but ones poorly, and a PMOS the opposite.
+     1: Put them in parallel, with complementary control signals, and you get a transmission gate, a nearly ideal switch that passes both values cleanly.
+  beat1:
+     0: Two transmission gates make an elegant two to one multiplexer.
+     1: When the select signal is zero, the top gate passes A.
+     2: When it's one, the bottom gate passes B.
+     3: Just four transistors, plus an inverter for the complemented select, far fewer than building a mux from NAND gates.
+  beat2:
+     0: Transmission gates are also the heart of efficient X O R gates and of latches and flip flops.
+     1: As a final project in this course, student teams design a CMOS multiplexer from transmission gates and trade off its power, area and delay.
+  beat3:
+     0: Other logic styles exist for special needs.
+     1: Pseudo N MOS uses a weak always on pull up, which is small but burns static power.
+     2: Dynamic, or domino, logic precharges a node and then conditionally discharges it, which is very fast but sensitive to noise.
+     3: Static CMOS remains the default because it's robust.
+
+[s12] V  From schematic to silicon: layout and fabrication
+  img: a:mask_aligner / fig:layout
+  • Photolithography: pattern one layer at a time
+  • Layers: wells, active, poly (gates), contacts, metals
+  • Design rules (λ) guarantee manufacturability
+  • DRC, LVS, extraction → back to SPICE
+  beat0:
+     0: Chips are manufactured by photolithography.
+     1: A light sensitive resist is exposed through a patterned mask, using machines like this mask aligner in a university lab, or vastly more advanced scanners in commercial fabs.
+     2: Each exposure defines one layer, and a modern chip is built up from dozens of them.
+  beat1:
+     0: A designer draws the layout, the actual shapes on each layer.
+     1: Here's an inverter.
+     2: The PMOS sits in an n well at the top, where the red polysilicon gate crosses the p plus active region.
+     3: The NMOS sits at the bottom where the same gate crosses the n plus active region.
+     4: Black squares are contacts, and blue metal connects the supply, ground and the output.
+     5: Design rules, often expressed in units of lambda, set minimum widths and spacings so the chip can actually be manufactured.
+     6: Tools then check the layout against the rules, called D R C, verify that it matches the schematic, called L V S, and extract the real resistances and capacitances back into SPICE for accurate simulation.
+     7: In this course, students draw layouts like this in the Magic layout tool and simulate them in LT spice.
+
+[s13] Q  Key takeaways
+  BIG: CMOS = complementary **pull-up and pull-down** networks. Speed is **RC**, power is **α C V² f**, and long **wires** need repeaters.
+  cap: Next: EGCP 446, Advanced Digital Design with Verilog.
+  beat0:
+     0: To recap.
+     1: NMOS transistors pull down and PMOS transistors pull up, so CMOS gates combine complementary networks that draw almost no static current.
+     2: The inverter's transfer curve gives noise margins.
+     3: NAND and NOR follow the series parallel duality.
+     4: Delay comes from charging capacitance through transistor resistance, power from charging it at all, scaled by voltage squared, and leakage adds static power.
+     5: Long wires are slow and need repeaters.
+     6: Transmission gates make efficient muxes, and layout turns schematics into manufacturable silicon.
+     7: Next, advanced digital design with Verilog.
+     8: See you there.

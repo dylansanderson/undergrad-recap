@@ -1,0 +1,482 @@
+﻿#### L06_math170a: MATH 170A Mathematical Structures I
+
+[s0] TITLE  Mathematical Structures
+  img: a:enigma
+  beat0:
+     0: Welcome to Math one seventy A, Mathematical Structures, often called discrete mathematics.
+     1: Calculus is about smooth, continuous change.
+     2: But computers are discrete: bits, steps, finite states.
+     3: This course gives you the math of that world: logic, proofs, sets, counting and number theory.
+     4: The machine on screen is an Enigma, a World War Two cipher machine, and breaking it took exactly this kind of mathematics, plus some of the first electronic computing machines.
+
+[s1] V  Where discrete math shows up
+  img: fig:why
+  (pen marks: 4 )
+  beat0:
+     0: Here's where you'll use it.
+     1: Logic is the language of if statements in software and of logic gates in hardware, and it's how engineers formally verify that a chip design is correct.
+     2: Counting tells you how strong a password is, how many cases a test must cover, and how long an algorithm takes.
+     3: Number theory, the study of whole numbers and remainders, is the foundation of encryption, error checking codes and hash tables.
+     4: And graphs, dots connected by lines, model road maps, computer networks, and the dependencies in a build system.
+     5: Let's start with logic.
+
+[s2] V  Propositions and truth tables
+  img: fig:truth
+  • Proposition: a statement that is true or false
+  • AND ∧, OR ∨, NOT ¬, XOR ⊕
+  • Truth table: list every combination
+  • p → q is false only when p is true and q is false
+  (pen marks: 7 )
+  beat0:
+     0: A proposition is a statement that's either true or false.
+     1: It is raining.
+     2: Two plus two equals four.
+     3: We'll write them as letters, like p and q, and represent true as one and false as zero.
+  beat1:
+     0: We combine them with connectives.
+     1: AND is true only when both are true.
+     2: OR is true when at least one is true.
+     3: NOT flips the value.
+     4: And exclusive or, X O R, is true when exactly one is true.
+     5: These are exactly the gates you'll build in digital logic.
+  beat2:
+     0: A truth table lists every combination of inputs.
+     1: With two variables there are four rows.
+     2: With n variables there are two to the n rows, which is why exhaustive testing of a big circuit is impossible.
+  beat3:
+     0: The trickiest connective is implication, p implies q.
+     1: Think of it as a promise: if it rains, I'll bring an umbrella.
+     2: The promise is only broken in one case: it rains and I don't bring the umbrella.
+     3: If it doesn't rain, I haven't broken my promise either way.
+     4: That's the highlighted row: true implies false is false, and every other row is true.
+
+[s3] WB  Worked example: proving an equivalence with a truth table
+  step0 board+: Claim:  $(p \to q) \equiv (\neg p \vee q)$ || PEN None
+     0: Let's build a truth table by hand and use it to prove something.
+     1: Claim: p implies q means exactly the same thing as not p, or q.
+     2: Set up columns: p, q, p implies q, not p, and finally not p or q.
+  step1 board+: PEN None || PEN None
+     0: Row one: p true, q true.
+     1: The promise is kept, so p implies q is one.
+     2: Not p is zero, and zero or one is one.
+     3: Row two: p true, q false.
+     4: That's the broken promise: zero.
+     5: Not p is zero, and zero or zero is zero.
+  step2 board+: PEN None || PEN None
+     0: Rows three and four: whenever p is false, the implication is automatically true.
+     1: And not p is one, so not p or q is one as well.
+  step3 board+: PEN None || every row matches, || so the formulas are equivalent
+     0: Now compare the two highlighted columns: one, zero, one, one, and one, zero, one, one.
+     1: They match in every row, so the two formulas are equivalent.
+     2: That's a complete proof.
+     3: Checking every row is exactly how chip verification tools prove two circuits do the same thing.
+
+[s4] V  Equivalences and De Morgan's laws
+  img: fig:demorgan
+  • Contrapositive: (p → q) ≡ (¬q → ¬p)
+  • Converse (q → p) is NOT equivalent
+  • De Morgan: ¬(A ∧ B) ≡ ¬A ∨ ¬B
+  • Simplify code and circuits
+  (pen marks: 4 )
+  beat0:
+     0: Two formulas are equivalent if they have the same truth table.
+     1: The most useful equivalence for proofs: p implies q is equivalent to not q implies not p, the contrapositive.
+     2: If it rains, the ground is wet, is the same as: if the ground isn't wet, it didn't rain.
+  beat1:
+     0: But the converse, q implies p, is not equivalent.
+     1: If the ground is wet, it rained?
+     2: No, maybe the sprinklers were on.
+     3: Confusing a statement with its converse is one of the most common reasoning errors, in math and in life.
+  beat2:
+     0: De Morgan's laws tell you how to push a NOT through an AND or an OR: flip each piece and swap AND with OR.
+     1: Not A and B equals not A or not B.
+     2: In hardware, that means a NAND gate is the same as an OR gate with inverted inputs.
+  beat3:
+     0: And in code, not open parenthesis a and b equals not a or not b.
+     1: Programmers use this constantly to simplify conditions, and chip design tools use it to rearrange logic into whatever gates are cheapest.
+
+[s5] WB  Worked example: simplifying code with De Morgan
+  step0 board+: if not (x > 5 and y < 3):
+     0: Here's De Morgan in real code.
+     1: Suppose a program has this condition: if not, open parenthesis, x is greater than five and y is less than three.
+     2: It's correct, but hard to read.
+     3: Let's simplify it.
+  step1 board+: $\neg(A \wedge B) \equiv \neg A \vee \neg B$ || if not (x > 5) or not (y < 3):
+     0: De Morgan says: push the not inside, negate each piece, and swap and with or.
+     1: So it becomes: not x greater than five, or, not y less than three.
+  step2 board+: not (x > 5)  →  x <= 5 || not (y < 3)  →  y >= 3
+     0: Now negate each comparison.
+     1: Not greater than five means less than or equal to five.
+     2: Not less than three means greater than or equal to three.
+     3: Be careful with the equals signs, because that's where most bugs hide.
+  step3 board+: if x <= 5 or y >= 3: || test x = 7, y = 1:   original → False,   new → False
+     0: So the final condition is: if x is at most five, or y is at least three.
+     1: Test it with x equals seven and y equals one.
+     2: The original: seven is greater than five and one is less than three, so the and is true, and not makes it false.
+     3: The new version: seven at most five, false.
+     4: One at least three, false.
+     5: False or false is false.
+     6: They agree.
+
+[s6] V  Quantifiers: for all, there exists
+  img: fig:quant
+  • ∀x P(x): P is true for every x
+  • ∃x P(x): P is true for at least one x
+  • Negation flips them: ¬∀x P(x) ≡ ∃x ¬P(x)
+  • "Not every test passes" = "some test fails"
+  (pen marks: 4 )
+  beat0:
+     0: Statements about whole collections use quantifiers.
+     1: For all, written as an upside down A, means the statement holds for every element.
+     2: There exists, written as a backwards E, means it holds for at least one.
+     3: For all integers x, x squared is at least zero: true.
+     4: There exists an integer x with x squared equal to two: false.
+     5: Negating a quantified statement flips the quantifier and negates the inside.
+     6: Not every test passes is the same as: there exists a test that fails.
+     7: To disprove a for all claim, you only need one counterexample.
+     8: To prove it, you need an argument that covers every case, and that's what proofs are for.
+
+[s7] V  Three ways to prove something
+  img: fig:proofs
+  • Direct: even + even = 2a + 2b = 2(a + b) → even
+  • Contrapositive: n² even → n even  ⇔  n odd → n² odd
+  • Contradiction: assume √2 = a/b in lowest terms … impossible
+  (pen marks: 4 )
+  beat0:
+     0: A proof is an argument that leaves no case uncovered.
+     1: The direct method: start from what you know and march to the conclusion.
+     2: Claim: the sum of two even numbers is even.
+     3: Any even number is two times some integer, so write them as two a and two b.
+     4: Their sum is two times a plus b, which is even.
+     5: Done.
+  beat1:
+     0: Sometimes the contrapositive is easier.
+     1: Claim: if n squared is even, then n is even.
+     2: Prove the contrapositive instead: if n is odd, then n squared is odd.
+     3: Odd n is two k plus one.
+     4: Squaring gives four k squared plus four k plus one, which is two times something, plus one.
+     5: Odd.
+     6: Done.
+  beat2:
+     0: And proof by contradiction: assume the opposite and derive something impossible.
+     1: The classic: the square root of two is irrational.
+     2: Assume it equals a over b in lowest terms.
+     3: Then a squared equals two b squared, so a squared is even, so a is even, using the result we just proved.
+     4: Write a as two c: four c squared equals two b squared, so b squared is even, and b is even too.
+     5: But then a over b wasn't in lowest terms.
+     6: Contradiction.
+     7: So root two can't be a fraction.
+
+[s8] V  Mathematical induction: the domino proof
+  img: fig:domino
+  • Base case: true for n = 1
+  • Step: if true for k, then true for k + 1
+  • Example: 1 + 2 + … + n = n(n+1)/2
+  • Same idea proves loops and recursion correct
+  (pen marks: 5 )
+  beat0:
+     0: Induction proves a statement for every positive integer at once.
+     1: Picture an infinite row of dominoes.
+     2: First, show the first domino falls.
+     3: That's the base case.
+  beat1:
+     0: Then show that whenever domino k falls, it knocks over domino k plus one.
+     1: That's the inductive step.
+     2: Together, every domino falls.
+  beat2:
+     0: Example: one plus two plus up to n equals n times n plus one over two.
+     1: Base case: n equals one, and one equals one times two over two.
+     2: Inductive step: assume it's true for k.
+     3: Then the sum up to k plus one is k times k plus one over two, plus k plus one.
+     4: Factor out k plus one, and you get k plus one times k plus two, over two, which is the formula for k plus one.
+     5: Done, for every n.
+  beat3:
+     0: Computer scientists use induction to prove programs correct.
+     1: A loop invariant is a statement that's true before the loop starts, the base case, and stays true after each pass, the step.
+     2: And a recursive function is correct if its base case is right and each call correctly uses smaller calls.
+
+[s9] WB  Worked example: an induction proof you can see
+  step0 board+: Claim:  $1 + 3 + 5 + \ldots + (2n-1) = n^2$ || PEN None
+     0: Let's write out a complete induction proof.
+     1: Claim: the sum of the first n odd numbers is n squared.
+     2: One plus three plus five, up to two n minus one, equals n squared.
+     3: Look at the picture: each new odd number is an L shaped layer that grows the square by one.
+  step1 board+: Base, $n=1$:   $1 = 1^2$
+     0: Base case: n equals one.
+     1: The left side is just one.
+     2: The right side is one squared, also one.
+     3: True.
+  step2 board+: Assume:  $1 + 3 + \ldots + (2k-1) = k^2$ || Add next:  $k^2 + (2k+1)$
+     0: Inductive step: assume it's true for k, so the first k odd numbers add up to k squared.
+     1: Now add the next odd number, two k plus one.
+     2: The sum becomes k squared plus two k plus one.
+  step3 board+: $= (k+1)^2$ || true for all n || PEN None
+     0: But k squared plus two k plus one factors as k plus one, squared.
+     1: That's exactly the formula for k plus one.
+     2: So the statement holds for one, and each case pushes over the next, like dominoes.
+     3: True for every n.
+     4: And the picture agrees: one plus three plus five plus seven is sixteen, a four by four square.
+
+[s10] V  Sets and Venn diagrams
+  img: fig:venn
+  • Union A ∪ B, intersection A ∩ B, complement
+  • Inclusion–exclusion: |A ∪ B| = |A| + |B| − |A ∩ B|
+  • 100 students: 60 C++, 45 Python, 25 both
+  • → 80 take at least one, 20 take neither
+  (pen marks: 7 )
+  beat0:
+     0: A set is an unordered collection of distinct things.
+     1: The union of A and B contains everything in either one.
+     2: The intersection contains only what's in both.
+     3: The complement is everything not in the set.
+  beat1:
+     0: To count a union, add the sizes, then subtract the overlap, because the overlap got counted twice.
+     1: That's the inclusion exclusion principle.
+  beat2:
+     0: Example: in a group of one hundred students, sixty take C plus plus, forty five take Python, and twenty five take both.
+  beat3:
+     0: Sixty plus forty five minus twenty five is eighty students taking at least one, so twenty take neither.
+     1: Databases do this all day: a SQL query with AND and OR conditions is set intersection and union, and you'll see it again in the databases course.
+
+[s11] V  Functions: mapping inputs to outputs
+  img: fig:funcs
+  • Function: every input maps to exactly one output
+  • One-to-one: no two inputs share an output
+  • Onto: every output is hit
+  • Bijection = both → it can be inverted (e.g. encryption)
+  (pen marks: 3 )
+  beat0:
+     0: A function assigns each input exactly one output.
+     1: Mathematicians care about two special properties.
+  beat1:
+     0: One to one, or injective: different inputs always give different outputs.
+     1: No collisions.
+  beat2:
+     0: Onto, or surjective: every possible output is actually produced by some input.
+  beat3:
+     0: A function that's both is a bijection, a perfect pairing, and only bijections can be undone.
+     1: That's why an encryption function must be a bijection: every ciphertext has to decrypt to exactly one message.
+     2: A hash function, on the other hand, squeezes huge inputs into a small range of outputs, so it can't be one to one.
+     3: Collisions are guaranteed, and the next slides show why.
+
+[s12] V  Counting: how strong is your password?
+  img: fig:passwords
+  • Product rule: k choices, n times → kⁿ
+  • 8 lowercase letters: 26⁸ ≈ 2.1 × 10¹¹
+  • 8 letters+digits mixed case: 62⁸ ≈ 2.2 × 10¹⁴
+  • Length beats complexity: 62¹² ≈ 3.2 × 10²¹
+  (pen marks: 4 )
+  beat0:
+     0: The basic tool of counting is the product rule.
+     1: If you make a sequence of choices, multiply the number of options at each step.
+     2: A license plate with three letters and four digits has twenty six cubed times ten to the fourth, about a hundred seventy six million possibilities.
+  beat1:
+     0: Passwords.
+     1: Eight lowercase letters gives twenty six to the eighth, about two hundred billion.
+     2: A modern graphics card can try around ten billion guesses per second against a weakly protected password file, so that falls in about twenty seconds.
+  beat2:
+     0: Use upper case, lower case and digits, sixty two choices per character, and eight characters gives about two times ten to the fourteen.
+     1: Now it takes about six hours.
+     2: Better, but not good.
+  beat3:
+     0: Now go to twelve characters: sixty two to the twelfth, about three times ten to the twenty one, which takes roughly ten thousand years.
+     1: Length matters more than anything, because it's in the exponent.
+     2: And six words chosen at random from a list of seven thousand seven hundred seventy six are even stronger, hundreds of thousands of years at this rate, while being much easier to remember.
+
+[s13] V  Permutations and combinations
+  img: fig:pascal
+  • Order matters → permutations: P(n,k) = n!/(n−k)!
+  • Order doesn’t → combinations: C(n,k) = n!/(k!(n−k)!)
+  • Pick 2 of 6 teammates: C(6,2) = 15
+  • Lottery 6 of 49: C(49,6) = 13,983,816
+  (pen marks: 3 )
+  beat0:
+     0: When order matters, you're counting permutations.
+     1: How many ways can first, second and third place be awarded among ten runners?
+     2: Ten times nine times eight, seven hundred twenty.
+     3: In general, n factorial over n minus k factorial.
+  beat1:
+     0: When order doesn't matter, you're counting combinations: divide out the k factorial ways to arrange each group.
+     1: That's n choose k.
+  beat2:
+     0: How many ways to pick two people from six for a project?
+     1: Six choose two: six times five over two, fifteen.
+     2: And look at Pascal's triangle, where each number is the sum of the two above it.
+     3: Row six, position two, is fifteen.
+     4: Every entry is a combination.
+  beat3:
+     0: And a famous one: picking six numbers out of forty nine, which is how many lotteries work.
+     1: Forty nine choose six is almost fourteen million.
+     2: So each ticket has about a one in fourteen million chance.
+     3: Counting is also the foundation of probability, which you'll study in engineering statistics.
+
+[s14] WB  Worked example: PINs with no repeated digit
+  step0 board+: All PINs:  $10 \times 10 \times 10 \times 10 = 10{,}000$
+     0: Here's a counting problem worked by hand.
+     1: How many four digit PINs are there in total?
+     2: Each of the four positions can be any of ten digits, so by the product rule it's ten to the fourth, ten thousand.
+  step1 board+: No repeats:  $10 \times 9 \times 8 \times 7$ || $= P(10,4) = \frac{10!}{6!} = 5040$
+     0: Now, how many have no repeated digit?
+     1: The first digit has ten choices.
+     2: The second can't match the first, so nine.
+     3: The third has eight, and the fourth has seven.
+     4: Ten times nine times eight times seven is five thousand and forty.
+     5: That's a permutation: P of ten, four.
+  step2 board+: At least one repeat $= 10{,}000 - 5040$ || $= 4960$
+     0: And how many PINs have at least one repeated digit?
+     1: Counting those directly is messy, so count the complement: all PINs minus the ones with no repeats.
+     2: Ten thousand minus five thousand and forty is four thousand nine hundred sixty.
+     3: Almost half of all PINs repeat a digit.
+     4: When a direct count is hard, count what you don't want and subtract.
+
+[s15] V  The pigeonhole principle
+  img: fig:pigeon
+  • n + 1 pigeons, n holes → some hole has 2+
+  • 367 people → two share a birthday (guaranteed)
+  • More possible files than hash values → collisions are certain
+  • Lossless compression can’t shrink every file
+  (pen marks: 2 )
+  beat0:
+     0: Here's a deceptively simple idea.
+     1: If you put more than n pigeons into n holes, at least one hole gets two pigeons.
+     2: With three hundred sixty seven people in a room, two must share a birthday, because there are only three hundred sixty six possible birthdays.
+     3: It sounds obvious, but it proves powerful facts.
+     4: A hash function maps an unlimited number of possible files onto a fixed number of hash values, so collisions must exist.
+     5: Security depends on making them hard to find, not impossible.
+     6: And no compression program can shrink every file: there are fewer short files than long ones, so some inputs must get bigger.
+     7: Whenever someone claims a perfect compression or a collision free hash, the pigeonhole principle says they're wrong.
+
+[s16] V  Number theory: divisibility and the GCD
+  img: fig:euclid
+  • Primes: only divisible by 1 and themselves
+  • GCD: the largest common divisor
+  • Euclid's algorithm (≈ 300 BC): replace (a, b) with (b, a mod b)
+  • gcd(252, 105) = 21 in three steps
+  (pen marks: 4 )
+  beat0:
+     0: Number theory studies the integers.
+     1: A prime is a number greater than one divisible only by one and itself: two, three, five, seven, eleven.
+     2: Every integer factors uniquely into primes.
+     3: Twelve is two times two times three.
+  beat1:
+     0: The greatest common divisor of two numbers is the largest number that divides both.
+     1: It's how you reduce fractions, like the Fraction class from object oriented programming.
+  beat2:
+     0: Finding it by factoring is slow for big numbers.
+     1: Euclid's algorithm, more than two thousand years old, is fast: the GCD of a and b equals the GCD of b and the remainder of a divided by b.
+     2: Repeat until the remainder is zero.
+  beat3:
+     0: Let's run it on two fifty two and one oh five.
+     1: Two fifty two is two times one oh five plus forty two.
+     2: So find the GCD of one oh five and forty two.
+     3: One oh five is two times forty two plus twenty one.
+     4: Forty two is two times twenty one plus zero.
+     5: The answer is twenty one.
+     6: Three steps.
+     7: This ancient algorithm runs inside every secure web connection today.
+
+[s17] V  Modular arithmetic: math on a clock
+  img: fig:clock
+  • a mod n = remainder after dividing by n
+  • 15:00 is 3 o’clock: 15 ≡ 3 (mod 12)
+  • Add and multiply, then take the remainder
+  • Computer integers ARE mod 2ⁿ (overflow wraps)
+  (pen marks: 5 )
+  beat0:
+     0: Modular arithmetic is arithmetic that wraps around, like a clock.
+     1: a mod n is the remainder when a is divided by n.
+  beat1:
+     0: Fifteen hundred hours is three o'clock, because fifteen mod twelve is three.
+     1: We write fifteen is congruent to three, mod twelve.
+  beat2:
+     0: You can add and multiply first and take the remainder at the end, or take remainders along the way, and get the same answer.
+     1: Nine plus eight is seventeen, which is five mod twelve.
+     2: Seven times five is thirty five, which is eleven mod twelve.
+  beat3:
+     0: This isn't just a curiosity.
+     1: A thirty two bit register in a C P U literally does arithmetic mod two to the thirty two, which is exactly why integers overflow and wrap around.
+     2: Check digits on credit cards and book I S B Ns use modular arithmetic to catch typos.
+     3: And hash tables use mod to pick a slot for each key.
+
+[s18] WB  Worked example: 3²⁰ mod 7 without a calculator
+  step0 board+: $3^{20}$ mod 7 = ?
+     0: Encryption needs huge powers mod n, so let's see the trick computers use.
+     1: Find three to the twentieth, mod seven.
+     2: Three to the twentieth is about three and a half billion, but we never need to compute it.
+  step1 board+: $3^1 \equiv 3$ || $3^2 = 9 \equiv 2$ || $3^4 \equiv 2^2 = 4$ || $3^8 \equiv 4^2 = 16 \equiv 2$ || $3^{16} \equiv 2^2 = 4$
+     0: Square repeatedly, reducing mod seven every time.
+     1: Three to the first is three.
+     2: Three squared is nine, which is two mod seven.
+     3: Three to the fourth is two squared, four.
+     4: Three to the eighth is four squared, sixteen, which is two.
+     5: Three to the sixteenth is two squared, four.
+  step2 board+: $20 = 16 + 4$ || $3^{20} = 3^{16}\cdot 3^4 \equiv 4 \cdot 4 = 16$ || $3^{20} \equiv 2$  (mod 7)
+     0: Twenty is sixteen plus four, so three to the twentieth is three to the sixteenth times three to the fourth.
+     1: That's four times four, sixteen, which is two mod seven.
+     2: Five small multiplications instead of a ten digit number.
+     3: This is called square and multiply, and it's how R S A handles exponents hundreds of digits long.
+
+[s19] V  Putting it together: RSA encryption (toy version)
+  img: fig:rsa
+  • Public key (n, e) — anyone can encrypt
+  • Private key d — only you can decrypt
+  • c = mᵉ mod n,  m = cᵈ mod n
+  • Security: factoring a 600-digit n is infeasible
+  (pen marks: 8 )
+  beat0:
+     0: Here's the payoff of number theory: R S A, one of the public key encryption systems that has secured the internet.
+     1: You publish a public key so anyone can encrypt a message to you.
+  beat1:
+     0: But only you hold the private key that decrypts it.
+     1: Let's build a toy version.
+     2: Pick two primes, three and eleven.
+     3: Multiply: n equals thirty three.
+     4: Compute phi of n, two times ten, which is twenty.
+     5: Choose e equals three.
+     6: Find d so that e times d is one, mod twenty: d equals seven, since twenty one mod twenty is one.
+  beat2:
+     0: Encrypt the message four: four cubed is sixty four, and sixty four mod thirty three is thirty one.
+     1: That's the ciphertext.
+     2: To decrypt, compute thirty one to the seventh, mod thirty three, which comes out to four.
+     3: The message is back.
+  beat3:
+     0: Why is it secure?
+     1: Anyone can see n and e, but finding d requires knowing p and q.
+     2: With thirty three, that's trivial.
+     3: With an n that's six hundred digits long, nobody knows how to factor it in any reasonable time.
+     4: The whole scheme rests on modular arithmetic, Euclid's algorithm, and primes.
+
+[s20] V  Graphs: dots and connections
+  img: fig:graph
+  • Graph = vertices + edges (optionally weighted)
+  • Degree: number of edges at a vertex
+  • Handshake theorem: Σ degrees = 2 × edges
+  • Maps, networks, social media, task dependencies
+  (pen marks: 6 )
+  beat0:
+     0: Finally, graphs.
+     1: Not charts, but networks: a set of vertices connected by edges.
+     2: Edges can have weights, like travel times between places.
+  beat1:
+     0: The degree of a vertex is how many edges touch it.
+  beat2:
+     0: A neat fact, called the handshake theorem: add up all the degrees and you get twice the number of edges, because every edge has two ends.
+     1: So the number of odd degree vertices is always even.
+  beat3:
+     0: Graphs model road maps, where your navigation app searches for the shortest path.
+     1: Here, the fastest route from A to E isn't the direct looking one.
+     2: Computer networks, social networks, and the order in which files must be compiled are all graphs.
+     3: You'll learn the algorithms that search them in data structures.
+
+[s21] Q  Key takeaways
+  BIG: Logic to reason precisely, **proof** to be sure, **counting** to size problems, **number theory** to secure them.
+  cap: Next: EGCP 180, Digital Logic — where these truth tables become real circuits.
+  beat0:
+     0: To wrap up.
+     1: Logic gives us a precise language, and truth tables, De Morgan's laws and implications are the same rules used in code and circuits.
+     2: Proofs, direct, by contrapositive, by contradiction and by induction, let us be certain, not just confident.
+     3: Sets and functions describe collections and mappings.
+     4: Counting tells us how big a problem is, from passwords to probabilities.
+     5: And number theory, with modular arithmetic and primes, underlies encryption and hashing.
+     6: Next, we take those truth tables and build them out of real gates in digital logic.
+     7: See you there.

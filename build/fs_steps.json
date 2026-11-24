@@ -1,0 +1,10 @@
+[
+ {"m": "Runtime.evaluate", "p": {"expression": "1"}, "sleep": 5},
+ {"m": "Input.dispatchMouseEvent", "p": {"type": "mouseMoved", "x": 500, "y": 300}, "sleep": 1, "shot": "review\\fs_hover.png", "label": "hover"},
+ {"m": "Runtime.evaluate", "p": {"expression": "(()=>{const r=document.getElementById('fsOver').getBoundingClientRect();return JSON.stringify([r.x+r.width/2,r.y+r.height/2, getComputedStyle(document.getElementById('fsOver')).opacity])})()", "returnByValue": true}, "label": "fsOver pos"},
+ {"m": "Runtime.evaluate", "p": {"expression": "document.getElementById('fsOver').click()", "userGesture": true}, "sleep": 2, "label": "click"},
+ {"m": "Runtime.evaluate", "p": {"expression": "JSON.stringify([document.fullscreenElement && document.fullscreenElement.className, document.getElementById('fsOver').textContent, document.getElementById('fsBtn').textContent])", "returnByValue": true}, "label": "after click"},
+ {"m": "Input.dispatchMouseEvent", "p": {"type": "mouseMoved", "x": 600, "y": 300}, "sleep": 0.5, "shot": "review\\fs_full.png", "label": "fullscreen"},
+ {"m": "Runtime.evaluate", "p": {"expression": "document.getElementById('fsOver').click()", "userGesture": true}, "sleep": 2, "label": "click exit"},
+ {"m": "Runtime.evaluate", "p": {"expression": "JSON.stringify([!!document.fullscreenElement, document.getElementById('fsOver').textContent])", "returnByValue": true}, "label": "after exit"}
+]

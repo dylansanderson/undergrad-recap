@@ -1,0 +1,323 @@
+﻿#### L15_egee203: EGEE 203 Electric Circuits
+
+[s0] TITLE  Electric Circuits
+  img: a:hv_lines
+  beat0:
+     0: Welcome to E G E E two oh three, electric circuits.
+     1: This is the foundation of everything electrical, from a phone charger to the power grid behind these towers.
+     2: The good news: the entire course rests on three simple laws.
+     3: The rest is a toolbox of clever ways to apply them, plus two big ideas, time constants and phasors, that turn hard problems into easy ones.
+     4: We'll also cover the lab skills, like using an oscilloscope.
+
+[s1] V  Voltage, current, power
+  img: a:breadboard / a:scope_screen
+  • Current I: charge flow (amperes)
+  • Voltage V: energy per charge (volts) — always between two points
+  • Power P = V × I (watts)
+  • Passive sign convention: current into + → absorbing power
+  (pen marks: 4 )
+  beat0:
+     0: Three quantities run through every circuit.
+     1: Current is the flow of charge, measured in amperes.
+     2: Voltage is the energy each coulomb of charge gains or loses between two points, measured in volts.
+     3: A useful picture: voltage is the pressure, current is the flow rate.
+     4: And power, the rate energy is delivered, is voltage times current.
+     5: A five volt U S B port supplying two amps delivers ten watts.
+     6: One bookkeeping rule, the passive sign convention: if current enters the plus terminal of an element, that element is absorbing power, like a resistor heating up.
+     7: If it comes out of the plus terminal, it's supplying power, like a battery.
+  beat1:
+     0: In the lab, you'll build these circuits on a breadboard and measure them with a multimeter and an oscilloscope, which plots voltage against time, like this screen showing a triangle wave and a square wave.
+     1: The lab sessions in this course start exactly there: learning the scope's timebase, volts per division and triggering.
+
+[s2] V  The three laws
+  img: fig:divider
+  • Ohm: V = I R
+  • KCL: currents into a node sum to zero (charge is conserved)
+  • KVL: voltages around a loop sum to zero (energy is conserved)
+  • Voltage divider: Vx = V · Rx / R_total → 12 · 8/12 = 8 V
+  (pen marks: 10 )
+  beat0:
+     0: Ohm's law: the voltage across a resistor equals the current through it times its resistance.
+  beat1:
+     0: Kirchhoff's current law: whatever current flows into a node must flow out, because charge can't pile up anywhere.
+  beat2:
+     0: Kirchhoff's voltage law: walk around any closed loop, adding up voltage rises and drops, and you get zero, because energy is conserved.
+     1: You end up back at the same potential where you started.
+  beat3:
+     0: Put these together and you get the most useful shortcut in electronics: the voltage divider.
+     1: Twelve volts across a four k and an eight k in series.
+     2: The same current flows through both, so the voltage splits in proportion to resistance: twelve times eight over twelve is eight volts across the eight k.
+     3: You'll use dividers to scale down sensor voltages for an A D C, and to bias transistors, constantly.
+
+[s3] WB  Worked example: a series-parallel circuit
+  step0 board+: PEN None || PEN [('circle', 1.5, 3, 1.15, 0.6)] || PEN [('box', 2.35, -0.45, 6.95, 3.35)] || find every current
+     0: Let's solve a complete circuit.
+     1: A twelve volt source drives R one, four ohms, in series with R two and R three in parallel.
+     2: Find every current.
+  step1 board+: $R_2 \parallel R_3 = \frac{6\cdot 12}{6+12} = 4\ \Omega$ || PEN [('box', 2.35, -0.45, 6.95, 3.35)] || $R_{total} = 4 + 4 = 8\ \Omega$ || PEN ('underline',) on R_{total}
+     0: First simplify.
+     1: Six ohms in parallel with twelve ohms is their product over their sum: seventy two over eighteen, four ohms.
+     2: Add R one in series: the total is eight ohms.
+  step2 board+: $I = \frac{12}{8} = 1.5\ \mathrm{A}$ || PEN None || $V_{R1} = 1.5 \times 4 = 6\ \mathrm{V}$ || PEN [('circle', 1.5, 3, 1.15, 0.6)]
+     0: Ohm's law gives the source current: twelve volts over eight ohms, one and a half amps.
+     1: All of it flows through R one, which drops one and a half times four, six volts.
+  step3 board+: KVL: $12 - 6 = 6\ \mathrm{V}$ across both || $I_2 = 6/6 = 1\ \mathrm{A}$,   $I_3 = 6/12 = 0.5\ \mathrm{A} || PEN None || PEN [('circle', 3, 1.5, 0.62, 1.15)] || PEN [('circle', 6.2, 1.5, 0.62, 1.15)] || KCL check: $1 + 0.5 = 1.5\ \mathrm{A}$ || PEN [('circle', 3, 3, 0.42, 0.42)]
+     0: By Kirchhoff's voltage law, the parallel pair gets the remaining six volts.
+     1: So R two carries six over six, one amp, and R three carries six over twelve, half an amp.
+     2: Now check with Kirchhoff's current law: one plus a half is one and a half, exactly the current that came in.
+     3: Always check.
+
+[s4] V  Nodal analysis: the workhorse method
+  img: fig:nodal / fig:nodal_eq / fig:nodal_eq
+  • Pick a ground; label unknown node voltages
+  • KCL at each node, every current = (V_a − V_b)/R
+  • Solve the linear system A x = b
+  (pen marks: 7 )
+  beat0:
+     0: For bigger circuits, use nodal analysis, which works on any circuit.
+     1: Pick one node as ground, zero volts.
+     2: Label the unknown voltages at the other nodes.
+     3: Here there are two, V A and V B.
+  beat1:
+     0: At each unknown node, write Kirchhoff's current law, expressing each branch current as the voltage difference divided by the resistance.
+     1: At node A, the currents leaving through the one k to the source, the two k to ground and the one k to B must sum to zero.
+     2: At node B, the currents through its two resistors must sum to zero.
+  beat2:
+     0: That's a system of linear equations, A x equals b, straight from linear algebra.
+     1: Here it's a two by two matrix.
+     2: Solving gives V A about five point four five volts and V B about three point six four volts.
+     3: Circuit simulators like SPICE do exactly this, building and solving matrices with thousands of rows.
+     4: Mesh analysis is the mirror image: unknown loop currents and Kirchhoff's voltage law around each loop.
+
+[s5] WB  Worked example: nodal analysis with two unknowns
+  step0 board+: PEN None || PEN None || currents leaving each node sum to zero || PEN [('underline', 0, 9, -0.35)] || PEN [('circle', 3, 3, 0.45, 0.45), ('circle'
+     0: Here's a circuit with two unknown node voltages.
+     1: A ten volt source, four resistors and a half amp current source.
+     2: Step one: choose ground at the bottom and name the unknown nodes V one and V two.
+  step1 board+: PEN [('circle', 3, 3, 0.45, 0.45)] || V1:  $\frac{V_1-10}{2} + \frac{V_1}{4} + \frac{V_1-V_2}{4} = || PEN [('arrow', 2.7, 2.55, 1.4, 2.55), ('arro || $\Rightarrow\ 4V_1 - V_2 = 20$
+     0: Step two: Kirchhoff's current law at V one.
+     1: Current leaving through the two ohm resistor toward the source, plus current down the four ohm, plus current toward V two, equals zero.
+     2: Multiply through by four: four V one minus V two equals twenty.
+  step2 board+: V2:  $\frac{V_2-V_1}{4} + \frac{V_2}{4} = 0.5$ || PEN [('circle', 6, 3, 0.45, 0.45)] || PEN [('arrow', 5.6, 2.55, 4.4, 2.55), ('arro || $\Rightarrow\ -V_1 + 2V_2 = 2$
+     0: At V two, the current leaving through its two resistors equals the half amp the source pushes in.
+     1: Times four: two V two minus V one equals two.
+  step3 board+: $V_1 = 2V_2 - 2 \;\Rightarrow\; 7V_2 = 28$ || $V_2 = 4\ \mathrm{V}$,   $V_1 = 6\ \mathrm{V}$ || PEN None || PEN [('circle', 3, 3, 0.45, 0.45), ('circle'
+     0: Two equations, two unknowns.
+     1: From the second, V one equals two V two minus two.
+     2: Substitute into the first: seven V two equals twenty eight, so V two is four volts, and V one is six volts.
+     3: Every current follows instantly.
+     4: This method scales to circuits with hundreds of nodes, which is exactly what SPICE does.
+
+[s6] V  Thevenin: any circuit is a source and a resistor
+  img: fig:thev1 / fig:thev1 / fig:thev1 / fig:thev2
+  • V_th = open-circuit voltage at the terminals
+  • R_th = resistance seen with sources turned off
+  • Then any load is a one-line calculation
+  • Max power to the load when R_L = R_th
+  (pen marks: 10 )
+  beat0:
+     0: Now the most powerful idea in the course.
+     1: Any linear circuit, no matter how complicated, looks from two terminals exactly like one voltage source in series with one resistor.
+     2: That's the Thevenin equivalent.
+     3: Let's find it for this circuit.
+  beat1:
+     0: Step one: the Thevenin voltage is the open circuit voltage at a b, with nothing connected.
+     1: That's a voltage divider: twelve times twelve over sixteen, which is nine volts.
+  beat2:
+     0: Step two: turn off the independent sources.
+     1: A voltage source becomes a wire, a current source becomes an open.
+     2: Then look back into the terminals.
+     3: The four k and twelve k are now in parallel: four times twelve over sixteen, three k.
+  beat3:
+     0: So this whole circuit behaves like a nine volt source with three k of internal resistance.
+     1: Hook up any load and the answer is one line.
+     2: And the load gets the most power when its resistance equals the Thevenin resistance, three k here, receiving nine squared over four times three k, about six point seven five milliwatts.
+     3: Engineers model every sensor, battery and amplifier stage this way.
+
+[s7] WB  Worked example: finding a Thevenin equivalent
+  step0 board+: PEN None || what does the load see at a-b? || PEN [('circle@0', 5, 3, 0.45, 0.45), ('circl
+     0: Let's replace this circuit, as seen from terminals a and b, with a single source and a single resistor.
+     1: A twelve volt source feeds a six kilohm resistor, with a three kilohm resistor across the terminals.
+  step1 board+: $V_{th} = 12\cdot\frac{3k}{6k+3k} = 4\ \mathrm{V}$ || PEN [('circle@0', 3, 1.5, 0.62, 1.15)]
+     0: Step one, the Thevenin voltage: the voltage at the open terminals.
+     1: With nothing connected, it's a voltage divider: twelve times three over nine, four volts.
+  step2 board+: PEN [('cross@0', 0, 1.5, 34)] || source off (short):  $R_{th} = 6k \parallel 3k = 2\ \mathrm{ || PEN [('circle@0', 1.5, 3, 1.15, 0.6), ('circ
+     0: Step two, the Thevenin resistance: turn the voltage source off, which means replace it with a wire, and look back into the terminals.
+     1: Six k and three k are now in parallel: two kilohms.
+  step3 board+: PEN None
+     0: So the whole circuit acts like four volts behind two kilohms.
+     1: Any load is now a one line problem.
+  step4 board+: PEN None || PEN [('circle@1', 3, 1.5, 0.62, 1.15)] || $V_L = 4\cdot\frac{2k}{2k+2k} = 2\ \mathrm{V}$,   $P_L = \fr || max power when $R_L = R_{th}$
+     0: Connect a two kilohm load.
+     1: The load voltage is four times two over four, two volts, and its power is two squared over two thousand, two milliwatts.
+     2: That's the most power this circuit can ever deliver, because the load matches the Thevenin resistance.
+
+[s8] V  Op amps: the ideal amplifier
+  img: fig:opamp
+  • Huge gain + negative feedback
+  • Rule 1: no current into the inputs
+  • Rule 2: the inputs are forced equal (virtual short)
+  • Inverting gain = −R_f/R_in = −10 · non-inverting = 1 + R_f/R_in
+  (pen marks: 8 )
+  beat0:
+     0: An operational amplifier is a chip with enormous voltage gain, often a hundred thousand or more.
+     1: On its own that's hard to use, but with negative feedback, a resistor from the output back to the inverting input, it becomes a precise, predictable amplifier.
+  beat1:
+     0: Two golden rules make analysis easy.
+     1: First, essentially no current flows into the inputs.
+  beat2:
+     0: Second, with negative feedback, the op amp adjusts its output until the two input voltages are equal.
+     1: That's called a virtual short.
+  beat3:
+     0: Apply them to this inverting amplifier.
+     1: The plus input is grounded, so the minus input sits at zero volts.
+     2: The current through R in is v in over one k, and it can't enter the op amp, so it all flows through R f, making v out equal to minus ten times v in.
+     3: The gain is minus R f over R in.
+     4: The non inverting version has gain one plus R f over R in.
+     5: Op amps amplify microphone and sensor signals, build filters, and condition signals before the A D C in nearly every embedded system.
+
+[s9] WB  Worked example: designing an amplifier with gain 11
+  step0 board+: need: 0.2 V → about 2 V || PEN None
+     0: A sensor gives us point two volts, and our ADC wants about two volts.
+     1: Let's design a non-inverting amplifier.
+     2: The signal goes into the plus input.
+  step1 board+: PEN None || rule 1: no current into the inputs || rule 2: $v_- = v_+ = v_{in}$ || PEN ('underline',) on rule 1: no current || PEN ('underline',) on rule 2:
+     0: Feedback goes from the output, through R f, to the minus input, and R g goes from the minus input to ground.
+     1: By the golden rules, no current enters the inputs, and the op amp drives its output until the minus input equals the plus input.
+  step2 board+: $v_{in} = v_{out}\cdot\frac{R_g}{R_f + R_g}$ || gain $= 1 + \frac{R_f}{R_g}$ || PEN ('box',) on gain $= 1
+     0: So R f and R g form a voltage divider from the output, and its middle must equal v in.
+     1: That gives v out over v in equals one plus R f over R g.
+  step3 board+: $1 + \frac{10k}{1k} = 11$:   $0.2\ \mathrm{V} \to 2.2\ \math || PEN None
+     0: Choose R f equals ten kilohms and R g equals one kilohm: a gain of eleven.
+     1: Point two volts in gives two point two volts out.
+     2: Swap the input and ground connections, and you get the inverting amplifier instead, with a gain of minus R f over R g.
+
+[s10] V  Capacitors, inductors and first-order transients
+  img: fig:rc
+  • Capacitor: i = C dv/dt — voltage can’t jump
+  • Inductor: v = L di/dt — current can’t jump
+  • Find x(0), x(∞) and τ = RC or L/R
+  • 10 kΩ, 100 μF → τ = 1 s; 63% after 1 τ, done after ~5 τ
+  (pen marks: 7 )
+  beat0:
+     0: Capacitors and inductors add time to circuits.
+     1: A capacitor's current is C times the rate of change of its voltage, so its voltage can't jump instantly; that would take infinite current.
+     2: At DC, a capacitor acts like an open circuit.
+  beat1:
+     0: An inductor is the mirror image: its voltage is L times the rate of change of current, so its current can't jump.
+     1: At DC, it acts like a wire.
+  beat2:
+     0: Any circuit with one capacitor or one inductor follows the same recipe, the solution of the first order differential equation you met in math.
+     1: Find the initial value, the final value, and the time constant, tau, which is R C or L over R.
+     2: Then the response is the final value plus the initial minus final, times e to the minus t over tau.
+  beat3:
+     0: Example: a ten k resistor charging a one hundred microfarad capacitor from a five volt step.
+     1: Tau is one second.
+     2: After one tau, it's at sixty three percent, about three point one six volts.
+     3: After five tau, it's within one percent of five volts.
+     4: In embedded systems, an R C circuit with a ten millisecond time constant is a classic way to debounce a mechanical button.
+
+[s11] WB  Worked example: charging a capacitor
+  step0 board+: PEN None || $v_C(0) = 0$,   switch closes at $t = 0$
+     0: At time zero, a switch connects a five volt source to a ten kilohm resistor and an empty hundred microfarad capacitor.
+     1: How does the capacitor voltage change?
+  step1 board+: $v(0) = 0$,   $v(\infty) = 5\ \mathrm{V}$ || $\tau = RC = (10^4)(10^{-4}) = 1\ \mathrm{s}$ || PEN None || PEN ('underline',) on $v(0) = 0$ || PEN ('circle',) on $\tau = RC
+     0: Use the three step method.
+     1: Initial value: the capacitor starts empty, zero volts.
+     2: Final value: after a long time no current flows, so the capacitor reaches five volts.
+     3: Time constant: R times C, ten thousand times a hundred millionths, one second.
+  step2 board+: $v(t) = v(\infty) + [v(0) - v(\infty)]\,e^{-t/\tau}$ || $v(t) = 5(1 - e^{-t})\ \mathrm{V}$ || PEN None || PEN [('circle', 210, 229.6, 30, 30)] || PEN [('circle', 690, 338, 30, 30)]
+     0: The answer is always final, plus initial minus final, times e to the minus t over tau.
+     1: Here: five times one minus e to the minus t.
+     2: After one time constant, it reaches sixty three percent, three point one six volts.
+     3: After five, it's within one percent of five volts.
+     4: For engineering purposes, done.
+
+[s12] V  AC circuits with phasors
+  img: fig:phasor / fig:impedance
+  • A sinusoid at one frequency = magnitude + phase
+  • V_m cos(ωt + φ) → phasor V_m∠φ
+  • Impedance: Z_R = R, Z_L = jωL, Z_C = 1/(jωC)
+  • All DC methods now work with complex numbers
+  (pen marks: 6 )
+  beat0:
+     0: For sinusoidal sources, solving differential equations every time would be miserable.
+     1: Here's the trick.
+     2: In a linear circuit driven at one frequency, every voltage and current is a sinusoid at that same frequency.
+     3: The only things that differ are amplitude and phase.
+     4: So we represent each one by a complex number, a phasor, with that magnitude and angle: Euler's formula from Calculus two at work.
+     5: On the left, the current lags the voltage by forty five degrees.
+     6: On the right, the same information as two arrows.
+  beat1:
+     0: Then every element gets an impedance, a complex resistance.
+     1: A resistor is R.
+     2: An inductor is j omega L.
+     3: A capacitor is one over j omega C.
+     4: A one hundred millihenry inductor at sixty hertz has an impedance of about thirty seven point seven ohms.
+     5: Now Ohm's law, dividers, nodal analysis and Thevenin all work exactly as before, just with complex numbers.
+     6: Differential equations become algebra.
+     7: In the lab, students verify superposition and Thevenin's theorem in AC networks exactly this way, and measure sinusoidal steady state in R L C circuits.
+
+[s13] V  AC power: real, reactive, apparent
+  img: fig:power
+  • RMS: V_rms = V_peak / √2 (120 V outlet → 170 V peak)
+  • Real power P = V_rms I_rms cos θ does work
+  • Reactive power Q sloshes back and forth
+  • Low power factor costs utilities; capacitors correct it
+  (pen marks: 5 )
+  beat0:
+     0: With AC, voltage and current aren't always in step, and that changes the power.
+     1: Take the thirty seven point seven ohm resistor in series with our thirty seven point seven ohm inductor, on a one hundred twenty volt R M S line.
+     2: The impedance magnitude is fifty three point three ohms at forty five degrees, so the current is two point two five amps, lagging by forty five degrees.
+     3: The real power, which actually heats the resistor or turns a motor, is V times I times the cosine of the angle: about one hundred ninety one watts.
+     4: The reactive power, about one hundred ninety one volt amps reactive, just sloshes back and forth between the source and the inductor's magnetic field every cycle, doing no net work.
+     5: The apparent power is their combination, two hundred seventy volt amps, and the ratio of real to apparent power, point seven one here, is the power factor.
+     6: Utilities have to supply the full current even though only part of it does work, so large factories with motors are charged for poor power factor, and they install capacitor banks to cancel the inductive current.
+
+[s14] V  Three-phase power
+  img: fig:3phase / a:hv_lines
+  • Three sinusoids 120° apart
+  • Total power is constant — smooth motors
+  • Balanced loads: currents sum to zero
+  • V_line = √3 V_phase: 120 V → 208 V
+  (pen marks: 3 )
+  beat0:
+     0: Power plants and transmission lines use three phase power: three sinusoids, each shifted by one hundred twenty degrees.
+     1: At every instant, the three add up to zero, the green dashed line, so in a balanced system there's no need for a heavy return wire, and the total power delivered is perfectly constant instead of pulsing.
+     2: That's why big motors run smoothly on three phase.
+  beat1:
+     0: You can spot it in power lines, where conductors come in groups of three.
+     1: And the voltage between two phases is root three times the voltage of each phase to neutral, which is why U S commercial buildings often have two hundred eight volt service: one hundred twenty times root three.
+
+[s15] V  Lab skills: the oscilloscope and Lissajous figures
+  img: a:scopes / fig:lissajous
+  • Timebase (s/div), volts/div, trigger level
+  • AC vs DC coupling; 10× probes
+  • X–Y mode: plot one signal against another
+  • Lissajous shapes reveal phase and frequency ratio
+  (pen marks: 4 )
+  beat0:
+     0: The oscilloscope is the engineer's eyes.
+     1: On the left is a classic analog scope from the nineteen seventies, and on the right a modern digital one.
+     2: The key controls: the timebase, in seconds per division across the screen; the vertical scale, in volts per division; and the trigger, which tells the scope when to start drawing so a repeating waveform stands still.
+     3: A C coupling removes the DC level so you can zoom in on small wiggles, and ten times probes reduce how much the scope disturbs your circuit.
+  beat1:
+     0: In X Y mode, the scope plots one signal horizontally against another vertically, producing Lissajous figures.
+     1: Two signals at the same frequency and in phase make a diagonal line.
+     2: At ninety degrees apart, a circle.
+     3: In between, an ellipse whose shape tells you the phase shift.
+     4: And if one frequency is double the other, you get a figure eight.
+     5: Before digital measurements were everywhere, this was how engineers compared frequencies, and it's exactly what students do in the first labs of this course.
+
+[s16] Q  Key takeaways
+  BIG: Three laws (**Ohm, KCL, KVL**), one big simplification (**Thevenin**), and two time tools: **τ** for transients and **phasors** for AC.
+  cap: Next: EGEE 303, Electronics — diodes, transistors and amplifiers.
+  beat0:
+     0: Let's wrap up.
+     1: Ohm's law, Kirchhoff's current law and Kirchhoff's voltage law underlie everything.
+     2: Dividers, nodal and mesh analysis, superposition and Thevenin equivalents are organized ways of applying them.
+     3: Op amps with feedback obey two simple rules.
+     4: Capacitors and inductors bring time constants and first order transients.
+     5: Phasors and impedance turn AC analysis into complex algebra, and power factor and three phase explain how the grid really works.
+     6: Next up, electronics, where we add diodes and transistors.
+     7: See you there.

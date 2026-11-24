@@ -1,0 +1,889 @@
+
+##### CPSC-332 Database Systems_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+CPSC 332 - File Structures & Database Systems
+Semester Fall 2020 (fully online)
+Instructor Kyoung Seop Shin
+Textbook Fundamentals of Database Systems, 7e - Elmasri & Navathe
+Tools Microsoft SQL Server, T-SQL, PowerShell
+What this course is about
+How data is modeled, stored and queried. The course goes from designing a database on paper (Entity-
+Relationship diagrams), to turning that design into relational tables with primary/foreign keys, to removing
+redundancy with normalization (1NF-3NF, functional dependencies), to writing SQL queries. It finishes with
+how a DBMS actually stores data on disk: file structures, indexing, hashing, query optimization and
+transactions.
+Why you learned it
+Almost every piece of software stores data somewhere. This course teaches you to design that storage so it
+stays consistent, and to get answers out of it efficiently. For a computer engineer it's the bridge between
+programming and real applications (web backends, logging systems, analytics).
+The work you did
+Homework 1: PowerShell script (Company.ps1) that builds and populates the textbook's 6-table COMPANY
+database in SQL Server.
+Homework 2: SQL queries, e.g. finding every student's 'classmates' using self-joins.
+Homework 4: normalization exercises (Ch. 14) - find keys from functional dependencies, decompose into
+2NF/3NF.
+Scripts: a department-statistics report (SUM/AVG/COUNT with joins) exported to CSV from PowerShell; a
+recursive tree table with a breadth-first-search stored procedure (usp_BFS) using cursors.
+Two research-paper reviews: 'Weaving Relations for Cache Performance' (the PAX storage model) and
+Google's 'Bigtable' distributed storage system.
+Key concepts to re-learn
+ER modeling -> relational schema mapping
+Primary / foreign keys and referential integrity
+Functional dependencies, keys, normal forms
+(1NF, 2NF, 3NF, BCNF)
+Relational algebra and SQL: SELECT/JOIN/GROUP
+BY/HAVING/subqueries
+Stored procedures, cursors, recursive data (trees)
+in SQL
+Row vs column storage, indexing, hashing, cache
+behavior
+Transactions and query optimization (concepts)
+How it applies in the real world
+Every web/mobile app backend (user accounts, orders, inventory) runs on these ideas - PostgreSQL, MySQL,
+SQL Server.
+Normalization prevents bugs where the same fact is stored twice and gets out of sync.
+SQL reporting + scripting (like your PowerShell -> CSV report) is everyday work in IT, data analysis and
+DevOps.
+The Bigtable/PAX papers explain why modern analytics systems (BigQuery, Snowflake, Parquet files) store
+data by column.
+Where to start in this folder
+Homework\scripts & data - all .sql and .ps1 files you can re-run against SQL Server
+Homework\papers - your two paper reviews
+Lecture Notes - Chapter 2 slides + the PAX paper
+
+##### CPSC-351 Operating Systems_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+CPSC 351 - Operating Systems Concepts
+Semester Fall 2019
+Instructor Prof. Thomas L. Bettens
+Textbook Operating System Concepts, 10e - Silberschatz, Galvin & Gagne
+Tools C / C++ on Linux, POSIX threads (pthreads)
+What this course is about
+What an operating system does and how it does it: managing processes and threads, scheduling the CPU,
+synchronizing concurrent code, managing memory (paging, virtual memory) and handling I/O. The
+programming assignments are in C/C++ and use real OS APIs like fork() and pthreads.
+Why you learned it
+Every program you write runs on top of an OS. Knowing how processes, threads and memory work explains
+performance problems, crashes and race conditions. For embedded and systems work (your 450 class and
+beyond) it's essential background.
+The work you did
+Process homework: a 'time' utility that forks a child process, runs a command and reports elapsed time (Ex.
+3.19).
+Project 2: multithreaded sorting application - threads sort halves of an array and a merge thread combines
+them (pthreads).
+Synchronization homework: made a linked-list stack thread-safe with locks.
+Virtual Memory Manager simulation analysis: explained why page faults dropped (539 -> 244) when
+physical memory doubled.
+Critical-thinking homework: researched and chose an inter-process communication (IPC) technique for a
+scalable, mission-critical system.
+Key concepts to re-learn
+Processes vs threads; fork/exec/wait
+CPU scheduling algorithms (FCFS, SJF, round-
+robin, priority)
+Race conditions, mutexes, semaphores, deadlock
+Inter-process communication (pipes, shared
+memory, message passing, sockets)
+Paging, page tables, TLB, page faults, page
+replacement
+Virtual memory and address translation
+File systems and I/O basics
+How it applies in the real world
+Multithreading is how modern apps use multi-core CPUs (games, servers, browsers).
+Thread-safety bugs (race conditions, deadlocks) are some of the hardest bugs in industry - this class gives
+you the vocabulary to find them.
+Virtual memory/page faults explain why a computer slows down when RAM fills up.
+IPC choices matter in robotics, cars, and microservice architectures where many processes must talk reliably.
+Where to start in this folder
+Exams & Quizzes\Study-Guide.pdf - a great chapter-by-chapter summary of the whole textbook (start here)
+Homework\code - sorting.c (threads), stack.c/.h (thread-safe stack)
+Lecture Notes\Introduction.pptx - course overview
+
+##### CPSC-362 Software Engineering_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+CPSC 362 - Foundations of Software Engineering
+Semester Spring 2020
+Team Team Binary (5 students)
+Textbook Software Engineering: A Practitioner's Approach, 9e - Pressman (slides)
+Tools Android Studio, Java, Firebase/Google sign-in, UML tools
+What this course is about
+How software is built by teams rather than by one person: gathering requirements, writing user stories and
+use cases, modeling the system with UML (use case, activity, class, sequence and state diagrams, CRC cards),
+planning and estimating projects, and delivering the product in iterations (sprints).
+Why you learned it
+Real software is too big for one person to hold in their head. This course teaches the process and
+communication tools that let a team agree on what to build, design it, and ship it in increments. It's the 'how
+to work as an engineer' class rather than a pure coding class.
+The work you did
+Semester-long team project over 3 sprints: FlexinFitness, an Android fitness app (Java).
+App features in the code: Google sign-in, dashboard, workout planner, activity & meal log, fitness
+calculators, camera, exercise tutorial videos, Google Maps, notifications.
+Sprint documents: vision/scope, user stories (e.g. 'As a user, I want tutorials so I can learn proper form'), use
+cases, state machine and sequence diagrams.
+A separate Login screen prototype (Login project + zips).
+Key concepts to re-learn
+Software process models: waterfall, incremental,
+agile/Scrum
+Requirements: user stories, use cases, use-case
+templates
+UML structural models: class diagrams, CRC cards,
+object diagrams
+UML behavioral models: activity, sequence, state
+machine diagrams
+Project planning and estimation
+Iterative delivery (sprints), revising scope each
+iteration
+How it applies in the real world
+Agile sprints, user stories and backlogs are how most software companies operate today (Jira, Azure
+DevOps).
+UML-style diagrams are still used in design reviews and documentation, especially for
+embedded/defense/automotive systems.
+Your FlexinFitness app is a portfolio-ready example of a full mobile app built by a team.
+Where to start in this folder
+Projects\FlexinFitness (Android app) - the full Android Studio project (code in app\src\main\java)
+Projects\sprint docs - your 2nd sprint and 3rd-sprint requirements
+Lecture Notes - Pressman Ch.1, structural modeling (Ch.5), class diagrams, use-case templates
+
+##### EGCP-281 Digital Logic Design (VHDL)_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGCP 281 - Designing with VHDL
+Semester Spring 2019
+Instructor Dr. Mike Turi
+Texts Real Digital (Digilent); Free Range VHDL
+Tools Xilinx Vivado, ModelSim, FPGA board
+What this course is about
+Your first hardware description language (HDL) course. Instead of drawing logic gates, you describe digital
+circuits in VHDL code, simulate them with test benches, and synthesize them onto an FPGA. It covers
+propagation delay and glitches, combinational blocks (adders, muxes, decoders, ALUs), memory elements
+(latches, flip-flops, registers, counters) and finite state machines.
+Why you learned it
+Modern chips are designed in HDLs, not by hand. This course turns the digital-logic theory from EGCP 180
+into real hardware, and it's the foundation for 381 (building a processor), 441, 446 (Verilog) and 447.
+The work you did
+Lab 1: signal propagation delays - full adder with 'after X ns' delays and a test bench.
+Lab 2: ripple-carry adders, two's complement, adder/subtractor with overflow (modular design with port
+maps).
+Lab 3: 7-segment display decoder and an ALU.
+Lab 4: flip-flops, registers and a simple accumulator-based processor.
+Lab 5: finite state machines and controllers (4-bit counter, FSM in Vivado).
+Lab 6: advanced interfacing with the seven-segment display (multiplexed digits, clock divider).
+Key concepts to re-learn
+VHDL entity/architecture, signals, concurrent
+assignment
+Test benches and simulation waveforms
+std_logic / std_logic_vector values (U, X, Z...)
+Components and port maps (modular design)
+when/with-select (muxes, decoders)
+process, if, case -> flip-flops and sequential logic
+Propagation delay, glitches/hazards
+Finite state machines (Moore/Mealy)
+How it applies in the real world
+FPGAs designed this way run in 5G base stations, data-center accelerators, medical imaging, defense radar
+and prototype chips.
+Every CPU, GPU and ASIC starts as HDL code that is simulated before fabrication - verification engineers
+write test benches all day.
+State machines control everything from traffic lights to communication protocols.
+Where to start in this folder
+Lecture Notes - 7 numbered lectures (1-IntroVHDL to 7-Process_If_Case) in order
+Labs - lab write-ups 1-6, vhdl files, Vivado lab5 project
+Projects\project_1..3 - Vivado projects (ripple adder, clock divider, ...)
+Reference - ModelSim tutorial/FAQ
+
+##### EGCP-371 Signals & Systems_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGCP 371 - Modeling & Simulation of Signals and
+Systems
+Semester Spring 2020
+Instructor Dr. Ankita Mohapatra
+Textbook Signals and Systems Using MATLAB, 2e - Luis Chaparro
+Tools MATLAB
+What this course is about
+The math of signals (sound, sensor readings, radio waves) and the systems that process them. You learn to
+describe signals in time and frequency, sample them without aliasing, characterize linear time-invariant (LTI)
+systems with impulse response and convolution, and use transforms - Fourier, Laplace and Z - to analyze and
+design filters. MATLAB is used to simulate and visualize everything.
+Why you learned it
+It connects calculus/differential equations (MATH 250B) to real engineering. Any system that measures, filters
+or transmits signals - audio, communications, control, image processing - is analyzed with these tools. It's also
+the foundation for DSP and control systems.
+The work you did
+Assignment 1: sketch continuous signals and sample them (T = 0.2 s) to get discrete-time signals.
+Assignment 2: amplitude modulation - plotting carrier and message signals in MATLAB.
+Assignment 3-4: transforms and pole-zero analysis; used MATLAB's ztrans() and pole-zero plots.
+Classwork on complex numbers, Laplace transforms and z-transforms; two midterms and a final.
+Key concepts to re-learn
+Continuous vs discrete-time signals; signal
+properties (energy, periodicity, even/odd)
+Sampling theorem and aliasing
+LTI systems, impulse response, convolution
+Laplace transform, transfer functions, poles &
+zeros, stability
+Fourier series, Fourier transform, DFT/FFT,
+frequency response
+Z-transform, FIR and IIR digital filters
+Complex numbers and phasors
+How it applies in the real world
+Noise-cancelling headphones, audio equalizers and voice assistants use FIR/IIR filters.
+Every WiFi/cellular/Bluetooth radio relies on Fourier analysis and modulation (like Assignment 2's AM).
+Sampling/aliasing decides how fast an ADC must sample a sensor - critical in embedded systems (450) and
+medical devices.
+Poles and zeros predict whether a control system (drone, cruise control) is stable.
+Where to start in this folder
+Lecture Notes - numbered slides: Intro, Signal properties, Sampling, Laplace, Z transform, Fourier
+Reference - Laplace and Z-transform tables (keep these handy)
+Homework - Assignments 1-4 with MATLAB code
+
+##### EGCP-381 Computer Architecture (VHDL Processor)_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGCP 381 - Computer Design and Organization
+Semester Fall 2020
+Instructor Dr. Mike Turi
+Tools VHDL, Xilinx Vivado / ModelSim
+Processor 'Small16' teaching CPU (adapted from Pacific Lutheran Univ. labs)
+What this course is about
+How a CPU is built from the inside. Using VHDL, you build a processor piece by piece: an accumulator/ALU, a
+datapath with registers and muxes, a control unit (state machine), then a single-cycle 16-bit processor, and
+finally a pipelined version that handles data hazards. Lectures cover performance measurement/benchmarks
+and pipelining theory.
+Why you learned it
+It explains what actually happens when code runs: how instructions are fetched, decoded and executed, and
+why pipelining makes processors fast. It builds directly on your 281 VHDL skills and underpins embedded
+programming (450) and performance tuning in software.
+The work you did
+Lab 1: 8-bit accumulator (ALU + register) - review of 281 designs.
+Lab 2: 8-bit processor datapath and control (t8 processor) - wiring ALU, muxes, PC, memory.
+Lab 3: single-cycle Small16 processor datapath and control.
+Lab 4: improving the single-cycle Small16 (new instructions, ABCD register file).
+Lab 5: pipelining the Small16 processor (control_stage2/3).
+Lab 6: hazard support in the pipelined Small16 (forwarding/stalling).
+Homework: CPI and pipeline-hazard calculations for a 5-stage pipeline benchmark; hand-written machine-
+code programs (e.g. squaring array values).
+Key concepts to re-learn
+Instruction set architecture, opcodes, machine
+code
+Datapath: ALU, registers, register file, muxes,
+memory
+Control unit as a finite state machine
+Single-cycle vs multi-cycle vs pipelined execution
+Pipeline hazards: data, control, structural;
+forwarding and stalls
+Performance: CPI, clock rate, execution time,
+benchmarks
+Zero/negative flags and conditional jumps
+How it applies in the real world
+Every phone/laptop CPU (ARM, x86, RISC-V) is a deeply pipelined version of what you built.
+Understanding pipelines and hazards explains why some code runs faster (branch prediction, cache-friendly
+loops).
+CPU design/verification roles at Intel, AMD, Apple, Qualcomm and RISC-V startups use exactly this
+knowledge.
+The ARM Cortex-M white paper in Reference links to the microcontroller you programmed in 450.
+Where to start in this folder
+Labs - your lab reports 1-6 (PDF) plus lab2files/lab3files/lab5 files (all the VHDL)
+Lecture Notes - Performance and Pipelining slides, advanced VHDL examples
+Misc - code snippets (machine-code programs, datapath port maps)
+
+##### EGCP-441 Advanced Electronics (CMOS)_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGCP 441 - Advanced Electronics for Computer
+Engineers
+Semester Fall 2020 (online)
+Instructor Dr. Rakesh Mahto
+Reference Sedra & Smith, Microelectronic Circuits (Ch. 5 MOSFETs)
+Tools LTspice, Magic VLSI layout, Multisim, VHDL
+What this course is about
+The transistor-level view of digital electronics. You study how MOSFETs work, how they combine into CMOS
+logic gates (inverter, NAND, NOR, transmission gate), and how to measure what matters in chip design:
+switching delay, power/energy and interconnect effects. You simulate everything in LTspice and draw gate
+layouts in Magic. The later part of the course connects to FPGAs/HDL design.
+Why you learned it
+It explains why digital gates are fast or slow and why chips get hot. This is the physics underneath the logic
+you write in VHDL/Verilog, and the core of VLSI (chip) design.
+The work you did
+Lab 1: characterize an NMOS transistor (BS170) - threshold voltage and I-V curves.
+Lab 2: PMOS/NMOS threshold voltages (Vtn, Vtp) and simulation.
+Lab 3: CMOS inverter - voltage transfer curve (Vout vs Vin).
+Lab 4: inverter switching / delay experiments.
+Lab 5: power and energy measurement using CAD.
+Lab 6: interconnect modeling (RC delay of wires, Tplh).
+Lab 7: implementation of combinational logic (half adder in VHDL + CMOS).
+Magic VLSI layouts and LTspice symbols for NOT, NAND, NOR, NAND3, NOR3 and transmission gate.
+Final team project: design and characterize a CMOS 2-to-1 multiplexer using transmission gates (trading off
+power, area and delay) with a 2-um process model.
+Key concepts to re-learn
+MOSFET operation: cutoff, linear (triode),
+saturation; threshold voltage
+I-V characteristics and the square-law model
+CMOS inverter: VTC, noise margins, switching
+threshold
+Static CMOS gates (NAND, NOR) and
+transmission gates
+Propagation delay (tPLH, tPHL), RC models of
+wires
+Dynamic vs static power, energy per switch
+Layout, design rules, sizing (W/L)
+How it applies in the real world
+Every processor, memory and phone chip is billions of CMOS gates - this is how they're designed and
+verified.
+Power analysis is why phones last all day and data centers spend so much on cooling.
+Interconnect (wire) delay is now often the bottleneck in modern chips.
+SPICE simulation is a standard tool for analog/mixed-signal and IC design engineers.
+Where to start in this folder
+Labs - lab reports, LTspice simulations (.asc), screenshots, magic and sym folders
+Projects - final mux project report and LTspice files
+Lecture Notes - Lectures 2-3 (MOS device physics, I-V characteristics)
+Reference - Sedra solved problems Ch.5, sample lab report
+
+##### EGCP-446 Advanced Digital Design (Verilog)_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGCP 446 - Advanced Digital Design using Verilog HDL
+Semester Spring 2021 (online)
+Instructor Dr. Rakesh Mahto
+Tools Verilog, Xilinx Vivado, Nexys/Artix-7 FPGA board
+Team project with Octavio Espinoza & Farbod Movagharnemati
+What this course is about
+Your second HDL, Verilog, which is the most common language in industry chip design. The course moves
+from structural design (half/full adders) to sequential logic, Moore and Mealy state machines, algorithmic state
+machines (ASM), clock dividers, debouncers, and memories (ROM/RAM), and implements them on a real FPGA
+board.
+Why you learned it
+Knowing both VHDL (281/381) and Verilog makes you employable in FPGA/ASIC work. The course also
+teaches practical hardware problems that pure simulation hides: slow clocks for humans, noisy buttons, driving
+displays.
+The work you did
+Lab 1: structural half adder -> full adder with test benches.
+Lab 2: structural design and conditional statements (full adder, etc.).
+Lab 3: Moore state machine ('robot eyes' LED pattern) with test bench.
+Lab 4: ASM on FPGA - clock divider (100 MHz -> 1 Hz) and button debouncer.
+Lab 5: ROM and RAM - RAM emulator with 7-segment display output.
+Project A: seven-segment counter on the FPGA.
+Project B: multi-digit 7-segment display (time-multiplexed digits).
+Midterm exam (Exam No 1).
+Key concepts to re-learn
+Verilog modules, wires vs regs, always blocks
+Structural vs behavioral modeling
+Blocking vs non-blocking assignment
+Moore vs Mealy FSMs; ASM charts
+Clock division and timing
+Switch debouncing
+ROM/RAM modeling
+FPGA pin constraints and implementation flow
+How it applies in the real world
+Verilog/SystemVerilog is the dominant language at chip companies (Apple, NVIDIA, Intel) and FPGA
+vendors.
+Debouncing and clock division appear in every product with buttons and displays (microwaves, car
+dashboards).
+FPGAs are used for low-latency trading, video processing and prototyping ASICs before tape-out.
+Where to start in this folder
+Labs - lab handouts + your reports; Vivado projects lab3, lab4, lab5
+Projects - Project A/B reports, projectPartA/B Verilog sources
+Lecture Notes - Lectures 6, 7, 8, 10 (FSMs, sequential circuits, ASM, clock dividers)
+
+##### EGCP-447 Cyber-Physical Systems Security_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGCP 447 - Introduction to Cyber-Physical Systems
+(Hardware) Security
+Semester Fall 2021
+Instructor Dr. Jaya Dofe
+Tools VHDL, Xilinx Vivado
+Term paper team Alec Battisti, Brendan Grier
+What this course is about
+Security from the hardware up. Software security assumes the chip is trustworthy - this course asks what
+happens when it isn't. Topics include hardware Trojans (malicious circuit modifications with a rare trigger and a
+payload), counterfeit chip detection, logic locking, IC camouflaging, split manufacturing, side-channel attacks
+(leaking secrets through power or timing), fault testing, and IoT security.
+Why you learned it
+Chips are designed in one place and manufactured overseas by third parties, so the supply chain is an attack
+surface. As a computer engineer who designs hardware (281/381/446), this course teaches you how hardware
+can be attacked and defended.
+The work you did
+Homework 1: fault sites and test vectors for a small circuit (testing/fault coverage).
+In-class assignments: designing a hardware Trojan into a given circuit (rare trigger condition + payload).
+Programming Assignment 2: inserted and detected a hardware Trojan in the ISCAS C17 benchmark circuit
+in VHDL (C17_original vs C17_HT, counter-based trigger).
+Project: (7,4) Hamming encoder/decoder in VHDL (error detection/correction).
+FPGA labs: half/full adder, full subtractor, 8-bit up/down counter.
+Term paper + presentation: 'Hardware Trojans in IoT Devices'.
+Key concepts to re-learn
+Hardware Trojans: trigger, payload, combinational
+vs sequential
+Threat model of the IC supply chain
+Counterfeit detection and avoidance
+Logic locking, IC camouflaging, split
+manufacturing
+Side-channel attacks (power, timing, EM)
+Fault models and test vectors
+Error-correcting codes (Hamming)
+IoT security challenges
+Physical unclonable functions / true random
+numbers (Flash memory paper)
+How it applies in the real world
+Defense and aerospace agencies require trusted foundries because of hardware Trojan risk.
+Side-channel attacks have broken real smart cards, crypto wallets and car key fobs.
+Hamming/ECC codes protect RAM in servers (ECC memory), SSDs and satellites.
+With ~75 billion IoT devices, cheap insecure hardware is a major real-world attack vector (e.g. the Mirai
+botnet).
+Where to start in this folder
+Lecture Notes\lecture slides - Trojans, logic locking, side channels, counterfeits, IoT (very readable)
+Homework - Trojan assignment report + Vivado project (assignment2), C17 VHDL
+Projects - Hamming_Encoder Vivado project; term paper slides and proposal
+Reference - research papers on Trojans and IoT security
+
+##### EGCP-450 Embedded Systems (MSP432 ARM)_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGCP 450 - Embedded Processor Interfacing
+Semester Spring 2021
+Instructor Dr. Mike Turi
+Hardware TI MSP432 LaunchPad (ARM Cortex-M4F)
+Tools Code Composer Studio, ARM assembly, embedded C
+Book Valvano - Embedded Systems: Intro to the MSP432
+What this course is about
+Programming a microcontroller directly on the hardware, with no operating system. You start in ARM Thumb-2
+assembly (registers, branches, the stack, subroutines), then move to embedded C. You control GPIO pins,
+timers (SysTick), digital-to-analog conversion and serial communication to drive LEDs, switches, speakers and
+displays.
+Why you learned it
+Embedded systems are the most common computers in the world - in cars, appliances, medical devices and
+robots. This course is where computer architecture (381) meets real hardware, and it's core to a computer
+engineering career.
+The work you did
+Lab 1: intro to the MSP432 and ARM assembly (GPIO, LEDs and switches).
+Lab 2: branches, subroutines and interfacing to external I/O in assembly.
+Lab 3: SysTick timer and a traffic-light finite state machine in C (with pedestrian walk/blink states).
+Labs 4-5: digital piano using a 4-bit DAC - generating sine-wave tones to a headphone jack.
+Lab 6: serial communication and the seven-segment display.
+Extra CCS projects: blink example, GPIO, square waves, solid-state relay (SSR) and switch control.
+Key concepts to re-learn
+ARM Cortex-M architecture (RISC, Harvard,
+Thumb-2)
+Assembly: registers, load/store, branches,
+PUSH/POP, subroutines
+Stack, local variables, recursion
+Memory-mapped I/O: PxDIR, PxIN, PxOUT, PxSEL
+registers
+Busy-wait vs SysTick timing
+Table-driven finite state machines in C
+DAC / waveform generation
+Serial (UART/SPI) communication, I/O
+synchronization
+How it applies in the real world
+Cortex-M microcontrollers are in fitness trackers, thermostats, drones, car ECUs and medical pumps.
+The traffic-light FSM lab mirrors how real controllers (elevators, vending machines) are written.
+DAC waveform generation is how devices produce sound and control analog actuators.
+Your 471 senior project (Raspberry Pi + robot arm) uses the same I/O ideas at a higher level.
+Where to start in this folder
+Labs - your lab reports (PDF) and CCS projects (main.asm / main.c / DAC.c / SysTick.c)
+Labs\CCS project zips - importable into Code Composer Studio
+Lecture Notes - Cortex-M assembly, stacks/functions, I/O, SysTick, sync I/O
+Note: 'egcp 450 lab 3 - dylan sanderson.pdf' is actually your EGCP 446 Lab 3 report (misnamed);
+'EGCP450_lab5_final.docx' is another student's report
+
+##### EGCP-470 Senior Design I_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGCP 470 - Computer Engineering Senior Design (Part
+I)
+Semester Spring 2021 (approx.)
+Team Team G - Juan Toledo, Alec Battisti, Ahmed Jamalalleil, Dylan Sanderson
+Project Robotic Arm Assistant
+Folder contents Minimal: one biweekly report + ASI/IRA check-request forms
+What this course is about
+The first half of the capstone sequence. Teams propose a real engineering product, write requirements, plan
+the schedule and budget, buy parts and start building, reporting progress every two weeks. Your team's
+project was a Robotic Arm Assistant - a robot arm that identifies and hands over tools - finished in EGCP 471.
+Why you learned it
+The capstone shows you can take a vague idea to a working system as a team: planning, budgeting,
+documentation and integrating hardware and software. It pulls together everything from the program
+(embedded, programming, digital design).
+The work you did
+Team G biweekly progress reports (Robotic Arm Assistant).
+Parts purchasing through ASI / IRA check-request (reimbursement) forms - real-world budgeting and
+procurement.
+Key concepts to re-learn
+Project proposal and requirements definition
+Scheduling, milestones, risk management
+Budgeting and procurement
+Team roles and progress reporting
+Design reviews
+How it applies in the real world
+Biweekly status reports, budgets and purchase requests are exactly how engineering projects run in
+industry.
+Capstone projects are usually the strongest talking point in entry-level engineering interviews.
+Where to start in this folder
+Projects - EGCP 470 BiWeekly Report (Team G)
+Misc\check requests - reimbursement forms
+See EGCP-471 for the finished project (code, cascades, demo videos)
+
+##### EGCP-471 Senior Design II (Object Detection)_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGCP 471 - Computer Engineering Senior Design (Part
+II): Robotic Arm with Object Detection
+Semester Fall 2021
+Project Robotic Arm Assistant (continued from EGCP 470)
+Tools Python, OpenCV Haar cascades, Raspberry Pi + camera, Arm_Lib robot-arm library
+Folder contents GitHub repo, training data, trained cascades, demo videos, slides images
+What this course is about
+Finishing and demonstrating the capstone. The team trained custom OpenCV Haar-cascade classifiers to
+recognize specific tools (a stapler and a screwdriver) in a live camera feed. When the vision code detects the
+object, it sends commands to a multi-joint robotic arm, so the arm can locate and interact with the tool.
+Inverse kinematics (the 2-link arm diagram in the folder) works out the joint angles needed to reach a point.
+Why you learned it
+It's the integration project: computer vision (software), a Raspberry Pi/embedded platform (450), motor
+control and kinematics, and teamwork/documentation (470). It's the closest thing in your degree to a real
+product.
+The work you did
+createData.py: captured training images from a camera, saving every Nth frame and rejecting blurry ones.
+Built positive (p/) and negative (n/) image sets - thousands of images - plus pos/neg lists and a .vec sample
+file.
+Trained Haar cascades (cascade-stapler10.xml, cascade-screwdriver10.xml, cascade-arduino3.xml) - two
+training runs are kept.
+objectDetection2.py: live detection with OpenCV that drives the arm through Arm_Lib.
+Demo videos of object detection and a final presentation (training screenshots, cascade results).
+Key concepts to re-learn
+Haar features and cascade classifiers (Viola-Jones)
+Positive/negative training data, sample generation
+Detection parameters: scale factor, min neighbors,
+false positives
+Real-time video processing with OpenCV
+Robot arm control and servo commands
+Inverse kinematics for a 2-link arm
+System integration and testing
+How it applies in the real world
+Vision-guided robot arms do pick-and-place in warehouses (Amazon), factories and surgery.
+Haar cascades were the first real-time face detectors (digital cameras); today deep-learning models like
+YOLO do the same job.
+Collecting and cleaning training data is a big part of real ML engineering work.
+Inverse kinematics is used in industrial robots, animation and prosthetics.
+Where to start in this folder
+Projects\471_Project-main (GitHub repo) - the Python code and trained cascades
+Projects\Haar cascade training - StaplerCascade (final) and an earlier attempt
+Projects\Demo videos and Presentation images - for showing the project
+
+##### EGEE-203 Electric Circuits_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGEE 203 - Electric Circuits (with 203L lab)
+Semester Fall 2019 (quiz set F19); lab 203L
+Instructor Dr. Fleur T. Tehrani (lecture); Prof. M. Hilfi (lab)
+Textbook Engineering Circuit Analysis, 8e - Hayt, Kemmerly & Durbin (in Reference)
+Tools Multisim, oscilloscope
+What this course is about
+The foundation of all electrical engineering. You learn to analyze circuits made of resistors, capacitors,
+inductors and sources: Ohm's and Kirchhoff's laws, nodal and mesh analysis, superposition, Thevenin/Norton
+equivalents, transient (RC/RL) responses, and AC steady-state analysis with phasors, impedance, AC power and
+three-phase circuits.
+Why you learned it
+Every electronic device is a circuit. This is the prerequisite for electronics (303), digital electronics (441) and any
+hardware work. Being able to simplify a circuit to its Thevenin equivalent is a skill you use for your whole
+career.
+The work you did
+Weekly quizzes (Q3-Q11) and midterm - solutions kept for Fall 2019 plus a Spring 2018 practice set.
+Chapter 3 homework (nodal analysis).
+203L Experiment 1 and Lab 2: using the oscilloscope and Lissajous patterns to compare frequency and
+phase (Multisim).
+Experiment 6: steady-state sinusoidal behavior of RLC circuits.
+Lab 8: superposition and Thevenin's theorem in AC networks.
+Thevenin method cheat sheet (Thevenin Chart Outline).
+Key concepts to re-learn
+Ohm's law, KVL, KCL
+Series/parallel reduction, voltage & current
+division
+Nodal and mesh analysis
+Superposition, source transformation, Thevenin &
+Norton
+Capacitors, inductors; RC/RL transients and time
+constants
+Phasors, impedance, AC steady-state
+Average/complex power, RMS, power factor
+Three-phase (Y and Delta) circuits
+How it applies in the real world
+Thevenin equivalents are how engineers model batteries, sensors and amplifier inputs/outputs.
+RC time constants set delays, filters and debounce circuits (see 446's debouncer).
+AC/phasor analysis and three-phase power are how the power grid and motors work.
+Oscilloscope skills are used in every hardware lab and debugging session.
+Where to start in this folder
+Exams & Quizzes - full quiz/midterm solutions (best practice material)
+Lecture Notes - Thevenin method chart
+Labs - 203L reports
+Reference - Hayt textbook
+
+##### EGEE-303 Electronics_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGEE 303 - Electronics
+Semester Spring 2020
+Instructor Dr. Hassan H. Hashemi
+Textbook Microelectronic Circuits, 8e - Sedra & Smith
+Companion lab EGEE 303L
+What this course is about
+Circuits built from semiconductor devices. It covers diodes and diode circuits, field-effect transistors
+(MOSFETs/FETs) and bipolar junction transistors (BJTs): how to bias them, use them as amplifiers (small-signal
+models), analyze amplifier frequency response, and build circuits with operational amplifiers (op amps).
+Why you learned it
+Transistors are the building block of all electronics, analog and digital. This course connects circuit theory (203)
+to real devices, and leads into 441's CMOS digital electronics.
+The work you did
+Homework sets 1-6 (diodes, FETs, BJTs, amplifiers).
+Exam 2 and final exam (open notes).
+Project / direct assessment: diode load-line analysis (find IDQ, VDQ from a characteristic curve) and solving
+a non-homogeneous differential equation for a circuit.
+Lecture notes: FETs (91 pages), BJT small-signal and frequency response (65 pages), op amps (22 pages).
+Key concepts to re-learn
+Diode models, load lines, rectifiers
+MOSFET/JFET operation and DC biasing
+BJT operation, biasing, beta
+Small-signal models and amplifier gain
+Amplifier frequency response (Bode plots, -3 dB
+points)
+Op amps: inverting/non-inverting, ideal
+assumptions
+How it applies in the real world
+Every audio amplifier, sensor interface and power supply uses these devices.
+Op amps condition sensor signals before an ADC (e.g. ECGs, strain gauges, microphones).
+Transistor switches drive motors, relays and LEDs from microcontroller pins (450).
+MOSFET understanding leads straight into chip design (441).
+Where to start in this folder
+Lecture Notes - the three big lecture-note PDFs (FET, BJT, Op Amps) are the course in one place
+Homework - your HW solutions
+Exams & Quizzes - Exam 2 and final
+
+##### EGEE-303L Electronics Lab_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGEE 303L - Electronics Laboratory
+Semester Fall 2020 (virtual, via Zoom)
+Instructor Prof. Jim Yu
+Tools NI Multisim (installer in Coursework\_Software)
+Corequisite EGEE 303 Electronics
+What this course is about
+The hands-on (simulated, since it was online) companion to 303. You build and measure diode, BJT, FET and
+op-amp circuits in Multisim and write formal engineering lab reports. Experiments go from impedance
+measurement and grounding safety, to diode power supplies, clippers and clampers, to transistor switches,
+bias circuits and constant-current sources.
+Why you learned it
+It turns textbook equations into measurements and teaches you to write formal technical reports. The course
+also partially fulfills the engineering writing requirement.
+The work you did
+Lab 1: review of basic concepts, impedance measurements and safety ground.
+Lab 2A/2B: diode characteristics; AC-to-DC conversion with half/full-wave rectifiers and a Zener regulator.
+Lab 3: clippers and clampers.
+Lab 4: BJT as a switch.
+Lab 5: BJT collector curves (Ic vs Vce).
+Lab 7: linear-region constant current source.
+Lab 8: voltage-divider bias with emitter feedback (beta-independent design).
+Weekly quizzes and a final (diode circuits, constant-current design).
+Key concepts to re-learn
+Measuring impedance and grounding
+Diode I-V curve, rectifiers, ripple, Zener regulation
+Clipping and clamping circuits
+BJT regions: cutoff, active, saturation
+Biasing for stable operating points (Q-point)
+Current sources and current mirrors
+Formal lab report writing
+How it applies in the real world
+Every phone charger and power adapter uses rectifiers and regulators like Lab 2.
+Transistor switches let microcontrollers drive relays and motors.
+Beta-independent biasing is how real amplifiers stay stable across temperature and part variation.
+Clear lab reports are how engineers document test results in industry.
+Where to start in this folder
+Labs - handouts (EGEE303L_...) and your reports; Multisim .ms14 files
+Exams & Quizzes - quizzes and final
+
+##### EGEE-323 Probability & Random Variables_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGEE 323 - Engineering Probability & Random
+Variables
+Semester Spring 2020
+Folder contents Lecture outlines (Ch. 1-4), study guides
+Style Engineering-oriented (signals, noise, measurement)
+What this course is about
+Probability tools for engineers. Starting from set theory and the axioms of probability, the course covers
+conditional probability, independence, combined experiments and Bernoulli trials. It then introduces random
+variables with distribution and density functions, common distributions (Gaussian, uniform, exponential,
+Rayleigh, binomial, Poisson), expectation and moments (mean, variance, skew), and multiple random variables
+with joint and conditional densities.
+Why you learned it
+Real engineering signals are noisy and real systems fail randomly. This course gives you the math to model
+noise, reliability and uncertainty. It's needed for communications, signal processing, machine learning and
+quality testing.
+The work you did
+Lecture outlines 1-16 covering Chapters 1-4.
+Study guides for midterm 2 and the final.
+Midterm review solutions.
+Key concepts to re-learn
+Sample spaces, events, axioms of probability
+Joint and conditional probability, Bayes' rule
+Statistical independence
+Permutations, combinations, Bernoulli trials
+Random variables; CDF and PDF; delta functions
+for discrete RVs
+Gaussian, uniform, exponential, Rayleigh,
+binomial, Poisson
+Expected value, variance, moments
+Joint/conditional distributions of multiple random
+variables
+How it applies in the real world
+Thermal noise in circuits and radio signals is Gaussian; signal fading is Rayleigh.
+Poisson models network packet arrivals and server load.
+Bayes' rule underlies spam filters, medical tests and machine learning.
+Reliability engineering (mean time to failure) uses exponential distributions.
+Where to start in this folder
+Lecture Notes - numbered outlines in order (02 ... 16); very concise review sheets
+Exams & Quizzes - study guides list exactly which topics matter
+
+##### EGEE-401 Engineering Economics_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+EGEE/EGCP 401 - Engineering Economics &
+Professionalism
+Semesters Fall 2019 (EGEE 401, James Garner) and Fall 2021 (EGCP 401)
+Textbook Engineering Economic Analysis, 14e - Newnan (in Reference)
+Tools Excel / spreadsheets, interest tables
+What this course is about
+How engineers make money decisions and ethical decisions. The economics half covers the time value of
+money: interest (simple, compound, nominal vs effective), cash-flow diagrams, present worth, annual worth
+(EUAW), rate of return, depreciation and after-tax analysis, used to compare engineering alternatives. The
+professionalism half covers engineering ethics through famous case studies.
+Why you learned it
+Engineers constantly have to justify designs in dollars: buy vs lease, repair vs replace, which project is worth
+funding. Ethics matters because engineering failures hurt people. This is also a general-education (social
+science) course.
+The work you did
+Homework: cash-flow diagrams, compound interest and present/future-worth problems (e.g. 'should the
+firm sell the land?').
+Quizzes and exams with hand calculations, e.g. finding the building height that minimizes cost.
+Ethics case-study project (Fall 2021): the 2007 I-35W bridge collapse in Minneapolis.
+Group project: economic analysis of a solar farm proposal for a DOE green-energy grant.
+Famous ethics case group presentation (Fall 2019).
+Key concepts to re-learn
+Cash-flow diagrams
+Simple vs compound interest; nominal vs effective
+rates
+Interest factors (P/F, F/P, A/P, P/A, gradients)
+Present worth, annual worth (EUAW), future worth
+Rate of return / IRR, payback
+Depreciation and after-tax cash flows
+Engineering ethics, codes of conduct, case studies
+How it applies in the real world
+Deciding whether a solar installation, new machine or software license pays off is exactly this math.
+Excel's PV, FV, PMT, RATE and IRR functions are these formulas - used in finance, project management and
+personal loans/mortgages.
+Ethics failures like the I-35W bridge and Challenger shape engineering codes and regulations.
+Where to start in this folder
+Reference - Newnan textbook, compound interest tables, tax template
+Exams & Quizzes - study guide for the final lists the key problems
+Projects - bridge ethics case study, solar farm project
+
+##### MATH-250B Differential Equations & Linear Algebra_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+MATH 250B - Introduction to Linear Algebra and
+Differential Equations
+Semester Fall 2019
+Instructor Chris Lyons
+Coverage Book Ch. 1-9: first-order ODEs -> matrices -> vector spaces -> higher-order & systems of
+ODEs
+What this course is about
+Two big branches of applied math that come together at the end. First, ordinary differential equations: slope
+fields, separable and linear first-order equations, and modeling physical situations. Second, linear algebra:
+matrices, systems of equations, determinants, vector spaces, bases and dimension, inner product spaces, linear
+transformations and eigenvalues. Finally, linear algebra is used to solve higher-order linear ODEs and systems
+of first-order ODEs.
+Why you learned it
+It's the math behind circuits (203: RC/RLC circuits are differential equations), signals and systems (371:
+Laplace/Z transforms solve them), control, graphics and machine learning (matrices everywhere). It's a
+prerequisite for EGCP 371.
+The work you did
+13 homework sets (with solutions kept).
+4 quizzes, 3 exams and a final, with solutions and the instructor's exam-information sheets.
+Lecture slides by section (1.2-1.7, 2.3, 2.6, Ch. 3, 4.2, 4.6, Ch. 5).
+Key concepts to re-learn
+Slope fields and qualitative behavior of ODEs
+Separable and linear first-order ODEs; modeling
+(growth, mixing, circuits)
+Matrix algebra, row reduction, inverses
+Determinants
+Vector spaces, subspaces, span, linear
+independence, bases, dimension
+Inner product spaces, orthogonality
+Linear transformations, eigenvalues/eigenvectors
+Higher-order linear ODEs; systems of ODEs
+How it applies in the real world
+RLC circuits, spring-mass systems and motor dynamics are all second-order ODEs.
+Eigenvalues decide stability in control systems and vibration analysis (bridges, aircraft).
+3D graphics, robotics (your 471 arm's kinematics) and machine learning are built on matrices and vector
+spaces.
+Google's original PageRank was an eigenvector computation.
+Where to start in this folder
+Exams & Quizzes - Info_Exam sheets list exactly what to know for each exam (great review outline)
+Lecture Notes - slides by section
+Homework - HW problems and full solutions
+
+##### PHYS-226 Electricity & Magnetism_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+PHYS 226 - Elementary Physics: Electricity &
+Magnetism
+Semester Fall 2019
+Instructor Michael Dubuque
+Textbook Any calculus-based text (Halliday, Fundamentals of Physics 10e, in Reference; or free OpenStax
+University Physics Vol. 2)
+Corequisite PHYS 226L
+What this course is about
+Calculus-based physics of electricity and magnetism: electric charge and Coulomb's law, electric fields, Gauss's
+law, electric potential, capacitance, current and resistance, DC circuits, magnetic fields and forces,
+electromagnetic induction (Faraday's and Lenz's laws), and an introduction to Maxwell's equations.
+Why you learned it
+It's the physics behind everything in electrical and computer engineering. Circuit theory (203), electronics (303)
+and the behavior of transistors all come from these laws.
+The work you did
+Complete problem sets (PS #1 starts with a mechanics review from PHYS 225).
+Lecture example problems and in-class problems.
+6 quizzes (announced and pop), 3 exams, and possible final exam problems with solutions.
+Equation sheet and constants/conversions sheet.
+Key concepts to re-learn
+Coulomb's law, electric field, superposition
+Gauss's law
+Electric potential and potential energy
+Capacitance, dielectrics, energy in capacitors
+Current, resistance, Ohm's law, power; DC circuits
+(RC)
+Magnetic force on charges and currents
+Biot-Savart and Ampere's law
+Faraday's law, Lenz's law, inductance
+Maxwell's equations (intro)
+How it applies in the real world
+Capacitors store energy in camera flashes and smooth power supplies.
+Electromagnetic induction powers generators, transformers, wireless chargers and induction cooktops.
+Magnetic forces drive electric motors (EVs, fans, hard drives).
+Maxwell's equations describe radio, WiFi and light.
+Where to start in this folder
+Homework\226 - Problem Sets Complete.pdf - all problem sets in one file
+Reference - equation sheet, constants sheet, study tips, Halliday textbook
+Misc\screenshots - physics problem screenshots
+
+##### PHYS-227 Physics_summary.pdf
+COURSE SUMMARY · CSU FULLERTON
+PHYS 227 - Elementary Physics (third semester of the
+calculus physics series)
+Semester Spring 2019
+Online homework WileyPLUS
+Folder contents Minimal: WileyPLUS promo code, a class score report, a customer-service transcript
+What this course is about
+The folder holds no notes, so this summary is based on the standard course. PHYS 227 is usually the third part
+of the calculus-based physics sequence (after 225 mechanics and 226 E&M). It covers oscillations and waves,
+sound, optics (reflection, refraction, interference, diffraction), and an introduction to modern physics (relativity,
+photons, atoms). Homework was done online in WileyPLUS.
+Why you learned it
+It was required for the engineering degree. Waves and optics underlie signals (371), communications, and how
+light-based devices like cameras, fiber optics and lasers work. It's also a prerequisite for EGEE 303.
+The work you did
+WileyPLUS online homework (you also sorted out a $140 vs $33 promo-code billing problem with Wiley
+support).
+Graded work for one assessment is in the class score report.
+Key concepts to re-learn
+Simple harmonic motion, oscillations
+Mechanical waves, sound, superposition, standing
+waves
+Geometric optics: reflection, refraction, lenses
+Wave optics: interference and diffraction
+Intro modern physics: photons, the photoelectric
+effect, relativity
+How it applies in the real world
+Fiber-optic internet uses total internal reflection.
+Camera and phone lenses come from geometric optics.
+Wave interference explains noise-cancelling headphones and antenna arrays.
+The photoelectric effect is how image sensors and solar panels work.
+Where to start in this folder
+Misc - promo code, score report, Wiley chat transcript (no notes saved for this course)

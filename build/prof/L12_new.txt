@@ -1,0 +1,452 @@
+﻿#### L12_cpsc131: CPSC 131 Data Structures
+
+[s0] TITLE  Data Structures
+  img: a:card_catalog
+  beat0:
+     0: Welcome to C P S C one thirty one, data structures.
+     1: Before computers, libraries organized millions of cards in drawers like these, so you could find any book in minutes.
+     2: A data structure is the same idea: a way of organizing data so that the operations you need are fast.
+     3: In this lecture you'll learn how to measure speed with big O notation, and the core structures every programmer uses: arrays, linked lists, stacks, queues, hash tables, trees, heaps and graphs.
+
+[s1] V  Big-O: how does the cost grow?
+  img: fig:bigo
+  • Count steps as a function of input size n
+  • Keep only the fastest-growing term
+  • O(log n) ≪ O(n) ≪ O(n log n) ≪ O(n²) ≪ O(2ⁿ)
+  • An algorithm choice can mean 1 ms vs 17 minutes
+  (pen marks: 8 )
+  beat0:
+     0: To compare data structures, we need a way to measure speed that doesn't depend on the computer.
+     1: So we count steps as a function of the input size, n.
+  beat1:
+     0: And we only care about how that count grows for large n.
+     1: If a loop takes three n plus five steps, we just say it's order n, written big O of n.
+     2: Constants and smaller terms don't matter when n is a billion.
+  beat2:
+     0: Here are the common growth rates, on a log log chart.
+     1: Logarithmic barely grows.
+     2: Linear grows in step with n.
+     3: n log n is a bit worse.
+     4: n squared shoots up.
+     5: And two to the n is hopeless beyond tiny inputs.
+  beat3:
+     0: The difference is dramatic.
+     1: For a million items, on a computer doing a billion steps per second, a linear algorithm takes about a millisecond, n log n about twenty milliseconds, and n squared about seventeen minutes.
+     2: Choosing the right algorithm often matters far more than buying a faster computer.
+
+[s2] WB  Reading big-O straight off the code
+  step0 board+: for (int i = 0; i < n; i++)  sum += a[i]; || $\to O(n)$
+     0: Knowing the definition isn't enough.
+     1: On exams and at work you have to read the big O right off the code.
+     2: Rule one: a single loop over n items is order n.
+     3: The body runs n times.
+  step1 board+: for (int i = 0; i < n; i++) ||   for (int j = 0; j < n; j++)  check(a[i], a[j]); || PEN ('box',) on   for (int j = 0 || $n \times n \to O(n^2)$
+     0: Rule two: nested loops multiply.
+     1: For each of the n values of i, the inner loop runs n times, so the body runs n times n.
+     2: Comparing every pair of items is order n squared.
+  step2 board+: for (int k = n; k > 1; k = k / 2)  step(); || PEN ('circle',) on k = k / 2 || $n,\ \frac{n}{2},\ \frac{n}{4},\ \ldots,\ 1$:  $\log_2 n$ st
+     0: Rule three: a loop that halves its range each time is logarithmic.
+     1: Starting from n, how many halvings until you reach one?
+     2: Log base two of n.
+     3: That's binary search.
+  step3 board+: for (x : items)  BinarySearch(sorted, x); || $n \times \log n \to O(n\log n)$ || in sequence: add, keep the biggest:  $O(n) + O(n^2) = O(n^2)
+     0: Combine them.
+     1: A loop over n items with a binary search inside is n times log n.
+     2: Statements one after another add, and then you keep only the biggest term: order n plus order n squared is just order n squared.
+
+[s3] V  Arrays vs. linked lists
+  img: fig:listarray
+  • Array: contiguous → instant access a[i], cache-friendly
+  • Inserting in the middle: shift everything → O(n)
+  • Linked list: insert/remove anywhere in O(1) (given the node)
+  • But reaching element i means walking → O(n)
+  (pen marks: 6 )
+  beat0:
+     0: The two most basic ways to store a sequence.
+     1: An array, or vector, keeps elements side by side in one block of memory.
+     2: To get element i, the computer just computes the address, start plus i times the element size.
+     3: That's instant, order one.
+     4: Arrays are also cache friendly, because the processor loads neighboring elements together, which makes them very fast in practice.
+  beat1:
+     0: But inserting at the front means shifting every other element over by one: order n.
+  beat2:
+     0: A linked list stores each element in its own node, scattered in memory, with a pointer to the next node.
+     1: To insert, you just rewire two pointers.
+     2: Order one.
+  beat3:
+     0: But to reach element i, you have to start at the head and follow i pointers.
+     1: Order n.
+     2: Every data structure is a set of tradeoffs like this.
+     3: The skill is knowing which operations your program does most.
+
+[s4] WB  Worked example: inserting into a linked list
+  step0 board+: struct Node { ||   int value; ||   Node* next; || }; || PEN <function <lambda> at 0x00000293C4232020 || PEN None || PEN <function <lambda> at 0x00000293C42320C0
+     0: Let's insert the value twenty five into the middle of a linked list, between twenty and thirty.
+     1: Each node holds a value and a pointer to the next node.
+     2: We already have a pointer, prev, to the node holding twenty.
+  step1 board+: Node* n = new Node{25, nullptr}; || PEN None || PEN ('underline',) on new Node{25, nullptr}
+     0: Step one: create the new node on the heap, holding twenty five.
+     1: Right now, it isn't connected to anything.
+  step2 board+: n->next = prev->next;   // 25 -> 30 || PEN None || PEN ('highlight',) on n->next = prev->next; || PEN <function <lambda> at 0x00000293C4232160
+     0: Step two: point the new node at whatever prev currently points to, which is thirty.
+     1: Now both twenty and twenty five point to thirty.
+  step3 board+: prev->next = n;         // 20 -> 25 || PEN None || PEN ('highlight',) on prev->next = n; || list: 10 → 20 → 25 → 30 || PEN ('check',) on list: 10
+     0: Step three: point prev at the new node.
+     1: The old link from twenty to thirty is replaced, and the list reads ten, twenty, twenty five, thirty.
+     2: No element moved in memory.
+     3: That's why insertion is constant time.
+  step4 board+: PEN ('box',) on n->next = prev->next; || PEN ('box',) on prev->next = n; || Connect the new node first, then relink! || PEN ('underline',) on Connect the new node first
+     0: The order of those two lines is critical.
+     1: Swap them, and prev points to twenty five before twenty five knows about thirty.
+     2: The rest of the list is lost forever.
+     3: When you edit pointers, always connect the new node first.
+
+[s5] V  Stacks: last in, first out
+  img: a:plates / fig:stack1 / fig:stack2 / fig:stack3
+  • push onto the top, pop from the top
+  • Undo history, browser Back button
+  • The call stack for function calls
+  • Checking balanced brackets: ( [ { } ] )
+  (pen marks: 3 )
+  beat0:
+     0: A stack is like a stack of plates.
+     1: You add to the top and take from the top.
+     2: Last in, first out.
+  beat1:
+     0: Undo is a stack.
+     1: Every action you take is pushed: you type hello, then make it bold.
+  beat2:
+     0: Then you delete a line.
+     1: That's pushed on top.
+  beat3:
+     0: Press control Z, and the most recent action is popped off and undone first.
+     1: The browser's back button works the same way.
+     2: And the call stack you met in programming is literally a stack of function frames.
+     3: Compilers also use stacks to check that brackets are balanced: push every opening bracket, and every closing bracket must match the one on top.
+
+[s6] WB  Worked example: are the brackets balanced?
+  step0 board+: input:  { [ ( ) ] } || open: push || PEN ('underline',) on open: push || close: pop, must match || PEN None || PEN ('underline',) on close: pop
+     0: Compilers check brackets with a stack.
+     1: Let's trace the string curly, square, round, close round, close square, close curly.
+     2: The rule: push every opening bracket.
+     3: For every closing bracket, pop the top and check that it matches.
+  step1 board+: PEN None || PEN ('row', 0) || PEN None || PEN ('row', 1) || PEN None || PEN ('row', 2) || PEN <function <lambda> at 0x00000293C4232200
+     0: Curly: push.
+     1: Square: push.
+     2: Round: push.
+     3: The stack now holds three brackets, with the round one on top.
+  step2 board+: PEN None || PEN ('row', 3) || PEN None || PEN ('row', 4) || PEN None || PEN ('row', 5)
+     0: Close round: pop, and the top was round.
+     1: A match.
+     2: Close square: pop square, match.
+     3: Close curly: pop curly, match.
+  step3 board+: PEN <function <lambda> at 0x00000293C42322A0 || input  ( ] || pop "(" but saw "]":  NOT balanced || PEN ('box',) on pop "(" but saw "]"
+     0: The stack is empty at the end, so the brackets are balanced.
+     1: Now try round, then close square.
+     2: Push round.
+     3: Then close square pops round, which doesn't match.
+     4: Error.
+     5: That's exactly the message your compiler gives you, and it works because the most recent opening bracket must be the first one closed.
+     6: Last in, first out.
+
+[s7] V  Queues: first in, first out
+  img: fig:queue
+  • enqueue at the back, dequeue from the front
+  • Print jobs, network packets, task scheduling
+  • Circular buffer: fixed array that wraps around
+  • Used in every UART and keyboard driver
+  (pen marks: 4 )
+  beat0:
+     0: A queue is a line at a store: first in, first out.
+     1: New items join at the back, and items leave from the front.
+  beat1:
+     0: Print jobs wait in a queue.
+     1: Network routers queue packets.
+     2: Operating systems queue processes that are ready to run.
+  beat2:
+     0: A neat way to build one is a circular buffer: a fixed size array where the head and tail indexes wrap around to the start when they reach the end, using the modulo operator from discrete math.
+  beat3:
+     0: This matters a lot in embedded systems.
+     1: When bytes arrive on a serial port faster than your program can handle them, an interrupt routine drops them into a circular buffer, and the main program pulls them out later.
+     2: You'll write exactly this in the embedded systems course.
+
+[s8] V  Recursion: functions that call themselves
+  img: fig:fib
+  • Base case + a smaller version of the same problem
+  • factorial(n) = n × factorial(n − 1), factorial(0) = 1
+  • Naive Fibonacci recomputes subproblems → O(2ⁿ)
+  • Memoization (cache answers) → O(n)
+  (pen marks: 5 )
+  beat0:
+     0: A recursive function solves a problem by calling itself on a smaller version of the same problem, until it reaches a base case it can answer directly.
+  beat1:
+     0: Factorial is the classic: n factorial is n times n minus one factorial, and zero factorial is one.
+     1: Recursion is natural for anything that's defined in terms of smaller pieces of itself, like trees, file directories, and the merge sort we'll see shortly.
+  beat2:
+     0: But be careful.
+     1: Fibonacci, where each number is the sum of the two before it, looks perfect for recursion.
+     2: Yet the naive version recomputes the same values over and over.
+     3: Look at the tree: fib of three, in red, gets computed again and again.
+     4: The total work grows exponentially.
+     5: Fibonacci of fifty would take hours.
+  beat3:
+     0: The fix is memoization: store each answer the first time you compute it, and look it up afterwards.
+     1: Now each value is computed once, and the time drops to linear.
+     2: That idea, solving subproblems once and reusing them, is called dynamic programming.
+
+[s9] WB  Worked example: tracing a recursive function
+  step0 board+: int Fact(int n) { ||   if (n <= 1) return 1;      // base case || PEN ('highlight',) on if (n <= 1) return 1; ||   return n * Fact(n - 1);    // smaller problem || } || PEN ('highlight',) on return n * Fact(n - 1);
+     0: Here's factorial written recursively.
+     1: Every recursive function needs two parts.
+     2: A base case that stops: if n is at most one, return one.
+     3: And a recursive case that makes the problem smaller: n times factorial of n minus one.
+  step1 board+: PEN None || PEN None || PEN None || PEN None || calls go down, waiting...
+     0: Call Fact of four.
+     1: It can't answer yet, so it calls Fact of three, which calls Fact of two, which calls Fact of one.
+     2: Each call waits on the stack.
+  step2 board+: PEN <function <lambda> at 0x00000293C4232340 || PEN ('box',) on return n * Fact(n - 1); || PEN None || PEN None || PEN None || ...answers come back up
+     0: Fact of one hits the base case and returns one.
+     1: Now the answers come back up.
+     2: Fact of two returns two times one, two.
+     3: Fact of three returns three times two, six.
+     4: And Fact of four returns four times six, twenty four.
+  step3 board+: PEN ('strike',) on if (n <= 1) return 1; || no base case = stack overflow
+     0: Forget the base case, and the calls never stop, until the stack runs out of memory.
+     1: That's a stack overflow, and it's the classic recursion bug.
+
+[s10] V  Binary search: halve the problem every step
+  img: fig:bsearch0 / fig:bsearch1 / fig:bsearch2 / fig:bsearch3
+  (pen marks: 8 )
+  beat0:
+     0: If the data is sorted, you can search it incredibly fast.
+     1: Let's find thirty seven in this sorted array.
+     2: Check the middle element: forty one.
+     3: Thirty seven is smaller, so it must be in the left half.
+     4: Throw away the right half entirely.
+  beat1:
+     0: Check the middle of what's left: seventeen.
+     1: Thirty seven is bigger, so keep the right half.
+  beat2:
+     0: Middle again: twenty nine.
+     1: Still smaller than thirty seven, keep the right part.
+  beat3:
+     0: Middle: thirty seven.
+     1: Found it, in four steps out of fifteen elements.
+     2: Each step halves the range, so a billion items take only about thirty steps, because two to the thirtieth is about a billion.
+     3: That's logarithmic time, and it's why sorting data first often pays off.
+
+[s11] WB  Worked example: binary search for 21
+  step0 board+: find 21 || PEN None || PEN <function <lambda> at 0x00000293C4231BC0 || PEN <function <lambda> at 0x00000293C4231C60 || mid = 5: 34 > 21 || so hi = 4 || PEN <function <lambda> at 0x00000293C4231D00
+     0: Let's find twenty one in this sorted array of eleven numbers.
+     1: Low starts at index zero, high at index ten.
+     2: The middle is index five, which holds thirty four.
+     3: Thirty four is bigger than twenty one, so twenty one must be in the left half.
+  step1 board+: PEN None || PEN <function <lambda> at 0x00000293C4231DA0 || mid = 2: 15 < 21 || PEN <function <lambda> at 0x00000293C4231E40 || so lo = 3 || PEN <function <lambda> at 0x00000293C4231EE0
+     0: Now low is zero, high is four, and the middle is index two, holding fifteen.
+     1: Fifteen is smaller than twenty one, so move low up to three.
+  step2 board+: PEN None || PEN <function <lambda> at 0x00000293C4231F80 || mid = 3: found! || PEN ('check',) on found!
+     0: Low is three, high is four, and the middle is index three.
+     1: It holds twenty one.
+     2: Found it, in three comparisons.
+  step3 board+: $\log_2(10^9) \approx 30$ steps
+     0: A linear scan could take up to eleven comparisons.
+     1: Binary search halves the range every step, so even a billion sorted items need only about thirty comparisons.
+     2: That's the power of log n.
+     3: The catch: the data must be sorted first.
+
+[s12] V  Sorting: from O(n²) to O(n log n)
+  img: fig:merge
+  • Insertion sort: simple, O(n²) — fine for small n
+  • Merge sort: split in half, sort each, merge
+  • log n levels × n work each = O(n log n)
+  • Quicksort / std::sort: O(n log n) in practice
+  (pen marks: 4 )
+  beat0:
+     0: Sorting is one of the most studied problems in computing.
+     1: The simple approach, insertion sort, takes each item and slides it into place among the ones already sorted.
+     2: It's easy and fine for small lists, but it's order n squared.
+  beat1:
+     0: Merge sort uses divide and conquer.
+     1: Split the list in half, sort each half recursively, then merge the two sorted halves by repeatedly taking the smaller front element.
+     2: Look at the picture: we split down to single elements, then merge back up.
+  beat2:
+     0: There are log n levels of splitting, and each level does order n work merging.
+     1: So the total is n log n.
+     2: For a million items, that's the difference between about twenty million steps and a trillion.
+  beat3:
+     0: In practice, you'll usually call the library's sort, like s t d sort in C plus plus, which uses a carefully tuned hybrid of quicksort and other methods, and runs in n log n time.
+     1: But knowing why it's fast helps you recognize when your own code accidentally isn't.
+
+[s13] V  Hash tables: look things up in O(1)
+  img: fig:hash
+  • Hash function turns a key into a bucket number
+  • Lookup, insert, delete: O(1) on average
+  • Collisions: two keys, same bucket → chain them
+  • Python dicts, std::unordered_map, caches, databases
+  (pen marks: 6 )
+  beat0:
+     0: What if you want to find things by name, not by position?
+     1: A hash table runs each key through a hash function that scrambles it into a number, then takes that number mod the table size to pick a bucket.
+     2: Store the item in that bucket.
+  beat1:
+     0: To look it up later, hash the key again and go straight to the same bucket.
+     1: No searching.
+     2: On average, lookup, insert and delete are all order one, no matter how big the table is.
+  beat2:
+     0: By the pigeonhole principle, some keys must collide in the same bucket.
+     1: Here, alice and carol both land in bucket three.
+     2: The usual fix is chaining: each bucket holds a short list.
+     3: As long as the table isn't too full, those lists stay tiny.
+     4: If they don't, say a bad hash function sends every key to the same bucket, a lookup degrades into scanning one long list: order n.
+     5: That's why the order one is always quoted as average case.
+     6: Real hash tables grow and rehash automatically when they get too full to keep it that way.
+  beat3:
+     0: Hash tables are everywhere: Python dictionaries, C plus plus unordered maps, web caches, compilers' symbol tables, and the indexes inside databases.
+     1: If you only remember one data structure from this course, make it this one.
+
+[s14] WB  Worked example: filling a hash table
+  step0 board+: h(key) = key mod 7 || PEN None
+     0: Let's insert five keys into a hash table with seven buckets.
+     1: The hash function is the key mod seven: the remainder after dividing by seven.
+  step1 board+: 14 mod 7 = 0 || PEN None || PEN <function <lambda> at 0x00000293C4232660 || 23 mod 7 = 2 || PEN None || PEN <function <lambda> at 0x00000293C4232700
+     0: Fourteen mod seven is zero, so fourteen goes in bucket zero.
+     1: Twenty three mod seven is two: bucket two.
+  step2 board+: 9 mod 7 = 2   collision! || PEN <function <lambda> at 0x00000293C42327A0 || PEN ('underline',) on collision! || PEN None
+     0: Nine mod seven is also two.
+     1: A collision!
+     2: Two keys want the same bucket.
+     3: With chaining, we simply add nine to a small list hanging off bucket two.
+  step3 board+: 31 mod 7 = 3,   6 mod 7 = 6 || PEN None || PEN None || lookup: hash, then check one bucket: O(1) || PEN ('box',) on lookup: hash
+     0: Thirty one mod seven is three, and six goes in bucket six.
+     1: To look up a key later, we compute its hash and only search that one bucket.
+     2: With a good hash function and enough buckets, the chains stay short, and lookups take constant time on average.
+
+[s15] V  Binary search trees
+  img: fig:bst
+  • Left subtree smaller, right subtree larger
+  • Search, insert, delete: O(height)
+  • Balanced → height ≈ log₂ n
+  • std::map, databases (B-trees), file systems
+  (pen marks: 5 )
+  beat0:
+     0: A binary search tree keeps data sorted while still allowing fast inserts.
+     1: Each node has up to two children.
+     2: Everything in the left subtree is smaller, and everything in the right subtree is larger.
+  beat1:
+     0: To find forty, start at the root, fifty.
+     1: Forty is smaller, go left to thirty.
+     2: Forty is bigger, go right.
+     3: Found it.
+     4: The cost is the height of the tree.
+  beat2:
+     0: If the tree stays balanced, the height is about log base two of n, so a million items need only about twenty comparisons.
+     1: But insert items in sorted order into a plain BST and it degenerates into a long chain, as slow as a linked list.
+     2: Self balancing trees, like red black trees, rotate nodes to stay balanced automatically.
+  beat3:
+     0: The C plus plus s t d map is a red black tree.
+     1: Databases and file systems use a wide, shallow cousin called a B tree, designed so that each node fills one disk block.
+     2: You'll see B trees in the databases course.
+
+[s16] WB  Worked example: building and searching a BST
+  step0 board+: insert: 50 30 70 20 40 60 80 || PEN None || PEN None || PEN None
+     0: Let's build a binary search tree by inserting fifty, thirty, seventy, twenty, forty, sixty, eighty, in that order.
+     1: Fifty becomes the root.
+     2: Thirty is smaller, so it goes left.
+     3: Seventy is bigger, so it goes right.
+  step1 board+: PEN None || PEN None || PEN None || PEN None
+     0: Twenty: smaller than fifty, go left.
+     1: Smaller than thirty, go left again.
+     2: Forty: left of fifty, but bigger than thirty, so right.
+     3: Sixty: right of fifty, left of seventy.
+     4: Eighty: right, then right.
+  step2 board+: search 60: || 60 > 50: right || PEN <function <lambda> at 0x00000293C42323E0 || 60 < 70: left || PEN <function <lambda> at 0x00000293C4232480 || found! || PEN None || PEN <function <lambda> at 0x00000293C4232520
+     0: Now search for sixty.
+     1: Compare with fifty: bigger, go right.
+     2: Compare with seventy: smaller, go left.
+     3: Sixty.
+     4: Found in three comparisons.
+     5: Each comparison throws away half of what's left, just like binary search.
+  step3 board+: sorted input makes a "stick": O(n)
+     0: But watch out: insert the same numbers already sorted, ten, twenty, thirty, and every node goes right.
+     1: The tree becomes a linked list, and search slows to order n.
+     2: That's why real libraries use self balancing trees.
+
+[s17] V  Heaps and priority queues
+  img: fig:heap
+  • Always know the smallest (or largest) item
+  • Insert and remove-min: O(log n)
+  • Stored compactly in an array
+  • OS schedulers, Dijkstra, event simulations
+  (pen marks: 5 )
+  beat0:
+     0: Sometimes you don't need everything sorted.
+     1: You just need to repeatedly grab the most urgent item.
+     2: That's a priority queue, usually built as a heap.
+  beat1:
+     0: In a min heap, every parent is smaller than its children, so the smallest item is always at the top.
+     1: Inserting or removing the top takes order log n, by swapping an item up or down one level at a time.
+  beat2:
+     0: A heap is stored compactly in a plain array, with no pointers at all.
+     1: The children of position i live at two i plus one and two i plus two.
+  beat3:
+     0: Operating systems use priority queues to decide which task runs next.
+     1: Network routers use them to prioritize traffic.
+     2: And the shortest path algorithm on the next slide uses one to always explore the closest location first.
+
+[s18] V  Graphs and shortest paths
+  img: fig:dijkstra
+  • Store as adjacency lists (sparse) or a matrix (dense)
+  • BFS explores level by level (queue)
+  • DFS goes deep first (stack / recursion)
+  • Dijkstra: shortest weighted paths — how map apps route you
+  (pen marks: 6 )
+  beat0:
+     0: A graph is a set of nodes connected by edges, like the road map from discrete math.
+     1: In code, we usually store it as adjacency lists: for each node, a list of its neighbors.
+     2: For dense graphs, an adjacency matrix works too.
+  beat1:
+     0: Breadth first search explores a graph level by level using a queue: all neighbors first, then their neighbors.
+     1: On an unweighted graph, it finds shortest paths in number of hops.
+  beat2:
+     0: Depth first search dives as deep as possible before backing up, using a stack or recursion.
+     1: It's how you'd solve a maze, detect cycles, or order tasks that depend on each other.
+  beat3:
+     0: For weighted graphs, Dijkstra's algorithm finds shortest paths.
+     1: Using a priority queue, it repeatedly settles the closest unsettled node and updates its neighbors' distances.
+     2: Here, from A, the shortest path to F costs thirteen, going A, C, B, D, E, F, which is not the most direct looking route.
+     3: Your phone's navigation app runs refined versions of this on a graph with millions of road segments.
+
+[s19] V  Choosing the right structure
+  img: fig:choose
+  (pen marks: 7 )
+  beat0:
+     0: Here's the summary table to keep.
+     1: Need fast access by position?
+     2: An array or vector.
+     3: Undo, recursion or parsing?
+     4: A stack.
+     5: First come, first served?
+     6: A queue.
+     7: Look things up by a key?
+     8: A hash table, with order one average time.
+     9: Need things kept in sorted order with fast search?
+     10: A balanced binary search tree, like s t d map.
+     11: Always need the smallest or largest item next?
+     12: A heap.
+     13: Modeling connections, networks or routes?
+     14: A graph, with breadth first search or Dijkstra.
+     15: The standard libraries of every major language provide all of these, so in practice your job is mostly choosing well, and understanding the costs well enough to avoid accidentally writing an n squared program.
+
+[s20] Q  Key takeaways
+  BIG: Data structures trade costs. Measure with **Big-O**, then pick the structure whose **fast operations** match what your program does most.
+  cap: Next: EGCP 280, Microcontrollers — programming the hardware directly in assembly.
+  beat0:
+     0: To wrap up.
+     1: Big O notation measures how cost grows with input size.
+     2: Arrays give instant access, and linked lists give cheap insertion.
+     3: Stacks and queues order work.
+     4: Recursion and divide and conquer give us binary search and merge sort.
+     5: Hash tables give constant time lookup.
+     6: Trees keep data sorted, heaps keep the minimum handy, and graphs model connections, searched with B F S, D F S and Dijkstra.
+     7: Next, we drop down to the hardware itself, programming microcontrollers in assembly language.
+     8: See you there.

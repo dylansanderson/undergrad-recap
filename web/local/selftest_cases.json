@@ -1,0 +1,68 @@
+[
+ {
+  "T": 638.09,
+  "expect_slide": "MATH 150A · Derivatives",
+  "q": "Why is the derivative the slope of the tangent line? Can you give me a quick example with numbers?",
+  "expect": ""
+ },
+ {
+  "T": 4751.25,
+  "expect_slide": "CPSC 121 · Using objects, and splitting code into files",
+  "q": "show me an example of a hello world program when declaring standard namespace at the top",
+  "expect": "C++ code shown in a code block, not read aloud"
+ },
+ {
+  "T": 8640.8,
+  "expect_slide": "EGCP 180 · Karnaugh maps: simplification by eye",
+  "q": "I don't get why the columns go 00, 01, 11, 10 instead of counting normally.",
+  "expect": "Gray code ordering"
+ },
+ {
+  "T": 16213.87,
+  "expect_slide": "EGCP 281 · Anatomy of a design: entity + architecture",
+  "q": "What's the difference between a signal and a variable in VHDL?",
+  "expect": ""
+ },
+ {
+  "T": 16213.87,
+  "expect_slide": "EGCP 281 · Anatomy of a design: entity + architecture",
+  "q": "Can you explain that more simply?",
+  "expect": "follow-up uses the previous answer"
+ },
+ {
+  "T": 19356.02,
+  "expect_slide": "EGEE 303 · The BJT and the common-emitter amplifier",
+  "q": "Where would I find a circuit like this in a real product?",
+  "expect": ""
+ },
+ {
+  "T": 22970.51,
+  "expect_slide": "EGCP 381 · Pipelining: the assembly line",
+  "q": "Why does pipelining increase throughput but not make a single instruction faster?",
+  "expect": ""
+ },
+ {
+  "T": 24019.9,
+  "expect_slide": "CPSC 351 · Race conditions and critical sections",
+  "q": "What exactly goes wrong if two threads run this at the same time?",
+  "expect": ""
+ },
+ {
+  "T": 29236.68,
+  "expect_slide": "EGCP 450 · Interrupts on Cortex-M",
+  "q": "Why use interrupts here instead of just polling in a loop?",
+  "expect": ""
+ },
+ {
+  "T": 31305.25,
+  "expect_slide": "EGCP 471 · Object detection with Haar cascades",
+  "q": "Is this approach still used today, or has deep learning replaced it?",
+  "expect": ""
+ },
+ {
+  "T": 26598.62,
+  "expect_slide": "EGEE 401 · Comparing alternatives: present worth and rate of return",
+  "q": "What's the weather going to be like this weekend?",
+  "expect": "brief, steers back to the lecture"
+ }
+]

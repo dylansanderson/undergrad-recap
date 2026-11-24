@@ -1,0 +1,345 @@
+﻿#### L11_phys227: PHYS 227 Waves, Optics & Modern Physics
+
+[s0] TITLE  Waves, Optics & Modern Physics
+  img: a:prism
+  beat0:
+     0: Welcome to Physics two twenty seven: waves, optics and modern physics.
+     1: This is the physics of things that wiggle, from a vibrating guitar string to the light carrying internet traffic through glass fibers.
+     2: And it ends with the twentieth century revolution: relativity and quantum physics, which explain why semiconductors work at all.
+     3: Every chip you'll ever design rests on the last part of this lecture.
+
+[s1] V  Simple harmonic motion: the universal oscillator
+  img: fig:shm / a:quartz_watch
+  • Restoring force F = −kx → x(t) = A cos(ωt + φ)
+  • Spring: ω = √(k/m) · pendulum: ω = √(g/L)
+  • Energy sloshes between kinetic and potential
+  • Quartz crystal: 32,768 Hz = 2¹⁵ → divide 15× → 1 Hz
+  (pen marks: 4 )
+  beat0:
+     0: Anything with a restoring force proportional to displacement, like a spring, oscillates as a perfect cosine.
+     1: That's simple harmonic motion.
+     2: For a spring, the angular frequency is the square root of k over m: stiffer springs vibrate faster, heavier masses slower.
+     3: For a small pendulum, it's the square root of g over L.
+     4: Energy constantly sloshes back and forth, potential at the turning points, kinetic in the middle, with the total constant.
+  beat1:
+     0: Here's where computer engineers meet it every day.
+     1: Inside every watch, phone and computer is a tiny quartz crystal that vibrates like a stiff spring when driven electrically.
+     2: A watch crystal is cut to vibrate at thirty two thousand seven hundred sixty eight hertz.
+     3: Why that odd number?
+     4: It's two to the fifteenth.
+     5: Divide it by two fifteen times with a chain of flip flops, the clock divider from digital logic, and you get exactly one tick per second.
+
+[s2] WB  Worked example: a mass on a spring
+  step0 board+: PEN None || $\omega = \sqrt{k/m} = \sqrt{200/0.5} = \sqrt{400} = 20\ \ma
+     0: Let's work out a spring and mass completely.
+     1: A half kilogram mass hangs on a spring with stiffness two hundred newtons per meter.
+     2: How fast does it oscillate?
+     3: The angular frequency is the square root of k over m: two hundred over point five is four hundred, and its square root is twenty radians per second.
+  step1 board+: $f = \frac{\omega}{2\pi} \approx 3.18\ \mathrm{Hz}$ || $T = \frac{1}{f} = \frac{2\pi}{\omega} \approx 0.314\ \mathr || PEN None
+     0: Convert to ordinary frequency by dividing by two pi: about three point one eight cycles per second.
+     1: The period is one over that: about point three one four seconds per bounce.
+  step2 board+: $x(t) = 0.05\cos(20t)$ || $v_{max} = A\omega = (0.05)(20) = 1\ \mathrm{m/s}$
+     0: Pull it five centimeters and let go.
+     1: The motion is x equals point zero five cosine twenty t.
+     2: The fastest it moves, through the middle, is amplitude times omega: point zero five times twenty, one meter per second.
+     3: Notice the period doesn't depend on how far you pull it.
+     4: That's exactly why a quartz crystal or a pendulum makes a reliable clock.
+
+[s3] V  Damping, resonance — and the RLC connection
+  img: fig:analogy
+  • Friction → amplitude decays
+  • Drive near the natural frequency → resonance
+  • Mass–spring–damper ≡ inductor–capacitor–resistor
+  • Same differential equation, same behavior
+  (pen marks: 4 )
+  beat0:
+     0: Real oscillators lose energy to friction, so the amplitude decays.
+     1: That's damping.
+  beat1:
+     0: Push an oscillator periodically, and if you push near its natural frequency, the amplitude grows dramatically.
+     1: That's resonance, like pushing a child on a swing at just the right moments.
+  beat2:
+     0: Now look at this table.
+     1: A mass, spring and damper obey exactly the same differential equation as an inductor, capacitor and resistor in series.
+     2: Mass corresponds to inductance, spring stiffness to one over capacitance, friction to resistance.
+  beat3:
+     0: So the natural frequency of an L C circuit is one over the square root of L C, just as a spring's is the square root of k over m.
+     1: Radios use this resonance to select one station out of thousands.
+     2: Same physics, same math, different parts.
+
+[s4] V  Waves: v = f λ
+  img: fig:wave
+  • A wave carries energy, not matter
+  • Transverse (string, light) vs longitudinal (sound)
+  • Middle A, 440 Hz in air: λ = 343/440 ≈ 78 cm
+  • Wi-Fi at 2.4 GHz: λ = c/f ≈ 12.5 cm
+  (pen marks: 4 )
+  beat0:
+     0: A wave is a disturbance that travels, carrying energy without carrying matter along.
+     1: A stadium wave moves around the stadium, but each person just stands up and sits down.
+  beat1:
+     0: In a transverse wave, like a wave on a string or light, the wiggle is perpendicular to the direction of travel.
+     1: In a longitudinal wave, like sound, the air molecules are pushed back and forth along the direction of travel.
+  beat2:
+     0: Every wave obeys the simplest formula in physics: speed equals frequency times wavelength.
+     1: Sound travels at about three hundred forty three meters per second in air.
+     2: Middle A, at four hundred forty hertz, has a wavelength of about seventy eight centimeters.
+  beat3:
+     0: Radio waves travel at the speed of light.
+     1: Wi Fi at two point four gigahertz has a wavelength of about twelve and a half centimeters, which is why Wi Fi antennas are a few centimeters long.
+     2: Antenna size is set by wavelength.
+
+[s5] V  Superposition and standing waves
+  img: fig:standing
+  • Waves add: constructive + destructive interference
+  • String fixed at both ends: λₙ = 2L/n
+  • Harmonics f, 2f, 3f … give instruments their tone
+  • Noise-cancelling headphones: add the inverse wave
+  (pen marks: 8 )
+  beat0:
+     0: When two waves overlap, their displacements simply add.
+     1: That's superposition.
+     2: Crest on crest makes a bigger wave, constructive interference.
+     3: Crest on trough cancels, destructive interference.
+  beat1:
+     0: A string fixed at both ends, like a guitar string, can only vibrate in patterns that fit: wavelengths of two L over n.
+     1: These are standing waves, with fixed points called nodes.
+  beat2:
+     0: So a string vibrates at its fundamental frequency and at whole number multiples, called harmonics.
+     1: The mix of harmonics is why a guitar and a piano playing the same note sound different.
+     2: And the idea that any sound is a sum of sine waves at different frequencies is exactly Fourier analysis, which you'll use in signals and systems.
+  beat3:
+     0: Destructive interference is also how noise cancelling headphones work: a microphone hears the noise, and the electronics play the inverted wave, so the two cancel at your ear.
+
+[s6] WB  Worked example: the notes of a guitar string
+  step0 board+: $L = 0.65\ \mathrm{m}$,   $f_1 = 110\ \mathrm{Hz}$ || $\lambda_1 = 2L = 1.3\ \mathrm{m}$ || PEN None
+     0: A guitar string is sixty five centimeters long and plays a fundamental of one hundred ten hertz, the note A.
+     1: The fundamental fits half a wavelength on the string, so the wavelength is twice the length: one point three meters.
+  step1 board+: $v = f\lambda = 110 \times 1.3 \approx 143\ \mathrm{m/s}$
+     0: So the wave speed on the string is f times lambda: one hundred ten times one point three, about one hundred forty three meters per second.
+     1: That speed is set by the string's tension and thickness, which is why tightening a tuning peg raises the pitch.
+  step2 board+: PEN None || PEN None || $f_n = n\,f_1$:   110, 220, 330 Hz
+     0: The string can also vibrate with two half waves, or three.
+     1: Those harmonics have wavelengths L and two thirds L, so their frequencies are two hundred twenty and three hundred thirty hertz: exactly two and three times the fundamental.
+     2: The mix of these harmonics is what makes a guitar sound different from a flute playing the same note.
+
+[s7] V  Sound: decibels and the Doppler effect
+  img: fig:db / fig:doppler
+  • β = 10 log(I/I₀) dB — a logarithmic scale
+  • +10 dB = 10× intensity; +3 dB = 2×
+  • Doppler: moving source → shifted frequency
+  • Radar guns, weather radar, ultrasound blood flow
+  (pen marks: 6 )
+  beat0:
+     0: Our ears handle an enormous range of intensities, so sound is measured on a logarithmic scale, in decibels.
+     1: Every ten decibels is ten times the intensity.
+     2: A rock concert at one hundred ten decibels is a hundred billion times more intense than the faintest sound you can hear.
+     3: Engineers use decibels for signal strength and amplifier gain too: plus three decibels means double the power.
+  beat1:
+     0: And when a source moves, its waves bunch up in front and stretch out behind.
+     1: That's the Doppler effect.
+     2: A siren at one thousand hertz moving toward you at thirty meters per second sounds like about one thousand ninety six hertz, then drops to about nine hundred twenty as it passes.
+     3: Police radar guns, weather radar and medical ultrasound all measure speed by measuring this frequency shift.
+
+[s8] WB  Worked example: the Doppler shift of a siren
+  step0 board+: $f = 700\ \mathrm{Hz}$,   $v_s = 30\ \mathrm{m/s}$,   $v = 3 || PEN None || PEN None
+     0: An ambulance siren sounds at seven hundred hertz and drives at thirty meters per second.
+     1: Sound travels at three hundred forty three meters per second.
+     2: What pitch do you hear as it approaches, and as it leaves?
+     3: Look at the drawing: ahead of the ambulance, the wave crests bunch up.
+  step1 board+: $f_{approach} = f\,\frac{v}{v - v_s} = 700\cdot\frac{343}{31 || $\approx 767\ \mathrm{Hz}$
+     0: Approaching, the crests arrive closer together.
+     1: The formula divides by the speed of sound minus the source speed: seven hundred times three forty three, over three thirteen.
+     2: That's about seven hundred sixty seven hertz.
+  step2 board+: $f_{away} = f\,\frac{v}{v + v_s} = 700\cdot\frac{343}{373}$ || $\approx 644\ \mathrm{Hz}$
+     0: Moving away, you add instead: seven hundred times three forty three over three seventy three, about six hundred forty four hertz.
+     1: So the pitch drops by more than a hundred hertz as it passes you.
+     2: Police radar and weather radar use the same shift, with radio waves, to measure speed.
+
+[s9] V  Light bends: refraction and Snell’s law
+  img: a:prism / fig:snell
+  • Light slows in glass: n = c / v
+  • n₁ sin θ₁ = n₂ sin θ₂
+  • Air → glass at 30°: bends to 19.5°
+  • n depends on color → prisms split white light
+  beat0:
+     0: Light travels slower in glass or water than in air.
+     1: The index of refraction, n, is how many times slower.
+     2: For glass, about one and a half.
+     3: When light enters at an angle, the change in speed bends it.
+     4: And since the index depends slightly on the color, a prism bends each color by a different amount, splitting white light into a rainbow.
+  beat1:
+     0: Snell's law gives the angle: n one sine theta one equals n two sine theta two.
+     1: From air into glass at thirty degrees, the sine of the new angle is point five divided by one point five, so the light bends to about nineteen and a half degrees, toward the perpendicular, as it slows down.
+
+[s10] WB  Worked example: light leaving water
+  step0 board+: PEN None || PEN None || $n_1 = 1.33$,   $n_2 = 1.00$,   $\theta_1 = 40°$
+     0: Light travels from water into air.
+     1: Water's index is one point three three, air's is one.
+     2: The light hits the surface at forty degrees from the normal.
+     3: Where does it go?
+  step1 board+: $n_1\sin\theta_1 = n_2\sin\theta_2$ || $\sin\theta_2 = 1.33\,\sin 40° \approx 0.855$ || $\theta_2 \approx 58.8°$ || PEN None
+     0: Snell's law: n one sine theta one equals n two sine theta two.
+     1: One point three three times sine forty is about point eight five five.
+     2: Since air's index is one, that's sine theta two directly.
+     3: The inverse sine gives fifty eight point eight degrees.
+     4: It bends away from the normal, because it speeds up.
+  step2 board+: PEN None || $\sin\theta_c = \frac{1}{1.33} \;\Rightarrow\; \theta_c \app
+     0: Tilt the beam more and the outgoing angle grows until it reaches ninety degrees.
+     1: That happens when sine theta one equals one over one point three three, at about forty eight point eight degrees: the critical angle.
+     2: Beyond it, all the light reflects back into the water.
+     3: That's total internal reflection, and it's how optical fiber traps light.
+
+[s11] V  Total internal reflection: the internet is made of light
+  img: fig:tir
+  • Dense → less dense, beyond the critical angle: 100% reflection
+  • sin θc = n₂/n₁ → 41.8° for glass to air
+  • Optical fiber traps light for kilometers
+  • Undersea cables carry most intercontinental data
+  (pen marks: 4 )
+  beat0:
+     0: Going the other way, from glass into air, light bends away from the perpendicular.
+     1: At a steep enough angle, the critical angle, it can't get out at all.
+     2: Every bit of it reflects back inside.
+     3: That's total internal reflection.
+     4: For glass to air, the sine of the critical angle is one over one point five, about forty two degrees.
+     5: An optical fiber is a thin glass core surrounded by cladding with a slightly lower index, so light bounces along the core for kilometers.
+  beat1:
+     0: These fibers carry the backbone of the internet.
+     1: Undersea fiber cables carry the vast majority of data between continents, with lasers blinking billions of times per second.
+     2: Every video you stream from another country probably traveled as light through glass, trapped by this one equation.
+
+[s12] V  Lenses and cameras
+  img: fig:lens
+  • Thin lens: 1/f = 1/d_o + 1/d_i
+  • Camera, f = 50 mm, subject at 2 m → image at 51.3 mm
+  • Focusing = moving the lens a millimeter or so
+  • Phone cameras, microscopes, chip lithography
+  (pen marks: 5 )
+  beat0:
+     0: A lens bends light so that rays from one point of an object meet again at one point of an image.
+     1: The thin lens equation relates the focal length to the object and image distances: one over f equals one over d o plus one over d i.
+  beat1:
+     0: A camera with a fifty millimeter lens photographing someone two meters away forms the image fifty one point three millimeters behind the lens, right on the sensor.
+  beat2:
+     0: For something very far away, the image forms at exactly fifty millimeters.
+     1: So focusing just means moving the lens by about a millimeter.
+     2: Your phone does that with a tiny motor, often a voice coil like a speaker.
+  beat3:
+     0: The same optics, scaled up enormously in precision, is how chips are made: lithography machines use lenses and mirrors to project circuit patterns onto silicon wafers.
+
+[s13] V  Interference and diffraction: light is a wave
+  img: fig:slits
+  • Two slits: bright where d sin θ = mλ
+  • Fringe spacing = λL/d = 13 mm in this example
+  • Diffraction limits how small you can image
+  • Chipmakers use 13.5 nm extreme-UV light to print tiny features
+  (pen marks: 5 )
+  beat0:
+     0: Shine a laser through two narrow slits, and instead of two bright lines you get a whole row of bright and dark fringes.
+     1: Light from the two slits interferes: where the path lengths differ by a whole number of wavelengths, the waves add, and where they differ by half a wavelength, they cancel.
+     2: This experiment, first done by Thomas Young around eighteen hundred, proved light is a wave.
+  beat1:
+     0: The fringe spacing is wavelength times distance to the screen, over the slit separation.
+     1: With a red laser at six hundred fifty nanometers, slits a tenth of a millimeter apart, and a screen two meters away, the fringes are thirteen millimeters apart.
+  beat2:
+     0: Diffraction also sets a fundamental limit: you can't focus light to a spot much smaller than its wavelength.
+     1: That's a huge problem for chipmakers, who need to print transistor features just a few tens of nanometers across.
+  beat3:
+     0: So the most advanced chip factories use extreme ultraviolet light with a wavelength of thirteen and a half nanometers, generated by blasting tiny droplets of tin with a laser.
+     1: Wave optics directly limits how small transistors can be.
+
+[s14] V  Relativity — and why GPS needs it
+  img: a:gps_sat / fig:gps
+  • Speed of light is the same for every observer
+  • Moving clocks run slow: Δt = γΔt₀
+  • Clocks in weaker gravity run fast
+  • GPS: net +38 μs/day — uncorrected, ~10 km error per day
+  (pen marks: 4 )
+  beat0:
+     0: In nineteen oh five, Einstein built special relativity on one surprising fact: the speed of light is the same for every observer, no matter how they move.
+     1: The consequences: moving clocks run slow, by the factor gamma.
+     2: Moving objects contract.
+     3: And mass and energy are equivalent, E equals m c squared.
+     4: His later theory, general relativity, adds that clocks run faster where gravity is weaker.
+  beat1:
+     0: This isn't abstract.
+     1: GPS satellites carry atomic clocks and move at about fourteen thousand kilometers per hour.
+     2: Special relativity makes their clocks lose about seven microseconds per day.
+     3: But they're high above Earth, in weaker gravity, so general relativity makes them gain about forty five.
+     4: The net is about thirty eight microseconds per day fast.
+     5: Since GPS measures distance by timing radio signals at the speed of light, thirty eight microseconds is about eleven kilometers of error, every single day, if engineers didn't correct for it.
+     6: They do, by deliberately setting the satellite clocks slightly slow before launch.
+
+[s15] V  Photons and quantized energy
+  img: fig:levels / a:rgb_led
+  • Light comes in packets: E = hf
+  • Photoelectric effect: only high-enough f frees electrons
+  • Atoms have discrete energy levels → sharp spectral lines
+  • LED color = semiconductor band gap
+  (pen marks: 5 )
+  beat0:
+     0: Light is also a particle.
+     1: Each photon carries energy h times f.
+     2: Shine dim blue light on certain metals, and electrons pop out.
+     3: Shine intense red light, and nothing happens, because no single red photon has enough energy.
+     4: Einstein explained this photoelectric effect in nineteen oh five, and it won him the Nobel Prize.
+     5: Camera sensors and solar cells work on this principle: each photon can free one electron.
+     6: And atoms can only hold electrons at specific, discrete energy levels.
+     7: In hydrogen, they're minus thirteen point six electron volts over n squared.
+     8: When an electron drops from one level to a lower one, it emits a photon with exactly that energy difference, which is why each element glows with its own fingerprint of colors.
+  beat1:
+     0: In a solid, those levels blur into bands separated by a gap, and the size of that gap decides whether a material is a conductor, an insulator or a semiconductor.
+     1: An LED emits photons with energy roughly equal to its band gap.
+     2: A handy rule: energy in electron volts is about twelve hundred forty divided by the wavelength in nanometers.
+     3: So a red LED's band gap is about one point nine electron volts, and a blue LED's about two point eight.
+     4: That's the bridge to the electronics course, where band gaps make diodes and transistors work.
+
+[s16] WB  Worked example: counting photons in a laser pointer
+  step0 board+: red laser: $P = 5\ \mathrm{mW}$,   $\lambda = 650\ \mathrm{n || $E = \frac{hc}{\lambda}$
+     0: How many photons does a red laser pointer emit?
+     1: Take a five milliwatt laser at six hundred fifty nanometers.
+     2: First, the energy of one photon: E equals h c over lambda.
+  step1 board+: $E = \frac{(6.63\times 10^{-34})(3\times 10^{8})}{650\times  || $\approx 3.06\times 10^{-19}\ \mathrm{J} \approx 1.91\ \math
+     0: Plug in Planck's constant, six point six three times ten to the minus thirty four, times the speed of light, three times ten to the eighth, over six fifty times ten to the minus nine.
+     1: That's about three point oh six times ten to the minus nineteen joules.
+     2: In electron volts, about one point nine one.
+  step2 board+: $\frac{P}{E} = \frac{5\times 10^{-3}}{3.06\times 10^{-19}} \
+     0: The laser emits five thousandths of a joule every second.
+     1: Divide by the energy per photon: about one point six times ten to the sixteen photons per second.
+     2: Sixteen quadrillion!
+     3: Each photon is tiny, which is why light looks smooth and continuous.
+     4: And that one point nine electron volts is no accident: it matches the band gap of the semiconductor in a red laser diode or LED.
+
+[s17] B  Matter waves and the quantum world
+  • de Broglie: particles have wavelength λ = h / p
+  • Electron microscopes resolve atoms
+  • Tunneling: electrons can pass through thin barriers
+  • Flash memory stores bits by tunneling charge onto a floating gate
+  beat0:
+     0: One more twist.
+     1: If waves can act like particles, particles can act like waves.
+     2: Louis de Broglie proposed that every particle has a wavelength, h over its momentum.
+  beat1:
+     0: Electrons have wavelengths far shorter than visible light, which is why electron microscopes can image individual atoms, and why chipmakers use them to inspect their transistors.
+  beat2:
+     0: Waves can also leak through thin barriers that a classical particle could never cross.
+     1: That's quantum tunneling.
+  beat3:
+     0: And you're using tunneling right now.
+     1: Flash memory, in your phone and in every S S D, stores each bit by forcing electrons to tunnel through a very thin insulating layer onto an isolated floating gate, where they stay trapped for years.
+     2: Quantum mechanics isn't just theory.
+     3: It's in your pocket.
+
+[s18] Q  Key takeaways
+  BIG: Oscillators keep time, **waves** carry energy and data, **light** bends and interferes, and **quantum** energy levels make semiconductors possible.
+  cap: Next: CPSC 131, Data Structures.
+  beat0:
+     0: To recap.
+     1: Simple harmonic motion describes every oscillator, from quartz clocks to L C circuits.
+     2: Waves obey v equals f lambda, superpose, and form standing waves and harmonics.
+     3: Light refracts, reflects, and interferes, which gives us fiber optics, cameras and the limits of chip manufacturing.
+     4: Relativity keeps GPS accurate.
+     5: And quantum physics, with photons and discrete energy levels, explains LEDs, solar cells, flash memory and the semiconductors at the heart of computing.
+     6: Next, back to software, with data structures.
+     7: See you there.

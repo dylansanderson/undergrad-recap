@@ -1,0 +1,219 @@
+﻿#### L30_egcp471: EGCP 471 Senior Design II
+
+[s0] TITLE  Senior Design II
+  img: a:robot_arm
+  beat0:
+     0: Welcome to E G C P four seventy one, senior design two, where the plan from the first semester becomes a working system.
+     1: We'll follow the robotic arm assistant example through its hardest parts: teaching a small computer to recognize objects in a camera image, working out how to move an arm's joints to reach a point, controlling the motors, and integrating everything so it works on demo day.
+     2: Along the way, you'll see nearly every earlier course reappear: programming, embedded I O, signals, probability and linear algebra.
+
+[s1] V  Object detection with Haar cascades
+  img: fig:haar / fig:integral
+  • Haar feature: bright region minus dark region
+  • Integral image: any rectangle sum in 4 lookups
+  • Cheap enough for a Raspberry Pi in real time
+  • Viola–Jones (2001): the original real-time face detector
+  (pen marks: 11 )
+  beat0:
+     0: One classic, lightweight way to detect objects is the Viola Jones method, published in two thousand one as the first real time face detector, and available in OpenCV as Haar cascades.
+     1: It's built from Haar like features: rectangles where you add up the pixels under the white part and subtract the pixels under the black part.
+     2: An edge feature responds to a brightness change, a line feature to a thin stripe.
+     3: In a twenty four by twenty four pixel window there are around one hundred sixty thousand possible features of different sizes and positions.
+  beat1:
+     0: Computing all those sums directly would be far too slow, so the method uses a trick called the integral image.
+     1: Each entry stores the sum of every pixel above and to the left.
+     2: Then the sum of any rectangle, of any size, takes just four lookups: bottom right, minus top right, minus bottom left, plus top left.
+     3: Here, the blue two by two block sums to seven: the highlighted entries give fourteen, minus three, minus five, plus one, which is seven.
+     4: Four lookups, for a rectangle of any size.
+     5: That's what makes Haar features cheap enough to run on a Raspberry Pi in real time.
+
+[s2] WB  Worked example: a rectangle sum in four lookups
+  step0 board+: need: sums of rectangles, fast || PEN None
+     0: Haar features need the sum of pixels inside rectangles, millions of times per frame.
+     1: Here's a tiny four by four image.
+  step1 board+: ii(r, c) = sum above and left || PEN None || PEN ('underline',) on sum above and left || ii(2, 2) = 11 || PEN ('circle',) on ii(2, 2) = 11
+     0: The integral image stores, at each cell, the sum of everything above and to the left, including the cell itself.
+     1: It's built in one pass.
+     2: For example, the cell in row two, column two holds one plus two plus one, plus zero plus one plus three, plus two plus one plus zero: eleven.
+  step2 board+: PEN None || 11 − 4 − 3 + 1 = 5
+     0: Now the blue rectangle, rows one and two, columns one and two.
+     1: Take the corner value eleven, subtract the strip above it, four, subtract the strip to its left, three, and add back the overlap we subtracted twice, one.
+     2: Eleven minus four minus three plus one: five.
+  step3 board+: check: 1 + 3 + 1 + 0 = 5 || PEN ('check',) on check: 1 + 3 + 1 + 0 = 5 || always 4 lookups, any size || PEN ('underline',) on always 4 lookups
+     0: Check by adding the blue pixels directly: one plus three plus one plus zero, five.
+     1: It matches.
+     2: And the cost is four lookups whether the rectangle is two pixels or two hundred thousand.
+     3: That's what made real-time detection possible on our small computer.
+
+[s3] V  AdaBoost and the attentional cascade
+  img: fig:cascade
+  • AdaBoost picks a few strong features from ~160,000
+  • Cascade: cheap early stages reject most windows
+  • Rates multiply: 0.995¹¹ ≈ 95% detection
+  • 0.44¹¹ ≈ 1.2 × 10⁻⁴ false alarms per window
+  (pen marks: 6 )
+  beat0:
+     0: Training uses AdaBoost, a machine learning algorithm that picks, out of all those features, the handful that best separate the object from the background, and weights each one.
+     1: Each feature alone is a weak classifier, barely better than guessing.
+     2: Combined, they form a strong one.
+  beat1:
+     0: The second idea is the cascade.
+     1: Most windows in an image obviously contain nothing, so the first stage uses just a few features to throw them out quickly.
+     2: Only windows that pass go on to the next, more thorough stage, and so on.
+     3: On average, very little work is spent per window.
+  beat2:
+     0: Here's where probability returns.
+     1: If each of eleven stages keeps at least ninety nine point five percent of real objects, the overall detection rate is point nine nine five to the eleventh, about ninety five percent.
+  beat3:
+     0: And if each stage lets through at most forty four percent of background windows, the overall false alarm rate is point four four to the eleventh, about one in eight thousand windows.
+     1: Those are exactly the kinds of parameters a team sets when training a cascade for a tool like a stapler or a screwdriver.
+
+[s4] V  Data is everything
+  img: a:rpi_camv2 / fig:params
+  • Positives: the object at many angles, lights, backgrounds
+  • Negatives: the SAME environment without the object
+  • Skip near-duplicate and blurry frames
+  • Hard-negative mining: add false positives back as negatives
+  (pen marks: 4 )
+  beat0:
+     0: In practice, the quality of the training data matters more than any algorithm setting.
+     1: Positive images should show the object from many angles, distances, lighting conditions and backgrounds.
+     2: Negative images should come from the same environment the robot will work in, just without the object, so the detector learns what the desk, the walls and the clutter look like.
+     3: A practical trick when collecting data from video: save only every tenth frame to avoid near duplicates, and automatically reject blurry frames using a sharpness measure, the variance of the image's Laplacian.
+     4: A typical successful cascade might use around twelve hundred positive and a thousand negative samples.
+     5: And the fastest way to improve a detector is hard negative mining: run it, collect the images where it fired falsely, and add them back as negatives.
+  beat1:
+     0: At run time, three parameters of OpenCV's detect multi scale function control the trade off.
+     1: The scale factor sets how finely object sizes are scanned.
+     2: Min neighbors requires several overlapping detections to agree, trading misses for fewer false alarms.
+     3: Min size ignores tiny boxes.
+     4: Exposing them on sliders and tuning while watching the live camera feed is far faster than guessing.
+
+[s5] CLIP  The real detector, running live
+  • Top: the run-time sliders (scale, min neighbors, min area, brightness)
+  • Magenta box: the stapler cascade
+  • Green box: the screwdriver cascade
+  • White box: a parts bag
+  • Watch for a box that drops out for a frame: a miss
+  cap: Footage from this course's project: the trained cascades on a live camera feed.
+  beat0:
+     0: Here's real footage from this course's project: the trained cascades running live on a webcam feed.
+     1: At the top are the run time tuning sliders we just talked about: the scale factor, min neighbors, a minimum box area, and a brightness adjustment.
+     2: Below, every cascade that fires draws a labeled box: magenta for the stapler, green for the screwdriver, and white for a small parts bag.
+     3: Now watch the boxes closely as the camera moves.
+     4: Every so often a box disappears for a frame or two, a missed detection, and then comes right back.
+     5: That's completely normal for a cascade, and it's why the arm's software should act only when a detection holds for several frames in a row, rather than trusting any single frame.
+
+[s6] V  Finding the object: scan and center
+  img: fig:scan
+  • Sweep the base servo 0° → 180° in small steps
+  • Run the detector at each step
+  • On a hit: draw the box, center it in the frame
+  • Visual servoing: move until the object is centered
+  (pen marks: 4 )
+  beat0:
+     0: With a working detector, the arm needs to find the object.
+     1: A simple, robust strategy: sweep the base servo across its range in small steps, say three degrees, grabbing a frame and running the detector at each position.
+     2: When the stapler cascade fires, stop, draw a labeled box on the display, and adjust the base until the object sits in the center of the image.
+     3: Moving until a visual measurement reaches a target is called visual servoing, and it avoids needing a precise camera calibration.
+     4: A more advanced approach calibrates the camera, measuring its focal length and lens distortion, and computes a fixed transformation from camera coordinates to arm coordinates, so a pixel position converts directly into a three dimensional target.
+
+[s7] V  Inverse kinematics: where do the joints go?
+  img: fig:ik
+  • Forward: angles → hand position (trig)
+  • Inverse: position → angles (law of cosines)
+  • Two solutions: elbow up / elbow down
+  • Real arms: Denavit–Hartenberg + 4×4 matrices
+  (pen marks: 7 )
+  beat0:
+     0: Forward kinematics asks: given the joint angles, where is the hand?
+     1: For a two link arm it's just trigonometry: x equals L one cosine theta one, plus L two cosine of theta one plus theta two, and similarly for y.
+  beat1:
+     0: The robot needs the opposite: given a target, what angles reach it?
+     1: That's inverse kinematics.
+     2: For two links, the law of cosines gives the elbow angle directly, and then a couple of arctangents give the shoulder angle.
+  beat2:
+     0: There are usually two solutions, elbow up and elbow down.
+     1: For links of ten and eight centimeters and a target at twelve, six, elbow up puts the shoulder at about sixty three degrees with the elbow bent minus eighty four, while elbow down uses about minus ten and plus eighty four.
+     2: The software picks the one that avoids the table and stays within the servos' ranges.
+  beat3:
+     0: Real arms with five or six joints use Denavit Hartenberg parameters and four by four homogeneous transformation matrices, multiplying one matrix per joint, the linear algebra from math two fifty B in action.
+
+[s8] WB  Worked example: solving a two-link arm
+  step0 board+: $L_1 = L_2 = 10$,  target $(12, 8)$ || PEN ('underline',) on target $(12, 8)$ || PEN None
+     0: Our arm has two links, each ten centimeters.
+     1: The camera says the cup is at x equals twelve, y equals eight.
+     2: What joint angles put the hand there?
+  step1 board+: $\cos\theta_2 = \frac{x^2 + y^2 - L_1^2 - L_2^2}{2L_1L_2}$ || $= \frac{208 - 200}{200} = 0.04$ || PEN None || PEN ('circle',) on 208 - 200
+     0: The elbow angle comes from the law of cosines.
+     1: Cosine theta two equals x squared plus y squared, minus L one squared minus L two squared, over two L one L two.
+     2: That's two hundred eight minus two hundred, over two hundred: point zero four.
+  step2 board+: $\theta_2 = \pm 87.7°$  so pick elbow-up: $-87.7°$ || PEN None || PEN ('underline',) on elbow-up
+     0: So theta two is plus or minus eighty seven point seven degrees: elbow down or elbow up.
+     1: We choose the elbow up solution, minus eighty seven point seven, to reach over the table.
+  step3 board+: $\theta_1 = \mathrm{atan2}(y, x) - \mathrm{atan2}(L_2\sin\th || $= 33.7° + 43.9° = 77.5°$ || PEN None || forward check: (12.0, 8.0) || PEN ('check',) on forward check
+     0: Then the shoulder angle: theta one equals the angle to the target, minus the angle the second link adds.
+     1: That's thirty three point seven degrees minus negative forty three point nine: seventy seven point five degrees.
+     2: Always check with forward kinematics: these angles land exactly at twelve, eight.
+
+[s9] V  Moving the joints: servos and PID control
+  img: a:servo / fig:pid
+  • Hobby servo: 1–2 ms pulse every 20 ms sets the angle
+  • Inside: a motor + a position sensor + a controller
+  • PID: proportional + integral + derivative
+  • Move smoothly; big jumps cause current spikes and wobble
+  (pen marks: 4 )
+  beat0:
+     0: Small arms use hobby servos like this one.
+     1: As we saw with timers, a servo reads a pulse every twenty milliseconds: about one millisecond means one end of travel, two milliseconds the other.
+     2: Inside is a small motor, a gearbox, a potentiometer that measures the actual angle, and a little controller that drives the motor until the measured angle matches the commanded one.
+  beat1:
+     0: That controller, and almost every feedback controller in engineering, is a variation of P I D.
+     1: The proportional term pushes harder the bigger the error.
+     2: Alone, it may leave a steady error or, with high gain, overshoot and oscillate, as the gray and red curves show.
+     3: The integral term accumulates past error and removes any steady offset.
+     4: The derivative term reacts to how fast the error is changing and damps the overshoot.
+     5: Tuned well, the green curve: fast, with little overshoot and no steady error.
+     6: In software, command joint moves in small increments rather than big jumps, which keeps the arm smooth and avoids current spikes.
+
+[s10] WB  Worked example: from an angle to a servo pulse
+  step0 board+: pulse $= 1\ \mathrm{ms} + \frac{\theta}{180°}\times 1\ \math || PEN None
+     0: A hobby servo reads a pulse every twenty milliseconds.
+     1: A one millisecond pulse means zero degrees, two milliseconds means one hundred eighty degrees, and in between is linear.
+  step1 board+: $45°$:  $1 + 0.25 = 1.25\ \mathrm{ms}$ || PEN None || PEN ('circle',) on 1.25
+     0: So the forty five degree joint angle we need is one plus forty five over one eighty, one point two five milliseconds.
+  step2 board+: 1 MHz timer: period 20000, compare 1250 || ramp the compare value: smooth motion || PEN None || PEN ('underline',) on compare 1250
+     0: On a timer ticking at one megahertz, one tick is a microsecond.
+     1: The period register gets twenty thousand, and the compare register gets twelve hundred fifty.
+     2: To move smoothly, don't jump straight there: step the compare value a little each period, so the arm doesn't jerk or brown out the supply.
+
+[s11] V  Integration and testing: where projects really fail
+  img: a:robot_arm / fig:brownout / a:rpi_camv2 / a:rpi_cam
+  • Problems live at the interfaces
+  • Servo current spikes brown out the computer
+  • Lighting changes break the detector
+  • Integrate one subsystem at a time; keep a demo video
+  beat0:
+     0: Most capstone problems don't appear inside a subsystem.
+     1: They appear when subsystems meet.
+  beat1:
+     0: The arm moves, the servos draw a surge of current, the supply voltage sags, and the Raspberry Pi reboots.
+     1: The fix is a separate, adequately rated servo supply with a shared ground.
+  beat2:
+     0: The detector works perfectly at home, then fails in the demo room under different lighting.
+     1: The fix is training data from varied lighting, and testing early in the real location.
+  beat3:
+     0: So test each subsystem alone, integrate one at a time, keep a known good version in version control, and record demo videos as you go, so a last minute failure doesn't erase the proof that it worked.
+     1: Today, convolutional neural network detectors like YOLO, running on small accelerators, are far more robust than Haar cascades, and would be the natural upgrade for a project like this.
+
+[s12] Q  Key takeaways
+  BIG: A capstone ties it all together: **vision** finds the object, **kinematics** plans the reach, **control** moves the joints — and **integration testing** makes it real.
+  cap: Next: the big picture — how every course fits together.
+  beat0:
+     0: To recap.
+     1: Haar cascades detect objects cheaply using rectangle features, integral images, AdaBoost and a cascade whose rates multiply.
+     2: Good, varied training data matters more than anything else.
+     3: The arm scans and centers the object, inverse kinematics turns a target into joint angles, and servos with P I D control move the joints.
+     4: And integration testing, at the interfaces, is where projects succeed or fail.
+     5: In the final lecture, we'll step back and see how every course in the degree fits together.
+     6: See you there.

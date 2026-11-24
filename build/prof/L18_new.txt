@@ -1,0 +1,327 @@
+﻿#### L18_egee323: EGEE 323 Engineering Probability & Statistics
+
+[s0] TITLE  Engineering Probability & Statistics
+  img: a:galton
+  beat0:
+     0: Welcome to E G E E three twenty three, engineering probability and statistics.
+     1: This board, called a Galton board, drops balls through a field of pins.
+     2: Each ball bounces randomly, yet together they pile up into a smooth bell curve, every time.
+     3: That's the magic of probability: individual events are unpredictable, but large numbers of them behave very predictably.
+     4: Engineers rely on that for noise in circuits, error rates in communication, manufacturing yield, reliability and machine learning.
+
+[s1] V  Sample spaces and the axioms
+  img: a:dice / fig:twodice
+  • Sample space S: all possible outcomes
+  • Event: a subset of S
+  • Axioms: P ≥ 0, P(S) = 1, disjoint events add
+  • P(Aᶜ) = 1 − P(A) · P(A ∪ B) = P(A) + P(B) − P(A ∩ B)
+  (pen marks: 1 )
+  beat0:
+     0: Probability starts with a sample space, the set of all possible outcomes of an experiment.
+     1: Roll two dice, and there are thirty six equally likely outcomes.
+     2: An event is any subset of outcomes, like the sum is seven.
+  beat1:
+     0: Everything follows from three axioms: probabilities are never negative, the whole sample space has probability one, and probabilities of events that can't happen together add up.
+     1: From those, we get rules like the complement, one minus P of A, and inclusion exclusion from discrete math.
+     2: Six of the thirty six outcomes sum to seven, so the probability of rolling a seven is one sixth, the most likely sum.
+
+[s2] V  Conditional probability and Bayes’ rule
+  img: fig:bayes
+  • P(A | B) = P(A ∩ B) / P(B)
+  • Bayes: P(A | B) = P(B | A) P(A) / P(B)
+  • 2% defective, test catches 95%, false alarm 10%
+  • A flagged chip is bad only ≈ 16% of the time!
+  (pen marks: 8 )
+  beat0:
+     0: Conditional probability is the probability of A given that we know B happened: the probability of both, divided by the probability of B.
+     1: Knowing B shrinks the sample space.
+  beat1:
+     0: Bayes' rule flips a conditional around: the probability of A given B equals the probability of B given A, times the probability of A, divided by the probability of B.
+     1: It's how you update a belief after seeing evidence.
+  beat2:
+     0: Here's an engineering example that surprises almost everyone.
+     1: Two percent of chips from a production line are defective.
+     2: A quick test catches ninety five percent of bad chips, but it also falsely flags ten percent of good ones.
+     3: A chip gets flagged.
+     4: What's the chance it's actually bad?
+  beat3:
+     0: Count it out with a thousand chips.
+     1: Twenty are bad, and the test flags nineteen of them.
+     2: Nine hundred eighty are good, and the test falsely flags ninety eight.
+     3: So a hundred seventeen chips are flagged, and only nineteen are actually bad: about sixteen percent.
+     4: When the condition is rare, even a good test produces mostly false alarms.
+     5: The same math applies to medical tests, spam filters, and fraud detection.
+
+[s3] WB  Worked example: should you trust the alarm?
+  step0 board+: $P(F) = 0.05$,  $P(A|F) = 0.9$,  $P(A|\mathrm{ok}) = 0.1$ || PEN None
+     0: A factory machine develops a fault five percent of the time.
+     1: A sensor sounds an alarm for ninety percent of real faults, but it also false alarms ten percent of the time when nothing is wrong.
+     2: The alarm just went off.
+     3: What's the probability there's really a fault?
+     4: Draw a tree.
+     5: First branch: fault, five percent, or okay, ninety five percent.
+  step1 board+: PEN None || $P(F \cap A) = 0.05 \times 0.9 = 0.045$ || PEN ('underline',) on $P(F \cap A) || $P(\mathrm{ok} \cap A) = 0.95 \times 0.1 = 0.095$ || PEN ('underline',) on $P(\mathrm{ok} \cap A)
+     0: Second branch: alarm or quiet.
+     1: Multiply along each path.
+     2: Fault and alarm: point zero five times point nine, point zero four five.
+     3: Okay and alarm: point nine five times point one, point zero nine five.
+  step2 board+: PEN None || $P(A) = 0.045 + 0.095 = 0.14$ || PEN ('circle',) on $P(A) = 0.045 || $P(F|A) = \frac{0.045}{0.14} \approx 0.32$
+     0: Now we know an alarm happened, so only the two alarm paths matter.
+     1: Together they total point one four.
+     2: The fault path is point zero four five of that.
+  step3 board+: rare events: most alarms are false || PEN ('underline',) on rare events
+     0: Only thirty two percent!
+     1: Most alarms are false, because faults are rare, so false alarms from the many healthy cases outnumber the true ones.
+     2: This exact reasoning appears in medical tests, spam filters, and the object detector in senior design.
+
+[s4] V  Independence
+  img: fig:reliab
+  • Independent: P(A ∩ B) = P(A) P(B)
+  • Knowing B tells you nothing about A
+  • NOT the same as mutually exclusive!
+  • Reliability: 3 independent parts at 99% → 0.99³ ≈ 97%
+  (pen marks: 5 )
+  beat0:
+     0: Two events are independent if the probability of both equals the product of their probabilities.
+     1: Knowing that one happened tells you nothing about the other, like two separate dice.
+  beat1:
+     0: Equivalently, the conditional probability of A given B is just P of A.
+  beat2:
+     0: A common mistake: independent is not the same as mutually exclusive.
+     1: If two events can't happen together and both are possible, then knowing one happened tells you the other definitely didn't.
+     2: That's maximum dependence.
+  beat3:
+     0: Independence makes reliability calculations easy.
+     1: A system that works only if all three of its independent components work, each with ninety nine percent reliability, works with probability point nine nine cubed, about ninety seven percent.
+     2: Add more components in series and reliability drops quickly.
+     3: Put them in parallel, with redundancy, and it rises.
+
+[s5] V  Bernoulli trials and the binomial distribution
+  img: fig:binomial
+  • n independent trials, success probability p
+  • P(k successes) = C(n,k) pᵏ (1−p)ⁿ⁻ᵏ
+  • Batch of 20 chips, 5% defect rate → P(no defects) ≈ 36%
+  • Large n, small p → Poisson with λ = np
+  (pen marks: 4 )
+  beat0:
+     0: Repeat an experiment n times independently, each with the same success probability p.
+     1: The number of successes follows the binomial distribution.
+     2: The formula combines the counting from discrete math, n choose k ways to pick which trials succeed, with the probability of each such sequence.
+  beat1:
+     0: Example: chips are defective with probability five percent.
+     1: In a batch of twenty, what's the probability of zero defects?
+     2: Point nine five to the twentieth, about thirty six percent.
+     3: Exactly one defect: about thirty eight percent.
+     4: The chart shows the full distribution.
+  beat2:
+     0: When n is large and p is small, the binomial is well approximated by the Poisson distribution, with parameter lambda equals n p.
+     1: Poisson describes counts of rare events in an interval: packets arriving per millisecond, photons hitting a sensor pixel, or radiation induced bit flips in memory per day.
+
+[s6] WB  Worked example: bit errors in a 10-bit message
+  step0 board+: $n = 10$,  $p = 0.1$ || $P(k) = \binom{10}{k}\,0.1^k\,0.9^{10-k}$ || PEN None
+     0: A noisy link flips each bit independently with probability point one.
+     1: We send ten bits.
+     2: What's the chance of at most one error?
+     3: The number of errors follows the binomial distribution.
+  step1 board+: $P(0) = 0.9^{10} \approx 0.349$ || PEN ('underline',) on $P(0) = 0.9^{10} || $P(1) = 10(0.1)(0.9^9) \approx 0.387$ || PEN None || PEN ('underline',) on $P(1) = 10
+     0: Zero errors: every bit survives, point nine to the tenth, about point three four nine.
+     1: Exactly one error: ten choices for which bit fails, times point one, times point nine to the ninth, about point three eight seven.
+  step2 board+: $P(k \leq 1) \approx 0.736$ || mean $= np = 1$ error || PEN ('circle',) on mean $= np
+     0: Add them: about seventy four percent.
+     1: So one time in four, the message has two or more errors.
+     2: The expected number of errors is n p, exactly one.
+     3: That's why real links add error correcting codes, like the Hamming code you'll meet in hardware security.
+
+[s7] V  Random variables, PDFs and CDFs
+  img: fig:pdfcdf
+  • Random variable: a number assigned to each outcome
+  • CDF F(x) = P(X ≤ x): rises from 0 to 1
+  • PDF f(x) = dF/dx: area under it = probability
+  • Mean E[X] = ∫ x f(x) dx · variance σ² = E[X²] − E[X]²
+  (pen marks: 4 )
+  beat0:
+     0: A random variable assigns a number to each outcome: the voltage of a noisy signal, the lifetime of a component, the number of errors in a packet.
+  beat1:
+     0: The cumulative distribution function, or CDF, gives the probability that X is at most x.
+     1: It rises from zero to one.
+  beat2:
+     0: Its derivative is the probability density function, or PDF.
+     1: For continuous variables, probability is area under the PDF.
+     2: The probability that X lands between a and b is the integral from a to b.
+     3: This is where Calculus pays off.
+  beat3:
+     0: Two numbers summarize a distribution.
+     1: The mean, or expected value, is the integral of x times f of x: the center of mass.
+     2: The variance measures spread: the expected squared distance from the mean, and its square root is the standard deviation, sigma.
+
+[s8] WB  Worked example: mean and variance, by hand
+  step0 board+: die:  $E[X] = \sum x\,p(x) = \frac{1+2+3+4+5+6}{6} = 3.5$ || PEN ('circle',) on = 3.5$
+     0: Let's actually compute an expected value, starting with a fair die.
+     1: Multiply each outcome by its probability and add: one through six, each times one sixth.
+     2: That's twenty one sixths, three point five.
+  step1 board+: E[X] = long-run average, not a likely outcome
+     0: Notice you can never roll a three point five.
+     1: The expected value is the long run average, the balance point of the distribution, not a value you expect to see on any single roll.
+  step2 board+: uniform on $[0,2]$:  $f(x) = \frac{1}{2}$ || $E[X] = \int_0^2 x\cdot\frac{1}{2}\,dx = 1$ || $E[X^2] = \int_0^2 x^2\cdot\frac{1}{2}\,dx = \frac{4}{3}$
+     0: Now a continuous one: X uniform between zero and two.
+     1: The density is one half across that range, so the total area is one.
+     2: The mean is the integral of x times one half, from zero to two: one.
+     3: Then E of X squared is the integral of x squared times one half: four thirds.
+  step3 board+: $\sigma^2 = \frac{4}{3} - 1^2 = \frac{1}{3}$,   $\sigma \app || $f(x)$ can exceed 1:  only AREA is probability || PEN ('underline',) on $f(x)$ can exceed 1
+     0: Variance is E of X squared minus the mean squared: four thirds minus one, one third.
+     1: The standard deviation is its square root, about point five eight.
+     2: And one warning: a density can be bigger than one.
+     3: Uniform on zero to one half has height two.
+     4: Only areas are probabilities.
+
+[s9] V  The Gaussian (normal) distribution
+  img: fig:gauss
+  • Bell curve with mean μ and standard deviation σ
+  • 68% within 1σ, 95% within 2σ, 99.7% within 3σ
+  • Standardize: z = (x − μ)/σ, then use tables or Q(z)
+  • Thermal noise, measurement error, manufacturing spread
+  (pen marks: 5 )
+  beat0:
+     0: The most important distribution in engineering is the Gaussian, or normal, distribution: the bell curve, set by its mean and its standard deviation.
+  beat1:
+     0: Memorize the 68, 95, 99.7 rule.
+     1: About sixty eight percent of values fall within one sigma of the mean, ninety five percent within two sigma, and ninety nine point seven percent within three.
+  beat2:
+     0: For any other question, standardize: subtract the mean and divide by sigma to get z, then look up the probability in a table or with the Q function, which gives the tail area beyond z.
+  beat3:
+     0: Example: one kilohm resistors with a one percent tolerance, modeled with sigma of ten ohms.
+     1: Ninety five percent fall between nine hundred eighty and one thousand twenty ohms.
+     2: Thermal noise in every resistor, measurement errors, and variations in transistor thresholds across a wafer are all approximately Gaussian, which is why this curve is everywhere.
+
+[s10] WB  Worked example: resistor tolerances
+  step0 board+: $\mu = 1000\ \Omega$,   $\sigma = 20\ \Omega$ || PEN None
+     0: A factory makes one kilohm resistors.
+     1: The actual values are Gaussian, with a mean of one thousand ohms and a standard deviation of twenty ohms.
+  step1 board+: $980$ to $1020$: within $1\sigma$  so 68% || PEN None || PEN ('circle',) on within $1\sigma$
+     0: What fraction lands between nine eighty and ten twenty?
+     1: That's within one standard deviation of the mean, which is always about sixty eight percent.
+  step2 board+: $z = \frac{1040 - 1000}{20} = 2$ || PEN ('circle',) on $z = \frac{1040 || $P(R > 1040) = P(Z > 2) \approx 2.3\%$ || PEN None
+     0: What fraction is above ten forty?
+     1: Standardize: z equals x minus the mean over sigma, forty over twenty, two.
+     2: The area beyond z equals two, from a table or a calculator, is about two point three percent.
+  step3 board+: 23 of every 1000 boards out of spec
+     0: So if a design breaks above ten forty ohms, about twenty three out of every thousand boards would fail.
+     1: Engineers use exactly this calculation to choose component tolerances, and to decide between one percent and five percent parts.
+
+[s11] V  Why the bell curve is everywhere: the Central Limit Theorem
+  img: a:galton / fig:clt
+  • Add many independent random effects…
+  • …and the sum becomes Gaussian, whatever the originals were
+  • Sum of 12 uniforms ≈ Gaussian already
+  • Noise = sum of countless tiny random kicks
+  (pen marks: 3 )
+  beat0:
+     0: Why does the Gaussian show up everywhere?
+     1: Look at the Galton board.
+     2: Each ball's final position is the sum of many small random left or right bounces.
+     3: And the pile is a bell curve.
+  beat1:
+     0: The central limit theorem says that the sum of many independent random effects is approximately Gaussian, no matter what each individual effect's distribution looks like.
+     1: On the left, a single uniform random number is flat.
+     2: Add two and you get a triangle.
+     3: Add twelve, and it's already almost indistinguishable from a bell curve.
+     4: Electrical noise is the combined effect of enormous numbers of electrons jiggling randomly, so it's Gaussian.
+     5: Measurement error is the sum of many small disturbances, so it's Gaussian too.
+
+[s12] V  Reliability: the exponential distribution
+  img: a:probe_card / fig:exponential
+  • Constant failure rate λ → lifetime is exponential
+  • Mean time to failure MTTF = 1/λ
+  • P(survive past t) = e^(−λt)
+  • Memoryless — plus “burn-in” to weed out early failures
+  (pen marks: 4 )
+  beat0:
+     0: Reliability engineering asks how long things last.
+     1: Chips are tested at the wafer level with probe cards like this one, and samples are stress tested to estimate failure rates.
+     2: When a part fails at a constant rate, lambda, its lifetime follows the exponential distribution.
+  beat1:
+     0: The mean time to failure is one over lambda, and the probability of surviving past time t is e to the minus lambda t.
+     1: Surprisingly, only about thirty seven percent of parts survive past their mean time to failure, and only thirteen and a half percent past twice that.
+     2: The exponential is also memoryless: a part that has worked for a year is no more likely to fail next week than a new one.
+     3: Real electronics also have a burst of early failures, called infant mortality, so manufacturers run new parts hot for a while, a process called burn in, to weed out the weak ones before shipping.
+
+[s13] V  Two random variables: joint distributions and correlation
+  img: fig:joint
+  • Joint PDF f(x, y); marginals by integrating out
+  • Independent ⇔ f(x, y) = f(x) f(y)
+  • Covariance and correlation ρ ∈ [−1, 1]
+  • Var(X + Y) = Var X + Var Y + 2 Cov(X, Y)
+  (pen marks: 4 )
+  beat0:
+     0: With two random variables, we describe them together with a joint PDF.
+     1: Integrate out one variable to get the other's own distribution, called the marginal.
+  beat1:
+     0: They're independent exactly when the joint PDF factors into the product of the marginals.
+  beat2:
+     0: Correlation measures how they move together, from minus one to plus one.
+     1: On the left, rho is zero: a round cloud, no relationship.
+     2: In the middle, rho of point seven: when one is high, the other tends to be high.
+     3: On the right, rho of minus point nine: a strong inverse relationship.
+     4: Remember that correlation measures linear relationship only, and it doesn't imply causation.
+  beat3:
+     0: And for sums: the variance of X plus Y is the sum of the variances plus twice the covariance.
+     1: For independent noise sources, variances simply add, so two independent noise sources with equal power give root two times the noise voltage, not double.
+
+[s14] V  Sums of random variables: convolution
+  img: fig:conv
+  • PDF of X + Y (independent) = f_X ∗ f_Y
+  • Uniform + uniform = triangle
+  • Same operation as LTI systems in Signals & Systems
+  • Repeated convolution → Gaussian (CLT again)
+  (pen marks: 4 )
+  beat0:
+     0: What's the distribution of the sum of two independent random variables?
+     1: It's the convolution of their PDFs: slide one across the other, multiply and integrate.
+  beat1:
+     0: Two uniform variables on zero to one add up to a triangle on zero to two, the same shape you saw with the dice and the central limit theorem demo.
+  beat2:
+     0: Convolution is exactly the operation that describes linear time invariant systems in signals and systems, where the output is the input convolved with the impulse response.
+     1: So you'll see it again very soon.
+  beat3:
+     0: Convolve many distributions together, and the result tends to a Gaussian.
+     1: That's the central limit theorem from a different angle.
+
+[s15] V  Engineering example: bit errors in noisy channels
+  img: fig:snr
+  • Send 0 → 0 V, 1 → A volts; noise is Gaussian (σ)
+  • Receiver decides with a threshold at A/2
+  • P(error) = Q(A / 2σ)
+  • A = 4σ → 2.3% · A = 12σ → 1 in a billion
+  (pen marks: 7 )
+  beat0:
+     0: Let's combine everything into the core problem of digital communication.
+     1: A transmitter sends zero volts for a zero and A volts for a one.
+     2: The channel adds Gaussian noise with standard deviation sigma.
+     3: So a received zero is a bell curve centered at zero, and a received one is a bell curve centered at A.
+  beat1:
+     0: The receiver decides with a threshold halfway between, at A over two.
+  beat2:
+     0: An error happens when noise pushes a signal across the threshold, the red areas.
+     1: The probability is Q of A over two sigma: the tail of a Gaussian beyond a distance of A over two.
+  beat3:
+     0: If A is four sigma, the error rate is Q of two, about two point three percent: terrible.
+     1: Triple the signal to twelve sigma, and the error rate drops to about one in a billion.
+     2: That's why signal to noise ratio is everything in communications, and why a few extra decibels of signal can cut error rates by orders of magnitude.
+     3: Wi Fi, cellular, Ethernet and USB are all designed around exactly this calculation.
+
+[s16] Q  Key takeaways
+  BIG: Probability makes uncertainty **predictable**: Bayes updates beliefs, the **Gaussian** models noise, and **Q(z)** turns signal-to-noise into error rates.
+  cap: Next: EGCP 371, Signals & Systems — where convolution and transforms take center stage.
+  beat0:
+     0: To recap.
+     1: Probability rests on sample spaces and three axioms.
+     2: Conditional probability and Bayes' rule update beliefs, and base rates matter enormously.
+     3: Independence simplifies reliability calculations.
+     4: The binomial and Poisson distributions count successes and rare events.
+     5: PDFs and CDFs describe continuous random variables, and the mean and variance summarize them.
+     6: The Gaussian is everywhere because of the central limit theorem.
+     7: The exponential models lifetimes.
+     8: Sums of random variables convolve.
+     9: And noise plus a threshold gives you bit error rates.
+     10: Next, signals and systems.
+     11: See you there.

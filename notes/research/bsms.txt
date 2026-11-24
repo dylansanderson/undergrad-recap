@@ -1,0 +1,1029 @@
+ 
+ 
+ 
+BLENDED BACHELOR AND 
+MASTER OF SCIENCE 
+IN 
+COMPUTER ENGINEERING 
+ 
+Department of Electrical & Computer Engineering (ECE) 
+College of Engineering & Computer Science (ECS) 
+California State University, Fullerton (CSUF) 
+ 
+ 
+E-mail: eceoffice@fullerton.edu  
+ 
+Telephone: (657) 278-3013 
+ 
+https://www.fullerton.edu/ecs/ece/    
+ 
+  
+
+ 
+ 
+BLENDED BACHELOR AND MASTER OF SCIENCE IN 
+COMPUTER ENGINEERING 
+Electrical & Computer Engineering Department 
+ 
+Department Chair: Jidong Huang 
+ jhuang@fullerton.edu  
+BS-MS Advisor: Kenneth John Faller II 
+ jfaller@fullerton.edu  
+Office: E-100A 
+Email: eceoffice@fullerton.edu    
+Telephone: (657) 278-3013 
+Website: http://www.fullerton.edu/ecs/ece/    
+Faculty: Yu Bai, Susamma Barua, Maqsood 
+Chaudhry, David Cheng, Yoonsuk Choi, 
+Jaya Dofe,  Kenneth John Faller II , Kiran 
+George, Karim Hamidian, Jidong Huang, 
+Rakeshkumar Mahto, Ankita Mohapatra, 
+Pradeep Nair, Mostafa Shiva, Fleur Tehrani, 
+Michael Turi, Raman Unnikrishnan 
+ 
+
+ 
+ 
+ 
+COMPUTER ENGINEERING PROGRAM 
+BLENDED BACHELOR AND MASTER OF SCIENCE HANDBOOK 
+TABLE OF CONTENTS 
+INTRODUCTION ....................................................................................................................................................... 1 
+PROGRAM MISSION STATEMENT ...................................................................................................................... 1 
+PROGRAM EDUCATIONAL OBJECTIVES (PEOs) ............................................................................................ 1 
+STUDENT OUTCOMES ............................................................................................................................................ 2 
+ADVISEMENT ............................................................................................................................................................ 2 
+First-Time Freshmen ................................................................................................................................................. 2 
+Credit by Examination .............................................................................................................................................. 2 
+ADMISSION REQUIREMENTS .............................................................................................................................. 3 
+Admission Requirements for International Students ................................................................................................ 3 
+GRADUATE STANDING - CLASSIFIED ............................................................................................................... 3 
+PLACEMENT EXAMINATION ............................................................................................................................... 3 
+BS DEGREE REQUIREMENTS ............................................................................................................................... 3 
+Minimum Academic Requirements .......................................................................................................................... 4 
+BS Degree Requirements (56 units).......................................................................................................................... 4 
+MS Degree Requirements (18 units) ......................................................................................................................... 5 
+BS and MS Electives (9 units) .................................................................................................................................. 5 
+Requirements in Related Fields (31 units) ................................................................................................................ 6 
+General Education ..................................................................................................................................................... 6 
+Graduation Requirement (3 units)............................................................................................................................. 7 
+PROGRAM SCHEDULE PREPARATION ............................................................................................................. 8 
+Recommended Schedule ........................................................................................................................................... 8 
+OTHER INFORMATION .......................................................................................................................................... 9 
+Course Prerequisites and Corequisites ...................................................................................................................... 9 
+Changing Technical Elective Courses ...................................................................................................................... 9 
+Internships and Cooperative Education .................................................................................................................... 9 
+Petition for Coursework Overload ............................................................................................................................ 9 
+GPA Calculation for Repeated Courses .................................................................................................................... 9 
+Academic Notice and Disqualification ..................................................................................................................... 9 
+Student Clubs .......................................................................................................................................................... 10 
+COURSE DESCRIPTIONS ...................................................................................................................................... 10 
+Electrical and Computer Engineering (EGEC) Courses ......................................................................................... 10 
+Computer Science (CPSC) Courses ........................................................................................................................ 19 
+Related Courses for Computer Engineering Majors ............................................................................................... 22 
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  1 
+ 
+INTRODUCTION 
+The Blended Computer Engineering Bachelor of Science -to-Master of Science provides students 
+with a strong understanding of the hardware design and practical applications of computer -based 
+systems. Courses in contemporary and highly evolving computer engine ering areas provide 
+students with extensive hardware design and modeling experience, exposure to state -of-the-art 
+Electronic Design Automation (EDA) tools, and the ability to design and analyze today’s modern 
+computer systems. The program integrates pertinent science, mathematics, and engineering 
+courses in order to develop an engineer capable of designing and analyzing all aspects of modern 
+computer and embedded systems. The B.S.-M.S. is a unique and attractive program that provides 
+an accelerated route to  completing both bachelor’s and master’s degrees in four years, thereby 
+saving both time and resources. 
+In addition to the requirements for the major, students must meet all other university requirements 
+for the bachelor’s and master’s degrees. Please consult the Graduation Requirements for the 
+Bachelor’s Degree section in the catalog  for complete information. For university requirements 
+regarding the master’s degree, please consult the Graduate Regulations section in this catalog  for 
+complete information. 
+ The Bachelor of Science degree in Computer Engineering  (CpE) at CSUF is accredited by 
+the Engineering Accreditation Commission of ABET.  
+PROGRAM MISSION STATEMENT 
+The BS-MS program in Computer Engineering provides students with a strong theoretical and 
+practical foundation in both hardware and software aspects of computer -based systems. It 
+emphasizes engineering analysis, design, and implementation skills essential for solving real -
+world problems using computer engineering principles. The program prepares students for 
+dynamic, rewarding careers in computer engineering as well as for continued study in graduate 
+programs. 
+PROGRAM EDUCATIONAL OBJECTIVES (PEOs) 
+The Computer Engineering program has established the following Program Educational 
+Objectives (PEOs): 
+A. Technical Growth: Graduates will be successful in modern engineering practice, integrate 
+into the local and global workforce, and contribute to the economy of California and the 
+nation. 
+B. Professional Skills: Graduates will continue to demonstrate the professional skills 
+necessary to be competent employees, assume leadership roles, and enjoy career success 
+and satisfaction. 
+C. Professional Attitude and Citizenship: Graduates will become productive citizens with high 
+ethical and professional standards, make sound engineering or managerial decisions, and 
+have enthusiasm for the profession and professional growth. 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  2 
+ 
+STUDENT OUTCOMES 
+Upon completion of the degree program, graduates of the Computer Engineering program must 
+demonstrate: 
+1. An ability to identify, formulate, and solve complex engineering problems by applying 
+principles of engineering, science, and mathematics 
+2. An ability to apply engineering design to produce solutions that meet specified needs 
+with consideration of public health, safety, and welfare, as well as global, cultural, 
+social, environmental, and economic factors 
+3. An ability to communicate effectively with a range of audiences 
+4. An ability to recognize ethical and professional responsibilities in engineering 
+situations and make informed judgments, which must consider the impact of 
+engineering solutions in global, economic, environmental, and societal contexts 
+5. An ability to function effectively on a team whose members together provide 
+leadership, create a collaborative and inclusive environment, establish goals, plan tasks, 
+and meet objectives 
+6. An ability to develop and conduct appropriate experimentation, analyze and interpret 
+data, and use engineering judgment to draw conclusions 
+7. An ability to acquire and apply new knowledge as needed, using appropriate learning 
+strategies 
+ADVISEMENT 
+CSUF offers academic advisement to all students, providing the opportunity to review progress 
+toward your degree and discuss elective choices aligned with your career goals. 
+BS-MS students in the Computer Engineering (CpE) program are required to attend academic 
+advising at least once per academic year. To ensure compliance, advising holds are placed on 
+students’ accounts: those with CWIDs ending in an odd number during the Fall semester, and those 
+with CWIDs ending in an even number during the Spring semester. 
+For information on scheduling an appointment, visit the Electrical and Computer Engineering 
+(ECE) website. 
+Be sure to follow the course requirements for your catalog year—the year typically corresponding 
+to when you began college, as determined by the Admissions Office. In some cases, an advisor 
+may approve a later catalog year. 
+First-Time Freshmen 
+The College of Engineering and Computer Science (ECS) sponsors orientation sessions for first -
+year students that cover registration procedures, university policies, general education, and major 
+program requirements. Academic advisers are available to help students select their initial 
+coursework. Orientation sessions are offered during both the Fall and Spring semesters. For 
+specific dates, please contact the ECS Dean’s Office. 
+Credit by Examination 
+If you are unable to provide materials proving course equivalency, you may challenge a course by 
+examination. To do so: 
+1. Obtain a “Credit by Examination” form from the ECE Office. 
+2. Secure approval from both your advisor and the Department Chair. 
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  3 
+ 
+3. Register for the course and take the Challenge Exam before the third week of the semester 
+with the course instructor. 
+If you pass, the instructor will assign a grade of CR (Credit). If you fail, you must continue in the 
+course to earn credit through regular completion. 
+ADMISSION REQUIREMENTS 
+• Entering freshmen must be CSUF-eligible. 
+• Must have a minimum high school GPA (unweighted) of 3.0. 
+Admission Requirements for International Students 
+International students must meet all the requirements listed above in the Admission Requirements. 
+Verification of English proficiency and financial resources will be governed by the criteria 
+established by the university. 
+All international students must submit their TOEFL score before they can be admitted to the 
+program.  Please consult the Office of Admission’ s International Graduate Eligibility 
+Requirements website for current exam requirements. 
+GRADUATE STANDING - CLASSIFIED 
+Classified standing requires approval of a formal study plan by the computer engineering graduate 
+adviser and Office of Graduate Studies. Students enrolled in the program must meet with an adviser 
+prior to completing 13 units toward the MS degree to develop a study plan. 
+PLACEMENT EXAMINATION 
+Students with a working knowledge of a high- level programming language such as C++ are 
+encouraged to take the Computer Science placement examination to qualify for a CPSC 120A and 
+CPSC 120L waivers. 
+BS DEGREE REQUIREMENTS 
+Students in the program must complete all requirements for both the BS and MS degrees, totaling 
+138 semester units. The department recommends that students enroll in summer sessions during 
+their first year, completing a total of 11 units (see flowchart). 
+The 138 units required for the 4-Year Blended BS-MS Degree Program in Computer Engineering 
+include: 
+• 31 units of foundation courses in mathematics and science 
+• 45 units of General Education (GE) courses (24 unduplicated units) 
+• 74 units of required core courses in the major 
+• 9 units of elective courses 
+Courses are designated as follows: CPSC for computer science, EGEC for electrical and computer 
+engineering, and EGGN for general engineering. 
+The blended Computer Engineering BS-MS program allows students to apply 12 units toward both 
+the BS and MS degrees. 
+The following courses satisfy 9 units of required MS coursework and 9 units of BS electives: 
+EGEC 447, EGEC 463, and EGEC 520. 
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  4 
+ 
+The following course satisfies 3 units of required BS coursework and 3 units of MS electives: 
+EGEC 451. 
+Minimum Academic Requirements 
+For the BS degree, all courses must be passed with a grade of “C -” or better. For the MS degree, 
+all courses must be completed with a grade of “C” or better, and students must maintain an overall 
+GPA of 3.0 or higher. If students do not meet these requirem ents, they may continue in the 
+traditional 4 -year BS program in Computer Engineering, provided they meet the eligibility 
+requirements established for the undergraduate Computer Engineering program at CSUF. The 
+program also satisfies the upper-division writing requirement; written work must meet professional 
+standards, and students must pass the requirement with a grade of “C” (2.0) or better.  
+BS Degree Requirements (56 units) 
+All courses must be passed with a “C-” or better. See Note for exceptions. 
+• CPSC 120A* - Introduction to Programming Lecture (2) 
+• CPSC 120L* - Introduction to Programming Lab (1) 
+• CPSC 121A - Object Oriented Programming Lecture (2) 
+• CPSC 121L - Object-Oriented Programming Lab (1) 
+• CPSC 131 - Data Structures (3) 
+• EGEC 180 - Digital Logic and Computer Structures (3) 
+• EGEC 203 - Electric Circuits (3) 
+• EGEC 203L - Electric Circuits Laboratory (1) 
+• EGEC 280 - Microcontrollers (3) 
+• EGEC 281 - Designing with VHDL (2) 
+• EGEC 303 - Electronics (3) 
+• EGEC 303L - Electronics Laboratory (1) 
+• EGEC 323 - Engineering Probability and Statistics (3) 
+• EGEC 371 - Modeling and Simulation of Signals and Systems (3) 
+• EGEC 381 - Computer Design and Organization (4) 
+• EGEC 401 - Engineering Economics and Professionalism (3) 
+• EGEC 441† - Advanced Electronics for Computer Engineers (4) 
+• EGEC 446 - Advanced Digital Design using Verilog HDL (3) 
+• EGEC 450 - Embedded Processor Interfacing (4) 
+• EGEC 451 - Real-Time Operating Systems for Embedded Systems (3) 
+• EGEC 470 - Multidisciplinary Projects in Computer Engineering - I (2) 
+• EGEC 471† - Multidisciplinary Projects in Computer Engineering - II (2) 
+ 
+ 
+* CPSC 120A and CPSC 120L are the introductory programming courses required for the major. They serve as 
+prerequisites for CPSC 121A and CPSC 121L. These courses may be waived if the student has completed an 
+equivalent programming course or passes the placement exam administered by the Computer Science Department. If 
+CPSC 120A and CPSC 120L are waived, the student must take an additional course —approved by their academic 
+advisor—to fulfill the 120-unit degree requirement. 
+† Satisfies the upper -division writing requirement. Written work must meet professional standards. Must pass both 
+with a “C” (2.0) or better. 
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  5 
+ 
+MS Degree Requirements (18 units) 
+All courses must be passed with a “C” or better and a 3.0 overall GPA. 
+Required (12 units) 
+• EGEC 447 - Introduction to Cyber-Physical Systems Security (3) 
+• EGEC 463 - Current Topics in Computer Engineering (3) 
+• EGEC 520 - Advanced Computer Architecture (3) 
+• EGEC 540 - Computer Arithmetic Structures (3) 
+Culminating Experience (6 units) 
+• EGEC 598 - Thesis (1-6) (must take 6 units in 3-unit intervals) 
+or 
+• EGEC - 543 Advanced Cyber-Physical Systems Security (3) and 
+• EGEC 597 - Project (3) 
+or 
+• EGEC 543 - Advanced Cyber-Physical Systems Security (3) and 
+• EGEC 548 - Real-Time Audio and Language Processing (3) and 
+• Comprehensive Exam (0) 
+BS and MS Electives (9 units) 
+Courses not on the list may count as electives only with adviser approval. Master’s students must 
+select 500-level courses. 
+• CPSC 531 - Advanced Database Management (3) 
+• CPSC 535 - Advanced Algorithms (3) 
+• CPSC 541 - Systems and Software Standards and Requirements (3) 
+• CPSC 542 - Software Verification and Validation (3) 
+• CPSC 543 - Software Maintenance (3) 
+• CPSC 544 - Advanced Software Process (3) 
+• CPSC 545 - Software Design and Architecture (3) 
+• CPSC 546 - Modern Software Management (3) 
+• CPSC 547 - Software Measurement (3) 
+• CPSC 548 - Professional, Ethical and Legal Issues for Software Engineers (3) 
+• CPSC 551 - Operating Systems Design (3) 
+• CPSC 552 - Cyber Forensics (3) 
+• CPSC 558 - Advanced Computer Networking (3) 
+• CPSC 566 - Advanced Computer Graphics (3) 
+• CPSC 583 - Knowledge Representation and Reasoning (3) 
+• CPSC 585 - Neural Networks, Deep Learning, and Reinforcement Learning (3) 
+• EGEC 441 - Advanced Electronics for Computer Engineers (4) 
+• EGEC 446 - Advanced Digital Design using Verilog HDL (3) 
+• EGEC 447‡ - Introduction to Cyber-Physical Systems Security (3) 
+• EGEC 450‡ - Embedded Processor Interfacing (4) 
+ 
+‡ Not eligible as an elective for an MS degree 
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  6 
+ 
+• EGEC 451 - Real-Time Operating Systems for Embedded Systems (3) 
+• EGEC 456 - Introduction to Logic Design in Nanotechnology (3) 
+• EGEC 461 - Low Power Digital IC Design (3) 
+• EGEC 463‡ - Current Topics in Computer Engineering (3) 
+• EGEC 543§ - Advanced Cyber-Physical Systems Security (3) 
+• EGEC 548§ - Real-Time Audio and Language Processing (3) 
+• EGEC 510 - Optics and Electromagnetics in Communications (3) 
+• EGEC 518 - Digital Signal Processing I (3) 
+• EGEC 520 - Advanced Computer Architecture (3) 
+• EGEC 522 - Spread Spectrum Communications (3) 
+• EGEC 523A - VLSI and Nano Technology and Devices (3) 
+• EGEC 523B - CMOS VLSI Design (3) 
+• EGEC 526 - Digital Control Systems (3) 
+• EGEC 529 - Principles of Neural Systems (3) 
+• EGEC 537 - Satellite Communications (3) 
+• EGEC 557 - Microprogramming and Embedded Microprocessors (3) 
+• EGEC 558B - Microprocessors and Systems Applications II (3) 
+• EGEC 559 - Introduction to Robotics (3) 
+• EGEC 580 - Analysis of Random Signals (3) 
+Requirements in Related Fields (31 units) 
+All mathematics and science courses must be passed with a “C-“ or better to count as prerequisite 
+courses for engineering courses or as credit towards the degree. 
+Mathematics (19 units) 
+• MATH 150A - Calculus I (4) 
+• MATH 150B - Calculus II (4) 
+• MATH 250A - Calculus III (4) 
+• MATH 250B - Introduction to Linear Algebra and Differential Equations (4) 
+• MATH 170A - Mathematical Structures I (3) 
+Science (12 units) 
+• PHYS 225 - Fundamental Physics: Mechanics (3) 
+• PHYS 225L - Fundamental Physics: Laboratory (1) 
+• PHYS 226 - Fundamental Physics: Electricity and Magnetism (3) 
+• PHYS 226L - Fundamental Physics: Laboratory (1) 
+• PHYS 227 - Fundamental Physics: Waves, Optics, and Modern Physics (1-3) 
+• PHYS 227L - Fundamental Physics: Laboratory (1) 
+General Education 
+All students at Cal State Fullerton are expected to complete prescribed units of General Education 
+that are made up of courses outside of their chosen disciplines. Students seeking a degree in 
+Engineering have been provided exceptions from some of the Gene ral Education requirements. 
+ 
+§ Not eligible as MS elective if taken for culminating experience 
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  7 
+ 
+For this reason, it is important that students take the approved G.E. courses for Engineering majors 
+that are found in their Titan Degree Audit (TDA). Additionally, they should confirm the G.E. 
+courses that are required within their specific programs with their respective advisers. 
+Graduation Requirement (3 units) 
+• HONR 201B - Honors Seminar: American Institutions and Values since 1877 (3) 
+• POSC 100 - American Government (3)  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  8 
+ 
+PROGRAM SCHEDULE PREPARATION 
+Recommended Schedule 
+To complete your coursework on schedule, it is essential to plan ahead by creating a semester-by-
+semester timetable. The 4 -year curriculum flowchart for the Blended Bachelor and Master  of 
+Science in Computer Engineering, provided below, outlines a recommended timeline for 
+completing the program in four years. This flowchart is carefully designed to ensure that all 
+prerequisite requirements are satisfied in the proper sequence. 
+ 
+ 
+  
+
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  9 
+ 
+OTHER INFORMATION 
+The following provides important information and instructions that may be helpful throughout 
+your course of study. 
+Course Prerequisites and Corequisites 
+It is your responsibility to ensure that you have met all prerequisites and corequisites before 
+enrolling in a course. You will not receive credit for a course taken without meeting its 
+prerequisites. If you wish to enroll in a course without having completed the required prerequisites, 
+you must submit a “Prerequisite Waiver” petition to the ECE Office. If you believe you possess 
+the necessary background, you may also opt to take a challenge examination. 
+Changing Technical Elective Courses 
+To request a change, you must obtain approval from both your advisor and the  department Chair. 
+Once the graduation check has been completed, course change requests will be denied unless 
+supported by serious and compelling reasons. 
+Internships and Cooperative Education 
+Learning occurs in many settings beyond the classroom. As you prepare to complete your 
+education and enter the professional job market, gaining hands -on experience can be extremely 
+valuable. To support this, CSUF and the ECE  offer an active internship program for students 
+seeking employment while still in school. 
+Benefits of the internship program include: 
+• Paid work experience in the computing field 
+• Job placement assistance through the Internship Office 
+• Up to 3 units of technical elective credit 
+We strongly encourage students to participate in the internship program once they reach junior or 
+senior standing. For more information, please visit the ECS Academic Internship website. 
+Petition for Coursework Overload 
+The maximum course load for a semester is 18 units. Students who wish to exceed this limit must 
+submit a petition for a course overload. Approval from both the advisor and the department Chair 
+is required for the petition to be granted. 
+GPA Calculation for Repeated Courses 
+Normally, all courses taken at CSUF are included in the calculation of a student’s GPA. However, 
+students may petition to exclude grades of D or F from repeated courses. A maximum of 16 units 
+may be excluded through this process.  
+Academic Notice and Disqualification 
+A student whose overall GPA and/or semester GPA falls below 2.0 will be placed on academic 
+notice and have a registration hold placed on their account until they meet with the Program 
+Academic Advisor and complete the online RESET Canvas course administered by the College of 
+ECS. These steps must be completed before enrolling in the following semester. In most cases, 
+repeating the course and petitioning to exclude the original grade from the GPA calculation will 
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  10 
+ 
+remove the academic notice. Continued academic notice may result in disqualification from the 
+program. 
+Student Clubs 
+As a student, you can enhance your technical knowledge and professional development by joining 
+one or more of the following clubs. These organizations offer valuable opportunities to attend 
+seminars, conferences, and symposiums, as well as to subscribe to technical publications. Most 
+are affiliated with local, regional, and national chapters, providing excellent networking 
+opportunities with professionals in the field. Computer Engineering students are strongly 
+encouraged to get involved in one or more of the following student organizations: 
+• Institute of Electrical and Electronics Engineers (IEEE) 
+• Institute of Navigation (IoN) 
+• Association for Computing Machinery (ACM) 
+• Society of Mexican American Engineers and Scientists (MAES) 
+• National Society of Black Engineers (NSBE) 
+• Society of Hispanic Professional Engineers (SHPE) 
+• Society of Women Engineers (SWE) 
+• Tau Beta Pi (TBP – National Engineering Honor Society) 
+• Upsilon Pi Epsilon (UPE – International Honor Society for the Computing and Information 
+Disciplines) 
+COURSE DESCRIPTIONS 
+Electrical and Computer Engineering (EGEC) Courses 
+EGEC 180 - Digital Logic and Computer Structures (3) 
+Binary number system and arithmetic, computer codes, Boolean algebra, logic gates, K -map 
+minimization, sequential circuits, memory devices, state diagram and table, computer architecture, 
+memory, Arithmetic Logic Unit, and control unit. (2 hours lecture, 2 hours laboratory) 
+Prerequisites: CPSC 120 
+EGEC 203 - Electric Circuits (3) 
+Units; Ohm's and Kirchhoff's laws; mesh and nodal analysis, superposition; Thevenin and Norton 
+theorems; RL and RC transients; phasors and steady state sinusoidal analysis; response as a 
+function of frequency; current, voltage, and power relationships; polyphase circuits. 
+Prerequisites: PHYS 226, MATH 250A 
+Corequisite: CPSC 120 or EGME 205 
+EGEC 203L - Electric Circuits Laboratory (1) 
+Simple resistive RL and RC circuits, electrical measurement techniques, verification of basic 
+circuit laws through hard-wired breadboarding and CAD circuit simulation. (3 hours laboratory) 
+Prerequisite or Corequisite: EGEC 203 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  11 
+ 
+EGEC 280 - Microcontrollers (3) 
+Microcontrollers, microcontroller programming model and instruction set, assembler directives, 
+writing and debugging microcontroller assembly language routines, microcontroller memory 
+system, microcontroller communication systems.  (1 hour lecture, 4 hours laboratory) 
+Prerequisite: EGEC 180 or EGEC 245 
+EGEC 281 - Designing with VHDL (2) 
+Introduction to various modeling methods, timings, events, propagation delays and concurrency, 
+the language constructs, data representations and formats, and physical attributes. (1 hour lecture, 
+2 hours laboratory) 
+Prerequisites: CPSC 120 or CPSC 121; EGEC 180 or EGEC 245 
+EGEC 303 - Electronics (3) 
+Characteristics and elementary applications of semiconductor diodes, field- effect transistors and 
+bipolar-junction transistors, and operational amplifiers; mid -frequency small-signal analysis and 
+design of transistors. 
+Prerequisites: PHYS 227, EGEC 203 
+EGEC 303L - Electronics Laboratory (1) 
+Semiconductor diodes, transistors, and elementary electronic circuits through hard- wired 
+breadboarding, CAD electronic simulation, and analysis. (3 hours laboratory) 
+Prerequisites: EGEC 203L, ENGL 101 
+Corequisite: EGEC 303 
+EGEC 323 - Engineering Probability and Statistics (3) 
+Set theory: axiomatic foundation of probability; random variables; probability distribution and 
+density functions; joint, conditional, and marginal distributions; expected values; distribution of 
+functions of random variables; central limit theorem; estimation. 
+Prerequisite: MATH 250A or MATH 170B 
+EGEC 371 - Modeling and Simulation of Signals and Systems (3) 
+Modeling and simulation of physical systems, mathematical description of systems, transfer 
+functions, poles and zeros, frequency response, continuous and discrete -time convolution, 
+continuous and discrete Fourier transforms, Laplace and Z transforms, Fast Fourier Transforms, 
+simulation using Matlab. 
+Prerequisite: MATH 250B 
+EGEC 381 - Computer Design and Organization (4) 
+Computer system, Central Processing Unit (CPU) organization and design, instruction set and 
+addressing modes, microprogrammed control unit design, cache memory, internal memory, virtual 
+memory, input/output interfacing, parallel processors, superscalar processors. (2 hours lecture, 4 
+hours laboratory) 
+Prerequisite: EGEC 280, EGEC 281 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  12 
+ 
+EGEC 401 - Engineering Economics and Professionalism (3) 
+Development, evaluation, and presentation of design alternatives for engineering systems and 
+projects using principles of engineering economy and cost -benefit analysis. Engineering 
+profession, professional ethics, and related topics. (Not available for use on graduate study plans.) 
+(EGEC 401, EGCE 401, and EGME 401 are the same course) 
+Prerequisites: MATH 150A; Engineering or Computer Science major; junior or senior standing 
+EGEC 410 - Electro-Optical Systems (3) 
+Introduction to electro -optics; optical radiation characteristics and sources; geometrical and 
+physical optics; lasers and electro -optical modulation; quantum and thermal optical radiation 
+detectors; detector performance analysis; electro -optical systems modeling and analysis; 
+application examples. 
+Prerequisite: EGEC 311 or graduate standing 
+EGEC 416 - Feedback Control Systems (3) 
+Feedback control system characteristics; stability in the frequency and time domains; analysis and 
+design of continuous-time systems using root -locus, Bode and Nyquist plots, Nichols chart, and 
+applications. 
+Prerequisite: EGEC 409; or graduate standing 
+EGEC 441 - Advanced Electronics for Computer Engineers (4) 
+High-speed CMOS, biCMOS, CPLDs, FPGAs, A/D, D/A, transducers, and optics; integration of 
+these devices into complete systems. (2 hours lecture, 4 hours laboratory) 
+Prerequisite: EGEC 281, EGEC 303 both with a “C-” (1.7) or better. 
+EGEC 443 - Electronic Communication Systems (3) 
+Principles of amplitude, angular, and pulse modulation, representative communication systems, 
+the effects of noise on system performance. 
+Prerequisites: EGEC 310, EGEC 323 
+EGEC 446 - Advanced Digital Design using Verilog HDL (3) 
+Fundamentals of Verilog programming; behavioral modeling using Verilog; structural modeling 
+using Verilog; RTL design using Verilog; Shannon’s decomposition; FPGA architecture; Digital 
+design, synthesis, and implementation using FPGA. 
+Prerequisite: EGEC 441 
+EGEC 447 - Introduction to Cyber-Physical Systems Security (3) 
+Hardware Trojan detection; physical and invasive attacks; side -channel attacks; intellectual 
+property piracy; circuit obfuscation; passive and active metering; physical unclonable functions; 
+cryptographic algorithms; introduction to cyber-physical systems and IoT security; security threats 
+and vulnerabilities in cyber-physical systems. 
+Prerequisites: CPSC 223P, CPSC 240; or EGEC 281; or graduate standing 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  13 
+ 
+EGEC 450 - Embedded Processor Interfacing (4) 
+Techniques of interfacing based on speed, timings, synchronization, interrupts, protocols, noise, 
+and race conditions. Interfacing specifications of the processor data, address, and control buses. (2 
+hours lecture, 4 hours laboratory) 
+Prerequisites: EGEC 280, EGEC 303L 
+Corequisites: EGEC 451 
+EGEC 451 - Real-Time Operating Systems for Embedded Systems (3) 
+Fundamentals of Real-Time Operating Systems (RTOS) for embedded systems, including thread 
+communication and synchronization, real-time scheduling, memory and process management, file 
+systems and management, and commercially available RTOS. (2 hours lecture, 2 hours laboratory) 
+Prerequisites: CPSC 131, EGEC 280; or graduate standing 
+EGEC 455 - Microelectronics and Nano Devices (3) 
+Quantum mechanical principles, crystal structure, energy band, carrier transport, carrier generation 
+and recombination, p-n junction, bipolar transistor, MOSFET, MEFET and related devices, basic 
+microwave and optoelectronic technology, crystal growth and f abrication, introduction to nano 
+structure, nano devices and technology. 
+Prerequisites: EGEC 303, EGEC 311; or graduate standing 
+EGEC 456 - Introduction to Logic Design in Nanotechnology (3) 
+Promising novel nano- electronic technologies and logic primitives for such technologies, 
+applicable basic logic design techniques, design models for spatial dimensions, applicable word-
+level data structures, multilevel circuit design, testability and observability, tolerance, and reliable 
+computing. 
+Prerequisite: EGEC 180 or EGEC 245, both with a “C-” (1.7) or better; or Computer Engineering 
+graduate standing 
+EGEC 460 - Introduction to Cellular Mobile Communications Systems (3) 
+Introduction to wireless mobile telecommunications, description and analysis of cellular radio 
+systems, co-channel interference reduction, channel capacity, and digital cellular systems. 
+Prerequisite: EGEC 323 or graduate standing 
+EGEC 461 - Low Power Digital IC Design (3) 
+Importance of low power design; analysis of power dissipation in digital integrated circuits; 
+circuit-level low -power techniques, logic -level low -power techniques, and system -level low -
+power techniques. 
+Prerequisites: EGEC 180 or EGEC 245; EGEC 303; all with a “C-” (1.7) or better 
+EGEC 463 - Current Topics in Computer Engineering (3) 
+Topics of contemporary interest from the perspective of current research and development in 
+computer engineering. Lectures by guest professionals. 
+Prerequisites: Engineering or Computer Science major; junior or senior standing 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  14 
+ 
+EGEC 465 - Introduction to VLSI Design (3) 
+Computer-aided design of VLSI circuits. MOS device structure, design rules, layout examples, 
+and CMOS standard cells. Speed -power trade-off, scaling, device, and circuit simulation. VLSI 
+design software tools. Routing method system design, Design Project. Chip fabrication through 
+the MOSIS service, testing. 
+Prerequisite: EGEC 245, EGEC 303, or graduate standing 
+EGEC 470 - Multidisciplinary Projects in Computer Engineering - I (2) 
+The first course in the two- course senior design sequence. Student teams develop a 
+hardware/software project, from conception through implementation and testing, under an 
+instructor’s supervision. Teams first explore technology issues related to the projec ts and then 
+prepare complete design proposals. 
+Corequisite: EGEC 450 
+EGEC 471 - Multidisciplinary Projects in Computer Engineering - II (2) 
+Second course in the two- course senior design course in which student teams develop a 
+hardware/software project under the supervision of the instructor. Develop design skills based 
+upon previous and current courses and laboratory experience. (4 hours laboratory) 
+Prerequisite: EGEC 450, EGEC 470 both with a “C-” (1.7) or better 
+EGEC 480 - Optical Engineering and Communications (3) 
+Optics review, lightwave fundamentals, integrated optic waveguides, first design of fiber optic 
+system, analog and digital modulation, digital fiber optic system design, baseband coding, digital 
+video transmission, optical emitters and receivers, coherent optical communication, measurements 
+in fiber optic telecommunication. 
+Prerequisite: EGEC 311, PHYS 227; or graduate standing 
+EGEC 483 - Introduction to Global Positioning Systems (GPS) (3) 
+Description of Global Positioning Systems (GPS) and Differential Global Positioning Systems 
+(DGPS), GPS navigation, errors. Satellite signals and co- ordinate transform math. Modeling for 
+position and velocity. Application to navigation. 
+Corequisite: EGEC 409 or EGEC 371 
+EGEC 497 - Senior Project (1-3) 
+Directed independent design project. May be taken for credit for a maximum of six units. Requires 
+consent of adviser and instructor. 
+Department Consent Required 
+EGEC 499 - Independent Study (1-3) 
+Specialized topics in engineering selected in consultation with and completed under the 
+supervision of the instructor. May be repeated for a maximum of 6 units. Requires approval of the 
+study plan by the advisor. 
+Department Consent Required 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  15 
+ 
+EGEC 503 - Information Theory and Coding (3) 
+Information measures, probabilistic studies of the transmission and encoding of information, 
+Shannon’s fundamental theorems and coding for noisy channels. 
+Prerequisite: EGEC 323 or graduate standing 
+EGEC 504A - Linear Network Synthesis (3) 
+Synthesis of passive element driving-point and transfer-functions with emphasis on RC networks. 
+Basic operational amplifier RC circuits and their performance limitations, introduction to second-
+order RC active filters. Parameter sensitivity analysis. 
+Prerequisite: EGEC 310 or graduate standing 
+EGEC 510 - Optics and Electromagnetics in Communications (3) 
+Plane-wave propagation and reflection from multiple layers; two- and three-dimensional boundary 
+value problems; waveguides and resonant cavities; radiation from apertures and antennas; 
+electromagnetic properties of materials, gases and plasmas; significant  coverage of engineering 
+applications. 
+Prerequisite: EGEC 480 or graduate standing 
+EGEC 518 - Digital Signal Processing I (3) 
+Discrete Fourier transform; fast Fourier transform; Chirp Z -transform; discrete time random 
+signals; floating-point arithmetic; quantization; finite word length effect in digital filters; spectral 
+analysis and power spectrum estimation. 
+Prerequisite: EGEC 420 or graduate standing 
+EGEC 520 - Advanced Computer Architecture (3) 
+Performance analysis and evaluation; limitations of scalar pipelines; superpipelined, superscalar 
+and VLIW processing; parallelism in programs; memory and I/O systems; out-of-order execution; 
+branch prediction; register and memory data flow techniques; Tom asulo’s algorithm; COTS 
+hardware accelerators, CUDA, GPU programming architecture. 
+Prerequisite: EGEC 381 or graduate standing 
+EGEC 522 - Spread Spectrum Communications (3) 
+Spread Spectrum (SS) Systems. Performance analysis of coherent digital signaling schemes. 
+Synchronization. Direct sequence, frequency hopping, time hopping and Hybrid Spread Spectrum 
+Modulations. Binary shift register sequences. Code tracking loops. SS sys tems performance in a 
+jamming environment, with forward error correction. 
+Prerequisites: EGEC 443, EGEC 580 
+EGEC 523A - VLSI and Nano Technology and Devices (3) 
+Silicon crystal, PN junction physics, oxide and interface physics and wafer fabrication technology; 
+oxidation, diffusion, ion- implantation, epitaxy, photolithography and thin films process. Layout 
+design principle for integrated circuits. Nano-electronic devices and technology. 
+Prerequisite: EGEC 455 or graduate standing 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  16 
+ 
+EGEC 523B - CMOS VLSI Design (3) 
+Surface physics of MOS system and MOS device physics. Short channel effect; hot carrier effect, 
+subthreshold conduction. CMOS fabrication process. Layout design rules. Scaling design and 
+analysis of CMOS circuits. Standard cell method. CAD design and SPICE simulation. 
+Prerequisites: EGEC 465, EGEC 448 or graduate standing 
+EGEC 526 - Digital Control Systems (3) 
+Analysis, design and implementation of digital control systems; Z -transform methods; frequency 
+domain and state-space approach for discrete-time systems. 
+Prerequisite: EGEC 416 or graduate standing 
+EGEC 529 - Principles of Neural Systems (3) 
+Principles of neural systems and their hardware implementation. Basic properties, discrete and 
+continuous bidirectional associative memories. Temporal associative memories. Neural nets 
+classifiers, perceptrons, supervised and unsupervised learning. Forward and backward 
+propagation. Electrical models of neural networks using op-amp., analog VLSI. 
+Prerequisites: EGEC 310, EGEC 409 or graduate standing 
+EGEC 531 - Digital Communication and Phase Locked Loop (3) 
+Theory of digital communications. Baseband modulation and demodulation/detection. Bandpass 
+modulation/demodulation. Theory of noise and linear system. FM feedback principles. Theory and 
+design of phase locked loops and their application in communication and control. 
+Prerequisite: EGEC 443 or graduate standing 
+EGEC 536 - Modern Power Systems (3) 
+Modern electrical power system containing interconnected generation, transmission and 
+distribution subsystems. Mathematical foundations for analysis, such as per unit systems and 
+symmetrical components. Power flow analysis, simulation, fault analysis, optimal power flow, 
+microgrids and integration of renewable energy. 
+Prerequisites: EGEC 203, EGEC 215, EGEC 309, EGEC 313; or graduate standing 
+EGEC 537 - Satellite Communications (3) 
+Satellite systems, link analysis, propagation effects, SNR/CNR calculations, modulation schemes, 
+TDMA, FDMA, and CDMA techniques. 
+Prerequisite: EGEC 443 or graduate standing 
+EGEC 540 - Computer Arithmetic Structures (3) 
+Suitability of signed binary number systems for high- speed arithmetic, normalized and 
+denormalized binary floating- point representation formats, high- speed algorithms, 
+implementations and design tradeoffs for fast arithmetic operations -  addition, subtract ion, 
+multiplication and division, floating point arithmetic. 
+Prerequisite: EGEC 381; or Computer Engineering graduate standing 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  17 
+ 
+EGEC 541 - Mixed-Signal IC Design (3) 
+IC design techniques for: Op- amps; Phase-Locked Loops (PLL); high -speed RF circuits; high-
+speed broadband circuits; Clock/Data Recovery (CDR) circuits; analog and optical signal 
+processing circuits; CMOS digital camera technologies. 
+Prerequisite: EGEC 441 or graduate standing 
+EGEC 542 - VLSI Testing and Design for Testability (3) 
+Fault model, equivalence and dominance; combinational and sequential circuit test generation; 
+Design For Testability (DFT); test compression; memory testing and diagnosis; boundary scan; 
+testing analog circuits; mixed -signal testing strategies; logic and mixed -signal Built-In Self-Test 
+(BIST). 
+Prerequisite: EGEC 441 or graduate standing 
+EGEC 543 - Advanced Cyber-Physical Systems Security (3) 
+Secure cyber -physical design and implementation; cryptographic hardware primitives; 
+cryptographic modules; trusted platforms; reverse engineering of cryptographic modules using 
+passive/active attacks; and cryptanalytic techniques, countermeasures against reverse engineering, 
+threats to cyber-physical systems in various domains, such as network and IoT. 
+Prerequisite: EGEC 447 
+EGEC 548 - Real-Time Audio and Language Processing (3) 
+Introduction to designing, developing, and implementing audio and language processing 
+algorithms, in real time, on dedicated processors. 
+Prerequisite: CPSC 121 and EGEC 371 
+EGEC 556 - Advanced Nanoelectronics (3) 
+Novel nanoelectronic devices. CAD analysis of nanoelectronic devices, advanced MOSFETs-SOI, 
+FinFETs, SiGe, carbon nanotubes and ribbons, nanowires, quantum devices: RTD, tunnel FET, 
+qubits; nanomemory, DRAM, flash, M/F RAM, spin torque devices. 
+Prerequisite: EGEC 456 or graduate standing 
+EGEC 557 - Microprogramming and Embedded Microprocessors (3) 
+Introduction to microprogramming concepts and applications to the control unit of a computer, 
+microprogrammable control, arithmetic -logic unit, implementation of an embedded process on 
+FPGA and interfacing with external memories. 
+Prerequisite: EGEC 448 or graduate standing 
+EGEC 558B - Microprocessors and Systems Applications II (3) 
+Advanced microprocessor architecture and their applications to microcomputer networking; RISC 
+VS CISC architectures, communication protocol, distributed- operating system, and local area 
+networks. 
+Prerequisite: EGEC 404 or graduate standing 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  18 
+ 
+EGEC 559 - Introduction to Robotics (3) 
+Science of robotics from an electrical engineering standpoint, including modeling, task planning, 
+control, sensing and robot intelligence. 
+Prerequisite: EGEC 416 or graduate standing 
+EGEC 565 - Rapid Prototyping for Internet of Things (3) 
+Introduction to Internet of Things (IoT), IoT network architecture and design, application protocols 
+for IoT, data and analytics for IoT, integration of embedded devices in web- based, distributed 
+applications, and prototyping IoT devices. 
+Prerequisite: CPSC 121; or graduate standing 
+EGEC 570 - Introduction to Digital VLSI Logic Design and Computer Organization (3) 
+Introduction to digital VLSI design (MOSFETs, logic design, timing issues), FPGA design with 
+HDL, computer architecture (CPU structure and function, instruction set). 
+Prerequisites: EGEC 180, EGEC 245; or Computer Engineering or Electrical Engineering graduate 
+standing 
+EGEC 580 - Analysis of Random Signals (3) 
+Random processes pertinent to communications, controls and other physical applications, Markov 
+sequences and processes, the orthogonality principle. 
+Prerequisite: EGEC 323, EGEC 409 or graduate standing 
+EGEC 582 - Linear Estimation Theory (3) 
+Mathematical models of continuous-time and discrete-time stochastic processes; the Kalman filter, 
+smoothing and suboptimal filtering computational studies. 
+Prerequisites: EGEC 580, EGEC 581 
+EGEC 597 - Project (3) 
+Project proposal must be approved prior to last day of class instruction of the preceding semester. 
+Requires classified graduate status; consent of graduate program adviser and program coordinator. 
+Department Consent Required 
+EGEC 598 - Thesis (1-6) 
+Unless approved by the department chair, EGEC 598 cannot be taken if EGEC 597 has been 
+completed. May be repeated for a maximum of 6 units. Requires consent of adviser. Classified 
+graduate students only. 
+Department Consent Required 
+EGEC 599 - Independent Graduate Research (1-3) 
+Unless approved by department  chair, EGEC 599 cannot be taken if EGEC 597 has been 
+completed. May be repeated for a maximum of six units. Requires consent of adviser. 
+Department Consent Required 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  19 
+ 
+Computer Science (CPSC) Courses 
+CPSC 120A - Introduction to Programming (2) 
+Introduction to the concepts underlying computer programming to accomplish desired tasks, 
+including: designing and executing programs; sequential nature of programs; using variables and 
+assignment; control flow; input/output; designing and using functions;  structured and object -
+oriented methodologies. 
+Corequisite: CPSC 120L, MATH 125 or MATH 116 
+CPSC 120L - Introduction to Programming Laboratory (1) 
+Introduction to the concepts underlying computer programming to accomplish desired tasks, 
+including: designing and executing programs; sequential nature of programs; using variables and 
+assignment; control flow; input/output; designing and using functions;  Structured and object -
+oriented methodologies.  
+Corequisite: CPSC 120A, MATH 125 or MATH 116 
+CPSC 121A - Object-Oriented Programming (2) 
+Object-oriented programming paradigm, including classes, objects, member variables and 
+functions, exceptions, inheritance, templates, encapsulation, decoupling and class design best 
+practices. Advanced program design, including iterators, operator overloading, recursion and 
+dynamic memory allocation. 
+Prerequisite: CPSC 120; or CPSC 120A and CPSC 120L; or passing score on Computer Science 
+Placement Exam 
+Corerquisite: CPSC 121L 
+CPSC 121L - Object-Oriented Programming Laboratory (1) 
+Application of object -oriented programming concepts including classes, objects, member 
+variables and functions, exceptions, inheritance, templates, encapsulation, decoupling, and class 
+design best practices. Activities also include advanced program design including iterators, operator 
+overloading, recursion, and dynamic memory allocation. 
+Prerequisite: CPSC 120; or CPSC 120A and CPSC 120L; or passing score on Computer Science 
+Placement Exam  
+Corerequisite: CPSC 121A 
+CPSC 131 - Data Structures (3) 
+Classical data structures: vector, linked list, stack, queue, binary search tree, and graph 
+representations. Worst-case analysis, amortized analysis, and big-O notation. Object-oriented and 
+recursive implementation of data structures. Self -resizing vectors and self -balancing trees. 
+Empirical performance measurement. 
+Prerequisite: CPSC 121 or a sufficient score on the Computer Science Placement Exam 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  20 
+ 
+CPSC 531 - Advanced Database Management (3) 
+Implementation techniques for query analysis, data allocation, concurrency control, data 
+structures, and distributed databases. New database models and recent developments in database 
+technology. Student projects are directed to specific design problems. CPSC 431 recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 535 - Advanced Algorithms (3) 
+Design and analysis of sophisticated algorithms and data structures. Lower, tight and pseudo -
+polynomial bounds. Randomization, approximation and special -purpose data structures. 
+Algorithmic frameworks, such as maximum flow and linear programming. CPSC 335 
+recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 541 - Systems and Software Standards and Requirements (3) 
+SESC framework and the IEEE Software Engineering Standards. Establishing the following 
+standards: Software Life Cycle Processes, Work Product Standards, Process Standards, 
+Requirement Analysis and Management and System Integration. Introduces CMMI framewor k; 
+discuss number of practical lessons. CPSC 362 recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 542 - Software Verification and Validation (3) 
+Theory and practice of software verification and validation (V&V), including software integrity 
+levels, minimum V&V tasks, walkthroughs, inspections and clean room. Topics include: white -
+box and black- box testing, boundary value analysis, equivalence class  partitioning, unit testing, 
+functional testing and test plans. CPSC 362 recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 543 - Software Maintenance (3) 
+Theory and practice of maintaining large -scale software. Maintenance framework, process, 
+measures, and process management. Topics include fundamentals of software change and its 
+implications, maintenance process models, reusability for maintenance, reverse  engineering, 
+maintenance testing, software configuration management and tools in maintenance. CPSC 362 
+recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 544 - Advanced Software Process (3) 
+Advanced guidance for defining and improving the software development process. Concepts of 
+software maturity framework, principles of process improvement and software process 
+assessment. Current topics such as CMMI and SCAMPI. CPSC 362 recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  21 
+ 
+CPSC 545 - Software Design and Architecture (3) 
+Advanced software design and architecture principles focusing a software engineering approach 
+to the development process. Topics include architecture business cycle, quality attributes, 
+attribute-driven design method, architectural styles, design patterns, software product lines and 
+component-based design. CPSC 362 recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 546 - Modern Software Management (3) 
+Modern project management methodologies and techniques. Software development process. 
+Planning, estimating, organizing, directing, monitoring, controlling software projects and 
+managing risks. Other related software management issues, such as infrastructure, quality software 
+development, project and product metrics and external factors. CPSC 362 recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 547 - Software Measurement (3) 
+Current software measurement practices. Topics include: establishing an effective software 
+metrics program; measuring software product, project and process; applying Statistical Process 
+Control and other statistical techniques. High maturity concepts defin ed in CMMI model will be 
+discussed. Stresses a practitioner-based approach. CPSC 362 recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 548 - Professional, Ethical and Legal Issues for Software Engineers (3) 
+Professional, legal and ethical issues pertaining to software engineering. Topics include 
+professional codes of ethics, intellectual property laws, computer privacy and human- computer 
+interaction. Relevant regulatory documents and their applications. CPSC 362 recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 551 - Operating Systems Design (3) 
+Professional, legal and ethical issues pertaining to software engineering. Topics include 
+professional codes of ethics, intellectual property laws, computer privacy and human- computer 
+interaction. Relevant regulatory documents and their applications. CPSC 362 recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 552 - Cyber Forensics (3) 
+Introduction to principles and practices of cyber forensics. Topics include: developing an 
+investigative capability; legal and IT requirements; forensic tools; incident response; live forensic 
+investigations; seizure of digital information; operating syste m boot processes; and investigation 
+of network traffic. CPSC 456 recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  22 
+ 
+CPSC 558 - Advanced Computer Networking (3) 
+System-oriented view of computer network design, protocol implementation, networking, high-
+speed networking, network management, computer network performance issues. CPSC 471 
+recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 566 - Advanced Computer Graphics (3) 
+Three-dimensional: reflection models, shading techniques, rendering process, parametric 
+representation, ray tracing, radiosity, texture, anti -aliasing, animation, color science. CPSC 484 
+recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 583 - Knowledge Representation and Reasoning (3) 
+A field of artificial intelligence representing information about the world in a form that a computer 
+system can use to solve complex tasks. Representing knowledge symbolically for automated 
+reasoning; inference algorithms; logic programming; Semantic Web; reasoning under uncertainty; 
+Requires project. CPSC 481 recommended. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+CPSC 585 - Neural Networks, Deep Learning, and Reinforcement Learning (3) 
+Principles of artificial neural networks, designing network architectures, implementations and 
+applications. Principles of reinforcement learning, frameworks, designing solutions, 
+implementations and applications. Principles of deep learning and applications. 
+Prerequisite: Computer Science or Computer Engineering graduate standing 
+Related Courses for Computer Engineering Majors 
+MATH 150A - Calculus I (4) 
+Properties of functions. The limit, derivative and definite integral concepts; applications of the 
+derivative, techniques and applications of integration. Six units of credit are given for both MATH 
+130 and MATH 150A, or for both MATH 135 and MATH 150A. Bi ology, geology and earth 
+science majors who pass ALEKS must take MATH 130. CBE majors who pass ALEKS must take 
+MATH 135. 
+Prerequisite: Passing score on ALEKS; or passing score or exemption on MQE; or MATH 125 
+with “C” (2.0) or better; or MATH 115, MATH 116, both with a “C” (2.0) or better; or MATH 
+115A, MATH 115B, MATH 116, all with a “C” (2.0) or better 
+MATH 150B - Calculus II (4) 
+Techniques of integration, improper integrals and applications of integration. Introduction to 
+differential equations. Parametric equations, sequences and series. 
+Prerequisite: MATH 150A 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  23 
+ 
+MATH 250A - Calculus III (4) 
+Calculus of functions of several variables. Partial derivatives and multiple integrals with 
+applications. Parametric curves, vector -valued functions, vector fields, line integrals, Green’s 
+Theorem, Stokes’ theorem, the Divergence Theorem, vectors and the geometry of 3-space. 
+Prerequisite: MATH 106 or MATH 150B 
+MATH 250B - Introduction to Linear Algebra and Differential Equations (4) 
+Introduction to the solutions of ordinary differential equations and their relationship to linear 
+algebra. Topics include matrix algebra, systems of linear equations, vector spaces, linear 
+independence, linear transformations and eigenvalues. 
+Prerequisite: MATH 250A 
+MATH 170A - Mathematical Structures I (3) 
+First of two semesters of fundamental discrete mathematical concepts and techniques needed in 
+computer-related disciplines. Logic, truth tables, elementary set theory, proof techniques, 
+combinatorics, Boolean algebra, recursion and graph theory. Must have completed four years of 
+high school mathematics. 
+PHYS 225 - Fundamental Physics: Mechanics (3) 
+Classical Newtonian mechanics; linear and circular motion; energy; linear/angular momentum; 
+systems of particles; rigid body motion; wave motion and sound. 
+Corequisites: MATH 150A, PHYS 225L 
+PHYS 225L - Fundamental Physics: Laboratory (1) 
+Laboratory for PHYS 225. Instructional fee required. (3 hours laboratory) 
+Corequisite: PHYS 225 
+PHYS 226 - Fundamental Physics: Electricity and Magnetism (3) 
+Electrostatics, electric potential, capacitance, dielectrics, electrical circuits, resistance, emf, 
+electromagnetic induction, magnetism and magnetic materials, and introduction to Maxwell’s 
+equations. 
+Prerequisite: PHYS 225 with a “C” (2.0) or better 
+Corequisites: MATH 150B, PHYS 226L 
+PHYS 226L - Fundamental Physics: Laboratory (1) 
+Laboratory for PHYS 226. Instructional fee required. (3 hours laboratory) 
+Corequisite: PHYS 226 
+  
+ 
+ 
+Computer Engineering BS-MS Handbook 
+Dated: June 17, 2025  24 
+ 
+PHYS 227 - Fundamental Physics: Waves, Optics, and Modern Physics (1-3) 
+Geometrical and physical optics, wave phenomena; quantum physics, including the photoelectric 
+effect, line spectra and the Bohr atom; the wave nature of matter, Schroedinger’s equation and 
+solutions; the Uncertainty Principle, special theory of relativity. 
+Prerequisite: PHYS 226 with a C (2.0) or better 
+Corequisite: PHYS 227L, except for Biochemistry, Chemistry and Mechanical Engineering 
+majors, who may enroll for one unit (optics component); all others must enroll for three units 
+PHYS 227L - Fundamental Physics: Laboratory (1) 
+Laboratory for PHYS 227. Instructional fee required. (3 hours laboratory) 
+Corequisite: PHYS 227 
+Disclaimer 
+This handbook is intended as a quick reference for students pursuing the Blended Bachelor and 
+Master of Science in Computer Engineering. In the event of any discrepancies between the 
+contents of this handbook and official College or University documents (such as the University 
+Catalog), the most recent version of the relevant College and/or University documents shall take 
+precedence. 
+ 

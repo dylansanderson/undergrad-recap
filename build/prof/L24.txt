@@ -1,0 +1,200 @@
+﻿#### L24_egee401: EGEE 401 Engineering Economics & Professionalism
+
+[s0] TITLE  Engineering Economics & Professionalism
+  img: a:solar_farm
+  beat0:
+     0: Welcome to E G E E four oh one, engineering economics and professionalism.
+     1: Engineers don't just ask whether something will work.
+     2: They ask whether it's worth it: should we build this solar farm, buy that test equipment, or lease it instead?
+     3: And they carry a responsibility to the public that can outweigh their employer's wishes.
+     4: This lecture covers both: the mathematics of money over time, and the ethics of engineering practice.
+     5: The money math is also directly useful for your own car loans, mortgages and retirement savings.
+
+[s1] V  The time value of money
+  img: fig:compound
+  • A dollar today > a dollar later
+  • Simple interest: F = P(1 + i·n)
+  • Compound interest: F = P(1 + i)ⁿ
+  • Effective rate: 12% compounded monthly = 12.68%/yr
+  (pen marks: 5 )
+  beat0:
+     0: The foundation of the whole course: a dollar today is worth more than a dollar next year, because today's dollar can be invested and earn interest.
+  beat1:
+     0: With simple interest, you earn interest only on the original amount.
+     1: Ten thousand dollars at six percent earns six hundred dollars every year.
+  beat2:
+     0: With compound interest, interest earns interest.
+     1: The future value is the present value times one plus i, to the n.
+     2: Ten thousand dollars at six percent becomes seventeen thousand nine hundred eight dollars in ten years, and over forty years, more than one hundred thousand dollars, versus thirty four thousand with simple interest.
+     3: That's the exponential growth from calculus.
+  beat3:
+     0: Watch out for how rates are quoted.
+     1: Twelve percent per year compounded monthly means one percent per month, and one point oh one to the twelfth power gives an effective annual rate of twelve point six eight percent.
+     2: Credit card rates hide this effect all the time.
+
+[s2] WB  Worked example: compounding monthly for ten years
+  step0 board+: $P = \$1000$, 6%/yr compounded monthly, 10 yr || PEN None || PEN None
+     0: You deposit one thousand dollars at six percent per year, compounded monthly, and leave it for ten years.
+     1: Always start with the cash flow diagram: money out today is an arrow down at year zero.
+  step1 board+: $i = 0.06/12 = 0.005$ per month || $n = 10 \times 12 = 120$ months
+     0: Monthly compounding means the rate per period is six percent over twelve, half a percent, and there are one hundred twenty periods.
+  step2 board+: $F = P(1+i)^n = 1000(1.005)^{120}$ || $F \approx \$1{,}819.40$ || PEN None
+     0: F equals P times one plus i, to the n.
+     1: One thousand times one point zero zero five to the one hundred twentieth: about one thousand eight hundred nineteen dollars.
+     2: That's the arrow up at year ten.
+  step3 board+: effective: $1.005^{12} - 1 = 6.17\%$
+     0: The effective annual rate is one point zero zero five to the twelfth, minus one: six point one seven percent, a little more than the six percent advertised, because interest earns interest within each year.
+     1: That's why lenders must state both the nominal annual percentage rate and the effective rate.
+
+[s3] V  Cash-flow diagrams and the interest factors
+  img: fig:cashflow / fig:factors
+  • Draw the cash-flow diagram first — every time
+  • Arrows down = costs, up = receipts
+  • Factors move money through time: (P/F), (P/A), (A/P)…
+  • Excel: PV, FV, PMT, RATE, NPV, IRR
+  (pen marks: 9 )
+  beat0:
+     0: Every problem starts with a cash flow diagram.
+     1: Time runs along the axis in years.
+     2: Costs point down, receipts point up.
+     3: Here, a company considers a new automated test machine: it costs fifty thousand dollars now, saves fifteen thousand dollars a year in labor for five years, and can be sold for five thousand at the end.
+     4: The company's minimum attractive rate of return, the MARR, is ten percent, the return it could earn on other investments.
+  beat1:
+     0: To compare money at different times, we move it all to one point with a handful of interest factors.
+     1: F over P moves a lump sum forward, P over F brings it back.
+     2: P over A converts a uniform yearly series into one present amount, and A over P does the reverse: it's the loan payment formula.
+     3: These are just sums of the geometric series from calculus two, tabulated for convenience.
+     4: Spreadsheets have them built in as P V, F V, P M T, N P V and I R R.
+
+[s4] V  Worked example: a car loan
+  img: fig:loan
+  • P = $25,000, i = 6%/12 = 0.5% per month, n = 60
+  • A = P · i(1+i)ⁿ / [(1+i)ⁿ − 1] = $483.32
+  • Total paid $28,999 → $3,999 interest
+  • Early payments are mostly interest
+  (pen marks: 3 )
+  beat0:
+     0: Let's use the capital recovery factor on something real.
+     1: You borrow twenty five thousand dollars for a car at six percent per year, paid monthly over five years.
+     2: The monthly rate is half a percent, and there are sixty payments.
+  beat1:
+     0: Plugging into A equals P times i times one plus i to the n, over one plus i to the n minus one, gives a payment of four hundred eighty three dollars and thirty two cents.
+  beat2:
+     0: Over sixty months, you pay about twenty nine thousand dollars in total, so the loan costs about four thousand dollars in interest.
+  beat3:
+     0: The chart shows how each payment splits.
+     1: Early on, a big chunk, in orange, is interest on the large balance.
+     2: As the balance falls, more of each payment goes to principal.
+     3: That's why extra payments early in a loan or mortgage save so much interest.
+
+[s5] V  Comparing alternatives: present worth and rate of return
+  img: fig:pwcurve
+  • PW: discount everything to today at the MARR
+  • Test machine: PW = −50,000 + 15,000(P/A) + 5,000(P/F) = +$9,966
+  • IRR: the rate where PW = 0 → ≈ 17.2%
+  • Accept if PW > 0, equivalently IRR > MARR
+  (pen marks: 4 )
+  beat0:
+     0: Back to the test machine.
+     1: The present worth method discounts every cash flow back to today at the MARR, and adds them up.
+  beat1:
+     0: At ten percent, the five years of fifteen thousand dollar savings are worth fifty six thousand eight hundred sixty two dollars today, and the salvage value is worth about three thousand one hundred.
+     1: Subtract the fifty thousand dollar cost, and the present worth is about plus nine thousand nine hundred sixty six dollars.
+     2: Positive means the investment beats the company's ten percent alternative.
+  beat2:
+     0: The internal rate of return is the interest rate that makes the present worth exactly zero, where the curve crosses the axis.
+     1: For this machine, about seventeen point two percent.
+     2: It's the effective return the investment earns.
+  beat3:
+     0: The decision rules agree: accept if the present worth at the MARR is positive, or equivalently if the rate of return exceeds the MARR.
+     1: One caution: when choosing between mutually exclusive projects, compare the rate of return of the extra investment, the incremental cash flow, not each project's rate on its own, or you can pick the wrong one.
+
+[s6] V  Annual worth: unequal lives
+  img: fig:euac
+  • Convert everything to an equivalent annual cost
+  • Pump A: $12k, 6 yr → $4,096/yr
+  • Pump B: $20k, 12 yr → $3,554/yr — cheaper
+  • Payback period: quick, but ignores time value
+  (pen marks: 4 )
+  beat0:
+     0: When alternatives last different lengths of time, present worth needs a common study period.
+     1: The annual worth method sidesteps that.
+     2: Convert each option to an equivalent uniform annual cost.
+     3: Pump A costs twelve thousand dollars, lasts six years, and costs fifteen hundred a year to run.
+     4: Spreading the purchase over six years at eight percent with the A over P factor, then adding the operating cost, gives about four thousand ninety six dollars per year.
+     5: Pump B costs twenty thousand but lasts twelve years and is cheaper to run: about three thousand five hundred fifty four dollars per year.
+     6: Despite the higher price tag, B is the better buy.
+     7: The simple payback period, how many years until savings repay the cost, is popular because it's easy, three point three years for our test machine, but it ignores the time value of money and everything after the payback point, so use it only as a rough screen.
+
+[s7] V  Depreciation, taxes and inflation
+  img: fig:depr
+  • Depreciation: non-cash expense that reduces taxable income
+  • Straight-line: (cost − salvage) / life = $18,000/yr
+  • MACRS: faster, fixed IRS percentages
+  • Real vs market rates: (1 + i) = (1 + i_real)(1 + f)
+  (pen marks: 3 )
+  beat0:
+     0: Equipment wears out, and tax law lets companies deduct that loss in value over time as depreciation.
+     1: It's not a cash payment, but it reduces taxable income, which saves real tax dollars.
+  beat1:
+     0: Straight line depreciation spreads the cost evenly.
+     1: A one hundred thousand dollar machine with a ten thousand dollar salvage value over five years depreciates eighteen thousand dollars per year.
+  beat2:
+     0: The U S tax system uses MACRS, which front loads the deductions with fixed percentages per year.
+     1: Because a tax saving today is worth more than one later, faster depreciation increases a project's present worth.
+     2: After tax cash flow equals before tax cash flow minus taxes, where taxes are the tax rate times the before tax cash flow minus depreciation.
+  beat3:
+     0: And inflation erodes money too.
+     1: The market interest rate combines a real return and inflation: one plus the market rate equals one plus the real rate, times one plus inflation.
+     2: Analyze in either real or market dollars, but never mix them.
+
+[s8] WB  Worked example: a straight-line depreciation schedule
+  step0 board+: cost \$50,000, salvage \$5,000, 5 years || PEN None || PEN None
+     0: A company buys a test machine for fifty thousand dollars.
+     1: It will last five years, then sell for five thousand.
+     2: Straight line depreciation spreads the lost value evenly.
+  step1 board+: $D = \frac{50{,}000 - 5{,}000}{5} = \$9{,}000$/yr
+     0: Each year's depreciation is the cost minus salvage, divided by the life: forty five thousand over five, nine thousand dollars a year.
+  step2 board+: PEN None || PEN None || PEN None || PEN None || PEN None
+     0: Book value drops by nine thousand each year: forty one thousand, thirty two, twenty three, fourteen, and finally five thousand, exactly the salvage value.
+  step3 board+: tax saving $= 0.25 \times 9{,}000 = \$2{,}250$/yr
+     0: Depreciation isn't cash leaving the company, but it is a tax deduction.
+     1: At a twenty five percent tax rate, nine thousand of depreciation saves two thousand two hundred fifty dollars in taxes each year.
+     2: That's why depreciation shows up in every after-tax comparison of alternatives.
+
+[s9] V  Engineering ethics: lessons written in failures
+  img: a:challenger / a:i35w / fig:ethics
+  • Codes (NSPE, IEEE): public safety, health and welfare come first
+  • Challenger, Hyatt Regency, Ford Pinto, I-35W
+  • Common threads: pressure, poor communication, silence
+  • Your duty: speak up, document, escalate
+  (pen marks: 4 )
+  beat0:
+     0: Professional codes of ethics, from the National Society of Professional Engineers and from the I E E E, put the safety, health and welfare of the public first, above an employer's or client's interests.
+     1: The case studies show why.
+     2: In January nineteen eighty six, the space shuttle Challenger launched on an unusually cold morning.
+     3: Engineers at the booster manufacturer had warned that the rubber O rings sealing the booster joints might not seal in the cold, and recommended against launching.
+     4: Under schedule pressure, the recommendation was reversed.
+     5: Seventy three seconds after launch, a failed joint led to the breakup of the shuttle and the loss of all seven crew members.
+  beat1:
+     0: In two thousand seven, the I 35 W bridge in Minneapolis collapsed during rush hour, killing thirteen people.
+     1: Investigators found gusset plates, the steel plates connecting the truss members, had been undersized in the original design decades earlier, and the bridge was carrying extra weight from later modifications and from construction materials stored on it that day.
+  beat2:
+     0: Other classic cases follow the same pattern.
+     1: At the Hyatt Regency hotel in Kansas City, a seemingly minor change to how suspended walkways were connected doubled the load on one connection, and the walkways fell, killing one hundred fourteen people.
+     2: In the Ford Pinto case, a cost benefit analysis effectively placed a dollar value on lives lost to a known fuel tank problem.
+     3: The common threads are cost and schedule pressure, communication failures, and warnings that weren't heard or weren't escalated.
+     4: As an engineer, your duty is to speak up clearly, put concerns in writing, and escalate when public safety is at stake.
+
+[s10] Q  Key takeaways
+  BIG: Move money through time with **(1 + i)ⁿ**, compare options by **PW, AW or IRR at the MARR** — and put **public safety first**.
+  cap: Next: EGCP 441, Advanced Electronics for Computer Engineers (CMOS).
+  beat0:
+     0: To recap.
+     1: Money has time value, and compound interest grows exponentially.
+     2: Draw the cash flow diagram, then use the interest factors to move money through time.
+     3: Present worth, annual worth and rate of return compare alternatives against the minimum attractive rate of return, and give the same decision.
+     4: Depreciation, taxes and inflation change the numbers in predictable ways.
+     5: And above the economics sits ethics: engineers hold paramount the safety of the public.
+     6: Next, we go inside the chips: CMOS circuit design.
+     7: See you there.

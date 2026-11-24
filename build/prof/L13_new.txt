@@ -1,0 +1,400 @@
+﻿#### L13_egcp280: EGCP 280 Microcontrollers
+
+[s0] TITLE  Microcontrollers
+  img: a:arduino
+  beat0:
+     0: Welcome to E G C P two eighty, microcontrollers.
+     1: A microcontroller is a whole small computer on one chip, and it's the most common computer on Earth.
+     2: In this lecture you'll see what's inside one, how its processor executes instructions, how to program it in assembly language, and how it controls the physical world through pins, timers, analog inputs and serial links.
+     3: This is where software meets hardware.
+
+[s1] V  What is a microcontroller — and where are they?
+  img: a:arduino / fig:mcu
+  • CPU + flash + RAM + peripherals on one chip
+  • Costs cents to a few dollars, sips power
+  • Tens of billions shipped every year
+  • A modern car contains dozens to over a hundred
+  (pen marks: 7 )
+  beat0:
+     0: Your laptop's processor needs separate memory chips, storage and a lot of supporting hardware.
+     1: A microcontroller puts a small processor, flash memory for the program, RAM for data, and a collection of input and output hardware all on one chip.
+     2: Boards like this Arduino and the TI LaunchPad made them popular with students and hobbyists, but the real market is in products.
+     3: Tens of billions of microcontrollers are shipped every year.
+     4: They're in your microwave, thermostat, TV remote, washing machine and keyboard.
+     5: A modern car contains dozens of them, often over a hundred, running the engine, brakes, airbags, windows and seats.
+  beat1:
+     0: Here's what's inside.
+     1: The CPU core executes instructions.
+     2: Flash memory holds the program even with the power off.
+     3: SRAM holds variables and the stack.
+     4: An interrupt controller lets hardware events grab the CPU's attention.
+     5: Timers keep time and generate signals.
+     6: And along the bottom, the peripherals connect to the outside world: general purpose input output pins, an analog to digital converter, and serial ports like UART, SPI and I squared C.
+     7: All of them connect through an internal bus.
+     8: We'll visit each of these today.
+
+[s2] V  The programmer’s model: registers
+  img: fig:regs
+  • Registers: tiny, ultra-fast storage inside the CPU
+  • ARM Cortex-M: R0–R12 general purpose (32 bits)
+  • SP = stack pointer, LR = return address, PC = next instruction
+  • Flags N Z C V record results of the last operation
+  (pen marks: 6 )
+  beat0:
+     0: To program in assembly, you need the programmer's model: the registers the instructions can see.
+     1: Registers are tiny storage slots inside the CPU itself, much faster than memory.
+  beat1:
+     0: We'll use the ARM Cortex M family as our example, since it's the most widely used microcontroller architecture today.
+     1: It has thirteen general purpose registers, R zero through R twelve, each thirty two bits wide.
+     2: Older courses and many 8 bit chips use fewer, smaller registers, but the ideas are identical.
+  beat2:
+     0: Three registers are special.
+     1: The stack pointer marks the top of the stack in memory.
+     2: The link register holds the return address when you call a subroutine.
+     3: And the program counter holds the address of the next instruction to execute.
+     4: Change the PC, and you've jumped somewhere else in the program.
+  beat3:
+     0: Finally, the status flags.
+     1: After an arithmetic or compare instruction, N says the result was negative, Z says it was zero, C records a carry out, and V signals signed overflow, the same overflow you met in two's complement.
+     2: Branch instructions read these flags to make decisions.
+
+[s3] V  Memory-mapped everything
+  img: fig:memmap
+  • One 32-bit address space (4 GB)
+  • Flash at the bottom, SRAM at 0x2000 0000
+  • Peripheral registers at 0x4000 0000 and up
+  • Controlling hardware = writing to an address
+  (pen marks: 5 )
+  beat0:
+     0: A thirty two bit processor can address four gigabytes, and a microcontroller divides that address space into regions.
+  beat1:
+     0: On ARM Cortex M chips, the program in flash starts at address zero, and SRAM, holding variables and the stack, starts at hex two zero zero zero, zero zero zero zero.
+  beat2:
+     0: Here's the key idea of this whole course.
+     1: The hardware peripherals also live at addresses, starting around hex four zero zero zero, zero zero zero zero.
+     2: Each pin, timer and serial port is controlled by registers that look exactly like memory locations.
+  beat3:
+     0: So to turn on an L E D, you don't call a special instruction.
+     1: You store a number at a particular address.
+     2: That's called memory mapped I O, and it's why C pointers to fixed addresses are so common in embedded code.
+
+[s4] WB  Memory-mapped I/O in C: one line, decoded
+  step0 board+: #define LED_PORT  (*(volatile uint32_t *)0x48000014) || LED_PORT |= (1u << 5);     // pin 5 high: LED on
+     0: Here's the line that confuses everyone the first time they open real embedded code.
+     1: It turns on an L E D by writing to a hardware register at a fixed address.
+     2: Let's take it apart from the inside out.
+  step1 board+: 1.  0x48000014 : an address from the datasheet || PEN ('circle',) on #define LED_PORT
+     0: Start with the number, hex four eight zero zero zero zero one four.
+     1: That's just an address from the chip's memory map, where the reference manual says the output register of a port lives.
+     2: On its own, it's only an integer.
+  step2 board+: 2.  (uint32_t *) : make it a pointer to a 32-bit value || PEN ('box',) on #define LED_PORT || 3.  * in front : the register itself, not its address || PEN ('circle',) on #define LED_PORT
+     0: The cast in front, open paren, volatile u int thirty two star, says: treat that integer as a pointer to a thirty two bit value.
+     1: Then the star on the far left dereferences it: not the address, but the thing stored at that address.
+     2: So LED port now behaves exactly like a variable that lives inside the hardware.
+  step3 board+: 4.  volatile : never optimize these reads/writes away || PEN ('circle',) on #define LED_PORT || 5.  |= (1u << 5) : set only bit 5 || PEN ('underline',) on LED_PORT |= (1u << 5)
+     0: And volatile tells the compiler: this value can change, or must be written, outside your view.
+     1: Without it, the optimizer may skip a write it thinks is pointless, or read the register once and never again, and your hardware silently stops responding.
+     2: Finally, the bit mask from earlier sets just pin five.
+
+[s5] V  A load–store instruction set
+  img: fig:toolchain
+  • Arithmetic only on registers: ADD R0, R1, R2
+  • Memory only via LDR (load) and STR (store)
+  • CMP sets flags; B, BEQ, BNE, BGT branch
+  • Assembler turns mnemonics into machine code
+  (pen marks: 6 )
+  beat0:
+     0: ARM, like most modern processors, uses a load store design.
+     1: Arithmetic and logic instructions only work on registers.
+     2: ADD R zero, R one, R two puts R one plus R two into R zero.
+  beat1:
+     0: To touch memory, you use separate instructions: L D R loads a word from memory into a register, and S T R stores a register back to memory.
+  beat2:
+     0: To make decisions, CMP compares two values by subtracting them and setting the flags without keeping the result.
+     1: Then a conditional branch like B E Q, branch if equal, or B G T, branch if greater, jumps based on those flags.
+     2: A plain B always jumps.
+  beat3:
+     0: Each of these human readable mnemonics is translated into binary machine code by a program called the assembler.
+     1: Then the linker places the code at real addresses, and you flash the resulting image onto the board and run it, usually under a debugger.
+
+[s6] EX  Example: summing an array in assembly
+  CODE:
+            .text
+            .global sum_array
+    @ R0 = address of array, R1 = count  →  returns sum in R0
+    sum_array:
+            MOV   R2, #0           @ sum = 0
+    loop:   CMP   R1, #0           @ any elements left?
+            BEQ   done             @ if count == 0, finish
+            LDR   R3, [R0], #4     @ R3 = *R0; then R0 += 4
+            ADD   R2, R2, R3       @ sum += R3
+            SUBS  R1, R1, #1       @ count--
+            B     loop
+    done:   MOV   R0, R2           @ return value in R0
+            BX    LR               @ return to caller
+  (pen marks: 14 )
+  beat0:
+     0: Let's read a real routine.
+     1: The dot text and dot global lines are assembler directives: they're not instructions, they tell the assembler where the code goes and that other files may call sum array.
+     2: By convention, the first arguments arrive in R zero and R one: the address of the array and the number of elements.
+  beat1:
+     0: We clear R two to hold the sum.
+     1: Then the loop: compare the count with zero, and if it's equal, branch to done.
+  beat2:
+     0: Otherwise, load the next element.
+     1: The square brackets mean use R zero as an address, and the comma four after the bracket means: after loading, add four to R zero, so it points to the next thirty two bit element.
+     2: That's called post increment addressing.
+     3: Add the element to the sum, decrement the count, and branch back to the top.
+  beat3:
+     0: At the end, move the sum into R zero, where the caller expects the return value, and B X L R jumps back to the address in the link register, returning to whoever called us.
+     1: This is exactly what a C compiler produces for a simple for loop.
+     2: Reading compiler output like this is a real debugging skill.
+
+[s7] V  Subroutines and the stack
+  img: fig:stackframe
+  • BL label: jump AND save the return address in LR
+  • Nested calls must save LR on the stack
+  • PUSH {R4, LR} on entry, POP {R4, PC} on exit
+  • Stack overflow = writing past its reserved space
+  (pen marks: 6 )
+  beat0:
+     0: To call a subroutine, use B L, branch with link.
+     1: It jumps to the label and saves the return address in the link register.
+  beat1:
+     0: But if that subroutine calls another one, the second B L overwrites L R, and the first return address is lost.
+     1: So functions that call other functions save L R on the stack first.
+  beat2:
+     0: The standard pattern is push R four and L R on entry, and pop R four and P C on exit.
+     1: Popping the saved return address straight into the program counter returns in one instruction.
+     2: The stack lives in SRAM and grows downward, toward lower addresses, and the stack pointer always marks its top.
+  beat3:
+     0: On a microcontroller with only a few kilobytes of RAM, the stack is small.
+     1: Deep recursion or big local arrays can run it past its reserved space and silently overwrite other variables, a classic and very confusing embedded bug.
+
+[s8] V  GPIO: controlling pins with bit masks
+  img: fig:bitmask
+  • Each pin = one bit in a port register
+  • Set a bit: reg |= (1 << n)
+  • Clear a bit: reg &= ~(1 << n)
+  • Toggle: reg ^= (1 << n) · Read: (reg >> n) & 1
+  (pen marks: 7 )
+  beat0:
+     0: General purpose input output pins are the simplest peripheral.
+     1: Each pin corresponds to one bit in a port register.
+     2: Write a one and the pin goes high, lighting an L E D.
+     3: Write a zero and it goes low.
+  beat1:
+     0: But a port register controls eight, sixteen or thirty two pins at once, so you must change one bit without disturbing the others.
+     1: That's done with bit masks, straight from Boolean algebra.
+     2: To set bit zero, OR the register with one shifted left by zero.
+  beat2:
+     0: To clear bit three, AND it with the complement of one shifted left by three.
+     1: Every bit stays the same except bit three, which becomes zero.
+  beat3:
+     0: To toggle bit five, X O R with one shifted left by five.
+     1: And to read a pin, shift right and AND with one.
+     2: You'll write these four patterns thousands of times as an embedded engineer.
+     3: Before a pin can be used, it must also be configured as an input or output, with its own direction register.
+
+[s9] WB  Worked example: bit masks, one bit at a time
+  step0 board+: uint8_t reg = 0xA5;          // 1010 0101 || PEN ('underline',) on 0xA5 || PEN ('underline',) on 1010 0101
+     0: Let's practice the four bit mask operations on a real value.
+     1: A port register holds hex A five: in binary, one zero one zero, zero one zero one.
+     2: Bit zero is on the right, bit seven on the left.
+  step1 board+: reg |=  (1 << 3);            // 1010 1101 = 0xAD || PEN ('circle',) on (1 << 3) || PEN ('circle',) on |= || PEN ('highlight',) on 0xAD
+     0: Set bit three.
+     1: One shifted left by three is zero zero zero zero, one zero zero zero.
+     2: Or it in, and bit three turns on, without touching anything else.
+     3: The result is hex A D.
+  step2 board+: reg &= ~(1 << 0);            // 1010 1100 = 0xAC || PEN ('circle',) on ~(1 << 0) || PEN ('highlight',) on 0xAC
+     0: Clear bit zero.
+     1: One shifted by zero is just one.
+     2: Invert it with tilde, so every bit is one except bit zero, then and it in.
+     3: Only bit zero is forced to zero: hex A C.
+  step3 board+: reg ^=  (1 << 7);            // 0010 1100 = 0x2C || PEN ('circle',) on ^= || PEN ('highlight',) on 0x2C
+     0: Toggle bit seven with exclusive or.
+     1: Bit seven was one, so it becomes zero: hex two C.
+  step4 board+: int b5 = (reg >> 5) & 1;     // 0010 1100 -> 1 || PEN ('circle',) on (reg >> 5) || PEN ('circle',) on & 1; || PEN ('check',) on 0010 1100 -> 1 || set: |=   clear: &= ~   toggle: ^=   read: >> and & 1
+     0: Finally, read bit five.
+     1: Shift the register right by five, so bit five lands in position zero, and mask with one.
+     2: Hex two C is zero zero one zero, one one zero zero.
+     3: Bit five is one.
+     4: These four idioms, set, clear, toggle and read, are how every embedded C program controls hardware: an LED, a motor enable, a sensor's ready flag.
+
+[s10] V  Polling vs. interrupts
+  img: fig:interrupt
+  • Polling: loop asking “ready yet?”
+  • Interrupt: hardware taps the CPU on the shoulder
+  • ISR runs, then main code resumes exactly where it was
+  • Keep ISRs short; share data carefully (volatile)
+  (pen marks: 6 )
+  beat0:
+     0: How does a program notice a button press?
+     1: The simple way is polling: loop forever, reading the pin over and over.
+     2: It works, but the CPU can't do anything else, and it can't sleep to save battery.
+  beat1:
+     0: The better way is an interrupt.
+     1: When the button is pressed, the hardware itself signals the CPU.
+  beat2:
+     0: The CPU finishes its current instruction, saves its registers, looks up the handler's address in a table called the interrupt vector table, and jumps to the interrupt service routine.
+     1: When the I S R finishes, the CPU restores its registers and resumes the main program exactly where it left off, as if nothing had happened.
+  beat3:
+     0: Two golden rules.
+     1: Keep I S Rs short: set a flag or grab a byte, and do the heavy work later in the main loop.
+     2: And variables shared between an I S R and the main program must be declared volatile, so the compiler doesn't cache them in a register and miss the update.
+     3: Forgetting volatile is one of the most common embedded bugs, and it often only shows up when you turn on optimizations.
+
+[s11] V  Timers and PWM
+  img: fig:pwm
+  • Timer: a hardware counter clocked by the system clock
+  • Periodic interrupts: “run this every 1 ms”
+  • PWM: fast on/off with adjustable duty cycle
+  • Dim LEDs, set motor speed, position servos (1–2 ms pulses)
+  (pen marks: 4 )
+  beat0:
+     0: A timer is a hardware counter that ticks with the system clock, completely independent of your code.
+     1: When it reaches a set value, it can trigger an interrupt, which gives you precise periodic events, like reading a sensor every millisecond.
+  beat1:
+     0: Timers can also generate pulse width modulation, or P W M.
+     1: The output switches on and off at a fixed fast rate, and you control the fraction of time it's on, called the duty cycle.
+  beat2:
+     0: Anything slow, like an L E D seen by your eye or a motor with inertia, responds to the average.
+     1: Twenty five percent duty gives roughly a quarter of the power.
+     2: That's how L E Ds are dimmed and how motor speed is controlled efficiently, without wasting energy as heat in a resistor.
+  beat3:
+     0: Hobby servo motors use P W M as a position command: a pulse every twenty milliseconds, where one millisecond means one end, two milliseconds means the other end, and one and a half means center.
+     1: The robot arm in senior design will need exactly this.
+
+[s12] WB  Worked example: choosing timer values for PWM
+  step0 board+: $f_{clk} = 48\ \mathrm{MHz}$,  want 1 kHz || period $= 48\times 10^6 \times 0.001 = 48{,}000$ counts || PEN None || PEN ('underline',) on period $= 48
+     0: A timer counts clock cycles.
+     1: Our clock is forty eight megahertz, and we want a one kilohertz PWM signal to dim an LED.
+     2: The period is one millisecond, so the timer must count forty eight million times one thousandth: forty eight thousand cycles per period.
+  step1 board+: 25% duty: compare $= 0.25\times 48{,}000 = 12{,}000$ || PEN None || PEN ('underline',) on 25% duty
+     0: For twenty five percent brightness, the output stays high for a quarter of the period.
+     1: So the compare value is twelve thousand.
+     2: When the counter passes twelve thousand, the pin goes low until the period restarts.
+  step2 board+: servo 50 Hz: $48\times 10^6 / 50 = 960{,}000$  too big! || prescaler 16: $3\ \mathrm{MHz}/50 = 60{,}000$ fits || PEN ('circle',) on too big! || PEN ('check',) on prescaler 16
+     0: Now a servo, which needs fifty hertz: twenty milliseconds per period.
+     1: That's nine hundred sixty thousand counts, too big for a sixteen bit timer, which tops out at sixty five thousand five hundred thirty five.
+     2: So we add a prescaler that divides the clock by sixteen first: three megahertz, and sixty thousand counts per period.
+     3: That fits.
+  step3 board+: 1.5 ms pulse: $0.0015\times 3\times 10^6 = 4500$
+     0: The servo's center position is a one point five millisecond pulse.
+     1: At three megahertz, that's four thousand five hundred counts.
+     2: Change that one number, and the servo arm turns.
+
+[s13] V  Reading the analog world: the ADC
+  img: fig:adc
+  • Sensors produce voltages; the CPU needs numbers
+  • n-bit ADC → 2ⁿ levels
+  • 12-bit, 3.3 V: ≈ 0.8 mV per step
+  • V = code × V_ref / 4096 → code 2048 ≈ 1.65 V
+  (pen marks: 4 )
+  beat0:
+     0: Temperature sensors, microphones, light sensors and potentiometers produce voltages, but the processor only understands numbers.
+     1: The analog to digital converter, or A D C, bridges the gap.
+  beat1:
+     0: An n bit A D C divides its input range into two to the n levels.
+     1: This chart shows a coarse four bit converter with sixteen steps, so you can see the staircase.
+     2: That staircase error is called quantization error.
+  beat2:
+     0: Real microcontrollers typically have twelve bit A D Cs: four thousand ninety six levels.
+     1: With a three point three volt reference, each step is about point eight millivolts.
+  beat3:
+     0: To convert a reading back to volts, multiply the code by the reference voltage and divide by four thousand ninety six.
+     1: A reading of two thousand forty eight means about one point six five volts, half scale.
+     2: The A D C also has a maximum sampling rate, and in signals and systems you'll learn why you must sample at more than twice the highest frequency you care about.
+
+[s14] WB  Worked example: from ADC code to temperature
+  step0 board+: sensor: $V = 0.5\ \mathrm{V} + 0.01\ \mathrm{V/°C}\times T$ || 12-bit ADC, $V_{ref} = 3.3\ \mathrm{V}$, reading = 1241 || PEN ('underline',) on reading = 1241
+     0: A temperature sensor outputs ten millivolts per degree Celsius, with an offset of half a volt at zero degrees.
+     1: It's wired to a twelve bit ADC with a three point three volt reference.
+     2: The ADC reads one thousand two hundred forty one.
+     3: What's the temperature?
+  step1 board+: $V = \mathrm{code}\times\frac{V_{ref}}{2^{12}} = 1241\times\ || $V \approx 1.00\ \mathrm{V}$ || PEN ('circle',) on $V \approx 1.00
+     0: Step one: code to volts.
+     1: A twelve bit converter has four thousand ninety six steps across three point three volts.
+     2: So the voltage is the code times three point three over four thousand ninety six: about one point zero zero volts.
+  step2 board+: $T = \frac{V - 0.5}{0.01} = \frac{1.00 - 0.5}{0.01}$ || PEN ('underline',) on $T = \frac{V - 0.5} || $T = 50\ \mathrm{°C}$
+     0: Step two: volts to temperature.
+     1: Subtract the half volt offset, and divide by ten millivolts per degree.
+     2: One point zero zero minus point five is point five, divided by point zero one is fifty degrees Celsius.
+  step3 board+: 1 step $\approx 0.8\ \mathrm{mV} \approx 0.08\ \mathrm{°C}$ || float t = (adc * 3.3f / 4096 - 0.5f) / 0.01f; || PEN ('highlight',) on 3.3f / 4096
+     0: And the resolution: one ADC step is three point three over four thousand ninety six, about point eight millivolts, which is less than a tenth of a degree.
+     1: In code, it's one line: float temp equals the reading times three point three over four thousand ninety six, minus point five, all over point zero one.
+
+[s15] V  Serial communication: UART, SPI and I²C
+  img: fig:uart / fig:buses
+  • UART: start bit, 8 data bits (LSB first), stop bit
+  • 9600 baud → 960 bytes per second
+  • SPI: clocked and fast · I²C: two wires, many addressed devices
+  • Logic analyzers decode these on screen
+  (pen marks: 6 )
+  beat0:
+     0: Microcontrollers talk to other chips and computers over serial links, sending bits one after another.
+     1: The classic is the U A R T.
+     2: The line idles high.
+     3: A start bit pulls it low, then eight data bits follow, least significant bit first, then a stop bit.
+     4: Here's the letter capital A, hex forty one.
+     5: There's no clock wire, so both sides must agree on the speed, called the baud rate.
+     6: At ninety six hundred baud, each byte takes ten bit times, so you get about nine hundred sixty bytes per second.
+  beat1:
+     0: Two other buses are everywhere.
+     1: S P I uses a separate clock, data lines in each direction, and a chip select, and it's fast, which is why S D cards and displays use it.
+     2: I squared C uses only two wires shared by many devices, each with its own address, which makes it perfect for wiring up lots of sensors.
+     3: When something doesn't work, a logic analyzer or oscilloscope that decodes these protocols on screen is an embedded engineer's best friend.
+
+[s16] WB  Worked example: the UART frame for the letter 'K'
+  step0 board+: 'K' = 0x4B = 0100 1011 || PEN None
+     0: Let's draw exactly what travels down the wire when a microcontroller sends the letter capital K.
+     1: The line rests high when idle.
+     2: Every frame begins with a start bit: the line drops low for one bit time.
+  step1 board+: LSB first:  1 1 0 1 0 0 1 0 || PEN ('underline',) on LSB first || PEN None
+     0: Then come the eight data bits, least significant bit first.
+     1: Hex four B is zero one zero zero, one zero one one.
+     2: Reading from the right, the bits go out as one, one, zero, one, zero, zero, one, zero.
+  step2 board+: PEN None || start 0 + 8 data + stop 1 || PEN ('box',) on start 0 + 8 data + stop 1
+     0: Finally a stop bit, high, and the line returns to idle.
+     1: The receiver has no clock wire.
+     2: It syncs on the falling edge of the start bit, then samples in the middle of each bit time.
+  step3 board+: bit time $= 1/9600 \approx 104\ \mu s$ || PEN ('circle',) on bit time || 10 bits per char: 960 chars/s || PEN None
+     0: At nine thousand six hundred baud, each bit lasts one over nine thousand six hundred seconds, about a hundred and four microseconds.
+     1: Ten bits per frame means one point oh four milliseconds per character, so about nine hundred sixty characters per second.
+
+[s17] B  Debugging embedded code
+  • Use a hardware debugger: breakpoints, single-step, watch registers & memory
+  • Blink an LED or toggle a pin to trace timing
+  • Read the datasheet & reference manual — register by register
+  • Check clocks and pin configuration first
+  • Measure with a scope or logic analyzer — don’t guess
+  (pen marks: 5 )
+  beat0:
+     0: Embedded debugging is different from desktop debugging, because there's often no screen.
+  beat1:
+     0: Use the hardware debugger.
+     1: Through a small debug port, you can stop the processor at a breakpoint, step one instruction at a time, and inspect every register and memory location while the chip is running on your bench.
+  beat2:
+     0: The humble L E D is a debugging tool.
+     1: Toggle a pin at the start and end of a routine and measure it on a scope to see exactly how long it takes.
+  beat3:
+     0: Read the datasheet and the reference manual.
+     1: Every peripheral is controlled by registers documented bit by bit, and most bugs are a single bit set wrong.
+  beat4:
+     0: When nothing works at all, check the basics first: is the peripheral's clock enabled, and is the pin configured for the right function?
+  beat5:
+     0: And measure.
+     1: A scope or logic analyzer shows what's really happening on the wires, which is often not what you think your code is doing.
+
+[s18] Q  Key takeaways
+  BIG: A microcontroller is a computer on a chip. Hardware is **memory-mapped**, controlled with **bit masks**, driven by **interrupts and timers**.
+  cap: Next: EGCP 281, Designing with VHDL. Later: EGCP 450 builds full embedded systems on ARM.
+  beat0:
+     0: To wrap up.
+     1: A microcontroller combines a C P U, flash, RAM and peripherals on one chip.
+     2: The programmer's model is registers, flags and a memory map.
+     3: Assembly language uses loads, stores, arithmetic and branches, and subroutines use the link register and the stack.
+     4: Peripherals are memory mapped, so you control them by setting and clearing bits.
+     5: Interrupts let hardware events take over the processor briefly, timers generate precise timing and P W M, the A D C reads the analog world, and serial buses connect to other chips.
+     6: Next, we'll design hardware itself with V H D L.
+     7: See you there.

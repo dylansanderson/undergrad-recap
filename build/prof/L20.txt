@@ -1,0 +1,352 @@
+﻿#### L20_egcp381: EGCP 381 Computer Design and Organization
+
+[s0] TITLE  Computer Design & Organization
+  img: a:zen_die
+  beat0:
+     0: Welcome to E G C P three eighty one, computer design and organization.
+     1: That's a photograph of a real processor die, an A M D Zen chip under a microscope.
+     2: By the end of this lecture, you'll know what the major blocks on a chip like that do.
+     3: We'll cover the instruction set as a contract between hardware and software, how a datapath executes instructions, how to measure performance, how pipelining makes processors fast and what goes wrong with it, and how caches hide slow memory.
+     4: In this course's labs, students build and extend a small sixteen bit processor in V H D L, all the way to a pipelined version with hazard handling.
+
+[s1] V  The ISA: the contract between hardware and software
+  img: fig:isa
+  • ISA = registers, instructions, encodings, memory model
+  • Many implementations of one ISA
+  • RISC (ARM, RISC-V, MIPS): simple, fixed-length, load/store
+  • CISC (x86): complex variable-length — decoded into RISC-like micro-ops
+  (pen marks: 6 )
+  beat0:
+     0: The instruction set architecture, or I S A, is the contract between software and hardware.
+     1: It defines what a programmer or compiler can see: the registers, the instructions, how they're encoded in bits, and how memory behaves.
+  beat1:
+     0: Underneath, the implementation, called the microarchitecture, can be anything.
+     1: A tiny microcontroller and a high end desktop chip can run the same programs if they implement the same I S A, which is exactly why software doesn't need to be rewritten for every new processor.
+  beat2:
+     0: There are two broad philosophies.
+     1: RISC, reduced instruction set computers, like ARM, RISC five and MIPS, use simple, fixed length instructions, lots of registers, and only loads and stores touch memory.
+     2: That makes them easy to decode and pipeline.
+     3: ARM chips power nearly every phone.
+  beat3:
+     0: CISC, complex instruction set computers, mainly x86 from Intel and A M D, have variable length instructions that can operate directly on memory.
+     1: Modern x86 chips translate those instructions internally into simple, RISC like micro operations.
+     2: So today, almost everything is RISC on the inside.
+
+[s2] V  Instruction formats and addressing
+  img: fig:formats
+  • R-type: register operands (add, sub, and)
+  • I-type: a 16-bit immediate (loads, stores, branches)
+  • J-type: a 26-bit jump target
+  • Accumulator machines use one implicit register — fewer bits, more instructions
+  (pen marks: 5 )
+  beat0:
+     0: Every instruction is just a binary number, with fields.
+     1: MIPS style instructions are thirty two bits, in three formats.
+     2: R type instructions name three registers: two sources and a destination, plus a function code that picks the operation.
+     3: Add t zero equals s one plus s two is R type.
+  beat1:
+     0: I type instructions carry a sixteen bit constant, an immediate.
+     1: Loads and stores use it as an offset from a base register, like load word t zero from eight bytes past the stack pointer.
+     2: Branches use it as a distance from the current instruction.
+  beat2:
+     0: J type instructions are jumps with a twenty six bit target address.
+  beat3:
+     0: Simpler machines, like the accumulator machines in early labs, use a single implicit register, the accumulator, for every operation.
+     1: Instructions get shorter, but you need more of them to do the same work.
+     2: Choosing instruction formats is a constant trade off between code size, decoding simplicity and flexibility.
+
+[s3] WB  Worked example: encoding an instruction by hand
+  step0 board+: add $t0, $s1, $s2 || PEN ('underline',) on $t0, $s1, $s2 || R-type: op rs rt rd shamt funct || PEN None || PEN ('circle',) on add $t0
+     0: Let's turn one assembly instruction into the thirty two bits the processor actually fetches.
+     1: The instruction is add t zero, s one, s two: add registers s one and s two, and put the result in t zero.
+     2: Add is an R type instruction, with six fields.
+  step1 board+: op = 0, rs = $s1 = 17, rt = $s2 = 18 || PEN ('underline',) on op = 0, rs || rd = $t0 = 8, shamt = 0, funct = 32 || PEN None || PEN ('circle',) on funct = 32
+     0: Fill in the numbers.
+     1: Opcode zero for all R type instructions.
+     2: The source registers: s one is register seventeen, s two is eighteen.
+     3: The destination t zero is register eight.
+     4: Shift amount zero.
+     5: And the function code for add is thirty two.
+  step2 board+: PEN None
+     0: Now write each field in binary, with exactly its bit width.
+     1: Zero is six zeros.
+     2: Seventeen is one zero zero zero one.
+     3: Eighteen is one zero zero one zero.
+     4: Eight is zero one zero zero zero.
+     5: Then five zeros, and thirty two is one zero zero zero zero zero.
+  step3 board+: PEN None || 0000 0010 0011 0010 0100 0000 0010 0000 || PEN ('highlight',) on 0000 0010 0011 0010 || PEN ('highlight',) on 0100 0000 0010 0000 || = 0x02324020
+     0: Group the thirty two bits by fours and convert to hex: zero two three two, four zero two zero.
+     1: Hex zero two three two four zero two zero is exactly what sits in memory, and the control unit decodes it by slicing out these same fields.
+
+[s4] V  The single-cycle datapath
+  img: fig:datapath
+  • PC → instruction memory → register file → ALU → data memory → write back
+  • Control unit decodes the opcode into control signals
+  • One instruction per (long) clock cycle
+  • Clock period set by the slowest instruction (load)
+  (pen marks: 8 )
+  beat0:
+     0: Here's how a processor actually executes instructions.
+     1: The program counter holds the address of the current instruction.
+     2: Instruction memory delivers it.
+     3: The register file reads the two source registers.
+     4: The A L U computes, for example, a sum, or an address for a load.
+     5: Data memory is read or written for loads and stores.
+     6: And the result is written back to a register, the orange path.
+  beat1:
+     0: The control unit looks at the opcode and sets the control signals: whether to write a register, whether the A L U's second input is a register or an immediate, whether to read or write memory, and so on.
+     1: In a single cycle design, control is just a combinational truth table, the kind you'd write in V H D L with a case statement.
+  beat2:
+     0: In a single cycle processor, every instruction completes in one clock cycle.
+  beat3:
+     0: The catch: the clock period must be long enough for the slowest instruction, a load, which uses every block.
+     1: Simple instructions waste most of that time.
+     2: In this course's labs, students first build exactly this single cycle datapath and control, then extend it with new instructions and a register file.
+
+[s5] V  Measuring performance
+  img: fig:perf
+  • CPU time = instruction count × CPI × clock period
+  • CPI: average clock cycles per instruction
+  • A higher GHz chip can still be slower
+  • Amdahl: speeding up 40% of the work by 10× → only 1.56× overall
+  (pen marks: 5 )
+  beat0:
+     0: How do you compare processors?
+     1: The iron law of performance: C P U time equals the number of instructions, times the average cycles per instruction, C P I, times the clock period.
+     2: All three matter.
+  beat1:
+     0: Example: processor A runs a program in one billion instructions, at a C P I of two, with a one gigahertz clock: two seconds.
+     1: Processor B needs one point two billion instructions, but has a C P I of one point two and an eight hundred megahertz clock: one point eight seconds.
+     2: B is faster despite the slower clock.
+     3: Megahertz alone is a terrible way to compare processors.
+  beat2:
+     0: C P I depends on the microarchitecture, the instruction count depends on the I S A and the compiler, and the clock depends on the circuit design and technology.
+  beat3:
+     0: And Amdahl's law, from operating systems, applies here too: if you make forty percent of a program ten times faster, the overall speedup is only one over point six plus point oh four, about one point five six times.
+     1: Speed up the common case.
+
+[s6] V  Pipelining: the assembly line
+  img: a:ford_line / fig:pipe_analogy / fig:pipeline
+  • Split execution into 5 stages: IF, ID, EX, MEM, WB
+  • Start a new instruction every cycle
+  • Ideal speedup ≈ number of stages
+  • Throughput improves; one instruction’s latency doesn’t
+  (pen marks: 2 )
+  beat0:
+     0: In nineteen thirteen, Ford's moving assembly line cut the time to build a car from about twelve hours to about an hour and a half, not by making any single step faster, but by working on many cars at once, each at a different station.
+     1: Processors do the same thing.
+     2: It's called pipelining.
+  beat1:
+     0: Think of laundry: wash, dry, fold.
+     1: Done one load at a time, two loads take six steps.
+     2: Pipelined, you start the second wash while the first load is drying.
+     3: Each load still takes three steps, that's latency, but a load finishes every step, that's throughput.
+  beat2:
+     0: The classic RISC pipeline has five stages: instruction fetch, instruction decode and register read, execute, memory access, and write back.
+     1: Each stage is separated by pipeline registers, and a new instruction starts every cycle.
+     2: In cycle five, five instructions are in flight at once, outlined in red.
+     3: Ideally, the speedup equals the number of stages, because each stage can use a clock about five times shorter.
+     4: In the labs, students convert their single cycle processor into a pipelined one.
+
+[s7] V  Data hazards: forwarding and stalls
+  img: fig:forward
+  • Next instruction needs a result that isn’t written back yet
+  • Forwarding: route the ALU result straight back to the ALU input
+  • Load-use hazard: data only ready after MEM → 1 stall (bubble)
+  • Compilers reorder code to fill the gap
+  (pen marks: 5 )
+  beat0:
+     0: Overlapping instructions creates hazards.
+     1: The most common is a data hazard.
+     2: Add writes t zero, and the very next instruction, subtract, reads t zero.
+     3: But add won't write its result back until the fifth stage, while subtract wants it in the third.
+  beat1:
+     0: The fix is forwarding, also called bypassing.
+     1: The result exists at the end of add's execute stage, so extra wires and multiplexers route it straight back to the A L U input for subtract, the red arrow.
+     2: No waiting.
+  beat2:
+     0: But a load is different.
+     1: Its data only arrives at the end of the memory stage, one cycle too late for an immediately following instruction that uses it.
+     2: That's the load use hazard, and the hardware must insert one bubble, a stall, delaying the dependent instruction by a cycle.
+  beat3:
+     0: Good compilers reorder instructions to put something independent in that slot.
+     1: In the lab on hazards, students implement forwarding and stall logic in V H D L for their pipelined processor and test it with programs that deliberately create these hazards.
+
+[s8] WB  Worked example: a pipeline diagram with a load-use stall
+  step0 board+: rows: instructions || columns: cycles || PEN None
+     0: Let's draw a pipeline diagram.
+     1: Each row is an instruction, each column is a clock cycle.
+     2: The load word goes through the five stages in cycles one through five.
+  step1 board+: PEN None
+     0: The add needs t zero, which the load is still fetching from memory.
+     1: Without hazards, add would be in its execute stage in cycle four.
+  step2 board+: PEN None
+     0: And the sub follows one cycle behind.
+     1: But there's a problem with the add.
+  step3 board+: PEN None || load-use: 1 stall || PEN ('circle',) on load-use: 1 stall
+     0: The load's data only appears at the end of the memory stage, cycle four.
+     1: Forwarding can't send data back in time, so the add must wait one cycle: a bubble.
+     2: The sub behind it waits too.
+  step4 board+: PEN None || forwarding: MEM to EX || PEN ('underline',) on forwarding: MEM to EX || compiler fills the slot || PEN ('check',) on compiler fills the slot
+     0: Then forwarding carries the loaded value straight from the memory stage into the add's execute stage in cycle five, without waiting for write back.
+     1: One lost cycle instead of two.
+     2: And a smart compiler will try to move an independent instruction into that slot, so no cycle is lost at all.
+
+[s9] V  Control hazards and branch prediction
+  img: fig:branchpred
+  • Branch outcome isn’t known until EX
+  • Predict, keep fetching, flush if wrong
+  • 2-bit saturating counter per branch
+  • Modern predictors: > 95% accurate
+  (pen marks: 6 )
+  beat0:
+     0: Branches cause control hazards.
+     1: The processor doesn't know whether a branch is taken until it reaches the execute stage, but it has already fetched the next instructions by then.
+  beat1:
+     0: Waiting would waste cycles on every branch, and roughly one in six instructions is a branch.
+     1: So processors predict, keep fetching down the predicted path, and if the prediction turns out wrong, flush the wrongly fetched instructions.
+  beat2:
+     0: A classic predictor uses a two bit saturating counter for each branch: a tiny state machine with four states.
+     1: Two taken outcomes push it toward predicting taken, and it takes two surprises in a row to change its mind.
+     2: That works beautifully for loops, which are taken many times and then not taken once.
+  beat3:
+     0: Modern processors use far more elaborate predictors that learn patterns across many branches, and they're right over ninety five percent of the time.
+     1: It matters for programmers too: code with unpredictable branches, like checking random data, can run several times slower than code with predictable ones.
+
+[s10] V  Putting numbers on it: CPI with hazards
+  img: fig:cpi
+  • Ideal pipeline CPI = 1
+  • Loads 25%, 40% followed by a use → +0.10
+  • Branches 15%, 20% mispredicted, 2-cycle penalty → +0.06
+  • Effective CPI = 1.16
+  (pen marks: 6 )
+  beat0:
+     0: Let's put numbers on hazards.
+     1: An ideal pipeline finishes one instruction per cycle, a C P I of one.
+  beat1:
+     0: Suppose twenty five percent of instructions are loads, and forty percent of those are immediately followed by an instruction that uses the loaded value.
+     1: Each causes one stall.
+     2: That adds point two five times point four times one, which is point one cycles per instruction.
+  beat2:
+     0: Suppose fifteen percent of instructions are branches, the predictor is wrong twenty percent of the time, and each misprediction costs two cycles.
+     1: That adds point one five times point two times two, point oh six.
+  beat3:
+     0: So the effective C P I is one point one six.
+     1: Still far better than an unpipelined design, but it shows exactly where to invest: better instruction scheduling to hide load delays, and better branch prediction.
+
+[s11] V  The memory hierarchy
+  img: fig:hierarchy
+  • Fast memory is small and expensive; big memory is slow
+  • DRAM ≈ 100× slower than the CPU cycle
+  • Locality: temporal (reuse soon) + spatial (neighbors next)
+  • Caches keep the working set close to the CPU
+  (pen marks: 4 )
+  beat0:
+     0: Here's a problem pipelines can't fix on their own.
+     1: A processor cycle takes about a third of a nanosecond, but main memory, D RAM, takes around eighty nanoseconds to respond.
+     2: If every load went to D RAM, the processor would spend almost all its time waiting.
+  beat1:
+     0: The solution is a hierarchy.
+     1: Registers are tiny and instant.
+     2: Then small, fast caches built from S RAM right on the chip: level one, level two, level three.
+     3: Then D RAM, then the S S D.
+  beat2:
+     0: It works because of locality.
+     1: Temporal locality: data you used recently, you'll probably use again soon, like a loop counter.
+     2: Spatial locality: data near what you just used, you'll probably use next, like the next element of an array.
+  beat3:
+     0: So caches keep recently used data, and fetch it in blocks of neighbors, typically sixty four bytes.
+     1: In those die photos, a large fraction of the chip area is cache.
+     2: That's how important it is.
+
+[s12] WB  Worked example: average memory access time
+  step0 board+: AMAT $=$ hit time $+$ miss rate $\times$ miss penalty || $= 1 + 0.05 \times 100 = 6$ cycles || PEN ('circle',) on $= 1 + 0.05 \times 100
+     0: Average memory access time is the hit time, plus the miss rate times the miss penalty.
+     1: Take a cache that hits in one cycle, misses five percent of the time, and costs one hundred cycles to reach DRAM on a miss.
+  step1 board+: misses dominate: 6× slower than a hit! || PEN ('underline',) on misses dominate || add L2: hit 10 cycles, local miss rate 20% || PEN ('underline',) on add L2
+     0: Six cycles on average, even though ninety five percent of accesses take one.
+     1: The rare misses dominate.
+     2: Now add a second level cache between them: it hits in ten cycles, and only twenty percent of the requests that reach it miss to DRAM.
+  step2 board+: L1 miss penalty $= 10 + 0.2 \times 100 = 30$ || PEN ('circle',) on L1 miss penalty || AMAT $= 1 + 0.05 \times 30 = 2.5$ cycles
+     0: The L one miss penalty becomes ten, plus point two times one hundred: thirty cycles instead of a hundred.
+     1: So AMAT is one plus point zero five times thirty, two and a half cycles.
+     2: More than twice as fast, by adding a cache level.
+     3: That's why every modern processor has two or three levels.
+
+[s13] V  How a cache works
+  img: fig:cache
+  • Address = tag | index | offset
+  • Index picks a cache line; tag checks it’s the right block
+  • Direct-mapped, set-associative, fully associative
+  • AMAT = hit time + miss rate × miss penalty
+  (pen marks: 8 )
+  beat0:
+     0: A cache splits each memory address into three fields.
+     1: The offset picks the byte within a block.
+     2: With sixty four byte blocks, that's six bits.
+  beat1:
+     0: The index picks which cache line to look in.
+     1: A thirty two kilobyte cache with sixty four byte blocks has five hundred twelve lines, so nine index bits.
+     2: The remaining seventeen bits are the tag, stored alongside the data and compared on every access to check that the line really holds the block you want.
+     3: Match: a hit.
+     4: No match: a miss, and the block is fetched from the next level.
+  beat2:
+     0: In a direct mapped cache, each block can live in exactly one line, so two blocks that share an index keep kicking each other out.
+     1: Set associative caches allow a few choices per index, and replace the least recently used one.
+  beat3:
+     0: Performance is measured by average memory access time: hit time plus miss rate times miss penalty.
+     1: With a one nanosecond hit, a five percent miss rate and a hundred nanosecond penalty, that's six nanoseconds.
+     2: Cut the miss rate to two percent, and it drops to three.
+     3: That's why the order in which your code walks through arrays can change its speed dramatically.
+
+[s14] WB  Worked example: splitting an address for a cache
+  step0 board+: 16 KB, direct-mapped, 64 B blocks || offset: $64 = 2^6$  so 6 bits || PEN None || PEN ('underline',) on offset: $64
+     0: A sixteen kilobyte direct mapped cache uses sixty four byte blocks, with thirty two bit addresses.
+     1: How does the cache split each address?
+     2: Start at the right.
+     3: The offset picks a byte inside a block.
+     4: Sixty four is two to the sixth, so six offset bits.
+  step1 board+: lines: $16384 / 64 = 256 = 2^8$  so 8 bits || PEN None || PEN ('underline',) on lines: $16384
+     0: The index picks which line of the cache.
+     1: Sixteen kilobytes over sixty four bytes is two hundred fifty six lines, two to the eighth, so eight index bits.
+  step2 board+: tag: 32 − 8 − 6 = 18 bits || PEN None || PEN ('circle',) on tag: 32
+     0: Everything left over is the tag: thirty two minus eight minus six, eighteen bits.
+     1: The tag is stored next to the data, to check that the line holds the address we want.
+  step3 board+: address 0x1234ABCD: || PEN ('underline',) on address 0x1234ABCD || offset 13, index 175, tag 0x48D2 || PEN None
+     0: Try a real address: hex one two three four A B C D.
+     1: The low six bits give offset thirteen.
+     2: The next eight give index one seventy five.
+     3: The rest is the tag, hex four eight D two.
+     4: So the cache goes straight to line one seventy five, compares tags, and on a match returns byte thirteen.
+     5: One lookup, no searching.
+
+[s15] V  Beyond the basic pipeline
+  img: a:p2_die / a:zen_die
+  • Superscalar: issue several instructions per cycle
+  • Out-of-order execution + register renaming
+  • Multicore + cache coherence (MESI)
+  • SIMD and GPUs: one instruction, many data
+  (pen marks: 4 )
+  beat0:
+     0: Real processors go much further.
+     1: This is the Pentium two from nineteen ninety seven, one of the first widely used out of order x86 processors.
+     2: Superscalar processors fetch and issue several instructions per cycle.
+     3: Out of order execution lets later, independent instructions run while an earlier one waits for memory, with register renaming removing false dependencies, and a reorder buffer making sure results still appear in program order.
+  beat1:
+     0: Today's chips, like this A M D Zen design, put several such cores on one die.
+     1: Each core has private caches, so the hardware must keep them consistent with a coherence protocol such as MESI, which tracks whether each cache line is modified, exclusive, shared or invalid.
+     2: And SIMD instructions and G P Us apply one instruction to many data elements at once, which is what makes graphics and machine learning fast.
+     3: All of it is built on the ideas in this course: datapaths, pipelines, hazards and caches.
+
+[s16] Q  Key takeaways
+  BIG: **Time = instructions × CPI × period.** Pipelines overlap work; **forwarding, stalls and prediction** handle hazards; **caches** hide slow memory.
+  cap: Next: CPSC 351, Operating Systems — the software that manages all this hardware.
+  beat0:
+     0: To recap.
+     1: The I S A is the contract between software and hardware, and many implementations can share one I S A.
+     2: A datapath fetches, decodes, executes, accesses memory and writes back, under the direction of a control unit.
+     3: Performance is instruction count times C P I times clock period.
+     4: Pipelining overlaps instructions for throughput, and hazards are handled with forwarding, stalls and branch prediction.
+     5: And the memory hierarchy, with caches exploiting locality, hides the enormous gap between processor and memory speeds.
+     6: Next, operating systems.
+     7: See you there.

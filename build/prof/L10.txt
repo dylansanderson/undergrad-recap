@@ -1,0 +1,314 @@
+﻿#### L10_phys226: PHYS 226 Electricity & Magnetism
+
+[s0] TITLE  Electricity & Magnetism
+  img: a:lightning
+  beat0:
+     0: Welcome to Physics two twenty six, electricity and magnetism.
+     1: For a computer engineer, this is the physics of everything.
+     2: Every bit in your processor is a tiny packet of charge, every wire carries current, every motor and speaker runs on magnetic forces, and every wireless signal is an electromagnetic wave.
+     3: Circuits class gives you rules.
+     4: This class explains where those rules come from.
+
+[s1] V  Electric charge and Coulomb’s law
+  img: fig:coulomb
+  • Two kinds of charge: + and −
+  • Like repel, opposites attract
+  • F = k q₁q₂ / r² — inverse square, like gravity
+  • But ~10⁴² times stronger than gravity between electrons
+  (pen marks: 7 )
+  beat0:
+     0: Matter is made of positive protons and negative electrons.
+     1: Charge comes in exactly those two flavors.
+  beat1:
+     0: Like charges repel, and opposite charges attract.
+  beat2:
+     0: Coulomb's law gives the force: k times q one times q two, over r squared, with k about nine billion.
+     1: Double the distance and the force drops to a quarter.
+  beat3:
+     0: This force is enormous compared to gravity.
+     1: Between two electrons, the electric force is about ten to the forty two times stronger than their gravitational pull.
+     2: Even two tiny one microcoulomb charges, a centimeter apart, push on each other with ninety newtons, the weight of nine kilograms.
+     3: The only reason we don't feel these forces every day is that ordinary matter is almost perfectly neutral.
+
+[s2] V  Electric fields and potential
+  img: fig:field
+  • Field E = force per unit charge, at every point
+  • Field lines leave + and end on −
+  • Potential V = energy per unit charge (volts)
+  • E points “downhill” in V and crosses equipotentials at 90°
+  (pen marks: 5 )
+  beat0:
+     0: Instead of computing forces between every pair of charges, we describe the electric field: the force a tiny positive test charge would feel at each point, per coulomb.
+     1: It's a vector field, like the ones from Calculus three.
+  beat1:
+     0: Field lines start on positive charges and end on negative ones.
+     1: Here, the gray lines show the field of a positive and negative pair, called a dipole.
+  beat2:
+     0: The electric potential, measured in volts, is the potential energy per unit charge.
+     1: A volt is a joule per coulomb.
+     2: The orange curves connect points at equal potential.
+  beat3:
+     0: The field points downhill in potential, from high voltage to low, and always crosses equipotentials at right angles, exactly like the gradient and contour lines from Calculus three.
+     1: In fact, E is minus the gradient of V.
+     2: That's the physics behind every voltage in a circuit.
+
+[s3] WB  Worked example: adding electric fields
+  step0 board+: PEN None || $q = \pm 2\ \mathrm{nC}$,   P is $r = 0.3\ \mathrm{m}$ from 
+     0: Let's add fields from two charges, step by step.
+     1: A plus two nanocoulomb charge and a minus two nanocoulomb charge sit sixty centimeters apart.
+     2: What's the electric field at point P, exactly halfway between them?
+  step1 board+: $E = \frac{kq}{r^2}$ || $E_1 = \frac{(9\times 10^9)(2\times 10^{-9})}{0.3^2} = \frac || PEN None
+     0: One charge at a time.
+     1: The field from a point charge is k q over r squared.
+     2: For the positive charge: nine times ten to the ninth, times two times ten to the minus ninth, over point three squared.
+     3: That's eighteen over point zero nine, two hundred newtons per coulomb.
+     4: It points away from the positive charge, so to the right.
+  step2 board+: $E_2 = 200\ \mathrm{N/C}$, also to the right || PEN None
+     0: The negative charge has the same size and distance, so its field is also two hundred.
+     1: Fields point toward negative charges, so this one points to the right as well.
+  step3 board+: $E = E_1 + E_2 \approx 400\ \mathrm{N/C}$  (to the right) || PEN None
+     0: Fields are vectors, so add them with direction.
+     1: Both point right, so they add: four hundred newtons per coulomb, pointing from plus toward minus.
+     2: If both charges had been positive, the two fields would have cancelled to zero.
+     3: Direction matters.
+
+[s4] V  Gauss’s law
+  img: fig:gauss
+  • Flux of E through a closed surface = Q_inside / ε₀
+  • Use symmetry to make hard problems easy
+  • Inside a conductor in equilibrium: E = 0
+  • Excess charge sits on the outer surface
+  (pen marks: 4 )
+  beat0:
+     0: Gauss's law says the total electric flux out of any closed surface equals the charge enclosed, divided by epsilon naught.
+     1: It's the divergence theorem from Calculus three applied to the electric field.
+  beat1:
+     0: When there's symmetry, it turns a hard integral into one line.
+     1: For example, it shows that a uniformly charged sphere looks exactly like a point charge from outside.
+  beat2:
+     0: It also proves that inside a conductor in equilibrium, the field is zero.
+     1: Any field would push the free electrons around until they cancel it.
+  beat3:
+     0: So excess charge sits on the outer surface.
+     1: That's why a car, a metal box, is a relatively safe place in a lightning storm, and why sensitive electronics are wrapped in metal shields called Faraday cages.
+
+[s5] V  Capacitors: storing charge and energy
+  img: fig:capacitor
+  • C = Q / V
+  • Parallel plates: C = ε₀A/d (bigger, closer → more C)
+  • Energy U = ½CV²
+  • Touchscreens, DRAM bits, camera flashes
+  (pen marks: 6 )
+  beat0:
+     0: A capacitor is two conductors separated by a gap.
+     1: Put a voltage across it and charge piles up, plus on one side and minus on the other.
+     2: Capacitance is the charge stored per volt.
+  beat1:
+     0: For parallel plates, C equals epsilon naught times the area over the gap.
+     1: Bigger plates or a smaller gap store more charge.
+     2: One square centimeter plates a micrometer apart give about point nine nanofarads.
+     3: Filling the gap with an insulating material multiplies it by the dielectric constant.
+  beat2:
+     0: The energy stored is one half C V squared, the same triangle we integrated in calculus two.
+  beat3:
+     0: Capacitors are everywhere in computer engineering.
+     1: Every bit in a computer's D RAM memory is a tiny capacitor that's either charged or not.
+     2: Your phone's touchscreen senses your finger because your finger changes the capacitance of a grid of electrodes.
+     3: And every chip has capacitors next to it to smooth out its power supply.
+
+[s6] WB  Worked example: a parallel-plate capacitor
+  step0 board+: PEN None || $A = (0.1)(0.1) = 0.01\ \mathrm{m^2}$,   $d = 10^{-4}\ \math
+     0: Let's size a real capacitor.
+     1: Two square plates, ten centimeters on a side, separated by a tenth of a millimeter of air.
+     2: What's the capacitance?
+     3: The plate area is point one times point one, point zero one square meters.
+  step1 board+: $C = \frac{\varepsilon_0 A}{d}$ || $= \frac{(8.85\times 10^{-12})(0.01)}{10^{-4}}$ || $C \approx 885\ \mathrm{pF}$
+     0: Use C equals epsilon naught A over d.
+     1: Epsilon naught is eight point eight five times ten to the minus twelve.
+     2: Multiply by point zero one and divide by ten to the minus four: about eight point eight five times ten to the minus ten farads, or eight hundred eighty five picofarads.
+  step2 board+: PEN None || $Q = CV = (885\ \mathrm{pF})(5\ \mathrm{V}) \approx 4.4\ \ma || $U = \frac{1}{2}CV^2 \approx 11\ \mathrm{nJ}$
+     0: Connect it to five volts.
+     1: The charge is C V: about four point four nanocoulombs.
+     2: The stored energy is one half C V squared: about eleven nanojoules.
+     3: Tiny!
+     4: That's why real capacitors use thin insulating films, rolled up or stacked in layers, to get far more area in far less space.
+
+[s7] V  Current and resistance
+  img: fig:current
+  • Current I = dq/dt (amperes = coulombs/second)
+  • R = ρL/A — longer, thinner wires resist more
+  • Electrons drift slowly; the field moves fast
+  • Power P = I²R = V²/R → heat
+  (pen marks: 4 )
+  beat0:
+     0: Current is the rate at which charge flows: one ampere is one coulomb per second.
+  beat1:
+     0: A wire's resistance depends on its material, its length and its cross section: R equals rho L over A.
+     1: A meter of copper wire one square millimeter thick has only about point zero one seven ohms.
+     2: On a chip, wires are thousands of times thinner, so their resistance matters a lot, as you'll see in advanced electronics.
+  beat2:
+     0: Here's a surprise.
+     1: In a wire carrying one amp, the electrons themselves drift at only about seven hundredths of a millimeter per second, slower than a snail.
+     2: But when you flip a switch, the light comes on instantly, because the electric field that pushes all the electrons travels down the wire at a large fraction of the speed of light.
+  beat3:
+     0: And resistance turns electrical energy into heat: power equals I squared R.
+     1: That's how toasters work, and also why processors need fans.
+
+[s8] WB  Worked example: how much power does a wire waste?
+  step0 board+: copper: $\rho = 1.68\times 10^{-8}\ \Omega\,\mathrm{m}$,   $ || $A = \pi r^2 = \pi(5\times 10^{-4})^2 \approx 7.85\times 10^
+     0: Here's a practical one.
+     1: A ten meter copper wire, one millimeter in diameter, carries ten amps.
+     2: What's its resistance, and how much power turns into heat?
+     3: The cross section is a circle of radius half a millimeter: pi times five times ten to the minus four, squared, about seven point eight five times ten to the minus seven square meters.
+  step1 board+: $R = \frac{\rho L}{A} = \frac{(1.68\times 10^{-8})(10)}{7.85 || $R \approx 0.21\ \Omega$
+     0: Resistance is rho L over A.
+     1: One point six eight times ten to the minus eight, times ten, divided by seven point eight five times ten to the minus seven.
+     2: That's about point two one ohms.
+  step2 board+: $V = IR = 10(0.21) \approx 2.1\ \mathrm{V}$ || $P = I^2R = 100(0.21) \approx 21\ \mathrm{W}$
+     0: At ten amps, the voltage lost along the wire is I R, about two point one volts.
+     1: The power turned into heat is I squared R: one hundred times point two one, about twenty one watts.
+     2: That's why high current cables are thick, and why the power grid uses high voltage: for the same power, less current, and the loss drops with the square of the current.
+
+[s9] V  Magnetic force: why motors spin
+  img: fig:lorentz / a:motor_cutaway
+  • F = q v × B: always perpendicular to motion
+  • Charges circle in a uniform field
+  • Force on a wire: F = I L × B
+  • Current loop in a field feels a torque → motor
+  (pen marks: 5 )
+  beat0:
+     0: Magnetic fields push on moving charges with the force q v cross B.
+     1: Because it's a cross product, the push is always sideways, perpendicular to the velocity.
+     2: So a magnetic field can bend a charge's path into a circle, but never speed it up or slow it down.
+     3: The radius is m v over q B.
+     4: That's how particle accelerators steer beams, and how old tube televisions aimed their electron beam.
+  beat1:
+     0: A current carrying wire is just many moving charges, so it feels a force too: I L cross B.
+     1: Put a loop of wire in a magnetic field, and the forces on opposite sides push in opposite directions, creating a torque.
+     2: Switch the current direction at the right moments, and the loop keeps spinning.
+     3: That's an electric motor, like this cutaway industrial motor.
+     4: Your hard drive, cooling fans, drones and electric cars all depend on this one equation.
+
+[s10] V  Currents create magnetic fields
+  img: fig:bwire / a:mri
+  • Long straight wire: B = μ₀I / (2πr)
+  • Field circles the wire (right-hand rule)
+  • Coil (solenoid): B = μ₀nI — an electromagnet
+  • MRI magnets: 1.5–3 T (≈ 50,000× Earth’s field)
+  (pen marks: 5 )
+  beat0:
+     0: The connection runs both ways: currents create magnetic fields.
+     1: Around a long straight wire, the field forms circles, with strength mu naught I over two pi r.
+     2: Ten amps, one centimeter away, gives about point two millitesla, a few times stronger than Earth's magnetic field.
+     3: Point your right thumb along the current, and your fingers curl in the direction of the field.
+  beat1:
+     0: Wind the wire into a coil, a solenoid, and the fields add up inside to make a strong, uniform field: an electromagnet.
+     1: Relays, speakers, and the read and write heads of hard drives use this.
+     2: And an MRI scanner uses a superconducting coil to create a field of one and a half to three tesla, tens of thousands of times stronger than Earth's.
+
+[s11] WB  Worked example: why compasses fail near wires
+  step0 board+: PEN None || $I = 10\ \mathrm{A}$,   $r = 5\ \mathrm{cm}$ || PEN None || PEN None
+     0: How strong is the magnetic field near an ordinary wire?
+     1: Take a wire carrying ten amps, and a point five centimeters away.
+     2: The field circles the wire, following the right hand rule.
+  step1 board+: $B = \frac{\mu_0 I}{2\pi r}$ || $= \frac{(4\pi\times 10^{-7})(10)}{2\pi (0.05)}$ || $B = 4\times 10^{-5}\ \mathrm{T} = 40\ \mu\mathrm{T}$
+     0: Use B equals mu naught I over two pi r.
+     1: Mu naught is four pi times ten to the minus seven.
+     2: The pi's cancel, leaving two times ten to the minus seven, times ten, over point zero five.
+     3: That's four times ten to the minus five tesla, forty microtesla.
+  step2 board+: Earth: $\approx 50\ \mu\mathrm{T}$:  same size!
+     0: Compare that to the Earth's magnetic field, about fifty microtesla.
+     1: They're about the same size!
+     2: So a compass next to a wire carrying ten amps can point the wrong way entirely.
+     3: That's why electronic compasses in phones and drones are calibrated, and placed away from high current wiring.
+
+[s12] V  Induction: changing fields make voltage
+  img: fig:faraday / a:qi_charger
+  • Faraday: emf = −dΦ/dt
+  • Lenz: induced current opposes the change
+  • Generators, wireless chargers, induction cooktops
+  • Inductors: v = L di/dt (current can’t jump)
+  (pen marks: 4 )
+  beat0:
+     0: In eighteen thirty one, Michael Faraday discovered that a changing magnetic field creates a voltage.
+     1: Push a magnet into a coil, and a current flows.
+     2: Hold it still, and the current stops.
+     3: The induced voltage equals minus the rate of change of magnetic flux through the coil.
+     4: And Lenz's law explains the minus sign: the induced current always flows so as to oppose the change.
+     5: Push the magnet in, and the coil pushes back.
+     6: That's energy conservation in action.
+     7: Almost all the electricity on the grid comes from generators that spin coils past magnets.
+  beat1:
+     0: Wireless phone chargers use induction directly.
+     1: A coil in the pad carries alternating current, creating a changing field, which induces a current in a coil inside the phone.
+     2: No wires touching.
+     3: Inductors, the circuit component, are coils that resist changes in current, with voltage L d i d t.
+     4: That's why inductor current can't jump instantly, a rule you'll use in circuits.
+
+[s13] WB  Worked example: Faraday's law in numbers
+  step0 board+: PEN None || PEN None || PEN None || $N = 100$,  $A = 0.01\ \mathrm{m^2}$,  $\Delta B = 0.5\ \mat
+     0: Let's put numbers into Faraday's law.
+     1: A coil of one hundred turns, each with an area of point zero one square meters, sits in a magnetic field that ramps from zero to half a tesla in a tenth of a second.
+     2: What voltage appears across the coil?
+  step1 board+: $\Delta\Phi = A\,\Delta B = (0.01)(0.5) = 0.005\ \mathrm{Wb}
+     0: The flux through one turn is B times A.
+     1: It changes from zero to point five times point zero one, which is point zero zero five webers.
+  step2 board+: $\mathcal{E} = N\frac{\Delta\Phi}{\Delta t} = 100\cdot\frac{ || $\mathcal{E} = 5\ \mathrm{V}$
+     0: Faraday's law: the voltage equals the number of turns times the rate of change of flux.
+     1: One hundred times point zero zero five over point one.
+     2: That's five volts.
+     3: Flip the field back and forth sixty times a second, and you have the principle of every generator and transformer on the power grid.
+
+[s14] V  Transformers: how the power grid works
+  img: fig:xfmr / a:pole_xfmr
+  • Two coils sharing an iron core
+  • V₂/V₁ = N₂/N₁
+  • Step up for transmission (less current → less I²R loss)
+  • Step down near homes: e.g. 7200 V → 240 V
+  (pen marks: 5 )
+  beat0:
+     0: A transformer is two coils wound on a shared iron core.
+     1: Alternating current in the first coil creates a changing magnetic flux in the core, which induces a voltage in the second coil.
+     2: The voltage ratio equals the turns ratio.
+     3: With thirty times fewer turns on the secondary, seven thousand two hundred volts becomes two hundred forty.
+  beat1:
+     0: Why bother?
+     1: Power lost in a long transmission line is I squared R.
+     2: For the same power, raising the voltage by a factor of ten cuts the current by ten, and the losses by a hundred.
+     3: So power plants step voltage up to hundreds of thousands of volts for long distance transmission, and transformers like this one on a utility pole step it back down near your home.
+     4: This is also why the grid uses AC: transformers only work when the flux keeps changing.
+
+[s15] V  Maxwell’s equations and electromagnetic waves
+  img: fig:spectrum
+  • Gauss (E) · Gauss (B) · Faraday · Ampère–Maxwell
+  • A changing E makes B, a changing B makes E
+  • Self-sustaining wave at c = 1/√(μ₀ε₀) ≈ 3×10⁸ m/s
+  • Radio, Wi-Fi, light, X-rays: same physics
+  (pen marks: 7 )
+  beat0:
+     0: In the eighteen sixties, James Clerk Maxwell collected everything into four equations: Gauss's law for electric fields, Gauss's law for magnetism, which says there are no magnetic monopoles, Faraday's law, and Ampère's law, to which Maxwell added one crucial term.
+  beat1:
+     0: That term says a changing electric field creates a magnetic field, just as a changing magnetic field creates an electric field.
+  beat2:
+     0: Put those together and you get a wave: a changing E makes B, which makes E, and so on, sustaining itself through empty space.
+     1: Maxwell calculated its speed from two lab constants, one over the square root of mu naught epsilon naught, and got three hundred million meters per second, the measured speed of light.
+     2: Light is an electromagnetic wave.
+  beat3:
+     0: And so is everything on this chart.
+     1: Radio and TV, the microwaves your Wi Fi uses at two point four gigahertz with a wavelength of about twelve centimeters, infrared, visible light, ultraviolet, and X rays.
+     2: Every wireless technology you'll ever design is an application of these four equations.
+
+[s16] Q  Key takeaways
+  BIG: Charges make **E fields**, currents make **B fields**, changing fields make each other — and that makes **light, motors, transformers and radio**.
+  cap: Next: PHYS 227 — waves, optics and modern physics (the quantum ideas behind semiconductors).
+  beat0:
+     0: To recap.
+     1: Charges exert forces through electric fields, and voltage is energy per charge.
+     2: Gauss's law relates fields to charge.
+     3: Capacitors store charge and energy, and resistance turns current into heat.
+     4: Moving charges feel magnetic forces, which drive motors, and currents create magnetic fields.
+     5: Changing magnetic flux induces voltage, which gives us generators, transformers and wireless charging.
+     6: And Maxwell's equations unite it all and predict electromagnetic waves.
+     7: Circuits are the low frequency, simplified version of all this.
+     8: Next up, waves, optics and modern physics.
+     9: See you there.

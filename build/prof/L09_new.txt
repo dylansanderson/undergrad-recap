@@ -1,0 +1,408 @@
+﻿#### L09_math250b: MATH 250B Linear Algebra & Differential Equations
+
+[s0] TITLE  Linear Algebra & Differential Equations
+  img: a:suspension
+  beat0:
+     0: Welcome to Math two fifty B, linear algebra and differential equations.
+     1: These two subjects look different at first, but they turn out to be one subject.
+     2: Differential equations describe how things change: a cooling cup of coffee, a charging capacitor, a car's suspension.
+     3: Linear algebra handles many equations at once with matrices.
+     4: By the end, you'll see that eigenvalues of a matrix decide whether a system settles down or blows up, which is the core idea of every circuit and control system you'll ever design.
+
+[s1] SECTION  First-order differential equations
+  beat0:
+     0: Part one.
+     1: First order differential equations.
+
+[s2] V  A differential equation describes how something changes
+  img: a:coffee / fig:slope
+  • Unknown is a function, not a number
+  • dT/dt = −k(T − T_room): cools faster when hotter
+  • Slope field: the slope at every point
+  • Solutions follow the arrows; equilibrium where slope = 0
+  (pen marks: 6 )
+  beat0:
+     0: In algebra, you solve for a number.
+     1: In a differential equation, you solve for a whole function, given a rule for how it changes.
+     2: Take a hot cup of coffee.
+     3: Newton's law of cooling says it loses heat at a rate proportional to how much hotter it is than the room.
+  beat1:
+     0: Written as an equation: d T d t equals minus k times T minus twenty, for a room at twenty degrees.
+     1: Hot coffee cools fast.
+     2: Lukewarm coffee cools slowly.
+  beat2:
+     0: Even before solving it, we can draw it.
+     1: A slope field puts a little arrow at every point, showing the slope the equation demands there.
+  beat3:
+     0: Every solution is a curve that follows the arrows.
+     1: Start at ninety degrees, the orange curve, and it bends down toward twenty.
+     2: Start below room temperature, the green curve, and it warms up toward twenty.
+     3: The flat red line, where the slope is zero, is the equilibrium.
+     4: Everything is attracted to it.
+
+[s3] EX  Solving it: separation of variables
+  img: fig:coffee
+  CODE:
+    dT/dt = −0.1 (T − 20)      T(0) = 90 °C
+    
+    separate:   dT / (T − 20) = −0.1 dt
+    integrate:  ln|T − 20| = −0.1 t + C
+    solve:      T(t) = 20 + A e^(−0.1 t)
+    initial:    90 = 20 + A  →  A = 70
+    
+    T(t) = 20 + 70 e^(−0.1 t)
+    T(10) = 20 + 70/e ≈ 45.8 °C
+  (pen marks: 7 )
+  beat0:
+     0: When a differential equation is separable, put everything with T on one side and everything with t on the other.
+     1: Integrate both sides: the natural log of T minus twenty equals negative point one t, plus a constant.
+     2: Exponentiate, and T equals twenty plus some constant A times e to the minus point one t.
+     3: The initial condition, ninety degrees at time zero, gives A equals seventy.
+     4: So after ten minutes, the coffee is at twenty plus seventy over e, about forty six degrees.
+     5: Notice the shape: an exponential decay toward a final value.
+     6: That's exactly the formula for a capacitor charging or discharging through a resistor, which you'll use constantly in circuits.
+     7: Same equation, different physics.
+     8: The other main technique, for linear first order equations, is the integrating factor, which handles equations with a forcing term like a changing outside temperature or an input voltage.
+
+[s4] WB  Worked example: the integrating factor
+  step0 board+: $y' + 2y = 4$,    $y(0) = 0$ || form:  $y' + p\,y = q$
+     0: Separation doesn't work when there's an input term, so here's the integrating factor, worked out.
+     1: Take y prime plus two y equals four, starting at zero.
+     2: It's the shape of a capacitor charging toward a supply voltage.
+  step1 board+: $\mu = e^{\int 2\,dt} = e^{2t}$ || PEN ('underline',) on (e^{2t}\,y)' || $e^{2t}y' + 2e^{2t}y = (e^{2t}\,y)' = 4e^{2t}$
+     0: Multiply both sides by e to the integral of p, here e to the two t.
+     1: Why that?
+     2: Because now the left side is exactly the product rule result for e to the two t times y.
+     3: That's the whole trick.
+  step2 board+: $e^{2t}y = 2e^{2t} + C$ || $y = 2 + Ce^{-2t}$,   $y(0) = 0 \Rightarrow C = -2$
+     0: Integrate both sides: e to the two t times y equals two e to the two t, plus C.
+     1: Divide by e to the two t: y equals two plus C e to the minus two t.
+     2: The starting value zero gives C equals minus two.
+  step3 board+: $y(t) = 2\,(1 - e^{-2t})$
+     0: So y equals two times one minus e to the minus two t.
+     1: It starts at zero and rises toward two, fast at first, then slowly.
+     2: That's exactly the voltage on a charging capacitor, with a time constant of one half.
+
+[s5] SECTION  Linear algebra
+  beat0:
+     0: Part two.
+     1: Linear algebra.
+
+[s6] V  Systems of equations and row reduction
+  img: fig:rref
+  • Write as A x = b
+  • Row-reduce the augmented matrix
+  • Outcomes: one solution, infinitely many, or none
+  • Circuit analysis produces exactly these systems
+  (pen marks: 4 )
+  beat0:
+     0: Many problems give you several linear equations in several unknowns.
+     1: We write them compactly as A x equals b, where A is a matrix of coefficients.
+  beat1:
+     0: To solve, row reduce the augmented matrix: swap rows, scale rows, and add multiples of one row to another, until it's triangular.
+     1: Here, subtracting half of row one from row two eliminates x.
+     2: Then back substitute: y equals one, so x equals two.
+  beat2:
+     0: There are only three possible outcomes.
+     1: Exactly one solution, infinitely many solutions with free variables, or no solution at all, which shows up as a row saying zero equals something nonzero.
+  beat3:
+     0: In circuits, nodal analysis writes Kirchhoff's current law at each node, and you get exactly this kind of system.
+     1: A circuit with fifty nodes is a fifty by fifty matrix, and circuit simulators like SPICE solve systems like this millions of times.
+
+[s7] WB  Worked example: solving three equations by elimination
+  step0 board+: $(1)\quad x + y + z = 6$ || $(2)\quad 2y + 5z = -4$ || $(3)\quad 2x + 5y - z = 27$
+     0: Let's solve a system of three equations by hand.
+     1: x plus y plus z equals six.
+     2: Two y plus five z equals negative four.
+     3: Two x plus five y minus z equals twenty seven.
+  step1 board+: $(3) - 2(1):\quad 3y - 3z = 15$ || $y - z = 5 \;\Rightarrow\; y = z + 5$
+     0: Step one: eliminate x from equation three.
+     1: Subtract two times equation one.
+     2: Two x cancels, five y minus two y is three y, minus z minus two z is minus three z, and twenty seven minus twelve is fifteen.
+     3: Divide by three: y minus z equals five.
+  step2 board+: $2(z+5) + 5z = -4$ || $7z = -14 \;\Rightarrow\; z = -2$
+     0: Step two: substitute y equals z plus five into equation two.
+     1: Two times z plus five, plus five z, equals negative four.
+     2: That's seven z plus ten equals negative four, so z equals negative two.
+  step3 board+: $y = 3$,     $x = 6 - 3 + 2 = 5$ || $(x, y, z) = (5,\ 3,\ -2)$ || check (3): $10 + 15 + 2 = 27$
+     0: Back substitute.
+     1: y is z plus five, which is three.
+     2: And x is six minus y minus z: six minus three plus two, which is five.
+     3: Always check in the equation you didn't use last: two times five plus five times three minus negative two is ten plus fifteen plus two, twenty seven.
+     4: Correct.
+     5: This is exactly what circuit simulators do, with thousands of equations instead of three.
+
+[s8] WB  Matrix multiplication: row times column
+  step0 board+: $A = \genfrac{[}{]}{0}{0}{1\quad 2}{3\quad 4}$,    $B = \gen || entry (i, j) = row i of A  ·  column j of B
+     0: Before we treat matrices as transformations, let's make sure the multiplication itself is clear, because it isn't done entry by entry.
+     1: Each entry of the product is a row of the first matrix times a column of the second: multiply matching entries and add.
+  step1 board+: top-left: $1(0) + 2(1) = 2$ || PEN ('circle',) on top-left: $1(0) + 2(1) = 2$ || top-right: $1(1) + 2(0) = 1$ || $AB = \genfrac{[}{]}{0}{0}{2\quad 1}{4\quad 3}$
+     0: Top left of A B: row one of A, one two, times column one of B, zero one.
+     1: One times zero plus two times one: two.
+     2: Top right: one two times one zero: one.
+     3: The bottom row the same way gives four and three.
+  step2 board+: $BA = \genfrac{[}{]}{0}{0}{3\quad 4}{1\quad 2}$ || $AB \neq BA$ || PEN ('underline',) on $AB \neq BA$
+     0: Now swap the order.
+     1: B A comes out as three, four, one, two.
+     2: Different!
+     3: A B swapped A's columns, but B A swapped its rows.
+     4: Matrix multiplication is not commutative, so order always matters.
+     5: And for A times a vector x, it's the same rule: each row of A dotted with x.
+
+[s9] V  A matrix is a transformation
+  img: fig:transform
+  • Multiplying by A moves every point
+  • Columns of A = where the basis vectors land
+  • det A = area (or volume) scaling factor
+  • det A = 0 → space gets squashed → not invertible
+  (pen marks: 3 )
+  beat0:
+     0: Here's the most useful way to think about a matrix: it's a machine that moves every point in space.
+     1: Multiply a vector by A and you get a new vector.
+     2: These pictures show the unit square, in blue, transformed into the orange shape.
+  beat1:
+     0: The columns of A tell you where the basis vectors land.
+     1: The first column is where the x direction goes, the second is where the y direction goes.
+     2: That's how 3D graphics rotate and scale every point of a model: one matrix multiply per point.
+  beat2:
+     0: The determinant is the factor by which areas get scaled.
+     1: Stretching x by two doubles areas, so the determinant is two.
+     2: Rotations and shears keep area the same, so their determinant is one.
+  beat3:
+     0: And if the determinant is zero, the matrix squashes the plane flat onto a line.
+     1: Information is lost, so you can't undo it: the matrix has no inverse.
+     2: This connects a dozen facts into one theorem.
+     3: A is invertible exactly when the determinant isn't zero, exactly when the columns are independent, exactly when A x equals b always has a unique solution.
+
+[s10] WB  Worked example: inverting a 2 × 2 matrix
+  step0 board+: $A = \genfrac{[}{]}{0}{0}{4\quad 7}{2\quad 6},\qquad b = \ge || $\det A = (4)(6) - (7)(2) = 10$
+     0: Let's solve A x equals b using an inverse.
+     1: A is four, seven, two, six, and b is one, two.
+     2: For a two by two matrix, the inverse has a shortcut.
+     3: First the determinant: a d minus b c, four times six minus seven times two, which is ten.
+     4: It's not zero, so A can be inverted.
+  step1 board+: $A^{-1} = \frac{1}{10}\genfrac{[}{]}{0}{0}{6\quad -7}{-2\qua
+     0: The shortcut: swap the two diagonal entries, negate the other two, and divide by the determinant.
+     1: So the inverse is one tenth of six, negative seven, negative two, four.
+  step2 board+: $x = A^{-1}b = \frac{1}{10}\genfrac{[}{]}{0}{0}{6(1) - 7(2)} || $x = (-0.8,\ 0.6)$
+     0: Now x equals A inverse times b.
+     1: Top row: six times one minus seven times two is negative eight.
+     2: Bottom row: negative two times one plus four times two is six.
+     3: Divide by ten: x is negative point eight, point six.
+  step3 board+: check: $4(-0.8) + 7(0.6) = 1$,   $2(-0.8) + 6(0.6) = 2$
+     0: Check it in the original equations.
+     1: Four times negative point eight plus seven times point six is one.
+     2: Two times negative point eight plus six times point six is two.
+     3: Both match.
+     4: In practice, computers solve by elimination rather than computing inverses, because it's faster and more accurate, but the inverse is the cleanest way to see what's happening.
+
+[s11] V  Vector spaces, basis and dimension
+  img: fig:basis
+  • Vector space: anything you can add and scale
+  • Rⁿ, polynomials, solutions of linear ODEs, signals
+  • Basis: independent vectors that build everything
+  • Rank + nullity = number of columns
+  (pen marks: 4 )
+  beat0:
+     0: Linear algebra generalizes far beyond arrows.
+     1: A vector space is any collection of objects you can add together and multiply by numbers, following the usual rules.
+  beat1:
+     0: That includes ordinary vectors, but also polynomials, matrices, the solutions of a linear differential equation, and audio signals.
+     1: That's why the same tools work in so many places.
+  beat2:
+     0: A basis is a minimal set of vectors from which you can build every vector in the space, using combinations.
+     1: The number of vectors in a basis is the dimension.
+     2: Sine and cosine waves at different frequencies form a basis for signals, which is the idea behind the Fourier series you'll study in signals and systems.
+  beat3:
+     0: And the rank nullity theorem: the dimension of the output space a matrix reaches, plus the dimension of the inputs it crushes to zero, always equals the number of columns.
+     1: Nothing is lost without being accounted for.
+
+[s12] V  Least squares: fitting a line to noisy data
+  img: fig:lsq
+  • More equations than unknowns → no exact solution
+  • Find the closest one: minimize squared error
+  • Normal equations: AᵀA x = Aᵀb
+  • Calibration, trend lines, machine learning
+  (pen marks: 4 )
+  beat0:
+     0: Real measurements are noisy.
+     1: If you have twelve data points and want the best line through them, you have twelve equations and only two unknowns, the slope and intercept.
+     2: There's no exact solution.
+  beat1:
+     0: So we find the closest one: the line that minimizes the sum of the squared vertical gaps, the red dotted lines.
+  beat2:
+     0: Linear algebra solves this in one step with the normal equations: A transpose A x equals A transpose b.
+     1: Geometrically, it projects the data onto the space of possible lines.
+  beat3:
+     0: Engineers use least squares to calibrate sensors, fit trend lines, estimate positions from GPS signals, and it's the starting point of machine learning.
+     1: Linear regression is literally this slide.
+
+[s13] WB  Worked example: the best-fit line through three points
+  step0 board+: data: $(0,1),\ (1,3),\ (2,4)$ || PEN None
+     0: Let's fit a line to three measurements by hand: zero comma one, one comma three, and two comma four.
+     1: No straight line passes through all three, so we want the one that minimizes the squared errors.
+  step1 board+: $\bar x = 1$,    $\bar y = \frac{8}{3}$ || $x - \bar x:\ -1,\ 0,\ 1$
+     0: Compute the averages.
+     1: The average x is one.
+     2: The average y is eight thirds, about two point six seven.
+     3: Then subtract the averages: the x deviations are negative one, zero, one.
+  step2 board+: $m = \frac{\sum (x-\bar x)\,y}{\sum (x-\bar x)^2}$ || $= \frac{(-1)(1) + 0 + (1)(4)}{1 + 0 + 1} = \frac{3}{2}$
+     0: The best slope is the sum of the x deviations times the y values, over the sum of the squared x deviations.
+     1: On top: negative one times one, plus zero, plus one times four, which is three.
+     2: On the bottom: one plus zero plus one, two.
+     3: So the slope is one point five.
+  step3 board+: $b = \bar y - m\bar x = \frac{8}{3} - 1.5 = \frac{7}{6}$ || $y = 1.5x + 1.17$ || PEN None
+     0: The line always passes through the averages, so the intercept is eight thirds minus one point five times one, which is seven sixths, about one point one seven.
+     1: Look at the dashed orange errors: two points sit above the line and one below, and the squared errors are as small as any line can make them.
+
+[s14] V  Eigenvalues: directions a matrix only stretches
+  img: fig:eigen
+  • A v = λ v: v keeps its direction, scaled by λ
+  • Solve det(A − λI) = 0
+  • A = [[2,1],[1,2]] → λ = 3 on (1,1), λ = 1 on (1,−1)
+  • Google’s PageRank is an eigenvector
+  (pen marks: 4 )
+  beat0:
+     0: Most vectors get turned when you multiply by a matrix.
+     1: Look at the light blue arrows: their directions change.
+     2: But a few special directions only get stretched.
+     3: Those are eigenvectors, and the stretch factor is the eigenvalue.
+  beat1:
+     0: To find them, solve the determinant of A minus lambda I equals zero.
+     1: For this matrix, that's two minus lambda squared, minus one, equals zero.
+  beat2:
+     0: So lambda is three or one.
+     1: The eigenvector for three is one, one: multiplying gives three, three, the same direction tripled.
+     2: The eigenvector for one is one, negative one, which comes back unchanged.
+     3: Those are the orange arrows.
+  beat3:
+     0: Eigenvectors are everywhere.
+     1: Google's original PageRank algorithm ranked web pages by finding the main eigenvector of an enormous matrix of links between pages.
+     2: Vibration engineers find the eigenvectors of a structure to learn its natural shapes of vibration.
+     3: And as we'll see in a moment, eigenvalues decide whether a system is stable.
+
+[s15] WB  Worked example: finding eigenvalues and eigenvectors
+  step0 board+: $A = \genfrac{[}{]}{0}{0}{4\quad 1}{2\quad 3}$ || $\det(A - \lambda I) = (4-\lambda)(3-\lambda) - 2 = 0$ || PEN None
+     0: Let's find the eigenvalues of A equals four, one, two, three.
+     1: Subtract lambda from the diagonal and set the determinant to zero.
+     2: Four minus lambda, times three minus lambda, minus one times two, equals zero.
+  step1 board+: $\lambda^2 - 7\lambda + 10 = 0$ || $(\lambda - 5)(\lambda - 2) = 0$ || $\lambda = 5,\ \ \lambda = 2$
+     0: Multiply out: lambda squared minus seven lambda plus twelve minus two, so lambda squared minus seven lambda plus ten.
+     1: That factors as lambda minus five, times lambda minus two.
+     2: The eigenvalues are five and two.
+  step2 board+: $\lambda=5$:  $-x + y = 0 \;\Rightarrow\; v_1 = (1,\ 1)$ || PEN None
+     0: For lambda equals five, solve A minus five I times v equals zero.
+     1: The first row says negative x plus y equals zero, so v is one, one.
+     2: Check: A times one, one is five, five.
+     3: Same direction, stretched by five.
+  step3 board+: $\lambda=2$:  $2x + y = 0 \;\Rightarrow\; v_2 = (1,\ -2)$ || PEN None
+     0: For lambda equals two, the first row says two x plus y equals zero, so v is one, negative two.
+     1: A times that is two, negative four, which is exactly twice v.
+     2: On the drawing, these two directions are special: A only stretches them.
+     3: Every other vector gets turned.
+
+[s16] SECTION  Higher-order equations and systems
+  beat0:
+     0: Part three.
+     1: Where the two halves of the course meet.
+
+[s17] V  Second-order equations: springs, suspensions and RLC circuits
+  img: fig:damping / a:tacoma
+  • a y″ + b y′ + c y = 0 → try y = e^(rt)
+  • Real roots: overdamped · repeated: critical
+  • Complex α ± iβ: rings at β while decaying at α
+  • Car suspensions aim for near-critical damping
+  (pen marks: 4 )
+  beat0:
+     0: A mass on a spring with friction, a car's suspension, and a resistor, inductor and capacitor circuit all obey the same equation: a y double prime plus b y prime plus c y equals zero.
+     1: Guess y equals e to the r t, and you get the characteristic equation, a r squared plus b r plus c equals zero.
+     2: Its roots decide everything.
+     3: Two real roots: overdamped.
+     4: The system creeps back without oscillating, the orange curve.
+     5: A repeated root: critically damped, the fastest return without overshooting, the green curve.
+     6: That's what a car's shock absorbers are designed to approach.
+     7: Complex roots, alpha plus or minus i beta: underdamped.
+     8: It rings at frequency beta while dying off at rate alpha, the blue curve.
+     9: Add a forcing term, like a bumpy road or an input voltage, and the full solution is this homogeneous part plus one particular solution.
+  beat1:
+     0: And when the forcing frequency matches a system's natural frequency, the response can grow huge.
+     1: That's resonance.
+     2: The famous nineteen forty collapse of the Tacoma Narrows Bridge is often described as resonance, though engineers today attribute it to a related effect called aeroelastic flutter, where the wind fed energy into the bridge's twisting oscillation.
+     3: Either way, the lesson is the same: you must know your system's natural modes.
+     4: In circuits, resonance is a feature: it's how a radio tunes to one station.
+
+[s18] WB  Worked example: an overdamped system
+  step0 board+: $y'' + 5y' + 6y = 0$,   $y(0)=1,\ y'(0)=0$ || try $y = e^{rt}$:   $r^2 + 5r + 6 = 0$
+     0: Let's solve a second order equation completely.
+     1: y double prime plus five y prime plus six y equals zero, starting at y equals one, at rest.
+     2: Guess y equals e to the r t.
+     3: Every derivative brings down an r, so we get the characteristic equation: r squared plus five r plus six equals zero.
+  step1 board+: $(r+2)(r+3) = 0 \;\Rightarrow\; r = -2,\ -3$ || $y = c_1 e^{-2t} + c_2 e^{-3t}$
+     0: It factors as r plus two times r plus three.
+     1: Two real, negative roots: negative two and negative three.
+     2: So the general solution is c one e to the minus two t, plus c two e to the minus three t.
+  step2 board+: $c_1 + c_2 = 1$ || $-2c_1 - 3c_2 = 0$ || $c_1 = 3,\ \ c_2 = -2$
+     0: Use the starting conditions.
+     1: At t equals zero, y is one, so c one plus c two equals one.
+     2: The starting velocity is zero, so negative two c one minus three c two equals zero.
+     3: Solve: c one is three and c two is negative two.
+  step3 board+: PEN None || $y(t) = 3e^{-2t} - 2e^{-3t}$ || PEN None
+     0: So y equals three e to the minus two t minus two e to the minus three t.
+     1: Because both roots are real, the system just glides back to zero, with no overshoot and no ringing.
+     2: That's overdamped, like a slow door closer.
+     3: Complex roots would have made it oscillate.
+
+[s19] WB  Worked example: complex roots mean oscillation
+  step0 board+: $y'' + 2y' + 26y = 0$ || $r = \frac{-2 \pm \sqrt{4 - 104}}{2} = -1 \pm 5i$ || PEN ('circle',) on -1 \pm 5i$
+     0: Now the case students find hardest: complex roots.
+     1: Take y double prime plus two y prime plus twenty six y equals zero.
+     2: The characteristic equation r squared plus two r plus twenty six has roots minus one plus or minus five i.
+  step1 board+: $e^{(-1+5i)t} = e^{-t}(\cos 5t + i\sin 5t)$ || $y = e^{-t}\,(c_1\cos 5t + c_2\sin 5t)$
+     0: We don't want imaginary numbers in a real answer.
+     1: Euler's formula fixes it.
+     2: e to the minus one plus five i, times t, splits into e to the minus t times cosine five t plus i sine five t.
+     3: The real and imaginary parts are both real solutions.
+  step2 board+: $\alpha \pm i\beta \;\to\; e^{\alpha t}(c_1\cos\beta t + c_2 || PEN ('underline',) on $\alpha \pm i\beta || $y(0)=1,\ y^\prime(0)=0:\ \ c_1 = 1,\ c_2 = \frac{1}{5}$ || PEN None
+     0: So the rule is simple.
+     1: For roots alpha plus or minus i beta, the solution is e to the alpha t, times a cosine and a sine at frequency beta.
+     2: Starting at one, at rest, gives c one equals one and c two equals one fifth.
+  step3 board+: PEN None || α: decay rate     β: ringing frequency
+     0: Look at the graph.
+     1: The real part, minus one, sets the shrinking envelope.
+     2: The imaginary part, five, sets how fast it rings.
+     3: That's an underdamped spring, or an R L C circuit ringing after a switch closes.
+
+[s20] V  Systems of ODEs: eigenvalues decide stability
+  img: fig:phase
+  • x′ = A x for a vector of states
+  • Solutions built from e^(λt) v for each eigenpair
+  • All Re(λ) < 0 → everything decays: STABLE
+  • Any Re(λ) > 0 → something blows up: UNSTABLE
+  (pen marks: 3 )
+  beat0:
+     0: Real systems have many interacting states: positions and velocities, voltages and currents.
+     1: We stack them into a vector x and write x prime equals A x.
+  beat1:
+     0: The solutions are built from e to the lambda t times v, one term for each eigenvalue and eigenvector pair of A.
+     1: So the eigenvalues of A control the behavior of the whole system.
+  beat2:
+     0: If every eigenvalue has a negative real part, every term decays, and the system settles down.
+     1: On the left, the eigenvalues are negative one plus or minus two i, so trajectories spiral inward.
+     2: That's stable.
+  beat3:
+     0: If any eigenvalue has a positive real part, some term grows exponentially, and the system runs away, like the trajectories escaping on the right.
+     1: This is the bridge to signals and systems and to control engineering, where those eigenvalues are called poles, and the first question about any design, from an amplifier to a drone, is: are all the poles in the left half plane?
+
+[s21] Q  Key takeaways
+  BIG: Differential equations describe **change**; matrices handle **many equations at once**; **eigenvalues** decide whether a system settles or explodes.
+  cap: Next: PHYS 226, Electricity & Magnetism. Later: circuits (EGEE 203) and signals (EGCP 371) use all of this.
+  beat0:
+     0: To wrap up.
+     1: First order differential equations model exponential change, and separation of variables solves them.
+     2: Linear algebra solves many equations at once, matrices transform space, the determinant measures scaling and invertibility, and least squares fits models to data.
+     3: Eigenvalues are the special stretch factors of a matrix.
+     4: Second order equations describe springs and circuits, with damping set by their characteristic roots.
+     5: And for systems, the eigenvalues decide stability.
+     6: You'll lean on this course in circuits, signals, control, graphics and machine learning.
+     7: Next up, electricity and magnetism.
+     8: See you there.

@@ -1,0 +1,3 @@
+tux | File:Tux, the Linux penguin I.jpg
+dining | File:An illustration of the dining philosophers problem.png
+unix_v5 | File:Version 5 Unix SIMH PDP11 Emulation.png

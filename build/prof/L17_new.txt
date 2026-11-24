@@ -1,0 +1,256 @@
+﻿#### L17_egee303l: EGEE 303L Electronics Laboratory
+
+[s0] TITLE  Electronics Laboratory
+  img: a:lab_bench
+  beat0:
+     0: Welcome to E G E E three oh three L, the electronics lab.
+     1: The lecture course gave you equations.
+     2: The lab is where you discover that real components, real instruments and real wires don't quite follow them, and you learn to explain why.
+     3: In this lecture, we'll walk through the core experiments: measurement basics, power supply circuits, diode shaping circuits, transistor switches, characteristic curves, current sources and stable biasing, plus how to write a lab report that an engineer would trust.
+     4: Many students did these labs in simulation, with NI Multisim, but every one of them can be done on a real bench.
+
+[s1] V  Every meter changes what it measures
+  img: a:multimeter / fig:loading
+  • Voltmeter: needs R_in ≫ R_th of the node
+  • Ammeter: needs R ≪ the circuit (goes in series!)
+  • Scope probe: 1 MΩ (×1) or 10 MΩ (×10)
+  • Always ask: is my instrument part of the circuit?
+  (pen marks: 3 )
+  beat0:
+     0: The first lesson of every lab: your instrument becomes part of the circuit.
+     1: A voltmeter connects in parallel with what it measures, and it has a finite input resistance, so it draws a little current and pulls the voltage down.
+     2: An ammeter must be inserted in series, and it adds a little resistance.
+  beat1:
+     0: How much does it matter?
+     1: Suppose you measure a node whose Thevenin resistance is fifty kilohms.
+     2: A scope probe at times one has one megohm of input resistance, so you read about ninety five percent of the true value, a five percent error from the meter alone.
+     3: Switch the probe to times ten, or use a ten megohm multimeter, and you read ninety nine and a half percent.
+     4: The rule: the meter's input resistance must be much larger than the Thevenin resistance of the node you're probing.
+     5: When your measurement disagrees with your calculation, the meter is always a suspect.
+
+[s2] WB  Worked example: when your meter lies
+  step0 board+: PEN None || theory: 5.00 V || PEN None
+     0: Two one megohm resistors divide ten volts.
+     1: On paper, the middle sits at exactly five volts.
+     2: Let's measure it with a typical digital multimeter, which has an input resistance of ten megohms.
+  step1 board+: $1M \parallel 10M = \frac{1 \times 10}{1 + 10} = 0.909\ \mat || PEN ('underline',) on $1M \parallel 10M
+     0: The meter is now part of the circuit.
+     1: Its ten megohms sits in parallel with the bottom resistor: one meg in parallel with ten meg is about point nine one megohms.
+  step2 board+: reads $10\cdot\frac{0.909}{1 + 0.909} = 4.76\ \mathrm{V}$ || error $= \frac{5 - 4.76}{5} = 4.8\%$ || PEN ('circle',) on error $=
+     0: So the divider is really one meg over point nine one meg.
+     1: The meter reads ten times point nine one over one point nine one: about four point seven six volts.
+     2: That's nearly five percent low, and the meter is working perfectly.
+     3: It's the circuit that changed.
+  step3 board+: need $R_{meter} \gg R_{node}$  (100× or more) || PEN ('box',) on need $R_{meter}
+     0: The rule: a voltmeter's resistance must be much larger, say a hundred times larger, than the resistance of the node you're measuring.
+     1: In your lab report, an unexplained five percent error like this is exactly what you should catch and explain.
+
+[s3] V  Grounding: the oscilloscope trap
+  img: fig:ground
+  • Scope ground clip is tied to earth via the power cord
+  • Clip it to a non-ground node → short circuit
+  • Use 2 channels + math (A − B) for floating voltages
+  • Or a differential probe
+  (pen marks: 4 )
+  beat0:
+     0: Here's a classic way to destroy a circuit, or a scope.
+     1: The ground clip on an ordinary oscilloscope probe is connected to the scope's chassis, which is connected to earth through the power cord's third prong.
+  beat1:
+     0: If your circuit is also referenced to earth, and you clip the probe's ground to some node that isn't ground, you've just connected that node directly to earth.
+     1: Current flows through the probe's ground lead, and something gets damaged.
+  beat2:
+     0: To measure a voltage across a component that isn't at ground, use two channels, one on each side, both with grounds at true ground, and let the scope compute A minus B.
+  beat3:
+     0: Or use a differential probe, designed for exactly this.
+     1: On a professional bench, knowing where ground really is matters as much as knowing Ohm's law.
+
+[s4] V  Lab: AC-to-DC power supplies
+  img: a:bridge_rect / fig:zener
+  • Transformer → rectifier → filter capacitor → regulator
+  • Half-wave ripple at f; full-wave ripple at 2f
+  • Ripple ≈ I_load / (f_ripple · C)
+  • Zener holds V_Z; R_s must still feed it at the lowest input
+  (pen marks: 5 )
+  beat0:
+     0: In the power supply labs, students build the chain inside every wall adapter.
+     1: A transformer steps the voltage down, a rectifier makes it one polarity, a capacitor smooths it, and a regulator holds it steady.
+     2: A half wave rectifier uses one diode and ripples at the line frequency.
+     3: A bridge uses both halves of the cycle, so its ripple is at twice the frequency and smaller, but the current passes through two diodes, costing two diode drops.
+     4: Ripple is roughly the load current divided by the ripple frequency times the capacitance: draw a hundred milliamps from a full wave supply at one hundred twenty hertz ripple with a one thousand microfarad capacitor, and you get about point eight volts of ripple.
+  beat1:
+     0: A simple regulator uses a Zener diode, which is designed to operate in reverse breakdown, where it holds an almost constant voltage, five point one volts here.
+     1: The series resistor drops the difference.
+     2: The design trap: at the lowest input voltage and the highest load current, the resistor must still supply enough current for the load plus the Zener's minimum current.
+     3: Otherwise the Zener drops out of regulation and the output sags.
+
+[s5] WB  Worked example: sizing a Zener regulator's resistor
+  step0 board+: $V_{in} = 9 \ldots 12\ \mathrm{V}$,   $V_Z = 5.1\ \mathrm{V} || $I_{L,max} = 20\ \mathrm{mA}$,   $I_{Z,min} = 5\ \mathrm{mA}
+     0: Let's work the Zener design problem, because it's always about the worst case.
+     1: The unregulated input swings between nine and twelve volts.
+     2: We want five point one volts out, for a load that draws up to twenty milliamps, and the Zener needs at least five milliamps to stay in regulation.
+  step1 board+: worst case 1: lowest $V_{in}$, heaviest load || $R_s \leq \frac{9 - 5.1}{20 + 5\ \mathrm{mA}} = 156\ \Omega$ || PEN ('circle',) on use $150\ \Omega$
+     0: Worst case one, the hardest for regulation: lowest input and heaviest load.
+     1: The resistor must still pass the load current plus the Zener's minimum: twenty five milliamps, from only nine minus five point one, three point nine volts.
+     2: So R s can be at most three point nine over twenty five milliamps, about one hundred fifty six ohms.
+     3: Choose one fifty.
+  step2 board+: worst case 2: highest $V_{in}$, no load || $I_Z = \frac{12 - 5.1}{150} = 46\ \mathrm{mA}$ || PEN ('circle',) on = 46\ \mathrm{mA}$
+     0: Worst case two, the hardest on the Zener: highest input and no load at all.
+     1: Now every bit of the resistor's current goes through the Zener.
+     2: That's twelve minus five point one, over one fifty: forty six milliamps.
+  step3 board+: $P_Z = 5.1 \times 0.046 \approx 0.24\ \mathrm{W}$  $\to$  us
+     0: The Zener dissipates five point one volts times forty six milliamps, about a quarter of a watt.
+     1: So a quarter watt Zener would be on the edge.
+     2: Pick a half watt part.
+     3: Two worst cases, one for each failure mode: that's how every regulator, and most real designs, are sized.
+
+[s6] V  Lab: clippers and clampers
+  img: fig:clip
+  • Clipper: diodes limit how far a signal can swing
+  • Protects inputs from overvoltage
+  • Clamper: capacitor + diode shift the DC level
+  • Stack clampers → voltage doublers / multipliers
+  (pen marks: 2 )
+  beat0:
+     0: Diodes can also shape waveforms.
+     1: A clipper uses a diode to limit how far a signal can swing.
+     2: Here, whenever the input tries to go above about point seven volts, the diode turns on and holds it there.
+     3: The same idea protects microcontroller inputs: tiny clamp diodes inside the chip keep input pins from going far beyond the supply voltage.
+  beat1:
+     0: A clamper uses a capacitor and a diode to shift the entire waveform's DC level, without changing its shape.
+     1: The capacitor charges to the peak on one half cycle and then adds that voltage to the signal.
+     2: Chain clampers with rectifiers and you get voltage doublers and multipliers, which is how old televisions and some modern sensors generate high voltages from low ones.
+
+[s7] V  Lab: the transistor as a switch
+  img: fig:bjt_switch
+  • Goal: drive the BJT hard into saturation
+  • I_B must exceed I_C / β_min (with 2–10× overdrive)
+  • 60 mA relay, β_min = 50 → I_B > 1.2 mA
+  • R_B = (3.3 − 0.7) / 1.2 mA ≈ 2.2 kΩ · flyback diode!
+  (pen marks: 5 )
+  beat0:
+     0: When a transistor is used as a switch, you want it either fully off or fully on, in saturation, where the collector to emitter voltage drops to about point two volts, so the transistor wastes very little power.
+  beat1:
+     0: To guarantee saturation, supply more base current than the collector current divided by the smallest beta the part might have, with some extra margin, called overdrive.
+  beat2:
+     0: Example: switching a sixty milliamp relay coil from a three point three volt microcontroller pin.
+     1: With a worst case beta of fifty, you need at least one point two milliamps of base current.
+  beat3:
+     0: The base resistor drops three point three minus point seven volts, so two point six volts over one point two milliamps is about two point two kilohms.
+     1: A smaller resistor gives more overdrive.
+     2: And because a relay coil is an inductor, add the flyback diode across it.
+     3: In the transistor switch lab, students see exactly what happens to the collector voltage at turn off with and without that diode.
+
+[s8] WB  Worked example: designing a transistor switch
+  step0 board+: PEN None || $I_C = 200\ \mathrm{mA}$,   $\beta_{min} = 100$ || PEN None
+     0: Let's design a switch for a five volt LED strip that draws two hundred milliamps, controlled by a three point three volt microcontroller pin.
+     1: The datasheet promises a beta of at least one hundred.
+  step1 board+: $I_{B,min} = \frac{200\ \mathrm{mA}}{100} = 2\ \mathrm{mA}$ || PEN ('underline',) on $I_{B,min} || overdrive 2×:  $I_B = 4\ \mathrm{mA}$ || PEN ('circle',) on overdrive 2
+     0: To saturate, the base current must be at least the collector current over beta: two hundred milliamps over a hundred, two milliamps.
+     1: Then overdrive it by two, to four milliamps, so it stays saturated even with a weak transistor or a cold day.
+  step2 board+: $R_B = \frac{3.3 - 0.7}{4\ \mathrm{mA}} = 650\ \Omega$ || use $620\ \Omega$
+     0: The base resistor drops the pin voltage minus the point seven volt base emitter drop.
+     1: Three point three minus point seven is two point six volts, over four milliamps: six hundred fifty ohms.
+     2: Pick the nearest standard value below, six twenty.
+  step3 board+: saturated: $P \approx 0.2 \times 0.2 = 40\ \mathrm{mW}$ || PEN ('check',) on saturated:
+     0: One more check: four milliamps is within what the pin can safely supply.
+     1: In saturation, the transistor drops only about point two volts, so it wastes about forty milliwatts.
+     2: If the load were a relay or a motor, you'd add a flyback diode, just like the MOSFET driver in electronics.
+
+[s9] V  Lab: BJT characteristic curves
+  img: fig:curves
+  • Sweep V_CE for several fixed base currents
+  • Active region: flat lines spaced by β
+  • Saturation near the y-axis
+  • Early effect: slope → output resistance r_o = V_A / I_C
+  (pen marks: 4 )
+  beat0:
+     0: To see a transistor's personality, measure its characteristic curves: hold the base current constant, sweep the collector to emitter voltage, and record the collector current.
+     1: Repeat for several base currents.
+  beat1:
+     0: In the active region, the curves are almost flat, and they're spaced evenly: every ten microamps of base current adds about one milliamp of collector current.
+     1: Divide and you get beta, about one hundred here.
+     2: That flatness is what makes the transistor act like a current source.
+  beat2:
+     0: Near the y axis, the curves bend down sharply.
+     1: That's saturation, where the transistor is fully on, the switch region from the previous slide.
+  beat3:
+     0: And the curves aren't perfectly flat: they slope slightly upward, the Early effect.
+     1: Extend the lines backwards and they meet near a point called minus V A, the Early voltage.
+     2: That slope sets the transistor's output resistance, which limits how much gain an amplifier can achieve.
+
+[s10] V  Lab: current sources and the current mirror
+  img: fig:mirror
+  • Active-region transistor ≈ constant current source
+  • I_C ≈ (V_B − 0.7) / R_E, nearly independent of load
+  • Mirror: Q1 sets V_BE, matched Q2 copies the current
+  • The most common building block inside analog ICs
+  (pen marks: 4 )
+  beat0:
+     0: Because the collector current barely depends on the collector voltage in the active region, a transistor makes a good constant current source.
+     1: Fix the base voltage, add an emitter resistor, and the current is set by V B minus point seven over R E, almost regardless of the load.
+     2: That holds until the load voltage gets so large that the transistor saturates, a limit called the compliance range.
+  beat1:
+     0: The current mirror is an even neater trick.
+     1: Q one is wired as a diode, with its collector tied to its base, and a resistor sets its current.
+     2: Since Q two shares the same base emitter voltage, and the two transistors are matched, Q two carries the same current, copying, or mirroring, the reference.
+     3: Inside integrated circuits, where matched transistors are easy to make side by side, current mirrors are everywhere, biasing almost every analog stage, including the inputs of op amps.
+
+[s11] V  Lab: stable bias that doesn’t depend on β
+  img: fig:bias
+  • β varies 2–3× between parts and with temperature
+  • Fixed base bias: I_C ∝ β — unreliable
+  • Stiff divider + R_E: I_C set by resistors
+  • Rule of thumb: R₂ ≤ 0.1 β R_E · bypass R_E for AC gain
+  (pen marks: 3 )
+  beat0:
+     0: Here's the most important design lesson of the lab.
+     1: Beta varies a lot: two transistors with the same part number can differ by a factor of two or three, and beta also changes with temperature.
+  beat1:
+     0: With simple fixed base bias, a single resistor feeding the base, the collector current is proportional to beta.
+     1: Swap the transistor and the operating point moves wildly, as the red bars show, and your amplifier may clip or even saturate.
+  beat2:
+     0: With the four resistor divider bias and an emitter resistor from the electronics course, the base voltage is set by the divider, and the emitter current by that voltage and R E.
+     1: Beta hardly matters: the green bars barely move from beta fifty to beta three hundred.
+     2: The trick is a stiff divider, one whose current is large compared to the base current.
+     3: A rule of thumb is R two at most a tenth of beta times R E.
+  beat3:
+     0: The emitter resistor reduces the AC gain, so designers often bypass it with a capacitor: it disappears for AC signals but still stabilizes the DC bias.
+     1: In the bias stability lab, students design exactly this and test it with transistors of different beta.
+
+[s12] V  Writing a lab report engineers trust
+  img: fig:report
+  • State what you expected before measuring
+  • Show data with units, uncertainty and plots
+  • Compare theory vs measurement: % error
+  • Explain differences: tolerances, meter loading, temperature
+  (pen marks: 3 )
+  beat0:
+     0: A lab report is how engineers convince other engineers.
+     1: The structure is always similar: objective, theory and pre lab calculations, procedure, data, analysis and conclusion.
+  beat1:
+     0: The most important habit is predicting before measuring.
+     1: If you calculate first, you'll notice immediately when a measurement doesn't make sense.
+  beat2:
+     0: Present data in tables and plots with units, and compute the percent error between theory and measurement.
+  beat3:
+     0: Then explain the differences honestly.
+     1: Resistors are typically plus or minus five percent.
+     2: Beta varies.
+     3: Meters load circuits.
+     4: Temperature drifts.
+     5: A report that says the measured gain was eight percent below the prediction, mostly because the transistor's beta was lower than the datasheet's typical value, is worth far more than one with perfect looking numbers.
+     6: This course carried part of the engineering writing requirement for exactly this reason.
+
+[s13] Q  Key takeaways
+  BIG: Predict, then measure. Respect **meter loading** and **ground**. Design so the circuit works with **any** transistor off the shelf.
+  cap: Next: EGEE 323, Engineering Probability and Statistics.
+  beat0:
+     0: To recap.
+     1: Instruments are part of the circuit, so choose them so they barely disturb it, and be careful where the scope's ground goes.
+     2: Power supplies are rectifier, filter and regulator.
+     3: Diodes clip and clamp signals.
+     4: Transistors switch loads when driven into saturation, act as current sources in the active region, and mirrors copy currents.
+     5: Good bias design makes a circuit work regardless of beta.
+     6: And a good lab report predicts, measures, compares and explains.
+     7: Next, we move to probability and statistics, the math of uncertainty and noise.
+     8: See you there.

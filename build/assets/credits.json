@@ -1,0 +1,618 @@
+{
+ "fpga_chip": {
+  "file": "fpga_chip.jpg",
+  "title": "File:Xilinx Spartan XC2S100.jpg",
+  "artist": "Phiarc",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Xilinx_Spartan_XC2S100.jpg"
+ },
+ "fpga_router": {
+  "file": "fpga_router.jpg",
+  "title": "File:FRITZ!Box 7490 - board - Xilinx Spartan XC3S100E-4157.jpg",
+  "artist": "Raimond Spekking",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:FRITZ!Box_7490_-_board_-_Xilinx_Spartan_XC3S100E-4157.jpg"
+ },
+ "antenna_5g": {
+  "file": "antenna_5g.jpg",
+  "title": "File:Antennes 5G o2 Munich.jpg",
+  "artist": "Yumikember",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Antennes_5G_o2_Munich.jpg"
+ },
+ "perseverance": {
+  "file": "perseverance.png",
+  "title": "File:Perseverance Stuns in New Selfie.png",
+  "artist": "NASA/JPL-Caltech/MSSS",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Perseverance_Stuns_in_New_Selfie.png"
+ },
+ "zedboard": {
+  "file": "zedboard.jpg",
+  "title": "File:Embedded World 2014 Xilinx ZedBoard Developer Board.jpg",
+  "artist": "Ordercrazy",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Embedded_World_2014_Xilinx_ZedBoard_Developer_Board.jpg"
+ },
+ "fpga_board": {
+  "file": "fpga_board.jpg",
+  "title": "File:TEI0003 Altera Cyclone 10 LP FPGA CYC1000.jpg",
+  "artist": "Antti Lukats",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:TEI0003_Altera_Cyclone_10_LP_FPGA_CYC1000.jpg"
+ },
+ "sevenseg": {
+  "file": "sevenseg.jpg",
+  "title": "File:LED-7-Segment-Display.jpg",
+  "artist": "RetroEditor",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:LED-7-Segment-Display.jpg"
+ },
+ "wafer_pentium": {
+  "file": "wafer_pentium.jpg",
+  "title": "File:Wafer with Pentium chips.jpg",
+  "artist": "Naotake Murayama from Los Altos, CA, USA",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Wafer_with_Pentium_chips.jpg"
+ },
+ "odometer": {
+  "file": "odometer.jpg",
+  "title": "File:123,456 kilometres! (7948500820).jpg",
+  "artist": "Riley from Christchurch, New Zealand",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:123,456_kilometres!_(7948500820).jpg"
+ },
+ "dashboard_digital": {
+  "file": "dashboard_digital.jpg",
+  "title": "File:Buick Electra 1989 digital cockpit.JPG",
+  "artist": "Jacek Rużyczka",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Buick_Electra_1989_digital_cockpit.JPG"
+ },
+ "newton": {
+  "file": "newton.jpg",
+  "title": "File:Portrait of Sir Isaac Newton, 1689 (brightened) (cropped).jpg",
+  "artist": "Godfrey Kneller",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Portrait_of_Sir_Isaac_Newton,_1689_(brightened)_(cropped).jpg"
+ },
+ "leibniz": {
+  "file": "leibniz.jpg",
+  "title": "File:Gottfried Wilhelm Leibniz c1700.jpg",
+  "artist": "Johann Friedrich Wentzel",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Gottfried_Wilhelm_Leibniz_c1700.jpg"
+ },
+ "coaster": {
+  "file": "coaster.jpg",
+  "title": "File:Loop Coaster MOMOnGA - Yomiuriland.jpg",
+  "artist": "Jeremy Thompson",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Loop_Coaster_MOMOnGA_-_Yomiuriland.jpg"
+ },
+ "calculator": {
+  "file": "calculator.jpg",
+  "title": "File:TI-84 Plus calculator HS1.jpg",
+  "artist": "Hayden Schiff",
+  "license": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:TI-84_Plus_calculator_HS1.jpg"
+ },
+ "water_tower": {
+  "file": "water_tower.jpg",
+  "title": "File:Velešín, water tower 01.jpg",
+  "artist": "Czeva",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Vele%C5%A1%C3%ADn,_water_tower_01.jpg"
+ },
+ "microphone": {
+  "file": "microphone.jpg",
+  "title": "File:Shure SM58.jpg",
+  "artist": "SM58&Beta58a.jpg: Iain Fergusson - Iainf 06:42, 24 June 2006 (UTC)\nderivative work: Binksternet (talk)",
+  "license": "CC BY 2.5",
+  "page": "https://commons.wikimedia.org/wiki/File:Shure_SM58.jpg"
+ },
+ "bouncing_ball": {
+  "file": "bouncing_ball.jpg",
+  "title": "File:Bouncing ball strobe edit.jpg",
+  "artist": "MichaelMaggs Edit by Richard Bartz",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Bouncing_ball_strobe_edit.jpg"
+ },
+ "eniac": {
+  "file": "eniac.jpg",
+  "title": "File:Two women operating ENIAC (full resolution).jpg",
+  "artist": "Unidentified U.S. Army photographer",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Two_women_operating_ENIAC_(full_resolution).jpg"
+ },
+ "stroustrup": {
+  "file": "stroustrup.jpg",
+  "title": "File:Bjarne Stroustrup (2013).jpg",
+  "artist": "ICPCNews",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Bjarne_Stroustrup_(2013).jpg"
+ },
+ "lovelace": {
+  "file": "lovelace.jpg",
+  "title": "File:Ada Lovelace portrait.jpg",
+  "artist": "Alfred Edward Chalon",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Ada_Lovelace_portrait.jpg"
+ },
+ "datacenter": {
+  "file": "datacenter.jpg",
+  "title": "File:Datacenter Server Racks (22370909788).jpg",
+  "artist": "Carl Lender from Sunrise, USA",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg"
+ },
+ "lego": {
+  "file": "lego.jpg",
+  "title": "File:Lego bricks.jpg",
+  "artist": "Benjamin D. Esham (bdesham)",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Lego_bricks.jpg"
+ },
+ "levittown": {
+  "file": "levittown.jpg",
+  "title": "File:LevittownPA.jpg",
+  "artist": "",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:LevittownPA.jpg"
+ },
+ "rocket_launch": {
+  "file": "rocket_launch.jpg",
+  "title": "File:45th Space Wing Supports Successful Falcon 9 SAOCOM 1B Launch 02.jpg",
+  "artist": "U.S. Space Force photo by Joshua Conti",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:45th_Space_Wing_Supports_Successful_Falcon_9_SAOCOM_1B_Launch_02.jpg"
+ },
+ "robot_arm": {
+  "file": "robot_arm.jpg",
+  "title": "File:KUKA industrial robotic arm performing \"The Beach\" by Roy Nachum - 02.jpg",
+  "artist": "Oleg Yunakov",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:KUKA_industrial_robotic_arm_performing_%22The_Beach%22_by_Roy_Nachum_-_02.jpg"
+ },
+ "mpu6050": {
+  "file": "mpu6050.jpg",
+  "title": "File:IvenSense 3-Axis-Gyro-Accelerometer-IC MPU-6050 10937-01.jpg",
+  "artist": "SparkFun",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:IvenSense_3-Axis-Gyro-Accelerometer-IC_MPU-6050_10937-01.jpg"
+ },
+ "gps_sat": {
+  "file": "gps_sat.jpg",
+  "title": "File:GPS Satellite NASA art-iif.jpg",
+  "artist": "NASA",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:GPS_Satellite_NASA_art-iif.jpg"
+ },
+ "falcon_landing": {
+  "file": "falcon_landing.jpg",
+  "title": "File:CRS-9 mission (28348649546).jpg",
+  "artist": "SpaceX",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:CRS-9_mission_(28348649546).jpg"
+ },
+ "enigma": {
+  "file": "enigma.jpg",
+  "title": "File:Enigma-IMG 0487-black.jpg",
+  "artist": "Rama",
+  "license": "CC BY-SA 2.0 fr",
+  "page": "https://commons.wikimedia.org/wiki/File:Enigma-IMG_0487-black.jpg"
+ },
+ "sn7400": {
+  "file": "sn7400.jpg",
+  "title": "File:SN7400N.jpg",
+  "artist": "Mister rf",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:SN7400N.jpg"
+ },
+ "rotary_encoder": {
+  "file": "rotary_encoder.jpg",
+  "title": "File:RotaryIncrementalEncoder.jpg",
+  "artist": "Lambtron",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:RotaryIncrementalEncoder.jpg"
+ },
+ "i4004_layout": {
+  "file": "i4004_layout.jpg",
+  "title": "File:Chip layout from the development phase of the Intel 4004 from 1971, the first microprocessor of the world (cropped and edited image).jpg",
+  "artist": "Intel 4004 Chip Layout (29983532570).jpg: Wolfgang Stief from Tittmoning, Germany\nderivative work, the rectangular versi",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Chip_layout_from_the_development_phase_of_the_Intel_4004_from_1971,_the_first_microprocessor_of_the_world_(cropped_and_edited_image).jpg"
+ },
+ "topo_relief": {
+  "file": "topo_relief.jpg",
+  "title": "File:Topographic-Relief-perspective-sample.jpg",
+  "artist": "Kbh3rd at English Wikipedia",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Topographic-Relief-perspective-sample.jpg"
+ },
+ "coffee": {
+  "file": "coffee.jpg",
+  "title": "File:Coffee steaming in a mug.jpg",
+  "artist": "PedanticNarrativeController",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Coffee_steaming_in_a_mug.jpg"
+ },
+ "suspension": {
+  "file": "suspension.jpg",
+  "title": "File:1938BuickChassis.jpg",
+  "artist": "New York Public Library",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:1938BuickChassis.jpg"
+ },
+ "tacoma": {
+  "file": "tacoma.png",
+  "title": "File:Tacoma Narrows still.png",
+  "artist": "Barney Elliot",
+  "license": "Public Domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Tacoma_Narrows_still.png"
+ },
+ "lightning": {
+  "file": "lightning.jpg",
+  "title": "File:Lightning strike above a seashore city.jpg",
+  "artist": "Валерия Бобыленко",
+  "license": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Lightning_strike_above_a_seashore_city.jpg"
+ },
+ "pole_xfmr": {
+  "file": "pole_xfmr.jpg",
+  "title": "File:Pole mounted Transformer.jpg",
+  "artist": "Bidgee",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Pole_mounted_Transformer.jpg"
+ },
+ "motor_cutaway": {
+  "file": "motor_cutaway.jpg",
+  "title": "File:TMW 50906 Schnittmodell einer Drehstrommaschine (Asynchronmaschine).jpg",
+  "artist": "",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:TMW_50906_Schnittmodell_einer_Drehstrommaschine_(Asynchronmaschine).jpg"
+ },
+ "qi_charger": {
+  "file": "qi_charger.jpg",
+  "title": "File:Inductive charging of LG smartphone (2).jpg",
+  "artist": "LG전자",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Inductive_charging_of_LG_smartphone_(2).jpg"
+ },
+ "mri": {
+  "file": "mri.jpg",
+  "title": "File:MRI-Philips.JPG",
+  "artist": "Jan Ainali",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:MRI-Philips.JPG"
+ },
+ "prism": {
+  "file": "prism.jpg",
+  "title": "File:Dispersion of White Light Through a Prism.jpg",
+  "artist": "Aligatorigiganti",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Dispersion_of_White_Light_Through_a_Prism.jpg"
+ },
+ "fiber_display": {
+  "file": "fiber_display.jpg",
+  "title": "File:MoST Fiber Optic Cable Display.jpg",
+  "artist": "Winver351",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:MoST_Fiber_Optic_Cable_Display.jpg"
+ },
+ "rgb_led": {
+  "file": "rgb_led.jpg",
+  "title": "File:LED - 5mm Cycling RGB 1.jpg",
+  "artist": "Mister rf",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:LED_-_5mm_Cycling_RGB_1.jpg"
+ },
+ "quartz_watch": {
+  "file": "quartz_watch.jpg",
+  "title": "File:Quartz Watch Mechanism Closeup.jpg",
+  "artist": "Glosome",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Quartz_Watch_Mechanism_Closeup.jpg"
+ },
+ "card_catalog": {
+  "file": "card_catalog.jpg",
+  "title": "File:Schlagwortkatalog.jpg",
+  "artist": "Dr. Marcus Gossler",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Schlagwortkatalog.jpg"
+ },
+ "plates": {
+  "file": "plates.jpg",
+  "title": "File:Stack of dinner plates.jpg",
+  "artist": "Santeri Viinamäki",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Stack_of_dinner_plates.jpg"
+ },
+ "arduino": {
+  "file": "arduino.jpg",
+  "title": "File:Arduino Uno 006.jpg",
+  "artist": "oomlout",
+  "license": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Arduino_Uno_006.jpg"
+ },
+ "msp430lp": {
+  "file": "msp430lp.png",
+  "title": "File:G3000.png",
+  "artist": "Texas Instruments",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:G3000.png"
+ },
+ "hv_lines": {
+  "file": "hv_lines.jpg",
+  "title": "File:High voltage transmission towers and lines.jpg",
+  "artist": "Stefan Andrej Shambora (St_A_Sh)",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:High_voltage_transmission_towers_and_lines.jpg"
+ },
+ "breadboard": {
+  "file": "breadboard.png",
+  "title": "File:Imagen con transparencia de circuito con un transistor.png",
+  "artist": "Camilofigueroa",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Imagen_con_transparencia_de_circuito_con_un_transistor.png"
+ },
+ "scope_screen": {
+  "file": "scope_screen.jpg",
+  "title": "File:Triangular wave and square wave on oscilloscope screen.jpg",
+  "artist": "User:Xato",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Triangular_wave_and_square_wave_on_oscilloscope_screen.jpg"
+ },
+ "scopes": {
+  "file": "scopes.jpg",
+  "title": "File:Analog CRT oscilloscope Tektronix 475A (1977) and digital storage oscilloscope Tektronix TPS 2014B (c. 2012).jpg",
+  "artist": "File:Tektronix TPS 2014B cropped.jpg: * File:Tektronix TPS 2014B.jpg: Marcin Łukasz Kiejzik\nderivative work: TeKaBe\nFile",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Analog_CRT_oscilloscope_Tektronix_475A_(1977)_and_digital_storage_oscilloscope_Tektronix_TPS_2014B_(c._2012).jpg"
+ },
+ "first_transistor": {
+  "file": "first_transistor.jpg",
+  "title": "File:Replica-of-first-transistor.jpg",
+  "artist": "Federal employee",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Replica-of-first-transistor.jpg"
+ },
+ "bridge_rect": {
+  "file": "bridge_rect.jpg",
+  "title": "File:3PM4 diode bridge, IPRS Baneasa 1988 (01).jpg",
+  "artist": "155LA3",
+  "license": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:3PM4_diode_bridge,_IPRS_Baneasa_1988_(01).jpg"
+ },
+ "transistors": {
+  "file": "transistors.jpg",
+  "title": "File:Transistorer (cropped).jpg",
+  "artist": "Mister rf at English Wikipedia",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Transistorer_(cropped).jpg"
+ },
+ "multimeter": {
+  "file": "multimeter.jpg",
+  "title": "File:Digital Multimeter (To measure Voltage, Current and Resistance).jpg",
+  "artist": "K.Venkataramana",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Digital_Multimeter_(To_measure_Voltage,_Current_and_Resistance).jpg"
+ },
+ "lab_bench": {
+  "file": "lab_bench.jpg",
+  "title": "File:Keysight InfiniiVision DSOX 4024A and digital multimeter and power supply in laboratory use.jpg",
+  "artist": "Radarvector",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Keysight_InfiniiVision_DSOX_4024A_and_digital_multimeter_and_power_supply_in_laboratory_use.jpg"
+ },
+ "galton": {
+  "file": "galton.jpg",
+  "title": "File:Galton box.jpg",
+  "artist": "Exhibit made by Estes Objethos Atelier, photo by Rodrigo.Argenton",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Galton_box.jpg"
+ },
+ "dice": {
+  "file": "dice.jpg",
+  "title": "File:Spielwürfel.jpg",
+  "artist": "Schlurcher",
+  "license": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Spielw%C3%BCrfel.jpg"
+ },
+ "probe_card": {
+  "file": "probe_card.jpg",
+  "title": "File:Probe card.JPG",
+  "artist": "Ajoones",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Probe_card.JPG"
+ },
+ "fourier": {
+  "file": "fourier.jpg",
+  "title": "File:Joseph Fourier.jpg",
+  "artist": "Amédée Félix Barthélemy Geille / After Julien-Léopold Boilly",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Joseph_Fourier.jpg"
+ },
+ "mixing_console": {
+  "file": "mixing_console.jpg",
+  "title": "File:DiGiCo S21 Mixing Console 2017.jpg",
+  "artist": "Niranjan Arminius",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:DiGiCo_S21_Mixing_Console_2017.jpg"
+ },
+ "p2_die": {
+  "file": "p2_die.jpg",
+  "title": "File:Intel Dixon (Pentium II) die shot - 38441001531.jpg",
+  "artist": "Martijn Boer",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Intel_Dixon_(Pentium_II)_die_shot_-_38441001531.jpg"
+ },
+ "zen_die": {
+  "file": "zen_die.jpg",
+  "title": "File:AMD@14nm@Zen(Zeppelin)@Summit Ridge@Ryzen 3 1200@YD1200BBM4KAE UA 1724PGT 9GW9105S70241 DSCx3 bottom layer microscope stitched@5x (35620962953).jpg",
+  "artist": "Fritzchens Fritz from Berlin",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:AMD@14nm@Zen(Zeppelin)@Summit_Ridge@Ryzen_3_1200@YD1200BBM4KAE_UA_1724PGT_9GW9105S70241_DSCx3_bottom_layer_microscope_stitched@5x_(35620962953).jpg"
+ },
+ "ford_line": {
+  "file": "ford_line.jpg",
+  "title": "File:Ford assembly line - 1913 (restored).jpg",
+  "artist": "Unknown authorUnknown author",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Ford_assembly_line_-_1913_(restored).jpg"
+ },
+ "tux": {
+  "file": "tux.jpg",
+  "title": "File:Tux, the Linux penguin I.jpg",
+  "artist": "Renato.pierri",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Tux,_the_Linux_penguin_I.jpg"
+ },
+ "dining": {
+  "file": "dining.png",
+  "title": "File:An illustration of the dining philosophers problem.png",
+  "artist": "Benjamin D. Esham (bdesham)",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:An_illustration_of_the_dining_philosophers_problem.png"
+ },
+ "unix_v5": {
+  "file": "unix_v5.png",
+  "title": "File:Version 5 Unix SIMH PDP11 Emulation.png",
+  "artist": "Huihermit",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Version_5_Unix_SIMH_PDP11_Emulation.png"
+ },
+ "thompson_ritchie": {
+  "file": "thompson_ritchie.jpg",
+  "title": "File:Ken Thompson and Dennis Ritchie--1973.jpg",
+  "artist": "Unknown authorUnknown author",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Ken_Thompson_and_Dennis_Ritchie--1973.jpg"
+ },
+ "hamilton": {
+  "file": "hamilton.jpg",
+  "title": "File:Margaret Hamilton - restoration.jpg",
+  "artist": "Adam Cuerden",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Margaret_Hamilton_-_restoration.jpg"
+ },
+ "ariane5": {
+  "file": "ariane5.jpg",
+  "title": "File:Ariane 5 Rollout with James Webb Space Telescope (NHQ202112230001).jpg",
+  "artist": "Bill Ingalls",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Ariane_5_Rollout_with_James_Webb_Space_Telescope_(NHQ202112230001).jpg"
+ },
+ "scrum_board": {
+  "file": "scrum_board.jpg",
+  "title": "File:Scrum task board.jpg",
+  "artist": "Logan Ingalls",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Scrum_task_board.jpg"
+ },
+ "ramac": {
+  "file": "ramac.jpg",
+  "title": "File:IBM 350 RAMAC disk mechanism.agr.jpg",
+  "artist": "ArnoldReinhold",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:IBM_350_RAMAC_disk_mechanism.agr.jpg"
+ },
+ "server_racks": {
+  "file": "server_racks.jpg",
+  "title": "File:NOIRLab HQ Server Racks (6V6A0395-CC).jpg",
+  "artist": "NOIRLab/NSF/AURA/T. Slovinský",
+  "license": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:NOIRLab_HQ_Server_Racks_(6V6A0395-CC).jpg"
+ },
+ "i35w": {
+  "file": "i35w.jpg",
+  "title": "File:I-35W bridge collapse TLR1.jpg",
+  "artist": "w:User:Tomruen",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:I-35W_bridge_collapse_TLR1.jpg"
+ },
+ "solar_farm": {
+  "file": "solar_farm.jpg",
+  "title": "File:Photovoltaic Panels at the Travers Solar Farm.jpg",
+  "artist": "Kkiefuik",
+  "license": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Photovoltaic_Panels_at_the_Travers_Solar_Farm.jpg"
+ },
+ "challenger": {
+  "file": "challenger.jpg",
+  "title": "File:Challenger STS-51-L-launch.jpg",
+  "artist": "NASA",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Challenger_STS-51-L-launch.jpg"
+ },
+ "cleanroom": {
+  "file": "cleanroom.jpg",
+  "title": "File:Inside the Cleanroom III.jpg",
+  "artist": "Niftyfiftycat",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Inside_the_Cleanroom_III.jpg"
+ },
+ "mask_aligner": {
+  "file": "mask_aligner.jpg",
+  "title": "File:SÜSS MicroTec MA6 Mask Aligner.jpg",
+  "artist": "James Friend",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:S%C3%9CSS_MicroTec_MA6_Mask_Aligner.jpg"
+ },
+ "traffic_light": {
+  "file": "traffic_light.jpg",
+  "title": "File:Northernmost traffic light in North America, Inuvik, NT.jpg",
+  "artist": "Daniel Case",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Northernmost_traffic_light_in_North_America,_Inuvik,_NT.jpg"
+ },
+ "smartwatch": {
+  "file": "smartwatch.png",
+  "title": "File:Garmin Instinct 2 Solar Smartwatch Fitness tracker activity.png",
+  "artist": "Mantelmoewe",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Garmin_Instinct_2_Solar_Smartwatch_Fitness_tracker_activity.png"
+ },
+ "fake_sd": {
+  "file": "fake_sd.jpg",
+  "title": "File:Decapsulated microSD memory card lineup-genuine, questionable, and fake-counterfeit.jpg",
+  "artist": "Andrew \"bunnie\" Huang (of WP:chumby)",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Decapsulated_microSD_memory_card_lineup-genuine,_questionable,_and_fake-counterfeit.jpg"
+ },
+ "smartcard": {
+  "file": "smartcard.jpg",
+  "title": "File:Mastercard debit card by easybank-chip PNr°1285.jpg",
+  "artist": "D-Kuru",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Mastercard_debit_card_by_easybank-chip_PNr%C2%B01285.jpg"
+ },
+ "ip_camera": {
+  "file": "ip_camera.jpg",
+  "title": "File:Outdoor wireless security IP camera at Nuthurst, Sussex 2.jpg",
+  "artist": "Acabashi",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Outdoor_wireless_security_IP_camera_at_Nuthurst,_Sussex_2.jpg"
+ },
+ "rpi_cam": {
+  "file": "rpi_cam.jpg",
+  "title": "File:Raspberry Pi with Camera Module.jpg",
+  "artist": "ZippeyKeys12",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Raspberry_Pi_with_Camera_Module.jpg"
+ },
+ "rpi_camv2": {
+  "file": "rpi_camv2.jpg",
+  "title": "File:Raspberry Pi Camera Module v2 with ribbon.jpg",
+  "artist": "the Raspberry Pi Foundation",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Raspberry_Pi_Camera_Module_v2_with_ribbon.jpg"
+ },
+ "servo": {
+  "file": "servo.png",
+  "title": "File:Micro Servo Motor TowerPro SG90 e Acessórios.png",
+  "artist": "Luiz Augusto Souza de Mesquita",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Micro_Servo_Motor_TowerPro_SG90_e_Acess%C3%B3rios.png"
+ }
+}

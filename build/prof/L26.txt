@@ -1,0 +1,260 @@
+﻿#### L26_egcp446: EGCP 446 Advanced Digital Design using Verilog
+
+[s0] TITLE  Advanced Digital Design with Verilog
+  img: a:fpga_board
+  beat0:
+     0: Welcome to E G C P four forty six, advanced digital design using Verilog.
+     1: You've already designed hardware in V H D L.
+     2: Verilog describes the same hardware with a compact, C like syntax, and together with its successor SystemVerilog, it's the most widely used hardware description language in the chip industry.
+     3: In this lecture you'll learn Verilog's essentials, the one rule that prevents most simulation and synthesis surprises, finite state machines, and the real world problems every F P G A design faces: dividing clocks, debouncing buttons, synchronizing inputs, driving displays, and closing timing.
+
+[s1] V  Verilog vs. VHDL
+  img: fig:hdlcompare
+  • Same hardware ideas, different syntax
+  • Verilog: C-like and compact, but weakly typed
+  • module = entity + architecture
+  • SystemVerilog adds powerful verification features
+  (pen marks: 5 )
+  beat0:
+     0: V H D L and Verilog describe exactly the same hardware: signals, concurrent logic, processes triggered by clock edges.
+     1: The difference is style.
+  beat1:
+     0: Verilog looks like C and is far less verbose.
+     1: The trade off is weak typing: assign a sixteen bit value to an eight bit wire and Verilog silently truncates it, where V H D L would refuse to compile.
+     2: Lint tools and careful habits make up for that.
+  beat2:
+     0: A Verilog module combines what V H D L splits into an entity and an architecture: the ports and the implementation in one place.
+  beat3:
+     0: Most American and Asian chip companies use Verilog and SystemVerilog, while V H D L remains strong in aerospace, defense and in Europe.
+     1: SystemVerilog adds object oriented testbenches, constrained random stimulus and assertions, the basis of the UVM verification methodology used across the industry.
+     2: Knowing both languages covers the job market.
+
+[s2] EX  A parameterized counter in Verilog
+  CODE:
+    module counter #(parameter N = 4) (
+      input  wire         clk, rst,
+      output reg  [N-1:0] q
+    );
+      always @(posedge clk) begin
+        if (rst) q <= 0;          // synchronous reset
+        else     q <= q + 1;      // count up, wraps at 2^N
+      end
+    endmodule
+    
+    // instantiate an 8-bit version:
+    counter #(.N(8)) c8 (.clk(clk), .rst(btn), .q(leds));
+  (pen marks: 11 )
+  beat0:
+     0: Here's a complete Verilog module: a counter whose width is a parameter, defaulting to four bits.
+     1: The port list declares a clock and reset as inputs, and q as an N bit output.
+     2: Wire means a continuously driven connection.
+     3: Reg means a value assigned inside an always block.
+     4: Despite its name, reg doesn't automatically mean a register.
+  beat1:
+     0: The always block runs on every rising clock edge.
+     1: If reset is high, q becomes zero, otherwise q increments, wrapping around after two to the N minus one.
+     2: Because it's assigned on a clock edge, q does become a bank of flip flops, with an adder in front.
+     3: Notice the arrow shaped operator, less than equals.
+     4: That's a non blocking assignment, and we'll see why it matters next.
+  beat2:
+     0: To use the module, instantiate it, here as an eight bit counter driving the board's L E Ds, connecting ports by name.
+     1: Parameters and generate loops let one module describe a whole family of circuits.
+
+[s3] V  The rule to memorize: blocking vs. non-blocking
+  img: fig:blocking
+  • Clocked always @(posedge clk): use <= (non-blocking)
+  • Combinational always @(*): use = (blocking)
+  • Assign every output in every branch → no latches
+  • Never mix both on one variable
+  (pen marks: 6 )
+  beat0:
+     0: Verilog has two assignment operators, and confusing them is the number one source of designs that simulate one way and synthesize another.
+     1: Inside a clocked always block, use non blocking assignments.
+     2: All the right hand sides are evaluated first, then all the left hand sides update together, exactly like real flip flops that all sample on the same clock edge.
+     3: So a gets b and b gets a really does swap them.
+  beat1:
+     0: With blocking assignments, statements execute in order like software.
+     1: A becomes two, and then b copies the new a, so both end up two.
+     2: Use blocking assignments for combinational logic, inside always at star blocks, where you want that step by step evaluation.
+  beat2:
+     0: In combinational blocks, assign every output in every branch, or set defaults at the top.
+     1: If some path leaves an output unassigned, the tool must remember its old value, and it infers a latch you never wanted.
+  beat3:
+     0: And never assign the same variable with both kinds of operators.
+     1: Follow these three rules and your simulation will match your hardware.
+
+[s4] WB  Worked example: why "=" vs "<=" changes the hardware
+  step0 board+: always @(posedge clk) begin ||   a = b; ||   b = a; || end || PEN ('circle',) on a = b; || PEN ('circle',) on b = a; || start: a = 1, b = 2
+     0: Here's the classic trap.
+     1: We want two registers to swap values on every clock edge.
+     2: Version one uses blocking assignments, the plain equals sign.
+     3: Start with a equal to one and b equal to two.
+  step1 board+: a = b  so a = 2 || PEN ('highlight',) on   a = b; || b = a  so b = 2  (old a lost!) || PEN ('highlight',) on   b = a; || PEN ('cross',) on b = a  so b = 2
+     0: Blocking assignments execute in order, like software.
+     1: a becomes two.
+     2: Then b gets the new a, which is also two.
+     3: Both are two: the old value of a is lost forever, and the synthesizer builds hardware that does exactly that.
+  step2 board+:   a <= b; ||   b <= a; || PEN ('circle',) on   a <= b; || PEN ('circle',) on   b <= a; || a = 2, b = 1:  swapped || PEN ('check',) on swapped
+     0: Version two uses non-blocking assignments, less than equals.
+     1: All right-hand sides are sampled at the clock edge, then every register updates together.
+     2: a gets the old b, two, and b gets the old a, one.
+     3: A true swap, just like two real flip flops wired to each other.
+  step3 board+: clocked: <=     combinational: =
+     0: So the rule: inside clocked always blocks, use non-blocking.
+     1: Inside combinational always blocks, use blocking.
+     2: Follow it every time and simulation will match the real hardware.
+
+[s5] V  Finite state machines in Verilog
+  img: fig:mooremealy
+  • State register: always @(posedge clk) with <=
+  • Next-state + output logic: always @(*) with =
+  • Moore: outputs from state · Mealy: from state + inputs
+  • ASM charts add datapath actions (counters, registers)
+  (pen marks: 3 )
+  beat0:
+     0: Finite state machines are written in a standard two process style.
+     1: One clocked always block holds the state register, updated with non blocking assignments.
+     2: A second combinational block computes the next state and the outputs from the current state and inputs, using a case statement.
+     3: States get names with local parameters, so the code reads like the diagram.
+  beat1:
+     0: Here's a Moore machine that detects two ones in a row on input x.
+     1: In a Moore machine, the outputs depend only on the current state, so the output turns on in state S two and stays clean for the whole clock cycle.
+  beat2:
+     0: A Mealy machine computes outputs from the state and the current inputs.
+     1: It often needs fewer states and reacts one cycle sooner, but its output can glitch when inputs change.
+     2: In this course's labs, students build a Moore machine that animates an L E D pattern, with a testbench that checks every transition.
+  beat3:
+     0: Algorithmic state machine charts extend state diagrams with datapath operations, like increment a counter or load a register, the standard way to design a controller together with the datapath it drives.
+
+[s6] WB  Worked example: a Verilog FSM from diagram to code
+  step0 board+: output 1 after two 1s in a row || PEN None || localparam S0 = 2'd0, S1 = 2'd1, S2 = 2'd2; || reg [1:0] state, next;
+     0: Design a machine that outputs one after it sees two ones in a row on input x.
+     1: Three states: S zero, nothing seen.
+     2: S one, one one seen.
+     3: S two, two or more ones: output one.
+  step1 board+: PEN None || always @* begin ||   case (state) ||     S0: next = x ? S1 : S0; ||     S1: next = x ? S2 : S0; ||     S2: next = x ? S2 : S0; ||     default: next = S0; ||   endcase || end || PEN ('underline',) on always @* || PEN ('circle',) on S1 : S0
+     0: Draw the arrows for input one: S zero to S one, S one to S two, and S two stays in S two.
+     1: Then code the next state logic in a combinational always block, using blocking assignments.
+  step2 board+: PEN None || PEN ('box',) on default: next = S0;
+     0: Any zero sends us back to S zero.
+     1: The default branch covers the unused fourth state code, so the machine can never get stuck there.
+  step3 board+: always @(posedge clk) state <= rst ? S0 : next; || PEN ('circle',) on <= rst ? S0 : next || assign y = (state == S2); || PEN ('circle',) on (state == S2) || register + next-state + output
+     0: Finally, the state register, clocked with non-blocking assignment and a reset, and the Moore output, which depends only on the state.
+     1: Three blocks: state register, next state logic, output logic.
+     2: Every FSM you write in this course has this exact shape.
+
+[s7] V  Real FPGA problem 1: clocks and buttons
+  img: fig:bounce / fig:sync
+  • 100 MHz → 1 Hz: count 50,000,000 cycles per toggle
+  • Better: a 1-cycle enable pulse, one global clock
+  • Buttons bounce for milliseconds → debounce
+  • Async inputs → two-flip-flop synchronizer
+  (pen marks: 7 )
+  beat0:
+     0: F P G A boards typically run a one hundred megahertz clock, far too fast to see an L E D blink.
+     1: To make a one hertz signal, count fifty million clock cycles, then toggle, which takes a twenty six bit counter.
+     2: Good practice is not to use that slow signal as a new clock, but to generate a one cycle enable pulse and keep every flip flop on the main clock.
+     3: Mixing derived clocks causes timing problems the tools can't analyze.
+     4: Mechanical push buttons have another problem: when pressed, the metal contacts bounce, opening and closing many times over a few milliseconds.
+     5: A counter would see one press as a dozen.
+     6: The fix is debouncing: accept a new button value only after it has stayed stable for several milliseconds, then detect the edge to get a single clean pulse.
+     7: In the A S M lab, students build exactly this: a clock divider and a push button debouncer.
+  beat1:
+     0: There's a subtler danger.
+     1: A button changes at random times relative to the clock.
+     2: If it changes right as a flip flop samples, the flip flop can enter a metastable state, hovering between zero and one for an unpredictable time.
+     3: The standard fix is a synchronizer: pass the signal through two flip flops in a row.
+     4: The first may go metastable, but it almost always settles within a clock cycle, before the second samples it.
+     5: Every asynchronous input in a real product goes through a synchronizer.
+
+[s8] WB  Worked example: a synchronizer and one-pulse circuit
+  step0 board+: reg sync1, sync2, prev; || PEN None
+     0: A push button can change at any instant, with no relation to the clock.
+     1: If it changes right at a clock edge, the flip flop that samples it can go metastable: stuck between zero and one for a while.
+  step1 board+: always @(posedge clk) begin ||   sync1 <= btn;     // may be metastable || PEN None || PEN ('underline',) on sync1 <= btn;
+     0: The fix is two flip flops in a row.
+     1: The first one may go metastable, but it has a whole clock period to settle before the second one samples it.
+  step2 board+:   sync2 <= sync1;   // clean ||   prev  <= sync2; || end || PEN None || PEN ('circle',) on sync2 <= sync1;
+     0: The second flip flop's output is clean and synchronized to our clock.
+     1: Everything else in the design should only ever look at sync two.
+  step3 board+: assign pulse = sync2 & ~prev; || PEN None || PEN ('circle',) on sync2 & ~prev
+     0: A held button would look like thousands of presses to a fast counter.
+     1: So compare sync two with its value one clock ago: the pulse is high only when it is one now and was zero before.
+     2: Exactly one clock cycle per press.
+     3: Add a debounce counter, and you have the input stage of nearly every F P G A lab.
+
+[s9] V  Real FPGA problem 2: driving a multi-digit display
+  img: a:sevenseg / fig:mux7
+  • 4 digits share the same 7 segment lines
+  • Enable one digit (anode) at a time
+  • Switch every ~1 ms → persistence of vision
+  • Decoder: hex digit → 7-segment pattern (case)
+  (pen marks: 4 )
+  beat0:
+     0: Seven segment displays are everywhere on F P G A boards.
+     1: A four digit display would need twenty eight segment wires, so instead all four digits share the same seven segment lines, and each digit has its own enable line, called its anode.
+  beat1:
+     0: The trick is time multiplexing.
+     1: Turn on digit zero and drive its pattern, then one millisecond later switch to digit one with its pattern, and so on.
+     2: Each digit is lit only a quarter of the time, but it refreshes two hundred fifty times per second, much faster than the eye can follow, so all four appear steadily lit.
+     3: A case statement decodes each hex digit into its segment pattern.
+     4: In this course's project, students first show a counter on one digit, then build the full time multiplexed multi digit display.
+
+[s10] EX  Memories: ROM and RAM that map to block RAM
+  CODE:
+    // 256 x 8 RAM: synchronous write and read
+    reg [7:0] mem [0:255];
+    always @(posedge clk) begin
+      if (we) mem[addr] <= din;
+      dout <= mem[addr];
+    end
+    
+    // ROM initialized from a file of hex values
+    reg [7:0] rom [0:15];
+    initial $readmemh("sine.hex", rom);
+  (pen marks: 5 )
+  beat0:
+     0: Memories are just arrays.
+     1: This declares two hundred fifty six bytes.
+     2: On each clock edge, if write enable is high, the input byte is stored at the address, and the byte at the address is read out.
+     3: Written in this synchronous pattern, the synthesis tool recognizes it and maps it to the F P G A's dedicated block RAM, instead of building it from two thousand individual flip flops and a giant multiplexer.
+     4: Write it slightly differently, with an asynchronous read for example, and you may lose that mapping, so follow the vendor's coding templates.
+  beat1:
+     0: A ROM can be a case statement, or an array initialized from a file of hex values with read mem h, which is handy for lookup tables like one period of a sine wave.
+     1: In the memory lab, students build ROM and RAM modules and show the RAM's contents on the seven segment display.
+
+[s11] V  From RTL to bitstream: implementation and timing
+  img: fig:flow
+  • Simulate first: testbenches with self-checking
+  • Synthesis → LUTs, flip-flops, block RAM, DSP slices
+  • Constraints (.xdc): pins and clock period
+  • Static timing analysis: worst negative slack must be ≥ 0
+  (pen marks: 3 )
+  beat0:
+     0: The design flow always starts with simulation.
+     1: A testbench drives inputs with initial blocks and delays, and a good one checks the outputs automatically, printing an error instead of making you stare at waveforms.
+  beat1:
+     0: Synthesis translates the R T L into the F P G A's resources: lookup tables, flip flops, block RAM and D S P multiplier slices.
+     1: Then place and route decides where each one goes on the chip and how to wire them.
+  beat2:
+     0: A constraints file tells the tools which package pin each port connects to, and what the clock period is.
+     1: One hundred megahertz means ten nanoseconds.
+  beat3:
+     0: Finally, static timing analysis checks every path from one flip flop to the next against that period, just like the maximum frequency calculation from digital logic.
+     1: The key number is worst negative slack.
+     2: If it's negative, some path is too slow and the design won't work reliably at that clock rate.
+     3: You fix it by pipelining long paths, simplifying logic, or lowering the clock frequency.
+     4: Only then is the bitstream generated and loaded onto the board.
+
+[s12] Q  Key takeaways
+  BIG: Use **<=** in clocked blocks and **=** in combinational ones. One global clock with **enables**, **debounce and synchronize** inputs, and check **slack**.
+  cap: Next: EGCP 450, Embedded Processor Interfacing on an ARM Cortex-M.
+  beat0:
+     0: To recap.
+     1: Verilog describes the same hardware as V H D L with a compact syntax, organized into modules with parameters.
+     2: Non blocking assignments model flip flops, blocking assignments model combinational logic, and assigning every output avoids latches.
+     3: Finite state machines use a clocked state register and combinational next state logic.
+     4: Real designs divide clocks with enables, debounce and synchronize inputs, multiplex displays, and use memory templates that map to block RAM.
+     5: And static timing analysis decides whether it all runs at speed.
+     6: Next, embedded systems on an ARM microcontroller.
+     7: See you there.

@@ -1,0 +1,952 @@
+Undergraduate Handbook
+2022-2023 Edition
+Department of Computer Science
+California State University, Fullerton
+August 17, 2022
+2
+Contents
+1 Introduction 7
+1.1 The Field of Computer Science . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+1.2 The Department . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+1.3 Accreditation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+1.4 The Programs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+1.5 Objectives and Outcomes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+1.6 Using This Document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+2 Sources of Information 11
+3 The CS Major 13
+3.1 Major Requirements at a Glance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+3.2 Major Prerequisite Tree . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+3.3 Lower-Division Core . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+3.4 Tuffix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+3.5 Mathematics Requirements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+3.6 Science and Mathematics Electives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+3.7 Upper Division Core . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+3.8 Computer Science Major Electives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+3.8.1 Lower Division CS Electives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+3
+3.8.2 Upper Division CS Electives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+3.9 B. S. in Computer Science with Cybersecurity Concentration . . . . . . . . . . . . . . . . . . . . . . 18
+3.10 General Education (GE) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+3.11 Academic Requirements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+3.11.1 Grades . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+4 The CS Minor 23
+4.1 Minor Requirements at a Glance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+4.2 Minor Prerequisite Tree . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+4.3 For Majors in Related Fields . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+5 Alternative Pathways 25
+5.1 Transfer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+5.2 Computer Science Placement Examination . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+5.3 Missing CPSC 120 or 121 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+5.4 Advanced Placement (AP) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+5.5 Internships . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+5.6 International Students . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+5.7 ROTC . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+5.8 Independent Study . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+5.9 Petitioning for Classes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+5.10 Request Forms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+6 Advisement 33
+6.1 General Advice . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+6.2 Major Advisement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+6.3 Required Advisement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+6.4 General Education (GE) Advisement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+4
+6.5 First-time Freshmen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+6.6 Career Advising . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+6.7 Studying Abroad . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+6.8 Transfer Students . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+6.9 Nearing Graduation (Within One Year) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+6.10 Probation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+6.11 Peer Advising & Clubs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+7 Sample Four Year Plans 37
+8 Credits and Revision History 41
+Index 43
+5
+6
+1
+Introduction
+1.1 The Field of Computer Science
+Computer Science is the systematic study of computing systems and computation. The body of knowledge contains
+the theoretical foundation for understanding computing systems, design methodology, algorithms, and software and
+hardware tools.
+The programs at Cal State Fullerton cover a wide range of areas, including:
+• multimedia and digital game technologies,
+• Internet and enterprise computing,
+• wireless and mobile computing,
+• databases and data mining,
+• computer security,
+• software engineering, and
+• computational bioinformatics.
+Computer Science prepares graduates for rewarding careers in all areas of business, government, education and indus-
+try. These organizations, large and small, need computer professionals to address their needs with specific programs
+and systems. Computer science professionals tackle complicated problems and create computer solutions to solve
+them, devising new ways to use computers.
+1.2 The Department
+The faculty and staff of the Computer Science Department welcome you into our program and sincerely wish you
+good luck on your journey into higher education, and continued success.
+7
+Whenever you have a question about the Department—its policies, its curriculum, its services, your progress, or
+anything else—feel free to contact us.
+Web: http://fullerton.edu/ecs/cs/
+E-mail: csdept@fullerton.edu
+In person: Room CS-522
+Telephone: (657) 278-3700
+Fax: (657) 278-7168
+Postal mail: California State University, Fullerton
+Department of Computer Science
+P.O. Box 6870
+Fullerton, CA 92834-6870
+1.3 Accreditation
+The Bachelor of Science in Computer Science degree at CSUF is accredited by the Computing Accreditation Com-
+mission of ABET (http://www.abet.org).
+1.4 The Programs
+The Department offers the following Undergraduate programs, which are documented in this Handbook:
+1. Bachelor of Science in Computer Science (B.S. CS),
+2. Bachelor of Science in Computer Science with Concentration in Cybersecurity, and
+3. Minor in Computer Science.
+The Department also offers Graduate programs, which are documented elsewhere:
+1. Master of Science in Computer Science (M.S. CS),
+2. Master of Science in Software Engineering (M.S.E.), and
+8
+3. Accelerated Master of Science in Software Engineering (A.M.S.E.).
+CS courses are also components of Computer Engineering, Electrical Engineering, and Mathematics programs at
+CSUF.
+1.5 Objectives and Outcomes
+The Program Educational Objectives and Program Outcomes for the B.S. Computer Science are documented in the
+University Catalog at http://www.fullerton.edu/ecs/cs/about/peo-so.php
+1.6 Using This Document
+This handbook covers information on how to complete a B.S. or a Minor in Computer Science, and contains informa-
+tion relevant to students pursuing them. If you are pursuing a Masters degree, please refer to the Graduate Handbook
+instead of this document.
+In order to minimize duplicated information, this document references other documents rather than copying their
+content. The PDF version of this Handbook presents these references as clickable links.
+Some aspects of our programs are complex, and you may find it difficult to choose among alternatives. In those cases,
+we present our suggested default choice as a tip, as shown below. You are not required to follow these tips, but doing
+so is often a prudent choice.
+TIP When in doubt, heed tips such as this one.
+This document has been formatted so that it may be printed as a booklet. Print double-sided with staples (or other
+binding) on the left side. The document will look best if printed in color, but it may also be printed in grayscale (a.k.a.
+semitone).
+9
+10
+2
+Sources of Information
+You may find the following sources to be helpful.
+• The University Catalog: http://catalog.fullerton.edu/
+• Advising:
+– CS Department Advising: http://www.fullerton.edu/ecs/cs/resources/advisement.
+php
+– Center for Academic Support in ECS (CASECS): http://www.fullerton.edu/ecs/resources/
+casecs.php
+– Student Success Center: http://www.fullerton.edu/ecs/resources/StudentSuccessCenter.
+php
+– Academic Advisement Center (GE advising): https://www.fullerton.edu/aac/
+• Department of Computer Science: http://www.fullerton.edu/ecs/cs/
+• General Education (GE): http://www.fullerton.edu/undergraduate/general_education/
+index.php
+• Course transfer database: http://www.assist.org
+• Center for Internships & Community Engagement — Academic Internships: http://www.fullerton.
+edu/cice/students/internships.php
+• Catalogs of nearby community colleges:
+– Cypress College: https://catalog.nocccd.edu/cypress-college/
+– Fullerton College: https://www.fullcoll.edu/schedule/
+– Golden West College: http://www.goldenwestcollege.edu/catalog/
+– Irvine Valley College: https://catalog.ivc.edu/
+– Orange Coast College: http://www.orangecoastcollege.edu/academics/CourseCatalog/
+Pages/default.aspx
+– Saddleback College: http://www.saddleback.edu/cc/course-catalog
+– Santa Ana College: https://www.sac.edu/CatalogAndSchedule/Pages/catalog.aspx
+– Santiago Canyon College: https://sccollege.elumenapp.com/catalog/2022-2023/home
+11
+12
+3
+The CS Major
+3.1 Major Requirements at a Glance
+The requirements for the B.S. CS are detailed in the University Catalog. The requirements fit into 6 categories:
+1. Lower-Division Core: 100/200-level CPSC courses covering
+computer programming, data structures, and cybersecurity.
+2. Mathematics Requirements: MATH courses laying the foundation for CS theory and practice.
+3. Science and Mathematics Electives: Physical science and/or mathematics courses that provide a breadth of
+scientific knowledge and prepare students for certain upper-division electives.
+4. Upper-Division Core: 300/400-level CPSC courses that build directly upon the Lower-Division Core, Mathe-
+matics, and Science courses lised above, and complete the computer science canon.
+5. Major Electives: You may choose elective courses that support your interests and career goals.
+6. General Education (GE): A blend of varied topics that round out a broad, liberal arts education, and satisfy
+University graduation requirements.
+Our accreditor, ABET, requires at least 30 units of mathematics and science courses. The Mathematics Requirements
+and Science and Mathematics Electives together satisfy this 30-unit requirement.
+3.2 Major Prerequisite Tree
+The following tree graph diagram illustrates the prerequisite and corequisite relationships between courses required
+for the major.
+13
+Figure 3.1: Prerequisite relations for the BS CS Core
+TIP
+You are ordinarily limited to 16 units each term. In order to finish the B.S. program in 8
+semesters, you will need to take five classes each semester. Almost all CPSC and GE courses
+are 3 units each; almost all mathematics and science courses are 4 units each. Plan on taking
+four 3-unit courses (CPSC and/or GE), and one 4-unit course (mathematics or science) each
+semester, for a total of 16 units, until you have completed all required 4-unit courses.
+3.3 Lower-Division Core
+The first three courses in the major are CPSC 120, 121, and 131. These courses must be taken in sequence, and are
+prerequisites to practically every other CS course.
+TIP Prioritize completing CPSC 120, 121, then 131 as soon as possible.
+If you come to CSUF with prior programming expertise, you may be able to skip some of these courses. See sections
+5.2 and 5.4 for more information.
+Our introductory programming courses are taught in C++, but cover concepts that are common to practically all
+programming languages. To establish some breadth of programming fluency, you are required to learn a second
+14
+programming language. This is accomplished by passing one of the CPSC 223 courses.
+TIP
+Choose CPSC 223P - Python Programming if you plan on taking security-related courses later
+on.
+TIP
+Python is used in many upper-division courses, so unless you are on one of the two specific
+paths above, take CPSC 223P - Python Programming.
+3.4 Tuffix
+Students enrolled in CSPC 120, CPSC 121, and CPSC 131 are recommended to use the Computer Science Department
+official GNU/Linux development environment, Tuffix. Tuffix is Tuffy the Titans Linux distribution.
+Instructions on how to install Tuffix or a Tuffix based VM are online at http://csufcs.com/tuffixinstall.
+The Tuffix Titanium Community for Students,
+https://communities.fullerton.edu/course/view.php?id=1547 is the best venue to receive help
+with Tuffix.
+Students may self-enroll in the community; first login to your portal, then navigate to Titanium communities, next
+under the dashboard to the left click Site home, then click Search Courses on the right, search for Tuffix, in the results
+click Tuffix Students, under the gear in the upper right select Enrol me in this course, finally click on the button Enrol
+me. You may unenroll at any time.
+The Tuffix home page is https://github.com/kevinwortman/tuffix.
+Students interested in using Microsoft development tools may request a Dreamspark account at
+http://dsreqform.ecs.fullerton.edu/. A student may, at no monetary cost, download full featured
+versions of Microsoft Visual Studio.
+Students interested in using Apple development tools can freely download Xcode through the App Store applica-
+tion bundled with macOS. Students may download Xcode directly from https://developer.apple.com/
+xcode/.
+A CentOS-based shell server is available through secure shell (ssh) and secure file transfer protocol (sftp). The host-
+name is ecs.fullerton.edu. If your email address is malcolm@csu.fullerton.edu, then your username is malcolm. If you
+are using a command-line ssh client, then your command to connect to ecs.fullerton.edu will be
+‘ssh malcolm@ecs.fullerton.edu‘.
+15
+3.5 Mathematics Requirements
+Before enrolling in Math 150A, you must either have recently passed MATH 125 - Precalculus, an equivalent course
+at another institution, or passed the Mathematics Qualifying Exam. Additional information on this exam is available
+in the online registration guide, and from the Fullerton Testing Center, University Hall 229, and (657) 278-3838.
+3.6 Science and Mathematics Electives
+As stated in the University Catalog, you must complete at least 12 units of natural science and/or mathematics courses
+chosen from a designated list. The list includes only courses that dovetail with CS material, and may fit within a
+coherent 12-unit curriculum. Due to GE and ABET requirements, you must take at least one course with a laboratory
+experience. Eligible laboratory courses are designated in the Catalog.
+Choose a set of courses that support each other and your future studies. Plan ahead, and discuss your plan for this
+requirement with your adviser.
+TIP
+PHYS 225, 225L, 226, 226L, and MATH 250A provide a strong foundation for later CS courses,
+meet all Science and Mathematics requirements, and fit within 12 units. Take this set of electives
+unless you are working toward a specific study plan focusing on biology, chemistry, geology, or
+mathematics.
+The two-semester biology sequence is BIOL 151 and BIOL 152. This sequence replaced older courses numbered
+BIOL 171 and 172. Current students should take 151 and 152, but you may see references to 171 and 172 in some
+documents. Students who took 171 and 172 while they were offered may count those courses toward the Science and
+Mathematics Electives requirement.
+3.7 Upper Division Core
+CPSC 491 - Senior Capstone Project in Computer Science is the Core course with the longest chain of prerequisites.
+Plan your schedule so that you make steady progress toward meeting 491’s prerequisites.
+TIP
+If possible, make progress on each of the following prerequisite chains every semester:
+1. CPSC 120, 121, 131, 362, 490, 491
+2. MATH 270A, 270B
+3. MATH 150A, 150B, 338
+16
+3.8 Computer Science Major Electives
+You must select 15 units of electives, ordinarily five 3-unit courses, to satisfy your degree requirements. Select elective
+courses that are best aligned with your personal objectives. For example, if you aspire to create web applications and
+mobile apps, then courses such as CPSC 411, CPSC 411A, CPSC 431, CPSC 349 and CPSC 449 are excellent choices.
+Consult mentors and advisors in selecting the elective courses that match your goals.
+Courses outside of the computer science department may be used as elective courses. You must seek approval from a
+major advisor before taking the course.
+Computer science related internship may be approved for 3 units of elective course. You must enroll in EGGN 495 to
+receive the credits. Independent Study can also be counted for elective credits. You must enroll in CPSC 499 under
+the supervision of a faculty advisor.
+3.8.1 Lower Division CS Electives
+You may complete at most 3.0 units of Lower Division CS Electives (200 level courses). Students who need additional
+units due to the Placement Examination, transfer, or other circumstances are encouraged to consult with a major
+advisor.
+3.8.2 Upper Division CS Electives
+Your are required to complete at least 12.0 units of Upper Division CS Electives. You may need to take additional
+electives if you are short on units due to the Placement Examination, transfer, or other circumstances.
+A course may be used as an Upper Division CS Elective if it is a 3-unit, 300/400 level CPSC course that is not a core
+requirement. Therefore, the following courses may count as Upper Division CS Electives:
+• CPSC 301 - Programming Lab Practicum (2)
+• CPSC 349 - Web Front-End Engineering (3)
+• CPSC 375 - Introduction to Data Science and Big Data (3)
+• CPSC 386 - Introduction to Game Design and Production (3)
+• CPSC 411 - Mobile Device Application Programming (3)
+• CPSC 411A - Mobile Device Application Programming for Android (3)
+• CPSC 431 - Database and Applications (3)
+• CPSC 439 - Theory of Computation (3)
+• CPSC 440 - Computer System Architecture (3)
+• CPSC 449 - Web Back-End Engineering (3)
+• CPSC 452 - Cryptography (3)
+17
+• CPSC 454 - Cloud Computing and Security (3)
+• CPSC 455 - Web Security (3)
+• CPSC 456 - Network Security Fundamentals (3)
+• CPSC 458 - Malware Analysis (3)
+• CPSC 459 - Blockchain Technologies (3)
+• CPSC 462 - Software Design (3)
+• CPSC 463 - Software Testing (3)
+• CPSC 464 - Software Architecture (3)
+• CPSC 466 - Software Process (3)
+• CPSC 474 - Parallel and Distributed Computing (3)
+• CPSC 479 - Introduction to High Performance Computing (3)
+• CPSC 483 - Introduction to Machine Learning (3)
+• CPSC 484 - Principles of Computer Graphics (3)
+• CPSC 485 - Computational Bioinformatics (3)
+• CPSC 486 - Game Programming (3)
+• CPSC 489 - Game Development Project (3)
+• CPSC 499 - Independent Study (3)
+You may be able to use an adviser-approved course not on this list as an Upper Division CS Elective. Such a course
+must be at least 3 units and directly related to your academic goals. If this interests you, discuss it with a major adviser.
+You may need to file a request form; see Section 5.10.
+3.9 B. S. in Computer Science with Cybersecurity Concentration
+The cybersecurity concentration prepares computer science students for entry-level cybersecurity positions, including
+security engineer, security administrator, penetration tester and security applications developer. The concentration
+emphasizes cybersecurity foundations and principles, including risk analysis, network security and cryptography, and
+covers current approaches to malware analysis and web, cloud and blockchain security.
+• Required Course (3 units)
+– CPSC 456 - Network Security Fundamentals (3)
+• Cybersecurity Electives (9 units)
+– CPSC 452 - Cryptography (3)
+– CPSC 454 - Cloud Computing and Security (3)
+18
+– CPSC 455 - Web Security (3)
+– CPSC 458 - Malware Analysis (3)
+– CPSC 459 - Blockchain Technologies (3)
+– CPSC 483 - Introduction to Machine Learning (3)
+– EGCP 447 - Introduction to Cyber-Physical Systems Security (3)
+Figure 3.2: Prerequisite relations for the BS CS with Cybersecurity Concentration
+3.10 General Education (GE)
+The Undergraduate Studies & General Education website
+http://www.fullerton.edu/undergraduate/general_education/index.php
+describes University GE requirements in detail. You are encouraged to check your TDA (Titan Degree Audit) to find
+out about the GE requirements. The TDA provides a list of courses that may be taken to satisfy each category of GE.
+You may also meet with an advisor at the Academic Advising Center to discuss your options for GE.
+Prior to Fall 2018 CSUF students are ordinarily required to take at least 51 units and 19 categories of GE courses.
+CS majors meet some of these requirements through their required courses, and some requirements are waived for CS
+majors.
+Beginning in Fall 2018, CSUF students are ordinarily required to take at least 48 units and 18 categories of GE courses.
+CS majors meet some of these requirements through their required courses, and some requirements are waived for CS
+majors.
+This leaves 27 units and 10 categories which must be satisfied by additional courses.
+19
+Table 3.1: Pre-2018 GE Waivers
+GE area Satisfied by
+A.3. Critical Thinking (3 units) waived for CS majors
+B.1. Physical Science (3 units) GEOL 101, PHYS 225, or CHEM 120A, part of Sci-
+ence and Mathematics Electives
+B.2. Life Science (3 units) waived for CS majors
+B.3. Laboratory Experience GEOL 101L or PHYS 225L, part of Science and Math-
+ematics Electives
+B.4. Mathematics and Quantitative Reasoning (3
+units)
+MATH 150A, part of Mathematics Requirements
+B.5. Implications and Explorations of Mathematics
+and Natural Sciences (3 units)
+MATH 338, part of Mathematics Requirements
+D.2. World Civilizations and Cultures (3 units) waived for CS majors who take HIST 110A to satisfy
+C.4
+D.5. Explorations in Social Sciences (3 units) waived for CS majors
+E. Lifelong Learning and Self Development (3 units) waived for CS majors
+Total: 24 units, 9 categories
+Table 3.2: Fall 2018 and Later GE Waivers
+GE area Satisfied by
+A.3. Critical Thinking (3 units) waived for CS majors
+B.1. Physical Science (3 units) GEOL 101, PHYS 225, or CHEM 120A, part of Sci-
+ence and Mathematics Electives
+B.2. Life Science (3 units) waived for CS majors
+B.3. Laboratory Experience GEOL 101L or PHYS 225L, part of Science and Math-
+ematics Electives
+B.4. Mathematics and Quantitative Reasoning (3
+units)
+MATH 150A, part of Mathematics Requirements
+B.5. Implications and Explorations of Mathematics
+and Natural Sciences (3 units)
+MATH 338, part of Mathematics Requirements
+D.4. Explorations in Social Sciences (3 units) waived for CS majors
+E. Lifelong Learning and Self Development (3 units) waived for CS majors
+Total: 18 units, 6 categories
+20
+Table 3.3: Pre-2021 GE Requirements & Suggestions
+GE area Suggested Course
+A.1. Oral Communications (3 units) HCOM 102 Public Speaking (3)
+A.2. Written Communications (3 units) ENGL 101 - Beginning College Writing (3)
+C.1. Introduction to Art (3 units) ART 101 - Introduction to Art (3) (many alternatives)
+C.2. Introduction to Humanities (3 units) LING 106 - Language and Linguistics (3); many alter-
+natives
+C.3. Explorations of Arts and Humanities (3 units) MUS 303 - World Music (3); C.1 is prerequisite; many
+alternatives
+D.1. Introduction to Social Sciences (3 units) EGCE/CP/EE/ME 401; MATH 150A is prerequisite;
+must be 401 specifically
+D.3. American History, Institutions and Values (3
+units)
+AMST 201 - Introduction to American Studies (3);
+many alternatives
+Z. Cultural Diversity already satisfied by MUS 303 above
+Total: 27 units, 10 categories
+In addition, CSUF students are required to take at least 6 units of GE at the upper-division (300/400) level. 4 of these
+are satisfied by MATH 338, so at least 2 of your additional GE units must be upper-division.
+The following tables list the remaining GE categories, and a suggested course for each category.
+TIP
+Effective Fall 2017, upper-division GE courses can only be taken by students at upper-division
+class standing.
+TIP
+To conserve units, make sure that the course you take for category C.3 (pre-2018) or C.4
+(2018 and later) is upper-division and also satisfies category Z. Z-category courses are marked
+with an asterisk on the http://www.fullerton.edu/undergraduate/courses/
+2021.php page.
+TIP
+Catalog years Fall 2015 through Spring 2018, CS majors must satisfy GE area D.1 with
+EGCE/CP/EE/ME 401. Starting in Fall 2018, CS majors may use any D.1 course.
+3.11 Academic Requirements
+Your GPA for courses required in your major must remain at or above 2.0. Grade requirements for courses are
+summarized below.
+21
+Table 3.4: 2021 and later GE Requirements & Suggestions
+GE area Suggested Course
+A.1. Oral Communications (3 units) HCOM 102 Public Speaking (3)
+A.2. Written Communications (3 units) ENGL 101 - Beginning College Writing (3)
+C.1. Introduction to Art (3 units) ART 101 - Introduction to Art (3); many alternatives
+C.2. Introduction to Humanities (3 units) LING 106 - Language and Linguistics (3); many alter-
+natives
+C.3. Explorations of Arts and Humanities++ (3 units) MUS 303 - World Music (3); many alternatives
+D.1. Introduction to Social Sciences (3 units) SOCI 101 - Introduction to Sociology (3) or
+EGCE/CP/EE/ME 401; many alternatives
+D.2. American History, Institutions, and Values (3
+units)
+HIST 190 Survey of American History with Emphasis
+on Ethnic Minorities (3); many alternatives
+Z. Cultural Diversity already satisfied by MUS 303 above; many alternatives
+Graduation Requirement (3 units) POSC 100 - American Government (3)
+Total: 27 units, 10 categories
+Course Type Minimum Grade
+GE courses, including MATH 150A, MATH 338,
+EGCE/CP/EE/ME 401 C-
+CPSC 490 and 491 C
+All other major courses D-
+3.11.1 Grades
+A repeatable grade is a “D”, “F”, or “W” grade. Students may repeat courses for which a “C-” or lower grades were
+earned at CSUF or other institutions. When repeating a course, the traditional grading system (“A”, “B”, “C”, etc.)
+shall be used (i.e. “CR”/“NC” is not an option). In computing the grade-point average, only the most recently earned
+grades and grade points shall be used for the first 16 units of repeated. This is called grade forgiveness, yet the original
+grade shall remain on your academic record.
+In the case of any repetition beyond the 16-unit limit or in courses for which a C or better grade was awarded, both
+grades are considered in computing grade-point averages. Students may be permitted to repeat an additional 12 units
+in addition to the 16 units for which grade forgiveness is permitted. This process is by petition through Admissions &
+Records and you must seek the support of an academic advisor and the department chair. The repeat grade shall not
+replace the original grade. Both grades shall be calculated in the student’s overall grade-point average.
+Students earning a grade of “D-” (grade-point 0.7) or better have earned a passing grade and will earn the units towards
+their degree. Students must have a grade-point average of 2.0 or greater to earn a degree.
+Students are strongly advised to repeat courses that lay the foundation for their education such as their lower- and
+upper-division core courses. In circumstances where a student earns a grade between “D-” and “C+” due to poor
+health, difficulties outside of the classroom, or other circumstances that impacted the student’s ability to succeed, the
+student is strongly recommended to meet with an academic advisor and determine in consultation with the advisor if
+not repeating the class is in the student’s best interest.
+22
+4
+The CS Minor
+There is strong demand for expertise in programming, data representation, and computational principles. The rise of
+the web; digital music, film, and humanities; and other interdisciplinary fields shows that a CS Minor can complement
+any field of study.
+To select Computer Science as your minor, visit the CS office and fill out a Request for Minor Objective form.
+4.1 Minor Requirements at a Glance
+The requirements for the CS minor are detailed in the University Catalog (https://catalog.fullerton.
+edu/preview_program.php?catoid=75&poid=35651&returnto=9871). units of computer science
+coursework (ordinarily 5 courses). A minimum six of the 15 units for the minor must be upper-division (300/400-
+level) courses and completed at CSUF. Courses may not include CPSC 311, CPSC 315 or those numbered CPSC
+490-CPSC 499.
+At least 12 units, including the minimum 6 units of upper division course work, must be courses that are not being
+used to fulfill requirements for your major.
+The following are prerequisites for most upper-division Computer Science courses. It is recommended that Computer
+Science minors complete them first. Other CPSC courses may require additional prerequisites.
+• CPSC 120 - Introduction to Programming (3)
+• CPSC 121 - Object-Oriented Programming (3)
+• CPSC 131 - Data Structures (3)
+In addition to the above three courses, you will still need to complete 6 units of upper-division Computer Science
+courses at CSUF. Most of the upper-division courses are available to students after successfully completing CPSC
+131. You may have to take additional courses to meet the prerequisites for some upper-division CS courses.
+23
+4.2 Minor Prerequisite Tree
+CPSC 120
+CPSC 121
+CPSC 131
+CPSC elective 1 CPSC elective 2
+4.3 For Majors in Related Fields
+As stated above, at least 12 units, including the minimum 6 units of upper division course work, must be courses that
+are not being used to fulfill requirements for your major. This has implications for students whose major includes
+some CPSC courses.
+Computer Engineering Major and Computer Science Minor
+The Computer Engineering major includes CPSC 120, 121, 131, 253U, and 351, so none of these count toward the 12-
+unit requirement. A Computer Engineering major may count only 3 of these units toward a Computer Science minor.
+To complete the minor they must pass at least 12 additional units of CPSC courses that are distinct from their major.
+Altogether, a Computer Engineering major must usually pass a total of 25 units of CPSC course work to complete a
+Computer Science minor.
+Electrical Engineering Major and Computer Science minor
+The Electrical Engineering major includes CPSC 120, so CPSC 120 does not count toward the 12-unit requirement.
+However, the remaining 12 units of minor courses ordinarily do not count toward the Electrical Engineering major, so
+Electrical Engineering majors typically only need to pass 15 units of CPSC courses to complete a Computer Science
+minor.
+Information Systems and Decision Sciences and Computer Science Double Majors
+The Information Systems and Decision Sciences major includes ISDS 309, which is not equivalent to any CPSC
+course.
+24
+5
+Alternative Pathways
+5.1 Transfer
+If you are a transfer student from a California Community College, you should refer to http://www.assist.org.
+A department adviser can help you with these equivalencies and give the required approval.
+Transfer courses cannot be applied toward the major or accepted as prerequisites until they are recorded in the Titan
+Degree Audit (TDA) system. You should have your official transcripts sent to the office of Admissions. see http:
+//admissions.fullerton.edu/prospectivestudent/college_transcripts.php for more in-
+formation.
+To find articulation agreements in the assist.org database, start by loading the web page http://www.assist.
+org, as shown below.
+25
+Select the institution you’d like to transfer from; in this example we will use Irvine Valley College (IVC).
+Then indicate that you are transferring to CSUF.
+Finally, indicate that you are interested in courses relevant to the Computer Science major.
+26
+The text within the scroll bars shows established articulations between CSUF and IVC. For instance, IVC CS 36 is
+equivalent to CSUF CPSC 120.
+If you explore the page, you will see that IVC offers equivalents for all of the required lower-division CS courses. IVC
+CS 36, 37, 41, 38, 40A, and 40B articulate to CPSC 120, 121, 131, 223J, and 240, which are the entirety of the Lower-
+Division Core courses. IVC MATH 3A, 3B, 30, and 31 articulate to CSUF MATH 150A, 150B, 270A, and 270B,
+which are all Mathematics Requirements except MATH 338. IVC PHYS 4A, PHYS 4B, and MATH 4A articulate to
+27
+CSUF PHYS 225, 225L, 226, 226L, and MATH 250A, which together satisfy the Science and Mathematics Electives
+requirement.
+5.2 Computer Science Placement Examination
+Our courses CPSC 120 and CPSC 121 cover computer programming. If you are proficient in this material, but do
+not have academic credit, you may attempt to establish your proficiency and skip one or both courses by taking the
+Computer Science Placement Examination. If you have taken CPSC 120, 121, or 131 at CSUF, you are not eligible to
+take the Placement Examination.
+The date, time, and location of Placement Examinations are given in the Department Placement Exams section of the
+Registration Guide for the current term. Before you show up in the exam please contact the Undergraduate Coordinator
+to understand whether the exam is appropriate for you.
+5.3 Missing CPSC 120 or 121
+If you bypass CPSC 120 by passing the Computer Science Placement Examination, you will be short 3 units in the
+Lower Division Core major requirement. Likewise, if you bypass both CPSC 120 and 121, you will be short 6 units.
+Some uncommon transfer situations can also cause you to be short on units, for instance if you transfer from a school
+on the quarter system.
+If you are short on Lower Division Core units, you will need to earn substitute units by taking extra units of CPSC 223
+and/or Computer Science Major Electives (listed in Section 3.8).
+5.4 Advanced Placement (AP)
+If you took the Computer Science AP exam and scored well, you may be able to get credit for CPSC 120, or both 120
+and 121. See the Credit by Advanced Placement Chart http://www.fullerton.edu/ecs/_resources/
+pdf/new_student_advising_reg/2021_registration/CreditByExamAP_CLEP_IB_2021.pdf.
+5.5 Internships
+Learning takes place in many settings, not just in the classroom. When you complete your educational career and are
+entering the professional job market for the first time, extensive professional experience can be highly beneficial. For
+this reason, the University and the Computer Science Department maintain an active internship program as a service
+to all students interested in obtaining employment while still in school.
+Academic internships bear credit at CSUF. Students enroll in an internship course and complete course requirements.
+The number of units you receive depends on the number of hours you complete at your internship site.
+28
+Hours at Internship Site Units
+40–60 hours 1 unit
+80–100 hours 2 units
+120–150 hours 3 units
+An academic internship is a work-learning partnership between a student, the university, and a host company or
+organization that bears a direct relationship to a student’s major and professional goals.
+EGGN 495 is a “supervision only” class. There are no class meetings. Students will receive a letter grade at the end
+of the semester based on their performance in the internship project. As far as the coursework is concerned, all that is
+required is that students complete the internship with the company and submit a final report by the end of the semester.
+The company name and the project supervisor’s name must be included in the report. The report does not have to be
+approved/signed by the company. Students should address the following items in the report:
+1. Details of the project.
+2. Tasks the student was primarily responsible for.
+3. What the student learned from the project he/she completed.
+4. How the project benefited the student from an academic standpoint.
+Benefits of the internship program in Computer Science include:
+• Industrial work experience.
+• Job placement assistance from the Center for Internships & Community Engagement (CICE)
+(http://www.fullerton.edu/cice/students/internships.php).
+• Up to 3 units of credit.
+We recommend that you consider an internship when you reach junior or senior status.
+To register for an internship, follow the instructions at CICE’s website
+(http://www.fullerton.edu/cice/students/internships.php).
+The ECS students must follow the ECS Internship process https://www.fullerton.edu/ecs/resources/
+ecs-academic-internship.php
+5.6 International Students
+International students must obtain a CPT I-20 form from the International Education and Exchange office in UH-244.
+Check with IEE for admissible dates prior to completing the CICE Registration.
+29
+5.7 ROTC
+Computer Science majors interested in joining the Reserve Officers’ Training Corps (ROTC) program should schedule
+a long appointment (30 minutes) with an advisor in their freshman year to map out the complete study plan. Prior to
+the meeting, the student must obtain the proper documents from ROTC office located in MS-101 (Military Science
+Building room 101) and bring those documents with them to the advising session.
+5.8 Independent Study
+You may take CPSC 499 Independent Study as an Upper Division CS Elective. This course allows you to pursue a
+topic that is not covered by any regular course, under the supervision of a faculty advisor.
+All independent study applications must be approved by the study’s faculty advisor and department chair by the end
+of the semester prior to the proposal’s start date. That means independent study proposals for the Fall are due in by
+the end of the previous Spring semester, and proposals for the Spring are due in the previous Fall semester.
+You must submit an Independent Study Application to the department office, which will supply the form. As stated
+on the form, the Application must be accompanied by a study plan which includes the study’s objective(s), the study’s
+outcome(s), a 16 week study plan, the basis for evaluation, and the date(s) that student work is due. A template is
+available at http://csufcs.com/isplan.
+You may take up to three units per semester, and apply a maximum of six units towards the degree.
+You will not be able to register for this course until the Department grants you permission to do so. You should contact
+the Department to verify that this has been done.
+Graduate students may not entroll in CPSC 499. Graduate students interested in self-directed study should consider
+CPSC 597, 598, or 599 instead.
+5.9 Petitioning for Classes
+When a class is closed because all the seats in the class are full, a student may petition to add the course once the
+semester begins. This is where a student attends the class and places his or her name on the paper waiting list that the
+instructor passes out in class.
+The Titan Online waiting lists, also called the electronic waiting lists, have no impact on the petitioning process and
+the Department’s paper waiting lists.
+The paper waiting lists are returned to the CS Department Office and the Department attempts to enroll as many
+students as possible, giving priority to those closest to graduation. This process does not guarantee enrolling in the
+desired course.
+Students are encouraged to attend as many classes as possible to maximize the number of waiting lists their name
+appears on. This signals to the Department office that you are able to attend the course. The use of proxies (asking
+friends to attend the class for you) is prohibited and is considered an act of academic dishonesty.
+30
+5.10 Request Forms
+The TDA software system usually does a good job of automatically tracking your completion of major and minor
+requirements. Unfortunately, though, it may mishandle exceptional circumstances, such as a transfer from a university
+on the quarter system. If your TDA is inaccurate, you need to ask the Department to correct your TDA manually.
+There are three forms that you can use to request that the Department adjust your TDA.
+1. Use the Domestic Course Articulation Request to ask the Department whether courses from another college or
+university in the United States can count toward Computer Science major or minor requirements.
+2. Use the International Course Articulation Request to ask whether courses from a college or university in a
+different country can count toward Computer Science major or minor requirements.
+3. Use the Undergraduate Course Reallocation Request form to ask the Department to reallocate a course that
+appears on your TDA which does not appear in the correct category. This may happen if you have taken an
+advisor-approved elective which was not automatically recognized by the TDA software, you have changed
+catalog years, or courses transferred from another institution appear uncatagorized or the incorrect category.
+Another common case is when you take a course that was created after your catalog year. For example, CS 223C
+and the cybersecurity courses are new courses that do not appear on the 2007 or 2011 TDAs. Use Undergraduate
+Course Reallocation Request to count these courses towards your degree.
+Blank forms are available at http://www.fullerton.edu/ecs/cs/resources/documents.php, or as
+hard-copies in the Department office. To file a request, submit a completed hard-copy form to the Department office
+or email to csoffice@fullerton.edu. The request will typically be processed within ten business days. The outcome of
+the request will be communicated to the applicant through an Advising Note in the applicant’s TDA. The Department
+Chair or designee has sole discretion to approve or deny these requests and those decisions are final and non-negotiable.
+31
+32
+6
+Advisement
+It can be frustrating to find out that you took a class that wasn’t useful for your course of study. Not being able to
+take a class when you want because of a needed prerequisite is even worse—it slows your progress and can delay your
+graduation. To avoid problems like these, the University offers advisement counseling to all students. This is your
+opportunity to review your progress toward your degree and to discuss electives that match your career goals.
+Developing the skills in identifying and connecting with formal and informal advisors and mentors is a skill that
+students need to develop. Set a goal for yourself to find mentors who will support you and keep you motivated on your
+path through the university.
+6.1 General Advice
+Any student who wishes to discuss any concern may contact the Student Success Center. Find out cpntact information
+here: http://www.fullerton.edu/ecs/resources/StudentSuccessCenter.php
+6.2 Major Advisement
+Students may seek major advising from major advisors in the computer science department and through the ECS
+Student Success Center.
+The Student Success Center on the second floor of the Computer Science Building can answer many of your questions
+regarding General Education as well. They are located in room CS 201. Their phone number is 657-278-3879. Their
+web site is https://www.fullerton.edu/ecs/resources/StudentSuccessCenter.php
+Computer Science department advisors are members of the faculty and you may schedule an appointment to see one
+by contacting the department office. The contact information for the department is in Section 1.2. The following web-
+page provides the Academic Advisement information http://www.fullerton.edu/ecs/cs/resources/
+advisement.php
+33
+6.3 Required Advisement
+The College of Engineering and Computer Science places a registration hold on all undergraduate students once a year
+to ensure the student meets with a department advisor. You will not be able to register for any courses until you consult
+with a department advisor and the hold is subsequently removed.
+Students who are in good academic standing and have the last two digits of their CWID ending in an odd number are
+required to complete mandatory advisement in the Fall term. Students in good academic standing and have the last
+two digits of their CWID ending in an even number are required to complete mandatory advisement during the Spring
+term.
+Freshmen and sophomore students must see an advisor in the ECS Student Success Center to lift the registration hold.
+Junior and senior students must see one of the department’s major advisors to lift the registration hold.
+Probation students are required to complete mandatory advisement every semester regardless of odd/even CWIDS.
+Detailed information is at http://www.fullerton.edu/ecs/cs/resources/advisement.php
+6.4 General Education (GE) Advisement
+The University encourages all students to seek GE advisement, each semester, well in advance of registration. You
+may obtain information about the CSUF GE curriculum and degree requirements by visiting the Academic Advising
+Center in UH-123B.
+6.5 First-time Freshmen
+You should make an appointment to see the adviser as early as possible. It is very important that you understand
+the program and the sequence in which you should take courses. The freshmen advising is conducted ib the Student
+Success Center https://www.fullerton.edu/ecs/resources/StudentSuccessCenter.php
+6.6 Career Advising
+The CSUF Career Center is online at http://www.fullerton.edu/career/. You should make an appoint-
+ment to see the ECS Career Specialist at
+https://www.fullerton.edu/ecs/resources/StudentSuccessCenter.php
+6.7 Studying Abroad
+The Study Abroad Office, http://international.fullerton.edu/study-abroad, can connect you with international oppor-
+tunities that will fit into your study plan. The office is located in University Hall 244. Their phone number is
+34
+(657) 278-2787 and they can be reached by email at sabroad@fullerton.edu. Search their database of programs at
+http://fullerton-sa.terradotta.com/index.cfm?FuseAction=Programs.AdvancedSearch.
+6.8 Transfer Students
+You should make an advisement appointment as early as possible. The department adviser can answer your questions
+about transfer credit for general education courses and can evaluate courses that apply to your major. Please bring any
+transcripts or grade reports you have, official or not, to this appointment. A catalog from your prior institution may be
+useful, particularly from those outside the Orange County area.
+6.9 Nearing Graduation (Within One Year)
+After completing 90 units of coursework, you are eligible to apply for graduation. The only way to apply for graduation
+is online through the TITAN Online Student Center. You cannot graduate without a completed Grad Check. The
+University Catalog has more information on Grad Checks (https://catalog.fullerton.edu/content.
+php?catoid=17&navoid=2049#graduation-requirement-check). You may make an appointment to
+see the ECS Graduation specialist at the Student Success Center.
+6.10 Probation
+If you are on probation, it is definitely time to see an adviser. Until you do so, a hold will be in place on your
+file, preventing you from registering in classes. Your adviser will discuss with you the problems that led to your
+probation and review strategies you should take to get off probation. Make your advisement appointment early so your
+registration is not held up.
+6.11 Peer Advising & Clubs
+There are lots of student clubs on this campus for all sorts of interests. Visit http://www.fullerton.edu/sll/involvement/clubs/
+and look at the different clubs that are at CSU Fullerton. You start your own club if you don’t see a club that aligns to
+your interests.
+Some clubs that are computer science clubs are ACM, ACM-W, OSS, Machine Learning club.
+35
+36
+7
+Sample Four Year Plans
+The following two pages are an example of semester-by-semester class plans through the B.S. program and the cyber-
+security concentration. These plans completes all major requirements in 8 semesters (4 years), satisfy all prerequisites
+along the way, and follow all tips in this Handbook.
+37
+Roadmap for BS in Computer Science (Catalog Year 2022 – 2023) 
+ 
+First Semester                 Second Semester            Third Semester         Fourth Semester 
+AREA (as listed on TDA) COURSE UNITS  AREA (as listed on TDA) COURSE UNITS  AREA (as listed on TDA) COURSE UNITS AREA (as listed on TDA) COURSE UNITS 
+Computer Science 
+Core 
+CPSC 
+120A + 
+120L  
+3 Computer Science Core 
+CPSC 
+121A + 
+121L 
+3  Computer Science Core CPSC 131 3 Computer Science Core CPSC 223 3 
+Mathematics 
+Requirements  
+MATH 
+170A 
+(270A)* 
+3 Mathematics Requirements  MATH 170B (270B)* 3 Mathematics Requirements  MATH 150B 4 Computer Science Core CPSC 240 3 
+GE subarea A.1 Oral 
+Communication    3 Mathematics Requirements  MATH 150A 4 Science and Math Elective I + Lab   4  Science and Mathematics Elective II   4 
+ GE subarea A.2 
+Written 
+Communication 
+  3 GE subarea C.1 Introduction to the Arts   3 
+GE subarea C.3/Z 
+Explorations in Arts or 
+Humanities/Cultural 
+Diversity Requirement 
+  3 Science and Mathematics Elective III    4 
+GE subarea D.1  
+Introduction to the 
+Social Sciences  
+  3 
+GE subarea C.2 
+Introduction to the 
+Humanities  
+  3 
+GE subarea D.2  
+American History, 
+Institution & Values  
+  3 
+Graduation 
+Requirement in American 
+Government 
+  3 
+Total   15 Total   16 Total   17 Total   17 
+      *Math 270A/B -> 170A/B    +Upper-Division  
+ 
+Fifth Semester                 Sixth Semester            Seventh Semester        Eighth Semester    
+AREA (as listed on TDA) COURSE UNITS AREA (as listed on TDA) COURSE UNITS AREA (as listed on TDA) COURSE UNITS AREA (as listed on TDA) COURSE UNITS 
+Computer Science 
+Core 
+CPSC 
+351 3 Computer Science Core  CPSC 332  3 Computer Science Core   CPSC 323 3 Computer Science Core  CPSC 315  3 
+Computer Science 
+Core  
+CPSC 
+253 
+(353)* 
+3 Computer Science Core  CPSC 335 3 Computer Science Core  CPSC 481 3 Computer Science Core CPSC 491 3 
+Computer Science 
+Core 
+CPSC 
+362 3 Computer Science Core  CPSC 471 3  Computer Science Core  CPSC 490 3 CPSC Elective IV   3 
+Mathematics 
+Requirements 
+MATH 
+338  4 CPSC Elective II   3 CPSC Elective III   3 CPSC Elective V   3 
+CPSC Elective I   3 F. Ethnic Studies   3 Total   12 Total   12 
+Total    16  Total   15       
+       *CPSC 353 -> 253 
+ 
+See the University Catalog (for your Catalog Year): https://catalog.fullerton.edu/ 
+(e.g.) for 2021-2022 Catalog Year: https://catalog.fullerton.edu/preview_entity.php?catoid=70&ent_oid=7941&returnto=8443  
+ 
+Run your Titan Degree Audit (TDA) to see the degree requirements: http://records.fullerton.edu/academics/degreeaudit.php  
+ 
+Advising (for new & transferred students): http://www.fullerton.edu/ecs/resources/StudentSuccessCenter.php  
+Advising (for junior & senior students): http://www.fullerton.edu/ecs/cs/resources/advisement.php  
+ 
+For CS-minor & graduate programs: http://www.fullerton.edu/ecs/cs/degree/ 
+CSU Fullerton – Department of Computer Science: http://www.fullerton.edu/ecs/cs/  
+Roadmap for BS in CS (CyberSecurity Concentration) 2022– 2023 
+ 
+First Semester                                                  Second Semester                                           Third Semester                                                 Fourth Semester 
+AREA (as listed 
+on TDA) COURSE UNITS   AREA (as listed on TDA) COURSE UNITS   AREA (as listed on TDA) COURSE UNITS AREA (as listed on TDA) COURSE UNITS 
+Cybersecurity 
+Core 
+CPSC 
+120  3 Cybersecurity Core CPSC 121 3 Cybersecurity Core CPSC 131 3 Cybersecurity Core CPSC 223 3 
+Mathematics 
+Requirements  
+MATH 
+170A 
+(270A) 
+3 Mathematics Requirements  MATH 170B (270B) 3 Mathematics Requirements  MATH 150B 4 Cybersecurity Core CPSC 240 3 
+GE subarea A.1 
+Oral 
+Communication
+  
+  3 Mathematics Requirements  MATH 150A 4 Cybersecurity Core CPSC 253 3 Cybersecurity Core CPSC- 351 3 
+ GE subarea 
+A.2 Written 
+Communication 
+  3 
+GE subarea C.1 
+Introduction to 
+the Arts 
+  3 
+GE subarea 
+C.3/Z 
+Explorations in 
+Arts or 
+Humanities/ 
+Cultural Diversity 
+Requirement 
+ 3 Cybersecurity Elective I  3 
+GE subarea D.1  
+Introduction to 
+the Social 
+Sciences  
+  3 
+GE subarea C.2 
+Introduction to 
+the Humanities  
+  3 
+Science and 
+Math Elective I + 
+Lab 
+  4  
+Science and 
+Mathematics 
+Elective II 
+  4 
+Total   15 Total   16 Total   17 Total   17 
+                                                                                                                                                               +Upper-Division 
+ 
+Fifth Semester                                                  Sixth Semester                                               Seventh Semester                                           Eighth Semester 
+AREA (as listed 
+on TDA) COURSE UNITS AREA (as listed on TDA) COURSE UNITS AREA (as listed on TDA) COURSE UNITS AREA (as listed on TDA) COURSE UNITS 
+Cybersecurity 
+Core 
+CPSC 
+362 3 Cybersecurity Core  CPSC 332  3 Cybersecurity Core  CPSC 323 3 Cybersecurity Core  CPSC 315  3 
+Cybersecurity 
+Core 
+CPSC 
+456 3 Cybersecurity Core  CPSC 335 3 Cybersecurity Core  CPSC 481 3 Cybersecurity Core CPSC 491 3 
+Mathematics 
+Requirements 
+MATH 
+338  4 Cybersecurity Core  CPSC 471 3  Cybersecurity Core CPSC 490 3 Science and Mathematics Elective III    4 
+GE subarea D.2  
+American 
+History, 
+Institution & 
+Values 
+ 3 Cybersecurity Elective II   3 Cybersecurity Elective III   3 CPSC Elective V   3 
+Graduation 
+Requirement in 
+American 
+Government 
+ 3 F. Ethnic Studies   3       
+Total    16  Total   15 Total   12 Total   13 
+ 
+ 
+See the University Catalog (for your Catalog Year): https://catalog.fullerton.edu/ 
+(e.g.) for 2022-2023 Catalog Year: https://catalog.fullerton.edu/preview_entity.php?catoid=75&ent_oid=8655&returnto=9871  
+ 
+Run your Titan Degree Audit (TDA) to see the degree requirements: http://records.fullerton.edu/academics/degreeaudit.php  
+ 
+Advising (for new & transferred students): http://www.fullerton.edu/ecs/resources/StudentSuccessCenter.php  
+Advising (for junior & senior students): http://www.fullerton.edu/ecs/cs/resources/advisement.php  
+ 
+For CS-minor & graduate programs: http://www.fullerton.edu/ecs/cs/degree/ 
+ 
+Academic Calendar: https://apps.fullerton.edu/AcademicCalendar/  
+Registration Calendars: http://records.fullerton.edu/apps/calendars.aspx 
+ 
+How to register: http://records.fullerton.edu/registration/ 
+ 
+CSU Fullerton – Department of Computer Science: http://www.fullerton.edu/ecs/cs/  
+ 
+40
+8
+Credits and Revision History
+Copyright 2015–2018, Department of Computer Science, California State University, Fullerton.
+This document has been maintained by Sandra Boulanger, David Falconer, Mikhail Gofman, Michael Shafae, and
+Kevin Wortman.
+Last revision by Shanw X. Wang for the 2020 - 2021 and 2022 - 2023 editions.
+41
+42
+Index
+ABET, 8, 13
+accreditation, 8
+address, 8
+advanced placement (AP), 28
+advisement
+general, 33
+major, 33
+required, 34
+career, 34
+contact information, 8
+CS electives, 17
+department office, 8
+e-mail, 8
+electives, 17
+fax number, 8
+freshmen, 34
+GE, 34
+general education, 19, 34
+grad check, 35
+graduation, 35
+lower division CS electives, 17
+peer advising, 35
+phone number, 8
+placement examination, 28
+postal address, 8
+probation, 35
+Program Educational Objectives (PEOs), 9
+Program Outcomes, 9
+request form, 18, 31
+study abroad, 34
+TDA, 31
+telephone number, 8
+tips, 9
+transfer, 25, 35
+unit limit, 14
+upper division CS electives, 17
+website, 8
+43
+Figure 8.1: Prerequisite relations for the BS CS Core
+Figure 8.2: Prerequisite relations for the BS CS with Cybersecurity Concentration

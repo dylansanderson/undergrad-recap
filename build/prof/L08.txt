@@ -1,0 +1,336 @@
+﻿#### L08_math250a: MATH 250A Calculus III
+
+[s0] TITLE  Calculus III
+  img: a:topo_relief
+  beat0:
+     0: Welcome to Calculus three.
+     1: So far, our functions have had one input.
+     2: But the real world has three dimensions, and quantities like temperature, air pressure and electric field vary from point to point in space.
+     3: This course extends calculus to many variables.
+     4: You'll learn to see a function of two variables as a landscape, find the steepest direction uphill, add up quantities over areas and volumes, and describe fields that fill space.
+     5: It's the language you'll need for electricity and magnetism, and, surprisingly, for machine learning.
+
+[s1] V  Vectors in 3D: the dot product
+  img: fig:dot
+  • a·b = a₁b₁ + a₂b₂ + a₃b₃ = |a||b| cos θ
+  • Zero → perpendicular
+  • (1,2,2)·(2,0,1) = 4 → θ ≈ 53.4°
+  • 3D graphics: brightness = normal · light direction
+  (pen marks: 4 )
+  beat0:
+     0: Vectors now have three components.
+     1: The dot product multiplies matching components and adds them.
+     2: Geometrically, it equals the lengths times the cosine of the angle between them.
+  beat1:
+     0: So if the dot product is zero, the vectors are perpendicular.
+     1: It also gives the projection: how much of one vector points along another.
+  beat2:
+     0: Example: one, two, two dotted with two, zero, one is two plus zero plus two, which is four.
+     1: The lengths are three and root five, so the cosine of the angle is four over three root five, about point six, and the angle is about fifty three degrees.
+  beat3:
+     0: Every video game uses this billions of times per second.
+     1: The brightness of a surface depends on the dot product between its normal vector and the direction to the light.
+     2: Facing the light, it's bright.
+     3: Turned edge on, the dot product is zero, and it's dark.
+
+[s2] WB  Worked example: the angle between two vectors
+  step0 board+: $\vec a = (3,4,0)$,    $\vec b = (4,0,3)$ || $\vec a\cdot\vec b = 3(4) + 4(0) + 0(3) = 12$
+     0: Let's compute an angle with the dot product, start to finish.
+     1: Take a equals three, four, zero, and b equals four, zero, three.
+     2: Step one: multiply matching components and add.
+     3: Three times four, plus four times zero, plus zero times three, is twelve.
+  step1 board+: $|\vec a| = \sqrt{9+16+0} = 5$ || $|\vec b| = \sqrt{16+0+9} = 5$
+     0: Step two: the lengths.
+     1: The length of a is the square root of nine plus sixteen plus zero, which is five.
+     2: The length of b is the square root of sixteen plus zero plus nine, also five.
+  step2 board+: $\cos\theta = \frac{\vec a\cdot\vec b}{|\vec a||\vec b|} = \ || $\theta = \cos^{-1}(0.48) \approx 61.3°$
+     0: Step three: the dot product equals the product of the lengths times cosine of the angle.
+     1: So cosine theta is twelve over twenty five, point four eight.
+     2: The inverse cosine gives about sixty one point three degrees.
+     3: A positive dot product means the angle is less than ninety degrees: the vectors point roughly the same way.
+
+[s3] V  The cross product: a perpendicular vector
+  img: fig:cross
+  • a × b is perpendicular to both a and b
+  • Length = |a||b| sin θ = parallelogram area
+  • Direction: right-hand rule
+  • Torque τ = r × F · surface normals in graphics
+  (pen marks: 3 )
+  beat0:
+     0: The cross product of two 3D vectors produces a third vector perpendicular to both.
+     1: Its length equals the area of the parallelogram they span, and its direction follows the right hand rule: curl your fingers from a to b, and your thumb points along a cross b.
+     2: For example, x hat cross y hat is z hat.
+     3: Torque from mechanics is really a cross product: r cross F.
+     4: In 3D graphics, the normal vector of each triangle in a model is the cross product of two of its edges.
+     5: And in electromagnetism, the force on a moving charge is q v cross B.
+     6: Same operation, everywhere.
+
+[s4] WB  Worked example: computing a cross product
+  step0 board+: $\vec a = (1,0,2)$,    $\vec b = (0,3,1)$ || PEN None || $\vec a\times\vec b = (a_2b_3 - a_3b_2,\; a_3b_1 - a_1b_3,\;
+     0: Now a cross product, worked by hand.
+     1: Take a equals one, zero, two, and b equals zero, three, one.
+     2: Each component of the cross product uses the other two components, in a crisscross pattern.
+  step1 board+: $x:\ 0(1) - 2(3) = -6$ || $y:\ 2(0) - 1(1) = -1$ || $z:\ 1(3) - 0(0) = 3$ || $\vec a\times\vec b = (-6,\,-1,\,3)$
+     0: First component: zero times one minus two times three, negative six.
+     1: Second: two times zero minus one times one, negative one.
+     2: Third: one times three minus zero times zero, three.
+     3: So a cross b is negative six, negative one, three.
+  step2 board+: PEN None || check: $(-6,-1,3)\cdot\vec a = -6+0+6 = 0$ || $(-6,-1,3)\cdot\vec b = 0-3+3 = 0$ || PEN None || area $= \sqrt{36+1+9} = \sqrt{46} \approx 6.78$
+     0: Always check it: the result must be perpendicular to both.
+     1: Dot it with a: negative six plus zero plus six, zero.
+     2: Dot it with b: zero minus three plus three, zero.
+     3: Both zero, so it's correct.
+     4: And its length, the square root of forty six, about six point seven eight, is the area of the parallelogram the two vectors span.
+
+[s5] V  Functions of two variables: landscapes
+  img: a:topo_relief / fig:surface
+  • z = f(x, y) is a surface
+  • Contour lines: points with equal height
+  • Like a topographic hiking map
+  beat0:
+     0: A function of two variables, z equals f of x and y, assigns a height to every point on a map.
+     1: Its graph is a surface, a landscape of hills and valleys.
+  beat1:
+     0: We can draw it two ways.
+     1: As a 3D surface, on the left.
+     2: Or as a contour map, on the right, where each curve connects points with the same height.
+     3: That's exactly a topographic hiking map: contour lines packed close together mean steep terrain, and lines spread apart mean gentle slopes.
+     4: Weather maps draw temperature and pressure the same way.
+
+[s6] V  Partial derivatives: slope in one direction
+  img: fig:partial
+  • ∂f/∂x: change x, hold y fixed
+  • ∂f/∂y: change y, hold x fixed
+  • f = x²y + 3y → f_x = 2xy, f_y = x² + 3
+  • At (1, 2): f_x = 4, f_y = 4
+  (pen marks: 4 )
+  beat0:
+     0: On a landscape, the slope depends on which direction you walk.
+     1: A partial derivative measures the slope in one coordinate direction.
+     2: The partial with respect to x: change x, and treat y as a constant.
+  beat1:
+     0: The partial with respect to y: change y, and treat x as a constant.
+  beat2:
+     0: Example: f equals x squared y plus three y.
+     1: With respect to x, y is just a constant, so the derivative is two x y.
+     2: With respect to y, x squared is a constant multiplier, so it's x squared plus three.
+  beat3:
+     0: At the point one, two, both partials equal four.
+     1: All the single variable rules still work.
+     2: You just have to be disciplined about which variables you're holding still.
+
+[s7] V  The gradient: which way is uphill?
+  img: fig:gradient
+  • ∇f = (∂f/∂x, ∂f/∂y)
+  • Points in the direction of steepest ascent
+  • Its length = the steepest slope
+  • Always perpendicular to contour lines
+  (pen marks: 3 )
+  beat0:
+     0: Collect the partial derivatives into a vector, and you get the gradient, written with an upside down triangle called nabla.
+  beat1:
+     0: Here's the key fact: the gradient points in the direction of steepest ascent.
+     1: If you're standing on a hillside in the fog, the gradient tells you which way is straight uphill.
+  beat2:
+     0: Its length tells you how steep that steepest direction is.
+     1: The slope in any other direction, called the directional derivative, is the gradient dotted with a unit vector in that direction.
+  beat3:
+     0: And the gradient is always perpendicular to the contour lines.
+     1: Look at the red arrows.
+     2: They cross every contour at a right angle, pointing toward the peaks.
+     3: Water flows in the opposite direction, straight downhill, which is why streams cross contour lines at right angles on a topographic map.
+
+[s8] V  Gradient descent: how machines learn
+  img: fig:gd
+  • Want the minimum of an error function?
+  • Step opposite the gradient: x ← x − η∇f
+  • Repeat until the slope is ~0
+  • Neural networks: the same idea with billions of variables
+  (pen marks: 5 )
+  beat0:
+     0: Now an application that runs much of modern technology.
+     1: Suppose you want the lowest point of a function, like the error of a prediction model.
+  beat1:
+     0: Start anywhere, compute the gradient, and take a small step in the opposite direction, downhill.
+     1: The step size, eta, is called the learning rate.
+  beat2:
+     0: Repeat.
+     1: Here, on the bowl f equals x squared plus three y squared, the orange path zigzags down into the minimum at the center.
+     2: It zigzags because the bowl is steeper in y than in x.
+  beat3:
+     0: This is gradient descent, and it's how neural networks are trained.
+     1: The error is a function of millions or billions of parameters, the gradient is computed with the chain rule, and the computer takes millions of small downhill steps.
+     2: Every image recognizer and language model you've used was trained this way, using exactly this Calculus three idea.
+
+[s9] WB  Worked example: two steps of gradient descent
+  step0 board+: $f = x^2 + 3y^2$ || PEN None || $\nabla f = (2x,\ 6y)$ || start $(2, 1)$,  $\eta = 0.1$,  $f = 7$ || PEN None
+     0: Let's run gradient descent by hand on f equals x squared plus three y squared.
+     1: Its minimum is obviously at the origin, so we can watch the algorithm find it.
+     2: The gradient is two x, six y.
+     3: Start at two comma one, with a learning rate of point one.
+  step1 board+: $\nabla f(2,1) = (4,\ 6)$ || $(2,1) - 0.1(4,6) = (1.6,\ 0.4)$ || $f = 3.04$ || PEN None
+     0: Step one.
+     1: At two comma one, the gradient is four comma six.
+     2: Move opposite to it, scaled by point one: two minus point four, and one minus point six.
+     3: The new point is one point six comma point four, and f has dropped from seven to about three.
+  step2 board+: $\nabla f(1.6,0.4) = (3.2,\ 2.4)$ || $(1.6,0.4) - 0.1(3.2,2.4) = (1.28,\ 0.16)$ || $f \approx 1.72$ || PEN None
+     0: Step two.
+     1: The gradient at the new point is three point two comma two point four.
+     2: Subtract a tenth of it: one point two eight comma point one six.
+     3: Now f is about one point seven.
+     4: Each step heads downhill, perpendicular to the contour lines.
+     5: Notice y shrinks faster than x, because the bowl is steeper in y.
+     6: Training a neural network is exactly this loop, with millions of variables instead of two.
+
+[s10] V  Finding maxima and minima
+  img: fig:saddle / fig:lagrange
+  • Critical point: ∇f = 0
+  • Second-derivative test: max, min, or saddle
+  • With a constraint g = c: ∇f = λ∇g (Lagrange)
+  • Max xy with x + y = 10 → x = y = 5
+  (pen marks: 7 )
+  beat0:
+     0: To find peaks and valleys, look for critical points where the gradient is zero: the surface is flat in every direction.
+     1: But flat doesn't always mean a peak or a valley.
+     2: Look at the third surface.
+     3: It's a saddle: it curves up in one direction and down in the other, like a mountain pass.
+     4: A second derivative test, using all the second partial derivatives, tells the three cases apart.
+  beat1:
+     0: Often you're optimizing with a constraint.
+     1: Maximize the area x y of a rectangle, given that x plus y must equal ten, say because you have twenty meters of fence.
+     2: Lagrange's insight: at the best point, the contour line of f just touches the constraint curve, so their gradients are parallel.
+     3: Gradient of f equals lambda times gradient of g.
+     4: Solving gives x equals y equals five, a square, with area twenty five.
+     5: Engineers use this to maximize performance subject to power, cost or size limits.
+
+[s11] WB  Worked example: minimum or saddle?
+  step0 board+: $f(x,y) = x^3 - 3x + y^2$ || $f_x = 3x^2 - 3 = 0 \;\Rightarrow\; x = \pm 1$ || $f_y = 2y = 0 \;\Rightarrow\; y = 0$ || PEN None
+     0: Let's classify the critical points of f equals x cubed minus three x plus y squared.
+     1: Step one: set both partial derivatives to zero.
+     2: f x is three x squared minus three, which is zero at x equals plus or minus one.
+     3: f y is two y, zero at y equals zero.
+     4: So there are two critical points: one comma zero, and negative one comma zero.
+  step1 board+: $D = f_{xx}f_{yy} - f_{xy}^2$ || $= (6x)(2) - 0^2 = 12x$
+     0: Step two: the second derivative test.
+     1: Compute D equals f x x times f y y, minus f x y squared.
+     2: Here f x x is six x, f y y is two, and f x y is zero.
+     3: So D equals twelve x.
+  step2 board+: $(1,0)$:  $D = 12 > 0$, $f_{xx} > 0$  so it's a minimum || PEN None
+     0: At one comma zero, D is twelve, positive, and f x x is six, positive.
+     1: So it's a local minimum, with value negative two.
+  step3 board+: $(-1,0)$:  $D = -12 < 0$  so it's a saddle || PEN None
+     0: At negative one comma zero, D is negative twelve.
+     1: A negative D means a saddle point: it's a peak if you walk along x, but a valley if you walk along y, like a horse's saddle.
+     2: Gradient descent can stall near saddles like this, which is a real problem when training neural networks.
+
+[s12] V  Double integrals: volume under a surface
+  img: fig:double
+  • ∬ f dA adds f over an area
+  • Compute as two nested single integrals
+  • ∫₀² ∫₀¹ (x + y) dy dx = ∫₀² (x + ½) dx = 3
+  • Mass from density, total charge, average temperature
+  (pen marks: 2 )
+  beat0:
+     0: A double integral adds up a function over a two dimensional region, just like a single integral adds up over an interval.
+     1: Geometrically, it's the volume under the surface, made of thin columns, like these bars.
+  beat1:
+     0: You compute it as two nested single integrals: integrate over y with x held fixed, then integrate the result over x.
+  beat2:
+     0: Example: x plus y over the rectangle from zero to two in x and zero to one in y.
+     1: The inner integral over y gives x plus one half.
+     2: Then integrate from zero to two: two plus one, which is three.
+  beat3:
+     0: Double integrals compute total mass from a density, total charge on a surface, the average temperature over a chip, or the probability that two random variables land in a region, which you'll do in the statistics course.
+
+[s13] V  Change of coordinates: polar, cylindrical, spherical
+  img: fig:polar
+  • Polar: dA = r dr dθ (the extra r matters!)
+  • Gaussian integral: ∫ e^(−x²) dx = √π
+  • Spherical: dV = ρ² sin φ dρ dφ dθ
+  • Sphere volume (4/3)πr³ falls right out
+  (pen marks: 4 )
+  beat0:
+     0: Circular regions are painful in x and y, so we switch coordinates.
+     1: In polar coordinates, a tiny area element is r d r d theta.
+     2: That extra r is crucial: the little patches get bigger as you move outward.
+  beat1:
+     0: Here's a famous trick.
+     1: The integral of e to the minus x squared has no antiderivative.
+     2: But square it, turning it into a double integral over the whole plane, and switch to polar.
+     3: The extra r makes it easy: the answer is pi.
+     4: Take the square root, and the integral of e to the minus x squared is root pi.
+     5: That's why root pi appears in the normal distribution's formula.
+  beat2:
+     0: In three dimensions, cylindrical and spherical coordinates do the same job, with their own volume elements.
+     1: In spherical coordinates, it's rho squared sine phi.
+  beat3:
+     0: Integrate one over a ball in spherical coordinates, and the volume of a sphere, four thirds pi r cubed, falls right out in a couple of lines.
+
+[s14] WB  Worked example: a double integral in polar coordinates
+  step0 board+: $\iint_{disk} (x^2 + y^2)\,dA$ || PEN None || $x^2 + y^2 = r^2$
+     0: Here's why polar coordinates are worth it.
+     1: Integrate x squared plus y squared over a disk of radius two.
+     2: In x and y, the limits are square roots and the algebra gets ugly.
+     3: In polar, x squared plus y squared is just r squared, and the disk is simply r from zero to two, theta from zero to two pi.
+  step1 board+: PEN None || $dA = r\,dr\,d\theta$ || $= \int_0^{2\pi}\int_0^2 r^2 \cdot r\;dr\,d\theta$
+     0: Don't forget the extra r: a little patch of area is r d r d theta, because patches farther from the center are wider.
+     1: So the integrand becomes r squared times r, r cubed.
+  step2 board+: $\int_0^2 r^3\,dr = \frac{2^4}{4} = 4$ || $\int_0^{2\pi} 4\;d\theta = 8\pi \approx 25.1$
+     0: The inner integral of r cubed is r to the fourth over four, which from zero to two is four.
+     1: The outer integral of four, over a full turn, is four times two pi.
+     2: Eight pi, about twenty five point one.
+     3: Two short lines, instead of a page of square roots.
+
+[s15] V  Vector fields, divergence and curl
+  img: fig:fields
+  • Vector field: an arrow at every point (wind, E, B)
+  • Divergence ∇·F: is stuff flowing out? (sources)
+  • Curl ∇×F: is it swirling? (rotation)
+  • Maxwell’s equations are written with these
+  (pen marks: 3 )
+  beat0:
+     0: A vector field attaches an arrow to every point in space: wind velocity on a weather map, water flow in a pipe, the electric field around a charge.
+  beat1:
+     0: Divergence measures whether a field is spreading out from a point, like the electric field of a positive charge on the left.
+     1: A positive divergence means a source.
+     2: Negative means a sink.
+  beat2:
+     0: Curl measures how much the field swirls around a point, like the magnetic field circling a wire carrying current, on the right.
+  beat3:
+     0: These aren't abstract.
+     1: Maxwell's equations, the four equations of electricity and magnetism, say: the divergence of E is proportional to charge density, the divergence of B is zero, the curl of E comes from a changing magnetic field, and the curl of B comes from current and a changing electric field.
+     2: You'll meet them next year in physics.
+
+[s16] V  Line integrals and the big theorems
+  img: fig:theorems
+  • Line integral ∫ F·dr: work along a path
+  • Conservative fields: only the endpoints matter
+  • Green, Stokes, Divergence: inside ⇄ boundary
+  • All are cousins of the Fundamental Theorem
+  (pen marks: 6 )
+  beat0:
+     0: A line integral adds up a field along a path.
+     1: The work done moving through a force field is the integral of F dot d r along the path.
+  beat1:
+     0: For conservative fields, like gravity, the work depends only on the starting and ending points, not on the route.
+     1: That's exactly why we can define potential energy, and in circuits, voltage.
+  beat2:
+     0: Then come the three great theorems of vector calculus.
+     1: Green's theorem, Stokes' theorem and the divergence theorem all say the same thing in different dimensions: adding up a derivative over the inside of a region equals adding up the field over its boundary.
+  beat3:
+     0: Look at the first row: the fundamental theorem of calculus is the one dimensional version, where the boundary of an interval is just its two endpoints.
+     1: The divergence theorem is what turns Maxwell's equations into Gauss's law, which says the electric flux out of any closed surface equals the charge inside.
+     2: It's one beautiful idea, from Calculus one all the way to electromagnetism.
+
+[s17] Q  Key takeaways
+  BIG: The **gradient** points uphill. **Multiple integrals** add up over areas and volumes. **Divergence & curl** describe fields — the language of E&M.
+  cap: Next: MATH 250B, Linear Algebra and Differential Equations.
+  beat0:
+     0: To recap.
+     1: Dot and cross products measure angles, projections, areas and perpendicular directions.
+     2: Functions of two variables are landscapes, partial derivatives measure slopes along each axis, and the gradient points straight uphill, which is the engine of machine learning.
+     3: Critical points and Lagrange multipliers find the best designs.
+     4: Double and triple integrals add up quantities over regions, often in polar or spherical coordinates.
+     5: And vector fields, with divergence, curl and the big theorems, are the language of electricity and magnetism.
+     6: Next, linear algebra and differential equations.
+     7: See you there.

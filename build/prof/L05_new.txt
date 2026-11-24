@@ -1,0 +1,449 @@
+﻿#### L05_phys225: PHYS 225 Mechanics
+
+[s0] TITLE  Mechanics
+  img: a:rocket_launch
+  beat0:
+     0: Welcome to physics two twenty five, mechanics.
+     1: This is the physics of things that move: rockets, cars, robot arms, and the tiny vibrating structures inside your phone.
+     2: We'll build up from describing motion, to Newton's laws, energy, momentum and rotation, with real numbers at every step.
+     3: Grab a calculator.
+
+[s1] V  Why does a computer engineer need mechanics?
+  img: a:robot_arm / a:mpu6050 / a:falcon_landing
+  • Robots & drones: motors, torque, balance
+  • Sensors: your phone’s accelerometer is a tiny mass on a spring
+  • Control: software that steers physical things
+  beat0:
+     0: Computer engineers increasingly build things that move.
+     1: A robot arm like this one has to be programmed knowing how much torque each motor can supply and how heavy the payload is.
+     2: Drones, self driving cars and warehouse robots are the same story.
+  beat1:
+     0: Sensors too.
+     1: This tiny chip is an accelerometer and gyroscope, the same kind of part inside your phone and game controllers.
+     2: Inside is a microscopic mass on springs etched in silicon.
+     3: When the chip accelerates, the mass lags behind, and the circuit measures that tiny shift.
+     4: It's literally F equals m a, on a chip.
+  beat2:
+     0: And control.
+     1: This rocket booster landed itself, with software reading sensors and steering the engine hundreds of times per second.
+     2: Software that controls physical things has to be built on mechanics.
+
+[s2] V  Vectors: quantities with direction
+  img: fig:vectors
+  • Scalar: just a size (mass, time, speed)
+  • Vector: size + direction (displacement, velocity, force)
+  • Add vectors tip-to-tail, or by components
+  • 3 km east + 4 km north = 5 km at 53.1°
+  (pen marks: 7 )
+  beat0:
+     0: Some quantities only have a size, like mass or temperature.
+     1: Those are scalars.
+  beat1:
+     0: Others have a size and a direction, like displacement, velocity and force.
+     1: Those are vectors.
+     2: Push a box with fifty newtons, and it matters a lot whether you push left or right.
+  beat2:
+     0: To add vectors, place them tip to tail, or more practically, break each into x and y components and add the components separately.
+  beat3:
+     0: Example: walk three kilometers east, then four kilometers north.
+     1: Your net displacement has length square root of three squared plus four squared, which is five kilometers, at an angle of inverse tangent of four over three, which is fifty three point one degrees north of east.
+     2: Breaking things into components is the single most useful trick in this course.
+
+[s3] WB  Worked example: adding two displacements
+  step0 board+: 3 km east, then 4 km north || PEN None || PEN None
+     0: Let's add two vectors by hand.
+     1: You walk three kilometers east, then four kilometers north.
+     2: Where do you end up, and in what direction?
+     3: Draw them tip to tail: first the east arrow, then the north arrow starting where the first one ends.
+  step1 board+: PEN None || $|\vec{d}| = \sqrt{3^2 + 4^2} = \sqrt{25}$ || $= 5\ \mathrm{km}$
+     0: The total displacement is the arrow from the start to the finish.
+     1: It's the hypotenuse of a right triangle, so use Pythagoras: the square root of three squared plus four squared, which is the square root of twenty five, five kilometers.
+  step2 board+: $\tan\theta = \frac{4}{3}$ || $\theta = \tan^{-1}(4/3) \approx 53°$ north of east
+     0: For the direction, use the tangent: opposite over adjacent is four over three.
+     1: The inverse tangent gives fifty three degrees north of east.
+     2: Notice you walked seven kilometers, but you're only five kilometers from where you started.
+     3: Distance and displacement are different things.
+
+[s4] V  Kinematics: describing motion
+  img: fig:vt
+  • v = v₀ + at
+  • x = x₀ + v₀t + ½at²
+  • v² = v₀² + 2a(x − x₀)
+  • Car 0 → 60 mph (27 m/s) in 6 s: a = 4.5 m/s², 81 m
+  (pen marks: 3 )
+  beat0:
+     0: Kinematics describes motion without asking what causes it.
+     1: For constant acceleration, three equations do almost everything.
+     2: Velocity grows linearly: v equals v naught plus a t.
+  beat1:
+     0: Position follows x equals x naught plus v naught t plus one half a t squared.
+     1: That should look familiar from calculus: position is the integral of velocity.
+  beat2:
+     0: And when you don't know the time: v squared equals v naught squared plus two a times the distance.
+  beat3:
+     0: Example: a car goes from zero to sixty miles per hour, about twenty seven meters per second, in six seconds.
+     1: The acceleration is twenty seven divided by six, four point five meters per second squared.
+     2: That's the slope of the velocity graph.
+     3: The distance covered is the area under it: one half times six times twenty seven, which is eighty one meters.
+
+[s5] WB  Which equation? The missing-variable trick
+  step0 board+: $v = v_0 + at$ || $x = v_0 t + \frac{1}{2}at^2$ || $v^2 = v_0^2 + 2ax$ || quantities:  $v_0,\ v,\ a,\ t,\ x$
+     0: Students always ask which of the three equations to use.
+     1: Here's the trick.
+     2: There are five quantities: v naught, v, a, t, and the distance x.
+     3: Each equation leaves exactly one of them out.
+  step1 board+: no x      no v      no t || PEN ('circle',) on $v^2 = v_0^2 + 2ax$
+     0: The first has no x.
+     1: The second has no final v.
+     2: The third has no t.
+     3: So list what you know, find the one quantity the problem doesn't mention and doesn't ask for, and pick the equation that leaves it out.
+  step2 board+: $v_0 = +20,\ v = 0,\ a = -9.8,\ x = ?$
+     0: Example: a ball is thrown up at twenty meters per second.
+     1: How high does it go?
+     2: We know v naught is twenty, v at the top is zero, and a is gravity.
+     3: Time isn't asked for, so use the equation with no t.
+  step3 board+: choose  up = +  , then  a = −9.8 || PEN ('underline',) on choose  up = + || $0 = 20^2 + 2(-9.8)\,x \;\Rightarrow\; x \approx 20.4\ \math
+     0: Now the signs.
+     1: Pick up as positive and stick with it.
+     2: Then gravity is negative nine point eight, because it points down.
+     3: Zero equals twenty squared plus two times negative nine point eight times x, so x is about twenty point four meters, matching what we found in calculus.
+     4: Mixing sign conventions halfway through is the most common way to lose points.
+
+[s6] V  Projectile motion: two independent problems
+  img: fig:projectile
+  • Horizontal: constant velocity
+  • Vertical: constant acceleration (−9.8 m/s²)
+  • 20 m/s at 45°: range 40.8 m, peak 10.2 m, 2.9 s
+  • 30° and 60° land at the same spot
+  (pen marks: 9 )
+  beat0:
+     0: Throw something, and its motion splits into two independent problems.
+     1: Horizontally, nothing pushes it, so it moves at constant velocity, ignoring air resistance.
+  beat1:
+     0: Vertically, gravity accelerates it downward at nine point eight meters per second squared, exactly like the ball we threw straight up in calculus.
+  beat2:
+     0: Launch at twenty meters per second at forty five degrees.
+     1: The vertical speed is twenty times sine forty five, about fourteen point one.
+     2: It stays in the air for two times fourteen point one over nine point eight, about two point nine seconds, and in that time travels about forty point eight meters horizontally, peaking at ten point two meters.
+  beat3:
+     0: Notice that thirty and sixty degrees land at the same spot, about thirty five meters, because the range depends on sine of twice the angle.
+     1: Forty five degrees gives the maximum range, at least without air resistance.
+
+[s7] WB  Worked example: a ball thrown off a cliff
+  step0 board+: PEN None || $v_x = 15\ \mathrm{m/s}$,   $v_{y0} = 0$,   drop $= 20\ \mat
+     0: Here's a new projectile problem, worked on the board.
+     1: A ball is thrown horizontally at fifteen meters per second from the top of a twenty meter cliff.
+     2: How far from the base does it land?
+  step1 board+: PEN None || vertical:  $20 = \frac{1}{2}(9.8)\,t^2$ || $t = \sqrt{40/9.8} \approx 2.02\ \mathrm{s}$
+     0: Split it into two problems.
+     1: Vertically, it's just falling from rest.
+     2: So twenty equals one half times nine point eight times t squared.
+     3: Solve: t squared is about four point zero eight, so t is about two point zero two seconds.
+  step2 board+: horizontal:  $x = v_x\,t = 15 \times 2.02$ || $x \approx 30.3\ \mathrm{m}$ || PEN None
+     0: Horizontally, nothing slows it down, so the distance is speed times time: fifteen times two point zero two, about thirty point three meters.
+  step3 board+: $v_y = 9.8 \times 2.02 \approx 19.8$ || $v = \sqrt{15^2 + 19.8^2} \approx 24.8\ \mathrm{m/s}$
+     0: And how fast is it going when it hits?
+     1: The vertical speed is nine point eight times two point zero two, about nineteen point eight.
+     2: Combine the two components with Pythagoras: about twenty four point eight meters per second.
+
+[s8] V  Newton's three laws
+  img: a:rocket_launch / a:rocket_launch / a:rocket_launch
+  • 1. Objects keep doing what they’re doing unless a net force acts
+  • 2. F_net = m a
+  • 3. Every force has an equal and opposite partner
+  beat0:
+     0: Now, what causes motion?
+     1: Isaac Newton's three laws.
+     2: First: an object at rest stays at rest, and an object moving stays moving in a straight line at constant speed, unless a net force acts on it.
+     3: Motion doesn't need a cause.
+     4: Changes in motion do.
+  beat1:
+     0: Second: the net force equals mass times acceleration.
+     1: Double the force, double the acceleration.
+     2: Double the mass, half the acceleration.
+     3: This one equation is the engine of all of mechanics.
+  beat2:
+     0: Third: forces come in pairs.
+     1: If A pushes on B, B pushes back on A equally hard in the opposite direction.
+     2: A rocket pushes hot gas down out of its engines, and the gas pushes the rocket up.
+     3: It doesn't need air to push against, which is why rockets work in space.
+
+[s9] WB  Third-law pairs act on different objects
+  step0 board+: PEN None || PEN None || W and N: equal & opposite || a 3rd-law pair?
+     0: The third law causes more confusion than the other two combined.
+     1: Here's the classic puzzle.
+     2: A book rests on a table.
+     3: Two forces act on it: its weight, the Earth pulling it down, and the normal force, the table pushing it up.
+     4: They're equal and opposite.
+     5: Is that a third law pair?
+  step1 board+: NO: both act on the book || PEN <function <lambda> at 0x000002129B7391C0 || they cancel by the 2nd law (a = 0)
+     0: No!
+     1: Both of those forces act on the same object, the book.
+     2: They cancel because of the second law: the book isn't accelerating, so the net force on it is zero.
+     3: A third law pair always acts on two different objects.
+  step2 board+: PEN None || pairs: Earth ↔ book,  table ↔ book
+     0: The real partner of the weight is the book pulling the Earth up, just as hard.
+     1: And the partner of the normal force is the book pushing down on the table.
+     2: Each pair is the same kind of force, between the same two objects.
+  step3 board+: pairs never cancel each other || PEN ('underline',) on pairs never cancel || mass: kg  ·  weight W = mg: newtons
+     0: That also answers the horse and cart puzzle.
+     1: If the cart pulls back on the horse as hard as the horse pulls the cart, how does anything move?
+     2: Because the forces act on different objects.
+     3: The cart moves if the pull on it beats the friction on it.
+     4: And one more fix: mass, in kilograms, is how much stuff there is.
+     5: Weight, in newtons, is a force, m times g.
+
+[s10] V  Free-body diagrams: a box on a ramp
+  img: fig:incline
+  • Draw every force on ONE object
+  • Tilt the axes along the slope
+  • Along: 98 sin30° − 0.2 × 84.9 = 32.0 N
+  • a = 32.0 / 10 = 3.2 m/s² down the ramp
+  (pen marks: 8 )
+  beat0:
+     0: To use F equals m a, draw a free body diagram: the object alone, with an arrow for every force acting on it.
+     1: Here's a ten kilogram box sliding down a thirty degree ramp, with a friction coefficient of point two.
+     2: Gravity pulls straight down with m g, ninety eight newtons.
+     3: The ramp pushes back perpendicular to its surface with the normal force.
+     4: And friction opposes the sliding.
+  beat1:
+     0: Trick: tilt your axes so x runs along the slope.
+     1: Then the normal force and the perpendicular part of gravity cancel: N equals m g cosine thirty, eighty four point nine newtons.
+  beat2:
+     0: Along the slope, gravity's component is ninety eight times sine thirty, forty nine newtons.
+     1: Friction is the coefficient times the normal force: point two times eighty four point nine, about seventeen newtons, pointing up the slope.
+     2: The net force is about thirty two newtons down the slope.
+  beat3:
+     0: Divide by the mass: the box accelerates at about three point two meters per second squared.
+     1: Every mechanics problem, from bridges to robot joints, follows this same recipe: isolate the object, draw the forces, pick smart axes, apply F equals m a.
+     2: One detail: point two is the kinetic friction coefficient, for a box that's already sliding.
+     3: Static friction, which holds a resting box in place, is usually a little larger.
+     4: That's why it takes more force to start something moving than to keep it moving.
+
+[s11] WB  Worked example: two blocks and a pulley
+  step0 board+: PEN None || Find a and T (no friction)
+     0: Now a problem with two objects.
+     1: A four kilogram block sits on a frictionless table.
+     2: A string runs over a pulley at the edge to a two kilogram block hanging below.
+     3: What's the acceleration, and what's the tension in the string?
+  step1 board+: PEN None || table block:  $T = 4a$ || hanging block:  $2g - T = 2a$ || PEN None
+     0: Draw a free body diagram for each block.
+     1: The table block feels only the tension T pulling it sideways.
+     2: The hanging block feels T pulling up and its weight, two g, pulling down.
+     3: The string keeps them moving together, so they share the same acceleration a.
+  step2 board+: add:  $2g = 6a$ || $a = \frac{2(9.8)}{6} \approx 3.27\ \mathrm{m/s^2}$
+     0: Add the two equations, and the tension cancels: two g equals six a.
+     1: So a is two times nine point eight over six, about three point two seven meters per second squared.
+  step3 board+: $T = 4a \approx 13.1\ \mathrm{N}$ || check: $T < 2g = 19.6\ \mathrm{N}$
+     0: Then the tension is four times a: about thirteen point one newtons.
+     1: Sanity check: that's less than the hanging block's weight of nineteen point six newtons, which makes sense, because the hanging block is accelerating downward.
+     2: If the tension equaled its weight, nothing would move.
+
+[s12] V  Apparent weight: what your phone’s accelerometer feels
+  img: fig:elevator
+  • Scale reads the normal force N, not mg
+  • N = m(g + a)
+  • Going up faster: you feel heavier
+  • Free fall: N = 0 — "weightless"
+  (pen marks: 5 )
+  beat0:
+     0: Stand on a bathroom scale in an elevator.
+     1: The scale doesn't measure gravity directly.
+     2: It measures how hard it has to push up on you: the normal force.
+  beat1:
+     0: Apply Newton's second law: N minus m g equals m a, so N equals m times g plus a.
+  beat2:
+     0: A seventy kilogram person reads six hundred eighty six newtons at rest.
+     1: Accelerating upward at two meters per second squared, the reading jumps to eight hundred twenty six newtons.
+     2: You feel heavier.
+     3: Accelerating downward, it drops to five hundred forty six.
+  beat3:
+     0: And in free fall, the reading is zero.
+     1: That's why astronauts in orbit float: they're falling around the Earth continuously.
+     2: An accelerometer works exactly like this scale.
+     3: That's why a phone lying still on a table reports about one g pointing up, and how it knows which way is up to rotate your screen.
+
+[s13] V  Circular motion: why cars slide on curves
+  img: fig:circular
+  • Moving in a circle = constantly changing direction
+  • Centripetal acceleration a = v²/r, toward the center
+  • Something must supply that force: friction, tension, gravity
+  (pen marks: 5 )
+  beat0:
+     0: Even at constant speed, moving in a circle means your velocity keeps changing direction.
+     1: And a change in velocity is an acceleration.
+  beat1:
+     0: That centripetal acceleration points toward the center, with size v squared over r.
+     1: A car at twenty meters per second, about forty five miles per hour, on a curve of radius fifty meters needs eight meters per second squared toward the center.
+  beat2:
+     0: Something has to supply that force.
+     1: For a car, it's friction between the tires and the road.
+     2: The friction coefficient must be at least eight over nine point eight, about point eight two.
+     3: Dry pavement can do that.
+     4: A wet road, with a coefficient around point five, can't, and the car slides outward.
+     5: That's why curve speed limits exist, and why highway curves are banked.
+     6: The same equation sizes the spin speed of hard drive platters and the forces in a centrifuge.
+
+[s14] V  Energy: the bookkeeping shortcut
+  img: fig:energy
+  • Kinetic energy ½mv² · potential energy mgh
+  • Without friction, the total never changes
+  • Drop 30 m: v = √(2gh) = 24.2 m/s (87 km/h)
+  • Work W = F·d changes energy
+  (pen marks: 6 )
+  beat0:
+     0: Forces and accelerations can get messy.
+     1: Energy is often a much faster route.
+     2: Moving objects have kinetic energy, one half m v squared.
+     3: Raised objects have gravitational potential energy, m g h.
+  beat1:
+     0: Without friction, energy just converts between these forms, and the total stays constant.
+     1: Look at the roller coaster.
+     2: At A, it's all potential energy, the blue bar.
+     3: At B, the bottom, most of it has become kinetic, orange.
+     4: At C, it's partly back to potential.
+  beat2:
+     0: So how fast is a coaster after dropping thirty meters?
+     1: Set m g h equal to one half m v squared.
+     2: The mass cancels, and v is the square root of two g h, about twenty four point two meters per second, or eighty seven kilometers per hour.
+     3: No forces, no time, no calculus.
+     4: Just bookkeeping.
+  beat3:
+     0: Work, force times distance, is how energy enters or leaves.
+     1: Friction does negative work, turning motion into heat.
+     2: In electronics, you'll see the same conservation idea: energy delivered by a battery ends up as heat in resistors, light in LEDs, or stored in capacitors.
+
+[s15] WB  Worked example: a spring launcher
+  step0 board+: PEN None || $k = 800\ \mathrm{N/m}$,   $x = 0.1\ \mathrm{m}$,   $m = 0.0
+     0: Let's use energy bookkeeping on a spring launcher.
+     1: A spring with stiffness eight hundred newtons per meter is compressed ten centimeters, with a fifty gram ball on top.
+     2: How fast does the ball leave, and how high does it go?
+  step1 board+: $E_{spring} = \frac{1}{2}kx^2 = \frac{1}{2}(800)(0.1)^2 = 4\
+     0: The energy stored in the spring is one half k x squared: one half times eight hundred times point one squared, which is four joules.
+  step2 board+: $\frac{1}{2}mv^2 = 4$ || $v = \sqrt{\frac{2(4)}{0.05}} = \sqrt{160} \approx 12.6\ \ma
+     0: All four joules become kinetic energy as the ball leaves.
+     1: One half m v squared equals four, so v squared is eight over point zero five, one hundred sixty, and v is about twelve point six meters per second.
+  step3 board+: PEN None || $mgh = 4 \;\Rightarrow\; h = \frac{4}{0.05(9.8)} \approx 8.2
+     0: At the top, it's all potential energy: m g h equals four.
+     1: So h is four over point zero five times nine point eight, about eight point two meters.
+     2: We never needed the time or the acceleration.
+     3: Energy skipped straight to the answer.
+
+[s16] V  Momentum and collisions
+  img: fig:collision
+  • Momentum p = mv; total is conserved in collisions
+  • 1000 kg at 20 m/s hits 1500 kg at rest, they stick: 8 m/s
+  • Kinetic energy: 200 kJ → 80 kJ (rest crushes metal)
+  • Impulse: F·Δt = Δp → airbags stretch Δt, cut the force
+  (pen marks: 6 )
+  beat0:
+     0: Momentum is mass times velocity.
+     1: When objects collide, the forces between them are equal and opposite, so the total momentum before equals the total after.
+  beat1:
+     0: A thousand kilogram car at twenty meters per second hits a fifteen hundred kilogram car at rest, and they stick together.
+     1: Momentum before: twenty thousand.
+     2: After, two thousand five hundred kilograms share it, so they move at eight meters per second.
+  beat2:
+     0: But kinetic energy is not conserved here.
+     1: It drops from two hundred kilojoules to eighty.
+     2: The missing one hundred twenty kilojoules went into crushing metal, heat and sound.
+     3: Car crumple zones are designed to absorb exactly that energy.
+     4: Two names to know: a collision that keeps kinetic energy, like billiard balls bouncing, is called elastic.
+     5: One where the objects stick together, like these cars, is perfectly inelastic, and loses the most energy possible.
+     6: Momentum is conserved in both.
+  beat3:
+     0: And impulse explains safety design.
+     1: Force times time equals the change in momentum.
+     2: Your momentum has to drop to zero in a crash either way.
+     3: An airbag stretches the stopping time from a few milliseconds to tens of milliseconds, so the force on you drops by roughly the same factor.
+     4: Electronics borrowed a related trick: many laptops with spinning hard drives used an accelerometer to detect a fall and park the drive's read head before impact.
+
+[s17] V  Rotation: torque
+  img: fig:torque / fig:analog
+  • Torque τ = r F sin θ: the “twisting force”
+  • 0.3 m wrench × 50 N = 15 N·m
+  • Every linear idea has a rotational twin
+  (pen marks: 10 )
+  beat0:
+     0: Spinning things are described by rotational versions of everything we've done.
+     1: The rotational version of force is torque: how hard you twist.
+     2: Torque equals the distance from the pivot times the force times the sine of the angle between them.
+     3: Push at the end of a thirty centimeter wrench with fifty newtons, at a right angle, and you apply fifteen newton meters.
+     4: Use a longer wrench and you need less force for the same torque.
+     5: That's why it's easier to open a door by pushing far from the hinges.
+  beat1:
+     0: Every linear quantity has a twin.
+     1: Position becomes angle.
+     2: Velocity becomes angular velocity.
+     3: Mass becomes moment of inertia, which depends on how far the mass is from the axis.
+     4: F equals m a becomes torque equals I alpha.
+     5: And kinetic energy becomes one half I omega squared.
+     6: Learn one column, and the other comes almost for free.
+
+[s18] WB  Worked example: balancing a seesaw
+  step0 board+: PEN None || PEN None || 30 kg at 2 m.  40 kg at d = ?
+     0: Here's torque on the board.
+     1: A thirty kilogram child sits two meters from the pivot of a seesaw.
+     2: Where must a forty kilogram child sit to balance it?
+  step1 board+: balance:  $\tau_{left} = \tau_{right}$ || $(30g)(2) = (40g)\,d$
+     0: Balance means the torques cancel: the counterclockwise torque equals the clockwise torque.
+     1: Each torque is weight times distance from the pivot.
+  step2 board+: $60 = 40\,d$ || $d = 1.5\ \mathrm{m}$
+     0: The g cancels from both sides, so sixty equals forty d, and d is one and a half meters.
+     1: The heavier child sits closer to the pivot.
+     2: This is exactly how a balance scale, a crane's counterweight, and the robot arm on the next slide are designed.
+
+[s19] V  Engineering example: sizing a robot arm motor
+  img: fig:arm
+  • Holding torque = weight × horizontal distance
+  • 2 kg at 0.5 m → 9.8 N·m (+ the arm itself)
+  • Small motors give ≈ 0.5 N·m → need ≈ 25:1 gearing
+  • Worst case: arm fully extended
+  (pen marks: 7 )
+  beat0:
+     0: Here's mechanics doing real engineering work.
+     1: A robot arm holds a two kilogram object at the end of a half meter arm, held horizontal.
+     2: The payload's weight is nineteen point six newtons.
+  beat1:
+     0: The motor at the shoulder must supply a torque of nineteen point six times point five, about nine point eight newton meters, just to hold still.
+     1: Add the arm's own weight, acting at its middle, and the requirement is closer to twelve.
+  beat2:
+     0: A typical small hobby motor might deliver around half a newton meter.
+     1: So you'd need a gearbox of roughly twenty five to one, trading speed for torque.
+  beat3:
+     0: And notice that the worst case is the arm stretched out horizontally, when the lever arm is longest.
+     1: Engineers always size motors for the worst case, plus a safety margin.
+     2: Robot arm projects, like the one in this degree's senior design course, start exactly with this calculation.
+
+[s20] V  Gravity and orbits: how GPS satellites stay up
+  img: a:gps_sat / fig:orbit
+  • F = G m₁m₂ / r²
+  • Orbit: gravity supplies the centripetal force
+  • v = √(GM/r) — no fuel needed to stay in orbit
+  • GPS: ~26,600 km radius, 3.9 km/s, 12-hour orbit
+  (pen marks: 5 )
+  beat0:
+     0: Newton's law of gravitation says every two masses attract with a force G m one m two over r squared.
+     1: At the Earth's surface, that gives the familiar nine point eight meters per second squared.
+  beat1:
+     0: Now combine it with circular motion.
+     1: A satellite in orbit is falling toward Earth the whole time, but it's moving sideways so fast that it keeps missing.
+     2: Gravity provides exactly the centripetal force: G M m over r squared equals m v squared over r.
+     3: The satellite's mass cancels, and the orbital speed is the square root of G M over r.
+     4: No engine needed to stay up.
+     5: GPS satellites like this one orbit at a radius of about twenty six thousand six hundred kilometers, moving at about three point nine kilometers per second, and circle the Earth every twelve hours.
+     6: Your phone finds your position by timing signals from several of them, which you'll appreciate more after the electromagnetism and signals courses.
+
+[s21] Q  Key takeaways
+  BIG: Draw the forces, apply **F = ma** — or skip straight to **energy and momentum** conservation. Rotation is the same physics, spinning.
+  cap: Next: MATH 170A, Mathematical Structures — the logic and discrete math behind computing.
+  beat0:
+     0: Let's recap.
+     1: Vectors are broken into components.
+     2: Kinematics describes motion with three equations for constant acceleration.
+     3: Newton's laws explain what causes motion, and free body diagrams are how you apply them.
+     4: Energy and momentum conservation are shortcuts that skip the details.
+     5: And rotation, with torque and moment of inertia, mirrors everything linear.
+     6: You'll see these ideas again in robotics, sensors and control, and the math patterns, like conservation and equal and opposite pairs, come back in circuits.
+     7: Next up, discrete mathematics, the math of logic and computing.
+     8: See you there.

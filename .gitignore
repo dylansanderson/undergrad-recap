@@ -1,0 +1,48 @@
+# ---- generated build output (rebuildable; see docs/BUILD_VIDEOS.md) ----
+# build/cache = TTS audio cache (~5 GB): kept on disk so rebuilds are fast, never committed
+build/cache/
+build/segs/
+build/frames/
+build/figs/
+build/out/
+build/review/
+build/onset_tmp/
+build/prof/*.err
+
+# ---- large binaries ----
+voice/*.onnx
+voice/*.bin
+web/server/voice/
+*.wav
+*.mp4
+*.mp3
+# source clips used by lessons (small, licensed; see build/assets/credits.json)
+!build/assets/clips/*.mp4
+
+# ---- web build artifacts ----
+# slides are copied from the Coursework folders by web/build_site.py
+web/public/slides/
+web/local/subs.vtt
+web/shots*/
+*selftest_report.json
+
+# ---- raw text extracted from coursework: contains other people's names/emails/phones; regenerate with legacy/recap-pdf/extract.py ----
+notes/corpus/
+
+# ---- local runtime data (private) ----
+local-narrator/qa_log.jsonl
+local-narrator/_clips/
+local-narrator/voice/
+
+# ---- Python / tooling ----
+__pycache__/
+*.pyc
+venv/
+.venv/
+edge_*/
+*.log
+
+# ---- secrets (should never exist here, but just in case) ----
+.env
+*.key
+*secret*

@@ -1,0 +1,5 @@
+rocket_launch | File:45th Space Wing Supports Successful Falcon 9 SAOCOM 1B Launch 02.jpg
+robot_arm | File:KUKA industrial robotic arm performing "The Beach" by Roy Nachum - 02.jpg
+mpu6050 | File:IvenSense 3-Axis-Gyro-Accelerometer-IC MPU-6050 10937-01.jpg
+gps_sat | File:GPS Satellite NASA art-iif.jpg
+falcon_landing | File:CRS-9 mission (28348649546).jpg

@@ -1,0 +1,274 @@
+﻿#### L27_egcp450: EGCP 450 Embedded Processor Interfacing
+
+[s0] TITLE  Embedded Processor Interfacing
+  img: a:msp430lp|0,0,1,0.9
+  beat0:
+     0: Welcome to E G C P four fifty, embedded processor interfacing.
+     1: This is where computer architecture meets real hardware.
+     2: Using a Texas Instruments M S P four thirty two LaunchPad, a board much like this one but built around a thirty two bit ARM Cortex M four F processor, students write assembly and C that blinks L E Ds, reads switches, keeps precise time, runs a traffic light controller, plays music through a homemade digital to analog converter, and talks over serial links.
+     3: The microcontrollers course introduced many of these ideas.
+     4: Here we build complete systems with them.
+
+[s1] V  Where Cortex-M chips live
+  img: a:smartwatch / fig:aapcs
+  • Wearables, thermostats, drones, car ECUs, medical devices
+  • Cortex-M4F: 32-bit, Thumb-2, hardware floating point
+  • AAPCS: arguments in R0–R3, result in R0
+  • Callee must preserve R4–R11 (PUSH/POP)
+  beat0:
+     0: ARM Cortex M processors are the workhorses of embedded computing: fitness watches like this one, thermostats, drones, electronic control units in cars, insulin pumps and industrial sensors.
+     1: The M four F adds signal processing instructions and a hardware floating point unit, useful for filters and control loops.
+     2: It runs the compact Thumb two instruction set, which mixes sixteen and thirty two bit instructions to save memory.
+  beat1:
+     0: To let C and assembly work together, everyone follows the ARM procedure call standard, AAPCS.
+     1: The first four arguments go in R zero to R three, and the result comes back in R zero.
+     2: Those registers, plus R twelve, can be overwritten freely by the called function.
+     3: But R four to R eleven belong to the caller: a function that uses them must push them on entry and pop them before returning.
+     4: Follow these rules, and an assembly routine can be called from C, or a C function from assembly, with no surprises.
+     5: Each call gets its own stack frame, which is also why recursion works, until the stack runs out.
+
+[s2] V  GPIO for real: LEDs and switches
+  img: fig:led
+  • PxDIR: 1 = output · PxIN / PxOUT: read / write
+  • LED needs a series resistor: R = (3.3 − 1.8) / 6 mA ≈ 250 Ω → 270 Ω
+  • Switch needs a pull-up (PxREN + PxOUT) and debouncing
+  • C idioms: P1->OUT |= BIT0; if (P1->IN & BIT1)
+  (pen marks: 6 )
+  beat0:
+     0: Each port on the M S P four thirty two has a set of registers.
+     1: The direction register makes each pin an input or an output.
+     2: The input register reads pins, the output register drives them, and the select registers route a pin to a peripheral like a UART or timer instead.
+  beat1:
+     0: An L E D needs a series resistor to limit its current.
+     1: The pin provides three point three volts, a red L E D drops about one point eight volts, and we want around six milliamps.
+     2: Ohm's law gives one point five volts over six milliamps, two hundred fifty ohms.
+     3: Round up to the next standard value, two hundred seventy ohms.
+  beat2:
+     0: A switch to ground needs a pull up resistor, so the pin reads one when the switch is open, instead of floating at a random value.
+     1: The M S P four thirty two has internal pull resistors, enabled with the resistor enable register, with the output register choosing up or down.
+     2: And mechanical switches bounce, so software must debounce them, just like on the F P G A.
+  beat3:
+     0: In C, it's the same bit masking from the microcontrollers course: P one arrow OUT or equals BIT zero to turn on the L E D, and if P one arrow IN and BIT one to test the switch.
+     1: In the first labs, students do all of this in ARM assembly first, then in C.
+
+[s3] WB  Worked example: an LED and a switch, in C
+  step0 board+: PEN None || P1->DIR |=  BIT0;     // P1.0 = output (LED) || PEN ('circle',) on |=  BIT0
+     0: Wire a red L E D through two hundred seventy ohms to pin P one point zero.
+     1: Make that pin an output by setting bit zero of the direction register.
+     2: Or equals sets one bit and leaves the other seven untouched.
+  step1 board+: PEN None || P1->DIR &= ~BIT1;     // P1.1 = input (switch) || PEN ('circle',) on &= ~BIT1 || P1->REN |=  BIT1;     // enable its resistor... || P1->OUT |=  BIT1;     // ...as a pull-UP || PEN ('underline',) on P1->REN |=  BIT1 || PEN ('underline',) on P1->OUT |=  BIT1
+     0: Wire a switch from P one point one to ground.
+     1: Clear its direction bit to make it an input.
+     2: With the switch open, the pin would float, so enable the internal resistor and set the output bit to make it a pull up.
+  step2 board+: while (1) { ||   if ((P1->IN & BIT1) == 0)   // pressed reads 0 || PEN ('circle',) on == 0 ||     P1->OUT |=  BIT0;         // LED on ||   else ||     P1->OUT &= ~BIT0;         // LED off || } || PEN ('highlight',) on P1->OUT |=  BIT0;
+     0: Now the loop.
+     1: Pressing the switch connects the pin to ground, so pressed reads as zero.
+     2: That's called active low.
+     3: If the bit is zero, turn the L E D on; otherwise, turn it off.
+  step3 board+: set |= mask    clear &= ~mask    test & mask || PEN ('underline',) on set |= mask
+     0: Notice the bit masking pattern: or equals with a mask to set, and equals with the inverted mask to clear, and with a mask to test.
+     1: These three idioms are ninety percent of all embedded register code.
+
+[s4] V  Precise timing with SysTick
+  img: fig:systick
+  • Busy-wait loops: imprecise and waste the CPU
+  • SysTick: 24-bit down-counter at the bus clock
+  • RELOAD = period × f_clk − 1 → 1 ms = 47,999 at 48 MHz
+  • Max one wrap ≈ 349 ms; count wraps for longer delays
+  (pen marks: 6 )
+  beat0:
+     0: Delay loops, counting down a register in software, are imprecise, change when the compiler or clock changes, and waste the processor's time.
+  beat1:
+     0: Every Cortex M has a simple built in timer called SysTick: a twenty four bit counter that counts down once per bus clock cycle.
+     1: When it reaches zero, it reloads, sets a flag, and can trigger an interrupt.
+  beat2:
+     0: To get a one millisecond tick on a forty eight megahertz clock, you need forty eight thousand counts, so the reload value is forty seven thousand nine hundred ninety nine, since the count includes zero.
+     1: The chart shows the counter sawtoothing down, wrapping exactly once per millisecond.
+  beat3:
+     0: Twenty four bits limits a single wrap to about sixteen point eight million counts, about three hundred forty nine milliseconds at forty eight megahertz, so longer delays count multiple wraps.
+     1: For P W M and measuring input pulses, the chip's more capable Timer A peripherals take over.
+
+[s5] WB  Worked example: a millisecond delay with SysTick
+  step0 board+: void Delay_ms(uint32_t n) { ||   SysTick->LOAD = 48000 - 1;   // 1 ms at 48 MHz || PEN ('circle',) on 48000 - 1 || PEN None
+     0: Let's write a precise delay.
+     1: At forty eight megahertz, one millisecond is forty eight thousand clock cycles.
+     2: SysTick counts from the reload value down to zero inclusive, so load forty eight thousand minus one.
+  step1 board+:   SysTick->VAL  = 0;           // start a fresh period ||   SysTick->CTRL = 5;           // ENABLE + CPU clock || PEN ('underline',) on SysTick->VAL  = 0; || PEN ('circle',) on CTRL = 5
+     0: Clear the current value so the first period is a full one, then enable the counter with the processor clock as its source.
+  step2 board+: PEN ('circle',) on (1u << 16) ||   while (n--) ||     while ((SysTick->CTRL & (1u << 16)) == 0) {} || } || PEN None || PEN ('highlight',) on while (n--)
+     0: Every time the count wraps from zero back to the reload value, hardware sets the count flag, bit sixteen of the control register.
+     1: Reading the register clears it.
+     2: So wait for the flag n times, and you've waited exactly n milliseconds, no matter what the compiler does with your code.
+
+[s6] V  Interrupts on Cortex-M
+  img: fig:nvic
+  • NVIC: nested vectored interrupt controller
+  • Hardware stacks R0–R3, R12, LR, PC, xPSR automatically
+  • So an ISR is a plain C function
+  • Shared data: volatile + disable interrupts around critical sections
+  (pen marks: 7 )
+  beat0:
+     0: Cortex M interrupts are handled by the nested vectored interrupt controller, the NVIC.
+     1: Each interrupt source has a priority, and a higher priority interrupt can preempt a lower priority one, which is the nested part.
+  beat1:
+     0: When an interrupt is accepted, the hardware automatically pushes eight registers onto the stack: exactly the ones the calling convention says a function may destroy.
+     1: Then it fetches the handler's address from the vector table.
+  beat2:
+     0: Because the hardware already saved the caller saved registers, an interrupt service routine is just an ordinary C function.
+     1: No special assembly wrapper is needed, an elegant design choice by ARM.
+     2: On return, the hardware unstacks everything and the main program resumes.
+  beat3:
+     0: The concurrency lessons from operating systems apply directly.
+     1: Variables shared between an I S R and main must be volatile, and if main does a read modify write on shared data, it must briefly disable interrupts or use atomic operations, or an interrupt arriving in the middle creates exactly the race condition from the count plus plus example.
+
+[s7] WB  Worked example: an ISR, and why "volatile" matters
+  step0 board+: volatile uint32_t ticks = 0;     // shared with the ISR || void SysTick_Handler(void) {     // every 1 ms ||   ticks++; || } || PEN ('underline',) on SysTick_Handler || PEN ('circle',) on ticks++;
+     0: Set SysTick to interrupt every millisecond.
+     1: The handler is a plain C function with a special name: it just adds one to a global counter.
+  step1 board+: uint32_t start = ticks; || while (ticks - start < 500) {}   // wait 500 ms || PEN ('highlight',) on while (ticks - start < 500) || PEN ('circle',) on volatile || PEN ('strike',) on volatile || no volatile: compiler reads ticks once, hangs forever
+     0: Main waits half a second by watching the counter.
+     1: Now delete the word volatile.
+     2: The optimizer sees that nothing inside this loop changes ticks, so it reads ticks once into a register and loops forever.
+     3: Volatile tells the compiler: this can change behind your back, so read it from memory every time.
+  step2 board+: PEN ('underline',) on count++; || __disable_irq();     // critical section || count++;             // load, add, store || __enable_irq(); || PEN ('span',) on __disable_irq();
+     0: Second danger.
+     1: If main also changes a shared variable, count plus plus is really three instructions: load, add, store.
+     2: An interrupt between the load and the store loses an update.
+     3: Protect it by disabling interrupts for those few instructions.
+
+[s8] V  Finite state machines in C: a traffic light
+  img: a:traffic_light / fig:traffic_fsm
+  • Moore FSM: each state = outputs + wait time + next states
+  • Store it as a table: an array of structs
+  • Loop: output → wait (SysTick) → read inputs → next state
+  • Adding a state = adding a table row
+  (pen marks: 4 )
+  beat0:
+     0: Traffic lights are a classic embedded control problem: lights that must never show green both ways, sensors that detect waiting cars, and a pedestrian button.
+  beat1:
+     0: The clean way to build one is a table driven Moore machine.
+     1: Each state stores its light outputs, how long to wait, and its next state for every combination of inputs.
+     2: The program is a tiny loop: write the outputs, wait using SysTick, read the sensors, and jump to the next state from the table.
+     3: Here, go north holds for three seconds.
+     4: If a car is waiting east or a pedestrian presses the button, it moves to a half second yellow, then go east, and so on, with a walk state that blinks a warning before handing control back.
+     5: The logic lives in data, not tangled if statements, so it's easy to verify and easy to change: adding a state means adding a row.
+     6: In this course's lab, students build exactly this controller, with pedestrian walk and blink states, in C on the LaunchPad.
+
+[s9] EX  The FSM table in C
+  CODE:
+    typedef struct {
+      uint8_t  lights;      // port output pattern
+      uint32_t wait_ms;     // how long to stay
+      uint8_t  next[4];     // next state for inputs 00,01,10,11
+    } State;
+    
+    const State FSM[4] = {
+      {0x21, 3000, {goN,   waitN, goN,   waitN}},   // goN
+      {0x22,  500, {goE,   goE,   goE,   goE  }},   // waitN
+      {0x0C, 3000, {goE,   goE,   waitE, waitE}},   // goE
+      {0x14,  500, {goN,   goN,   goN,   goN  }}};  // waitE
+    
+    while (1) {
+      LIGHTS = FSM[s].lights;
+      SysTick_Wait_ms(FSM[s].wait_ms);
+      s = FSM[s].next[SENSORS];
+    }
+  (pen marks: 10 )
+  beat0:
+     0: Here's the core of that design, simplified to four states.
+     1: Each state is a struct: the output pattern for the lights, the time to wait, and an array giving the next state for each of the four combinations of two sensor inputs.
+  beat1:
+     0: The whole controller is this constant table, stored in flash.
+     1: Read a row: in go north, the lights are pattern hex twenty one, wait three seconds, then stay in go north if no car waits east, or move to wait north if one does.
+  beat2:
+     0: And the engine is three lines: output the lights, wait, then index the next array with the current sensor reading.
+     1: That's the entire program.
+     2: The same pattern runs vending machines, elevator controllers and washing machines.
+
+[s10] V  Making sound: a DAC and a sine table
+  img: fig:dac / fig:dac
+  • Binary-weighted resistors sum 4 GPIO bits into one voltage
+  • Store one period of a sine wave in a table
+  • Output one sample per SysTick interrupt
+  • Tone = interrupt rate / table length: 14,080 / 32 = 440 Hz
+  (pen marks: 5 )
+  beat0:
+     0: To make sound, a microcontroller needs a digital to analog converter.
+     1: The simplest is built from resistors.
+     2: Four output pins drive resistors whose values double: twelve, twenty four, forty eight and ninety six kilohms.
+     3: The most significant bit has the smallest resistor and contributes the most current, so the summed output voltage is proportional to the binary number on the pins: sixteen levels.
+  beat1:
+     0: To play a note, store one period of a sine wave as a table of thirty two four bit values, and output one entry per SysTick interrupt.
+     1: The frequency of the tone is the interrupt rate divided by the table length.
+     2: For the note A at four hundred forty hertz, that's fourteen thousand eighty interrupts per second, a SysTick reload of about three thousand four hundred eight at forty eight megahertz.
+     3: Change the reload value and you change the note, which is how students build a digital piano with buttons as keys in this course's labs.
+     4: The staircase is quantization, the same effect an A D C has in reverse, and the sample rate easily satisfies Nyquist from signals and systems for a four hundred forty hertz tone.
+
+[s11] WB  Worked example: playing a 440 Hz tone
+  step0 board+: const uint8_t Sine[32] = { ||   8, 9,10,12,13,14,14,15,15,15,14,14,13,12,10, 9, ||   8, 6, 5, 3, 2, 1, 1, 0, 0, 0, 1, 1, 2, 3, 5, 6}; || PEN None
+     0: Store one period of a sine wave as thirty two four bit values, from zero to fifteen.
+  step1 board+: void SysTick_Handler(void) { ||   DAC_Out(Sine[i]);     // 4 bits to the resistor DAC || PEN ('circle',) on Sine[i] ||   i = (i + 1) & 0x1F;   // 0..31, wrap || } || PEN ('circle',) on & 0x1F
+     0: Each SysTick interrupt sends the next value to the four bit D A C, and wraps the index back to zero after thirty one.
+     1: And-ing with thirty one is a fast way to wrap, because thirty two is a power of two.
+  step2 board+: $440 \times 32 = 14{,}080$ interrupts/s || PEN ('underline',) on $440 \times 32 || LOAD $= \frac{48\times 10^6}{14{,}080} - 1 \approx 3408$ || PEN None
+     0: One full sine period takes thirty two interrupts.
+     1: For four hundred forty hertz, we need four hundred forty times thirty two: fourteen thousand eighty interrupts per second.
+     2: The reload is forty eight million over fourteen thousand eighty, minus one: about three thousand four hundred eight.
+     3: Pass the staircase through a simple RC low pass filter and it sounds like a smooth tone.
+
+[s12] V  Serial I/O and synchronization strategies
+  img: fig:iosync
+  • UART 115200 baud, SPI for displays, I²C for sensors
+  • Blind cycle → busy-wait → interrupts + FIFO → DMA
+  • FIFO = the circular-buffer queue from data structures
+  • Lab: serial link + 7-segment display
+  (pen marks: 4 )
+  beat0:
+     0: The final labs connect the microcontroller to other devices over serial links: UART for a console at speeds like one hundred fifteen thousand two hundred baud, S P I for fast displays, and I squared C for sensors.
+  beat1:
+     0: Just as important is how software synchronizes with an I O device.
+     1: A blind cycle simply waits a fixed time and hopes the device is ready.
+     2: Busy waiting, also called gadfly polling, loops on a status flag.
+     3: Both are simple and fine for slow, rare events, but they tie up the processor.
+  beat2:
+     0: The scalable approach is interrupt driven with a FIFO.
+     1: When a byte arrives, the receive interrupt drops it into a circular buffer queue, the very structure from data structures, and the main program pulls bytes out whenever it's ready.
+     2: Nothing is lost, and the C P U is free in between.
+  beat3:
+     0: For high data rates, direct memory access hardware copies whole blocks between a peripheral and memory with no C P U involvement at all.
+     1: Choosing the right strategy for each device is a core embedded design skill.
+
+[s13] WB  Worked example: what "115200 baud" really means
+  step0 board+: 'A' = 0x41 = 0100 0001 || PEN None || start + 8 data (LSB first) + stop = 10 bits
+     0: Students configure a UART at one hundred fifteen thousand two hundred baud without knowing what that buys them.
+     1: Here's one character, capital A, hex forty one, on the wire.
+     2: The line idles high.
+     3: A start bit pulls it low, then eight data bits go out, least significant bit first, then a stop bit returns it high.
+  step1 board+: bit time $= 1/115200 = 8.68\ \mu s$ || PEN None || 115200 / 10 = 11,520 bytes/s || PEN ('circle',) on 11,520 bytes/s
+     0: Baud is bits per second on the wire.
+     1: So each bit lasts one over one hundred fifteen thousand two hundred, about eight point six eight microseconds.
+     2: Ten bits per character means eighty six point eight microseconds per byte, or about eleven thousand five hundred bytes per second, not one hundred fifteen thousand.
+  step2 board+: $48\ \mathrm{MHz} \times 86.8\ \mu s \approx 4{,}170$ cycles
+     0: Why does this matter?
+     1: At forty eight megahertz, that's over four thousand C P U cycles per byte.
+     2: Busy waiting for each byte wastes all of them, which is exactly why a receive interrupt and a FIFO pay off.
+  step3 board+: divisor $= \frac{48\times 10^6}{16 \times 115200} = 26.04$ || round to 26:  0.16% error || PEN ('check',) on divisor $= || mismatched baud → garbage characters
+     0: And both ends must agree on the rate, because there's no clock wire: the receiver times each bit from the start bit's falling edge.
+     1: The baud divisor, forty eight million over sixteen times one fifteen two hundred, is twenty six point oh four.
+     2: Rounding to twenty six gives an error of a sixth of a percent, well under the roughly two percent a UART can tolerate.
+     3: Wrong settings at the two ends are why a serial console prints garbage.
+
+[s14] Q  Key takeaways
+  BIG: Embedded systems = **registers + timing + interrupts**. Keep ISRs short, put logic in **tables**, and pick the right **I/O synchronization**.
+  cap: Next: EGCP 447, Cyber-Physical Systems Security.
+  beat0:
+     0: To recap.
+     1: Cortex M microcontrollers run everything from watches to cars.
+     2: The AAPCS calling convention lets C and assembly cooperate.
+     3: GPIO needs the right resistors and debouncing.
+     4: SysTick gives precise timing from a simple reload calculation.
+     5: The NVIC stacks registers in hardware, so I S Rs are plain C functions, but shared data still needs care.
+     6: Table driven finite state machines make controllers clear and verifiable.
+     7: A resistor DAC and a sine table turn a microcontroller into a musical instrument, and serial I O scales with interrupts, FIFOs and DMA.
+     8: Next, how to secure these cyber physical systems.
+     9: See you there.

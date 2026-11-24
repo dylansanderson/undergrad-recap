@@ -1,0 +1,3 @@
+﻿rpi_cam | File:Raspberry Pi with Camera Module.jpg
+rpi_camv2 | File:Raspberry Pi Camera Module v2 with ribbon.jpg
+servo | File:Micro Servo Motor TowerPro SG90 e Acessórios.png

@@ -1,0 +1,410 @@
+﻿#### L04_cpsc121: CPSC 121 Object-Oriented Programming
+
+[s0] TITLE  Object-Oriented Programming
+  img: a:lego
+  beat0:
+     0: Welcome to C P S C one twenty one, object oriented programming.
+     1: In the last course, you learned the building blocks of programs.
+     2: In this one, you learn how to organize big programs, by bundling data and the code that works on it into objects, like snapping together Lego bricks.
+     3: We'll cover classes and objects, encapsulation, how memory really works with pointers, and the two big ideas of object orientation: inheritance and polymorphism.
+
+[s1] V  Why objects? Because programs got big
+  img: fig:procvsobj
+  • Real software: millions of lines, hundreds of developers
+  • Procedural: any function can touch any data → chaos
+  • OOP: each object owns its data and guards it
+  • Model the problem’s nouns: Player, Enemy, Account, Sensor
+  (pen marks: 4 )
+  beat0:
+     0: Real software is enormous.
+     1: A web browser or a car's infotainment system can have tens of millions of lines of code written by hundreds of people over many years.
+  beat1:
+     0: In a purely procedural style, the data lives in one place and many functions reach in and change it.
+     1: When something goes wrong, any of those functions might be guilty.
+     2: Look at the tangle of red lines on the left.
+  beat2:
+     0: Object oriented programming bundles data together with the functions allowed to touch it.
+     1: Each object guards its own data.
+     2: If an enemy's health goes negative, you only need to look inside the Enemy class.
+  beat3:
+     0: A good rule of thumb: the nouns in your problem become classes.
+     1: In a game: Player, Enemy, Bullet.
+     2: In a bank: Account, Customer, Transaction.
+     3: In embedded systems: Sensor, Motor, Display.
+
+[s2] V  Classes and objects: blueprint vs. house
+  img: a:levittown / fig:blueprint
+  • Class = blueprint (a new type)
+  • Object = one instance built from it
+  • Each object has its own data; all share the same methods
+  (pen marks: 6 )
+  beat0:
+     0: This photo shows a nineteen fifties suburb where thousands of houses were built from the same few blueprints.
+     1: That's exactly the relationship between a class and its objects.
+     2: A class is the blueprint.
+     3: It defines a new type: what data each instance holds, and what operations it supports.
+  beat1:
+     0: An object is one house built from that blueprint.
+     1: Here, the class BankAccount says every account has an owner and a balance, and supports deposit, withdraw and checking the balance.
+     2: Alice, Bob and Carol are three separate objects.
+     3: Each has its own owner and its own balance, but they all share the same code for depositing and withdrawing.
+     4: The diagram on top is written in U M L, the unified modeling language, which engineers use to sketch designs before coding.
+     5: Minus means private, plus means public.
+
+[s3] WB  Worked example: writing a class and making objects
+  step0 board+: class Rectangle { ||  public: ||   Rectangle(double w, double h) ||       : width_(w), height_(h) {} ||   double Area() const { ||     return width_ * height_; ||   } ||  private: ||   double width_; ||   double height_; || PEN ('highlight',) on double width_; || PEN ('highlight',) on double height_; || }; || PEN ('circle',) on _;
+     0: Let's write a complete class.
+     1: A Rectangle has two pieces of private data, its width and its height.
+     2: By convention, private member names end in an underscore.
+  step1 board+: PEN ('box',) on Rectangle(double w, double h) || PEN ('circle',) on const { || Rectangle door(0.9, 2.1); || PEN None || Rectangle window(1.2, 1.0); || PEN None
+     0: The constructor, the function with the same name as the class, fills in the data when an object is created.
+     1: Area is a const method: it promises not to change the object.
+     2: Now let's build two objects from this one blueprint: a door, point nine by two point one meters, and a window, one point two by one.
+  step2 board+: PEN None || std::cout << door.Area() << " " << window.Area(); || PEN ('underline',) on door.Area() || PEN ('underline',) on window.Area()
+     0: Each object carries its own width and height.
+     1: But the code for Area exists only once, shared by every Rectangle.
+     2: When we call door dot Area, the method runs on the door's data, and window dot Area runs on the window's.
+  step3 board+: $ ./rect || 1.89 1.2 || PEN ('box',) on  private:
+     0: The output: one point eight nine for the door, and one point two for the window.
+     1: And because width and height are private, no other code can accidentally set a negative width.
+     2: That protection is encapsulation.
+
+[s4] EX  Encapsulation: private data, public methods
+  CODE:
+    class BankAccount {
+     public:
+      BankAccount(std::string owner, double opening)
+          : owner_(owner), balance_(opening) {}
+    
+      void Deposit(double amount) {
+        if (amount > 0) balance_ += amount;
+      }
+      bool Withdraw(double amount) {
+        if (amount <= 0 || amount > balance_) return false;
+        balance_ -= amount;
+        return true;
+      }
+      double Balance() const { return balance_; }
+    
+     private:
+      std::string owner_;
+      double balance_;
+    };
+  (pen marks: 10 )
+  beat0:
+     0: Here's the class in C plus plus.
+     1: The data members, owner and balance, are private.
+     2: Code outside the class cannot touch them directly.
+     3: The only way in is through the public methods.
+     4: Why?
+     5: Because the class can now guarantee a rule, called an invariant: the balance never goes negative.
+     6: Deposit ignores negative amounts.
+     7: Withdraw refuses to take out more than you have, and returns false to say so.
+     8: If balance were public, any line in the whole program could set it to minus a million, and the bug could be anywhere.
+     9: Notice three more details.
+     10: The constructor, the function with the same name as the class, initializes a new object, using a member initializer list after the colon.
+     11: The const after Balance promises that method doesn't change the object.
+     12: And the underscore at the end of member names is a common style convention so you can tell members from local variables at a glance.
+
+[s5] EX  Using objects, and splitting code into files
+  CODE:
+    // bank_account.h  — the interface (what)
+    class BankAccount { … declarations … };
+    
+    // bank_account.cc — the implementation (how)
+    void BankAccount::Deposit(double amount) { … }
+    
+    // main.cc
+    #include "bank_account.h"
+    int main() {
+      BankAccount alice("Alice", 100.0);
+      alice.Deposit(20.0);
+      if (!alice.Withdraw(500.0)) {
+        std::cout << "Insufficient funds\n";
+      }
+      std::cout << alice.Balance() << "\n";   // 120
+    }
+  (pen marks: 7 )
+  beat0:
+     0: Using an object looks like this.
+     1: Create alice with an opening balance of one hundred.
+     2: Call Deposit with the dot operator, adding twenty.
+     3: Try to withdraw five hundred: the method refuses and returns false, so we print insufficient funds.
+     4: The balance is still one hundred twenty.
+     5: In real projects, each class is split into two files.
+     6: The header file, dot h, declares the interface: what the class can do.
+     7: The source file, dot c c, defines the implementation: how it does it.
+     8: Other code only includes the header.
+     9: That separation means you can change how something works internally without breaking anyone who uses it, and it lets the compiler build each file separately, which matters a lot when a project has thousands of files.
+
+[s6] V  How memory really works: stack, heap and pointers
+  img: fig:stackheap
+  • Stack: local variables, freed automatically
+  • Heap: objects created with new, live until delete
+  • Pointer = a variable holding an address
+  • &x → address of x · *p → the thing p points to
+  (pen marks: 7 )
+  beat0:
+     0: Now let's look under the hood, because computer engineers need to know where data lives.
+     1: A program's memory has two main areas.
+     2: The stack holds local variables.
+     3: They're created when a function starts and destroyed automatically when it returns.
+  beat1:
+     0: The heap is for objects that must outlive the function that created them, or whose size isn't known until run time.
+     1: You create them with new, and they stay until someone calls delete.
+  beat2:
+     0: How do you find something on the heap?
+     1: With a pointer: a variable whose value is a memory address.
+     2: Here, p lives on the stack and holds the address of a Circle object on the heap.
+  beat3:
+     0: Two operators: ampersand x gives you the address of x, and star p follows the pointer to the thing it points at.
+     1: Pointers are how linked lists, trees, operating systems and device drivers work.
+     2: In embedded systems, you'll even use pointers to specific addresses to control hardware registers directly.
+
+[s7] WB  Worked example: pointers, step by step
+  step0 board+: int x = 42; || PEN None || PEN <function <lambda> at 0x00000148D64391C0
+     0: Pointers confuse almost everyone at first, so let's draw memory as we go.
+     1: int x equals forty two creates a box on the stack holding forty two.
+     2: Every box has an address.
+     3: Let's say this one lives at hex one thousand.
+  step1 board+: int* p = &x;      // p holds x's address || PEN ('underline',) on int* p || PEN ('circle',) on &x || PEN None
+     0: Next, int star p equals ampersand x.
+     1: The ampersand means: the address of x.
+     2: So p is a box that holds the number hex one thousand.
+     3: We draw that as an arrow from p to x.
+  step2 board+: *p = 7;           // follow the arrow || PEN ('circle',) on *p = 7 || PEN None || PEN <function <lambda> at 0x00000148D6439260
+     0: Star p equals seven means: follow the arrow, and store seven there.
+     1: We never mentioned x, but x is now seven.
+  step3 board+: int* q = new int(99); || PEN None || PEN ('underline',) on new int(99)
+     0: New int of ninety nine asks for a box on the heap instead.
+     1: Heap boxes don't disappear when the function ends.
+     2: We only get to them through a pointer, here q.
+  step4 board+: std::cout << x << " " << *q; || delete q; || PEN None || $ ./ptr || 7 99 || PEN ('box',) on delete q; || PEN <function <lambda> at 0x00000148D6439300
+     0: Printing x and star q shows seven and ninety nine.
+     1: Finally, delete q gives the heap box back.
+     2: Forget that delete, and the memory leaks.
+     3: Use q after it, and you're reading memory you no longer own, a dangling pointer.
+     4: That's why modern C plus plus prefers unique pointer, which deletes for you.
+
+[s8] V  Memory bugs — and the modern fix
+  img: fig:membugs
+  • Leak: forgot to delete → memory slowly runs out
+  • Dangling: used after delete → random crashes
+  • RAII: tie a resource’s lifetime to an object
+  • std::unique_ptr deletes automatically
+  (pen marks: 4 )
+  beat0:
+     0: Manual memory management causes three classic bugs.
+     1: A memory leak: you new an object and never delete it.
+     2: Each leak is small, but a server that leaks a little on every request will eventually run out of memory.
+  beat1:
+     0: A dangling pointer: you delete an object but keep using the pointer.
+     1: The memory may already belong to something else, so you get random, hard to reproduce crashes.
+     2: Deleting twice is just as bad.
+     3: Studies by Microsoft and Google have found that around seventy percent of serious security vulnerabilities in their large C and C plus plus code bases are memory safety bugs like these.
+  beat2:
+     0: Modern C plus plus fixes this with an idea called RAII: resource acquisition is initialization.
+     1: Tie the lifetime of a resource to an object on the stack, and let its destructor clean up automatically.
+  beat3:
+     0: The standard library's unique pointer does exactly this.
+     1: When the unique pointer goes out of scope, it deletes the object for you.
+     2: No leaks, no double deletes.
+     3: The rule in modern code: avoid raw new and delete, and use smart pointers or standard containers instead.
+
+[s9] V  Composition: building objects from objects
+  img: fig:composition
+  • “Has-a” relationship
+  • A Car has an Engine and four Wheels
+  • Each part is tested on its own
+  • Usually the first tool to reach for
+  (pen marks: 4 )
+  beat0:
+     0: Objects can contain other objects.
+     1: That's composition, a has a relationship.
+  beat1:
+     0: A Car has an Engine and four Wheels.
+     1: In U M L, the filled diamond on the Car side shows that the car owns its parts.
+  beat2:
+     0: Each part is its own class, designed and tested on its own.
+     1: The Car just coordinates them: Drive starts the engine and rotates the wheels.
+  beat3:
+     0: Composition is usually the first tool to reach for, because the pieces stay independent and easy to swap.
+     1: Want an electric car?
+     2: Replace the Engine class with an ElectricMotor that has the same interface.
+
+[s10] V  Inheritance: “is-a” relationships
+  img: fig:inherit
+  • A derived class inherits data and methods from a base class
+  • class Circle : public Shape { … };
+  • Override behavior that differs (Area)
+  • Abstract base: Area() = 0 means “every shape must define this”
+  (pen marks: 3 )
+  beat0:
+     0: The second relationship is inheritance, an is a relationship.
+     1: A circle is a shape.
+     2: A rectangle is a shape.
+  beat1:
+     0: In C plus plus, you write class Circle, colon, public Shape.
+     1: Circle automatically gets everything Shape has, like its name, and adds its own data, like a radius.
+  beat2:
+     0: Each derived class can override behavior that differs.
+     1: Every shape can report its area, but a circle computes pi r squared, and a rectangle computes width times height.
+  beat3:
+     0: In the base class, Area is declared virtual and set equal to zero.
+     1: That makes it a pure virtual function, and Shape an abstract class.
+     2: You can't create a plain Shape, only specific shapes.
+     3: It's a contract: every shape must define its area.
+
+[s11] V  Polymorphism: one call, many behaviors
+  img: fig:vtable
+  • Store different shapes in one container of Shape pointers
+  • s->Area() calls the RIGHT version at run time
+  • Add a Triangle later — the loop never changes
+  (pen marks: 6 )
+  beat0:
+     0: Now the payoff.
+     1: We can keep a single vector of pointers to Shape, holding circles and rectangles mixed together.
+  beat1:
+     0: When the loop calls Area on each one, C plus plus figures out at run time which version to call, based on the object's real type.
+     1: A circle of radius one gives three point one four.
+     2: The two by three rectangle gives six.
+     3: A circle of radius two gives twelve point five seven.
+     4: The total is about twenty one point seven one.
+     5: This is called polymorphism, Greek for many forms.
+     6: Under the hood, each object carries a hidden pointer to a table of its class's virtual functions, called the v table, and the call looks up the right entry.
+  beat2:
+     0: Here's why that's powerful.
+     1: Next month, someone adds a Triangle class.
+     2: The loop that totals the areas doesn't change at all.
+     3: Code written today works with types invented tomorrow.
+     4: That's how plugin systems, graphics engines and device driver frameworks are built.
+
+[s12] WB  Worked example: one loop, many shapes
+  step0 board+: class Shape { ||  public: ||   virtual double Area() const = 0; ||   virtual ~Shape() = default; || }; || PEN None || PEN ('circle',) on = 0;
+     0: Let's build the shape example in code.
+     1: The base class Shape declares Area as pure virtual: equals zero means every kind of shape must provide its own.
+  step1 board+: class Circle : public Shape { ||   double r_; ||  public: ||   explicit Circle(double r) : r_(r) {} ||   double Area() const override { ||     return 3.14159 * r_ * r_; } || }; || PEN None || PEN ('underline',) on : public Shape || PEN ('circle',) on override || // Square: same idea, returns s_ * s_ || PEN None
+     0: Circle inherits from Shape, stores a radius, and overrides Area with pi r squared.
+     1: Square does the same with side squared.
+  step2 board+: std::vector<std::unique_ptr<Shape>> shapes; || shapes.push_back(std::make_unique<Circle>(1.0)); || shapes.push_back(std::make_unique<Square>(2.0)); || for (const auto& s : shapes) ||   std::cout << s->Area() << "\n"; || PEN None || PEN ('highlight',) on s->Area()
+     0: Now the payoff, on a fresh board.
+     1: We keep a vector of pointers to Shape, holding a circle of radius one and a square of side two.
+     2: One loop calls Area on each, and C plus plus picks the right version at run time.
+  step3 board+: $ ./shapes || 3.14159 || PEN ('box',) on for (const auto& s : shapes) || 4
+     0: It prints three point one four one five nine, then four.
+     1: Here's why this matters: add a Triangle class next year, and this loop doesn't change by a single character.
+     2: New behavior is added by adding classes, not by editing working code.
+
+[s13] EX  Operator overloading: making your types feel built-in
+  CODE:
+    class Fraction {
+     public:
+      Fraction(int n, int d) : num_(n), den_(d) { Reduce(); }
+      Fraction operator+(const Fraction& o) const {
+        return Fraction(num_ * o.den_ + o.num_ * den_, den_ * o.den_);
+      }
+     private:
+      int num_, den_;
+      void Reduce();   // divide both by their GCD
+    };
+    
+    Fraction a(1, 2), b(1, 3);
+    Fraction c = a + b;     // (1·3 + 1·2) / (2·3) = 5/6
+  (pen marks: 6 )
+  beat0:
+     0: C plus plus lets you define what operators mean for your own types.
+     1: Here's a Fraction class.
+     2: We define operator plus, so you can add fractions with a normal plus sign.
+     3: To add a over b and c over d, the numerator is a d plus c b, and the denominator is b d.
+     4: So one half plus one third is one times three plus one times two, over two times three: five sixths.
+     5: The constructor calls Reduce, which divides the top and bottom by their greatest common divisor, so two fourths automatically becomes one half.
+     6: That's encapsulation again: every Fraction object is always stored in lowest terms.
+     7: The standard library uses operator overloading everywhere: strings use plus to join, streams use the arrows for input and output, and complex numbers, which you'll use in circuits, overload all the arithmetic operators.
+
+[s14] V  Testing your classes
+  img: fig:tdd
+  • Unit test: small code that checks one behavior
+  • EXPECT_EQ(account.Balance(), 120.0);
+  • Test the rules: can’t withdraw more than you have
+  • Red → green → refactor
+  (pen marks: 5 )
+  beat0:
+     0: How do you know a class works?
+     1: You write unit tests: small pieces of code that create an object, do something, and check the result.
+     2: Frameworks like Google Test run hundreds of these in seconds.
+  beat1:
+     0: A test might create an account with one hundred, deposit twenty, and expect the balance to equal one hundred twenty.
+  beat2:
+     0: The most valuable tests check the rules.
+     1: Try to withdraw more than the balance, and expect false, with the balance unchanged.
+     2: Try to deposit a negative amount, and expect nothing to happen.
+  beat3:
+     0: Many teams follow the red, green, refactor cycle.
+     1: Write a test that fails, which is red.
+     2: Write just enough code to make it pass, green.
+     3: Then clean up the code, with the tests protecting you from breaking anything.
+     4: Tests are what let professional teams change big programs without fear.
+
+[s15] WB  Worked example: a unit test for the bank account
+  step0 board+: void TestWithdraw() { ||   BankAccount acct("test", 100.0);
+     0: Let's test the BankAccount class from earlier.
+     1: A unit test sets up an object, does something to it, and checks the result.
+     2: Start with an account holding one hundred dollars.
+  step1 board+:   assert(acct.Withdraw(30.0));        // allowed ||   assert(acct.Balance() == 70.0); || PEN ('highlight',) on acct.Withdraw(30.0)
+     0: Test the normal case.
+     1: Withdrawing thirty should succeed, and the balance should drop to seventy.
+     2: Assert stops the program with an error message if its condition is false.
+  step2 board+:   assert(!acct.Withdraw(500.0));      // refused ||   assert(acct.Balance() == 70.0);     // unchanged || PEN ('circle',) on !acct || PEN ('underline',) on // unchanged ||   std::cout << "all tests passed\n"; || }
+     0: Now test the rule that matters most: you can't withdraw more than you have.
+     1: Withdrawing five hundred must return false, and the balance must still be seventy.
+     2: Untested rules quietly break.
+  step3 board+: $ ./test_account || PEN ('check',) on all tests passed || all tests passed || Remove the balance check?  Test fails at once.
+     0: Run it, and it prints all tests passed.
+     1: Now suppose someone later deletes the check for amount greater than balance.
+     2: This test fails immediately, before any real customer is overdrawn.
+     3: Real projects use frameworks like Google Test, but the idea is exactly this.
+
+[s16] B  Design principles to remember
+  • **Encapsulate:** keep data private; expose a small, clear interface
+  • **Single responsibility:** one class, one job
+  • **Prefer composition** over deep inheritance trees
+  • **Program to an interface:** depend on Shape, not Circle
+  • **DRY:** don't repeat yourself — factor out shared code
+  • **RAII:** let objects clean up after themselves
+  (pen marks: 8 )
+  beat0:
+     0: Let's collect the design principles from today.
+  beat1:
+     0: Encapsulate.
+     1: Keep data private and expose a small, clear interface, so every object can protect its own rules.
+  beat2:
+     0: Single responsibility.
+     1: Each class should have one job.
+     2: If you describe a class with the word and, it's probably two classes.
+  beat3:
+     0: Prefer composition.
+     1: Inheritance is powerful, but deep hierarchies become rigid.
+     2: Building objects from parts is usually more flexible.
+  beat4:
+     0: Program to an interface.
+     1: Write code that depends on the general Shape, not the specific Circle, so new types plug right in.
+  beat5:
+     0: Don't repeat yourself.
+     1: If you copy and paste code, factor it into a function or a base class instead.
+  beat6:
+     0: And RAII.
+     1: Let objects clean up their own resources: memory, files, locks.
+     2: You'll see the same pattern in operating systems, where a lock guard automatically releases a lock.
+
+[s17] Q  Key takeaways
+  BIG: Bundle data with the code that protects it. **Composition** builds things from parts, **inheritance + polymorphism** let new types plug in.
+  cap: Next: PHYS 225, Mechanics — the physics behind motion, forces and energy.
+  beat0:
+     0: To wrap up.
+     1: A class is a blueprint, and objects are instances of it.
+     2: Encapsulation keeps data private behind methods that enforce the rules.
+     3: Memory lives on the stack or the heap, pointers hold addresses, and smart pointers prevent leaks.
+     4: Composition builds objects from parts, inheritance models is a relationships, and polymorphism lets one piece of code work with many types, including ones that don't exist yet.
+     5: These ideas show up in every large codebase, and you'll use them in software engineering, operating systems and embedded firmware.
+     6: Next, we switch to physics.
+     7: See you there.

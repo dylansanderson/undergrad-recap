@@ -1,0 +1,119 @@
+﻿== L03_cpsc120  CPSC 120 Introduction to Programming
+   0 title   Introduction to Programming                                  b1
+   1 v       What is a program?                                           b3 | A precise list of instructions / Computers do exactly what you say — not what  / Compiler: source code → machine code
+   2 v       Why C++? Who uses it?                                        b1 | Created by Bjarne Stroustrup (1979–85) as "C  / Fast, close to the hardware, yet high-level / Game engines, web browsers, databases, roboti / Embedded C/C++ runs in cars, medical devices,
+   3 ex      Your first program                                           b1 [code: #include <iostream> ...]
+   4 v       Variables: named boxes in memory                             b4 | A variable = a name + a type + a value / The type decides size and meaning of the bits / int: about ±2.1 billion (4 bytes) / Exceed it → overflow wraps to negative!
+   5 ex      Arithmetic and its gotchas                                   b1 [code: int a = 7 / 2;        // 3   (integer division dro ...] | int / int throws away the fraction / % gives the remainder — great for clocks, eve / Never compare doubles with ==
+   6 v       Decisions: if / else                                         b4 | if (condition) { … } else { … } / Comparisons: <  <=  >  >=  ==  != / Combine with && (and), || (or), ! (not) / Order matters: check the strictest case first
+   7 v       Loops: doing something many times                            b4 | while (condition) { … }  — repeat while true / for (int i = 1; i <= 100; ++i) { … } / Trace it by hand: i, sum after each pass / Classic bugs: off-by-one, infinite loop
+   8 v       Functions: build big programs from small, tested pieces      b2 | A function takes inputs (parameters) and retu / Name it, test it, reuse it / Each call gets its own frame on the call stac
+   9 v       Pass by value vs. pass by reference                          b4 | By value: the function gets a copy / By reference (&): the function gets the origi / Use & to change the caller’s variable (e.g. s / const & for big objects you only read
+  10 v       Collections: arrays and vectors                              b4 | Many values under one name, in a row in memor / Index from 0 to size − 1 / std::vector grows as needed: push_back() / Out-of-bounds access = undefined behavior (a 
+  11 ex      Putting it together: average and maximum                     b1 [code: double Average(const std::vector<int>& v) { ...]
+  12 v       Text: strings are just numbers in disguise                   b4 | Each char is stored as a number: 'H' = 72 / 'A'–'Z' are 65–90, 'a'–'z' are 97–122 / Strings: length(), indexing, +, comparisons / Example: count vowels by looping over charact
+  13 v       Debugging and version control                                b2 | Read the FIRST compiler error first / Print values or use a debugger (gdb) to see w / Write small tests for each function / git: save snapshots, undo mistakes, collabora
+  14 b       Habits of good programmers                                   b7 | Plan in plain English (or a flowchart) before / Meaningful names: total_seconds, not ts / Small functions that do one thing / Test the edge cases: 0, 1, empty, negative, h
+  15 q       Key takeaways                                                b1
+== L04_cpsc121  CPSC 121 Object-Oriented Programming
+   0 title   Object-Oriented Programming                                  b1
+   1 v       Why objects? Because programs got big                        b4 | Real software: millions of lines, hundreds of / Procedural: any function can touch any data → / OOP: each object owns its data and guards it / Model the problem’s nouns: Player, Enemy, Acc
+   2 v       Classes and objects: blueprint vs. house                     b2 | Class = blueprint (a new type) / Object = one instance built from it / Each object has its own data; all share the s
+   3 ex      Encapsulation: private data, public methods                  b1 [code: class BankAccount { ...]
+   4 ex      Using objects, and splitting code into files                 b1 [code: // bank_account.h  — the interface (what) ...]
+   5 v       How memory really works: stack, heap and pointers            b4 | Stack: local variables, freed automatically / Heap: objects created with new, live until de / Pointer = a variable holding an address / &x → address of x · *p → the thing p points t
+   6 v       Memory bugs — and the modern fix                             b4 | Leak: forgot to delete → memory slowly runs o / Dangling: used after delete → random crashes / RAII: tie a resource’s lifetime to an object / std::unique_ptr deletes automatically
+   7 v       Composition: building objects from objects                   b4 | “Has-a” relationship / A Car has an Engine and four Wheels / Each part is tested on its own / Usually the first tool to reach for
+   8 v       Inheritance: “is-a” relationships                            b4 | A derived class inherits data and methods fro / class Circle : public Shape { … }; / Override behavior that differs (Area) / Abstract base: Area() = 0 means “every shape 
+   9 v       Polymorphism: one call, many behaviors                       b3 | Store different shapes in one container of Sh / s->Area() calls the RIGHT version at run time / Add a Triangle later — the loop never changes
+  10 ex      Operator overloading: making your types feel built-in        b1 [code: class Fraction { ...]
+  11 v       Testing your classes                                         b4 | Unit test: small code that checks one behavio / EXPECT_EQ(account.Balance(), 120.0); / Test the rules: can’t withdraw more than you  / Red → green → refactor
+  12 b       Design principles to remember                                b7 | **Encapsulate:** keep data private; expose a  / **Single responsibility:** one class, one job / **Prefer composition** over deep inheritance  / **Program to an interface:** depend on Shape,
+  13 q       Key takeaways                                                b1
+== L07_egcp180  EGCP 180 Digital Logic and Computer Structures
+   0 title   Digital Logic                                                b1
+   1 v       Why digital? Because noise can’t fool a threshold            b4 | Analog: every bit of noise changes the value / Digital: only two levels — 0 or 1 / Receiver asks one question: above or below th / Copies and long cables stay perfect
+   2 v       Binary and hexadecimal                                       b4 | Each bit position is a power of 2 / 10011100₂ = 128 + 16 + 8 + 4 = 156 / Hex: each digit = 4 bits (0–9, A–F) / 1001 1100 → 9C → written 0x9C
+   3 v       Codes: BCD, ASCII and Gray code                              b2 | BCD: each decimal digit in 4 bits (calculator / ASCII: 7-bit codes for text / Gray code: neighbors differ in exactly one bi / Used in rotary encoders to avoid glitches
+   4 v       From transistors to gates: the CMOS inverter                 b4 | A transistor is a voltage-controlled switch / PMOS connects output to 1; NMOS connects it t / Exactly one is on → output = NOT input / Billions of these = a modern chip
+   5 v       The logic gates                                              b2 | AND, OR, NOT — the basics / NAND, NOR — each one alone can build anything / XOR — true when inputs differ (adders, parity
+   6 v       Boolean algebra: simplifying logic                           b4 | A + A′ = 1 · A·A′ = 0 · A + 1 = 1 · A·1 = A / Distributive: AB + AC = A(B + C) / Example: AB + AB′ + A′B / = A(B + B′) + A′B = A + A′B = A + B
+   7 v       From a truth table to a circuit                              b4 | Write the truth table / OR together the rows where F = 1 (minterms) / Simplify / Majority vote: F = AB + AC + BC
+   8 v       Karnaugh maps: simplification by eye                         b3
+   9 v       Combinational building blocks                                b1
+  10 v       Memory from feedback: the SR latch                           b4 | Feed outputs back into inputs → the circuit c / S (set) = 1 → Q = 1 / R (reset) = 1 → Q = 0 / S = R = 0 → hold the last value
+  11 v       Flip-flops, registers and counters                           b4 | D flip-flop: copies D to Q on the clock edge / Register: n flip-flops sharing a clock / Counter: register + adder (or toggling flip-f / Each bit toggles at half the rate of the one 
+  12 v       Memory chips: addresses and data                             b4 | Memory = huge grid of storage cells / Address lines pick one word (decoder) / n address bits → 2ⁿ words / 2048 × 8 memory: 11 address lines, 8 data lin
+  13 v       Putting it together: the structure of a computer             b4 | Datapath: registers + ALU / Control unit: decodes instructions, drives th / Memory holds instructions AND data (von Neuma / Fetch → decode → execute, forever
+  14 q       Key takeaways                                                b1
+== L12_cpsc131  CPSC 131 Data Structures
+   0 title   Data Structures                                              b1
+   1 v       Big-O: how does the cost grow?                               b4 | Count steps as a function of input size n / Keep only the fastest-growing term / O(log n) ≪ O(n) ≪ O(n log n) ≪ O(n²) ≪ O(2ⁿ) / An algorithm choice can mean 1 ms vs 17 minut
+   2 v       Arrays vs. linked lists                                      b4 | Array: contiguous → instant access a[i], cach / Inserting in the middle: shift everything → O / Linked list: insert/remove anywhere in O(1) ( / But reaching element i means walking → O(n)
+   3 v       Stacks: last in, first out                                   b4 | push onto the top, pop from the top / Undo history, browser Back button / The call stack for function calls / Checking balanced brackets: ( [ { } ] )
+   4 v       Queues: first in, first out                                  b4 | enqueue at the back, dequeue from the front / Print jobs, network packets, task scheduling / Circular buffer: fixed array that wraps aroun / Used in every UART and keyboard driver
+   5 v       Recursion: functions that call themselves                    b4 | Base case + a smaller version of the same pro / factorial(n) = n × factorial(n − 1), factoria / Naive Fibonacci recomputes subproblems → O(2ⁿ / Memoization (cache answers) → O(n)
+   6 v       Binary search: halve the problem every step                  b4
+   7 v       Sorting: from O(n²) to O(n log n)                            b4 | Insertion sort: simple, O(n²) — fine for smal / Merge sort: split in half, sort each, merge / log n levels × n work each = O(n log n) / Quicksort / std::sort: O(n log n) in practice
+   8 v       Hash tables: look things up in O(1)                          b4 | Hash function turns a key into a bucket numbe / Lookup, insert, delete: O(1) on average / Collisions: two keys, same bucket → chain the / Python dicts, std::unordered_map, caches, dat
+   9 v       Binary search trees                                          b4 | Left subtree smaller, right subtree larger / Search, insert, delete: O(height) / Balanced → height ≈ log₂ n / std::map, databases (B-trees), file systems
+  10 v       Heaps and priority queues                                    b4 | Always know the smallest (or largest) item / Insert and remove-min: O(log n) / Stored compactly in an array / OS schedulers, Dijkstra, event simulations
+  11 v       Graphs and shortest paths                                    b4 | Store as adjacency lists (sparse) or a matrix / BFS explores level by level (queue) / DFS goes deep first (stack / recursion) / Dijkstra: shortest weighted paths — how map a
+  12 v       Choosing the right structure                                 b1
+  13 q       Key takeaways                                                b1
+== L13_egcp280  EGCP 280 Microcontrollers
+   0 title   Microcontrollers                                             b1
+   1 v       What is a microcontroller — and where are they?              b2 | CPU + flash + RAM + peripherals on one chip / Costs cents to a few dollars, sips power / Tens of billions shipped every year / A modern car contains dozens to over a hundre
+   2 v       The programmer’s model: registers                            b4 | Registers: tiny, ultra-fast storage inside th / ARM Cortex-M: R0–R12 general purpose (32 bits / SP = stack pointer, LR = return address, PC = / Flags N Z C V record results of the last oper
+   3 v       Memory-mapped everything                                     b4 | One 32-bit address space (4 GB) / Flash at the bottom, SRAM at 0x2000 0000 / Peripheral registers at 0x4000 0000 and up / Controlling hardware = writing to an address
+   4 v       A load–store instruction set                                 b4 | Arithmetic only on registers: ADD R0, R1, R2 / Memory only via LDR (load) and STR (store) / CMP sets flags; B, BEQ, BNE, BGT branch / Assembler turns mnemonics into machine code
+   5 ex      Example: summing an array in assembly                        b4 [code:         .text ...]
+   6 v       Subroutines and the stack                                    b4 | BL label: jump AND save the return address in / Nested calls must save LR on the stack / PUSH {R4, LR} on entry, POP {R4, PC} on exit / Stack overflow = writing past its reserved sp
+   7 v       GPIO: controlling pins with bit masks                        b4 | Each pin = one bit in a port register / Set a bit: reg |= (1 << n) / Clear a bit: reg &= ~(1 << n) / Toggle: reg ^= (1 << n) · Read: (reg >> n) & 
+   8 v       Polling vs. interrupts                                       b4 | Polling: loop asking “ready yet?” / Interrupt: hardware taps the CPU on the shoul / ISR runs, then main code resumes exactly wher / Keep ISRs short; share data carefully (volati
+   9 v       Timers and PWM                                               b4 | Timer: a hardware counter clocked by the syst / Periodic interrupts: “run this every 1 ms” / PWM: fast on/off with adjustable duty cycle / Dim LEDs, set motor speed, position servos (1
+  10 v       Reading the analog world: the ADC                            b4 | Sensors produce voltages; the CPU needs numbe / n-bit ADC → 2ⁿ levels / 12-bit, 3.3 V: ≈ 0.8 mV per step / V = code × V_ref / 4096 → code 2048 ≈ 1.65 V
+  11 v       Serial communication: UART, SPI and I²C                      b2 | UART: start bit, 8 data bits (LSB first), sto / 9600 baud → 960 bytes per second / SPI: clocked and fast · I²C: two wires, many  / Logic analyzers decode these on screen
+  12 b       Debugging embedded code                                      b6 | Use a hardware debugger: breakpoints, single- / Blink an LED or toggle a pin to trace timing / Read the datasheet & reference manual — regis / Check clocks and pin configuration first
+  13 q       Key takeaways                                                b1
+== L14_egcp281  EGCP 281 Designing with VHDL
+   0 title   Designing with VHDL                                          b1
+   1 v       Why describe hardware with code?                             b3 | 1971: ~2,300 transistors — drawn by hand / Today: **tens of billions** per chip / Nobody can draw that. We **describe behavior*
+   2 v       Where did VHDL come from?                                    b2
+   3 v       Who uses VHDL today — and why?                               b5 | **Telecom:** 4G/5G radios and network gear / **Aerospace & defense:** satellites, rovers,  / **Products:** routers, cameras, medical imagi / **Chip companies:** prototype and verify befo
+   4 v       What is an FPGA?                                             b4 | Field-Programmable Gate Array / Thousands to millions of small **logic blocks / Each block: a **look-up table** + a flip-flop / Programmable wiring connects them
+   5 v       From code to chip: the design flow                           b7
+   6 v       The big mindset shift: everything runs at once               b3
+   7 ex      Anatomy of a design: entity + architecture                   b3 [code: library ieee; ...]
+   8 v       Designing a full adder, step by step                         b4 | Add three bits: a + b + carry-in / **Sum** is 1 when an odd number of inputs are / **Carry** is 1 when two or more inputs are 1 / Check: 1 + 1 + 0 = binary 10 = 2 ✓
+   9 v       Real gates have delay — and delay causes glitches            b3 | Every gate takes time: **propagation delay** / Inputs that change at slightly different time / VHDL can model it:  s <= a xor b after 2 ns;
+  10 v       Structural design: chaining four full adders                 b5
+  11 ex      Port maps: wiring components like a schematic                b1 [code: architecture structural of adder4 is ...] | Internal **signals** are the wires between co / **port map** connects each pin to a wire / **for … generate** stamps out copies — 4 or 6
+  12 v       Negative numbers: two's complement                           b2 | −x = (NOT x) + 1 / 4 bits hold −8 … +7 / Subtract = add the complement → one adder doe / Overflow: carry into MSB ≠ carry out
+  13 v       std_logic: a wire has nine possible values                   b1
+  14 ex      Three ways to write combinational logic                      b3 [code: -- 1. simple concurrent assignment ...]
+  15 v       Example: driving a seven-segment display                     b3 | Seven LEDs, named a through g / Decoder: 4-bit number in → 7 segment bits out / Perfect job for **with … select**
+  16 ex      Processes: how VHDL describes memory                         b2 [code: process (clk) ...]
+  17 ex      Signals vs. variables                                        b1 [code: -- signals: update when the process suspends ...]
+  18 ex      The #1 beginner bug: the accidental latch                    b2 [code: -- BAD: no else branch ...]
+  19 v       How fast can your design run?                                b4 | Data leaves a flip-flop (clock-to-Q) / Travels through logic / Must arrive **before** the next edge (setup) / f max = 1 / (t clk→q + t logic + t setup)
+  20 ex      Clock dividers: slowing 100 MHz down to human speed          b1 [code: process (clk) begin ...]
+  21 v       Multiplexed displays: tricking your eyes                     b2 | 4 digits share the same 7 segment wires / Light **one digit at a time** / Cycle at ~1 kHz → persistence of vision
+  22 v       Finite state machines                                        b4 | State register + next-state logic + output lo / Example: detect the bit pattern 1-0-1 / **Moore:** outputs depend only on the state / **Mealy:** outputs depend on state **and** in
+  23 ex      Writing a state machine in VHDL                              b1 [code: type state_t is (NS_GREEN, NS_YELLOW, ...]
+  24 ex      Test benches: prove it before you build it                   b1 [code: entity tb is end tb;      -- no ports! ...]
+  25 b       Pro tips and common mistakes                                 b7 | Draw the circuit (or block diagram) **before* / Combinational process: default every output — / Clocked process: one clock, reset everything / Treat **U** and **X** in simulation as bugs
+  26 q       Key takeaways                                                b1
+== L15_egee203  EGEE 203 Electric Circuits
+   0 title   Electric Circuits                                            b1
+   1 v       Voltage, current, power                                      b2 | Current I: charge flow (amperes) / Voltage V: energy per charge (volts) — always / Power P = V × I (watts) / Passive sign convention: current into + → abs
+   2 v       The three laws                                               b4 | Ohm: V = I R / KCL: currents into a node sum to zero (charge / KVL: voltages around a loop sum to zero (ener / Voltage divider: Vx = V · Rx / R_total → 12 ·
+   3 v       Nodal analysis: the workhorse method                         b3 | Pick a ground; label unknown node voltages / KCL at each node, every current = (V_a − V_b) / Solve the linear system A x = b
+   4 v       Thevenin: any circuit is a source and a resistor             b4 | V_th = open-circuit voltage at the terminals / R_th = resistance seen with sources turned of / Then any load is a one-line calculation / Max power to the load when R_L = R_th
+   5 v       Op amps: the ideal amplifier                                 b4 | Huge gain + negative feedback / Rule 1: no current into the inputs / Rule 2: the inputs are forced equal (virtual  / Inverting gain = −R_f/R_in = −10 · non-invert
+   6 v       Capacitors, inductors and first-order transients             b4 | Capacitor: i = C dv/dt — voltage can’t jump / Inductor: v = L di/dt — current can’t jump / Find x(0), x(∞) and τ = RC or L/R / 10 kΩ, 100 μF → τ = 1 s; 63% after 1 τ, done 
+   7 v       AC circuits with phasors                                     b2 | A sinusoid at one frequency = magnitude + pha / V_m cos(ωt + φ) → phasor V_m∠φ / Impedance: Z_R = R, Z_L = jωL, Z_C = 1/(jωC) / All DC methods now work with complex numbers
+   8 v       AC power: real, reactive, apparent                           b1 | RMS: V_rms = V_peak / √2 (120 V outlet → 170  / Real power P = V_rms I_rms cos θ does work / Reactive power Q sloshes back and forth / Low power factor costs utilities; capacitors 
+   9 v       Three-phase power                                            b2 | Three sinusoids 120° apart / Total power is constant — smooth motors / Balanced loads: currents sum to zero / V_line = √3 V_phase: 120 V → 208 V
+  10 v       Lab skills: the oscilloscope and Lissajous figures           b2 | Timebase (s/div), volts/div, trigger level / AC vs DC coupling; 10× probes / X–Y mode: plot one signal against another / Lissajous shapes reveal phase and frequency r
+  11 q       Key takeaways                                                b1

@@ -1,0 +1,460 @@
+﻿#### L02_math150b: MATH 150B Calculus II
+
+[s0] TITLE  Calculus II
+  img: a:calculator
+  beat0:
+     0: Welcome to Calculus two.
+     1: In Calculus one, we learned what derivatives and integrals are.
+     2: In Calculus two, we get good at integrals, we use them to compute real quantities like volume and work, and then we take a fascinating detour into infinite sums, which turn out to be how your calculator computes sine, cosine and e to the x.
+     3: Let's go.
+
+[s1] V  Where Calculus II shows up in engineering
+  img: a:water_tower / a:calculator / fig:euler
+  • Volumes, work, energy: tanks, springs, capacitors
+  • Series: how calculators and computers evaluate sin, cos, eˣ
+  • Euler's formula → phasors, the language of AC circuits
+  beat0:
+     0: Here's why this course matters.
+     1: Engineers compute volumes, like how much water a tank like this holds.
+     2: They compute work and energy, like the energy stored in a spring or a capacitor.
+     3: All of those are integrals.
+  beat1:
+     0: Your calculator, and every computer math library, evaluates functions like sine and e to the x using polynomials built from infinite series.
+     1: You'll see exactly how by the end of this lecture.
+  beat2:
+     0: And infinite series give us Euler's formula, e to the i theta equals cosine theta plus i sine theta.
+     1: That one formula is the foundation of how electrical engineers analyze AC circuits and signals.
+     2: So this course quietly sets up half of your later degree.
+
+[s2] SECTION  Integration techniques
+  beat0:
+     0: Part one.
+     1: Integration techniques.
+     2: Integration is harder than differentiation, because there's no product rule or chain rule that always works.
+     3: Instead, we have a toolbox.
+
+[s3] EX  Integration by parts: the product rule in reverse
+  img: fig:xex
+  CODE:
+    ∫ u dv = u·v − ∫ v du
+    
+    Example:  ∫ x·eˣ dx
+      u  = x      dv = eˣ dx
+      du = dx     v  = eˣ
+    
+    = x·eˣ − ∫ eˣ dx
+    = x·eˣ − eˣ + C
+    
+    Pick u by LIATE:
+    Log, Inverse trig, Algebraic,
+    Trig, Exponential
+  (pen marks: 7 )
+  beat0:
+     0: The first tool is integration by parts.
+     1: It comes from the product rule, run backwards, and it says the integral of u d v equals u times v, minus the integral of v d u.
+     2: The idea is to trade an integral you can't do for one you can.
+     3: Example: the integral of x times e to the x.
+     4: Choose u equals x, because its derivative is simpler, just one.
+     5: Then d v is e to the x d x, so v is e to the x.
+     6: Plug in: x e to the x, minus the integral of e to the x, which gives x e to the x minus e to the x, plus C.
+     7: To choose u, a handy rule is LIATE: logs first, then inverse trig, then algebraic, then trig, then exponentials.
+     8: Pick whichever comes first in that list as u.
+     9: You'll use this exact technique in signals and systems to compute Laplace and Fourier transforms.
+
+[s4] WB  Worked example: parts with a logarithm
+  step0 board+: $\int x\,\ln x\;dx$ || LIATE: log first, so  $u = \ln x$,   $dv = x\,dx$ || $du = \frac{1}{x}\,dx$,     $v = \frac{x^2}{2}$
+     0: Let's do one where the choice of u really matters: the integral of x times the natural log of x.
+     1: LIATE says logs come first, so u is ln x.
+     2: That means d v is x d x.
+  step1 board+: $= \frac{x^2}{2}\ln x - \int \frac{x^2}{2}\cdot\frac{1}{x}\, || $= \frac{x^2}{2}\ln x - \int \frac{x}{2}\,dx$
+     0: Now apply the formula: u v minus the integral of v d u.
+     1: That's x squared over two times ln x, minus the integral of x squared over two times one over x.
+     2: Look what happened: the log is gone, and x squared over x is just x.
+  step2 board+: $= \frac{x^2}{2}\ln x - \frac{x^2}{4} + C$ || from 1 to e:  $\left(\frac{e^2}{2}-\frac{e^2}{4}\right) - \l
+     0: The last integral is easy: x squared over four.
+     1: So the answer is x squared over two ln x, minus x squared over four, plus C.
+     2: As a numerical check, from one to e it comes out to e squared plus one, over four, about two point one.
+     3: If we'd picked u equals x instead, we'd have needed the integral of ln x, which is harder.
+     4: The right choice of u makes the problem collapse.
+
+[s5] V  Trig integrals — and why your outlet says 120 volts
+  img: fig:sin2
+  • Half-angle identity: sin²t = ½ − ½cos 2t
+  • Average of sin² over a cycle = ½
+  • RMS voltage: V_rms = V_peak / √2
+  • US outlet: 120 V rms → peaks at ≈ 170 V
+  (pen marks: 4 )
+  beat0:
+     0: Integrals of powers of sine and cosine use trig identities.
+     1: The most useful is the half angle identity: sine squared t equals one half minus one half cosine two t.
+  beat1:
+     0: Integrate that over a full cycle.
+     1: The cosine part averages to zero, so the average of sine squared is exactly one half.
+     2: You can see it in the graph: the blue sine squared wave bounces between zero and one, centered on one half.
+  beat2:
+     0: Here's why engineers care.
+     1: The power delivered by an AC voltage depends on the voltage squared.
+     2: So the effective voltage, called R M S for root mean square, is the square root of the average of the square.
+     3: For a sine wave, that's the peak times the square root of one half, which is the peak divided by root two.
+  beat3:
+     0: That's why a U S wall outlet labeled one hundred twenty volts actually swings up to about one hundred seventy volts at its peak.
+     1: One twenty times root two is about one seventy.
+     2: That label comes straight from this integral.
+
+[s6] V  Trig substitution: proving the area of a circle
+  img: fig:circle
+  • √(r² − x²) → let x = r sin θ
+  • Then √(r² − r²sin²θ) = r cos θ
+  • Area = 2r²∫cos²θ dθ = πr²
+  (pen marks: 5 )
+  beat0:
+     0: When you see a square root like root of r squared minus x squared, substitute x equals r sine theta.
+     1: Here's a beautiful use: proving the area of a circle.
+  beat1:
+     0: Slice the circle into thin vertical strips.
+     1: A strip at position x has height two times root r squared minus x squared.
+     2: With x equals r sine theta, that square root becomes r cosine theta, because one minus sine squared is cosine squared.
+  beat2:
+     0: The integral turns into two r squared times the integral of cosine squared, and using the half angle identity from the last slide, it comes out to exactly pi r squared.
+     1: The formula you memorized in grade school, proved with calculus.
+
+[s7] EX  Partial fractions: break a fraction into simple pieces
+  • Factor the bottom, split into simple fractions
+  • Plug in the roots to find A and B instantly
+  • Used constantly in circuits & signals (inverse Laplace transforms)
+  CODE:
+    ∫ 1 / ((x+1)(x+2)) dx
+    
+    1/((x+1)(x+2)) = A/(x+1) + B/(x+2)
+    1 = A(x+2) + B(x+1)
+    x = −1:  1 = A       x = −2:  1 = −B
+    
+    = ∫ [ 1/(x+1) − 1/(x+2) ] dx
+    = ln|x+1| − ln|x+2| + C
+  (pen marks: 6 )
+  beat0:
+     0: For rational functions, one polynomial over another, we use partial fractions.
+     1: Take one over x plus one times x plus two.
+     2: Write it as A over x plus one, plus B over x plus two.
+     3: Multiply through by the denominator: one equals A times x plus two, plus B times x plus one.
+     4: Now a shortcut: plug in x equals negative one, and the B term vanishes, leaving one equals A.
+     5: Plug in x equals negative two, and you get one equals negative B.
+     6: So the integral splits into one over x plus one, minus one over x plus two, and each piece integrates to a natural log.
+     7: Remember this one, because in signals and systems, the response of almost every circuit comes out as a fraction like this, and partial fractions is how you turn it back into a time signal.
+
+[s8] V  Improper integrals: area out to infinity
+  img: fig:improper
+  • Replace ∞ with b, then take the limit
+  • ∫ 1/x² from 1 to ∞ = 1 (finite!)
+  • ∫ 1/x from 1 to ∞ = ∞ (diverges)
+  • Key in probability and Laplace transforms
+  (pen marks: 5 )
+  beat0:
+     0: Can an infinitely long region have a finite area?
+     1: Surprisingly, yes.
+     2: An improper integral has an infinite limit.
+     3: To handle it, replace infinity with a variable b, integrate, then let b go to infinity.
+  beat1:
+     0: For one over x squared from one to infinity, the antiderivative is negative one over x.
+     1: From one to b, that's one minus one over b.
+     2: As b goes to infinity, that heads to one.
+     3: Finite area!
+  beat2:
+     0: But one over x, which looks almost the same, has antiderivative ln x, which grows forever.
+     1: Its area is infinite.
+     2: The difference is how fast the curve drops.
+  beat3:
+     0: You'll use improper integrals all the time.
+     1: In probability, the total area under a probability curve, over the whole number line, must equal one.
+     2: And the Laplace transform, the main tool of signals and systems, is an integral from zero to infinity.
+
+[s9] WB  Worked example: a decaying signal has finite area
+  step0 board+: $\int_0^{\infty} e^{-2t}\,dt$ || PEN None
+     0: Here's an improper integral you'll meet again in signals and systems: the integral of e to the minus two t, from zero to infinity.
+     1: This curve decays like a capacitor discharging, and we want the total area under it, all the way out.
+  step1 board+: $= \lim_{b\to\infty}\int_0^{b} e^{-2t}\,dt$ || $= \lim_{b\to\infty}\left[-\frac{1}{2}e^{-2t}\right]_0^{b}$ || $= \lim_{b\to\infty}\left(-\frac{1}{2}e^{-2b} + \frac{1}{2}\
+     0: Step one: replace infinity with b and write a limit.
+     1: Step two: the antiderivative of e to the minus two t is negative one half e to the minus two t.
+     2: Evaluate from zero to b.
+  step2 board+: $e^{-2b}\to 0$ || $= \frac{1}{2}$ || PEN None
+     0: Now let b go to infinity.
+     1: E to the minus two b shrinks to zero, so the whole limit is one half.
+     2: An infinitely long region, with an area of exactly one half.
+     3: This exact calculation, with a general s in place of the two, is the Laplace transform of a constant.
+
+[s10] V  When there is no formula: numerical integration
+  img: fig:simpson
+  • Some integrals have no elementary antiderivative
+  • Trapezoid rule: connect the dots with lines
+  • Simpson's rule: fit parabolas — far more accurate
+  • This is what computers actually do
+  (pen marks: 8 )
+  beat0:
+     0: Here's a secret: many integrals have no formula at all.
+     1: The integral of e to the minus x squared, which is the bell curve from probability, can't be written with ordinary functions.
+  beat1:
+     0: So we compute it numerically.
+     1: The trapezoid rule splits the area into slices and connects the tops with straight lines.
+     2: With just four slices, we get point seven four two nine eight.
+  beat2:
+     0: Simpson's rule fits little parabolas instead of straight lines.
+     1: With the same four slices, it gets point seven four six eight six.
+     2: The true value is point seven four six eight two, so Simpson is already correct to four decimal places.
+  beat3:
+     0: This is how engineering software, from circuit simulators to MATLAB, really computes integrals.
+     1: Not with clever antiderivatives, but with smart sums.
+
+[s11] SECTION  Applications
+  beat0:
+     0: Part two.
+     1: Applications.
+     2: Integrals add up tiny pieces, so whenever a quantity is made of pieces that vary, you integrate.
+
+[s12] V  Volumes of revolution: the disk method
+  img: fig:disk
+  • Spin a curve around an axis → a solid
+  • Slice into disks: area π·r(x)²
+  • V = π∫ r(x)² dx
+  • y = √x from 0 to 4: V = π∫x dx = 8π ≈ 25.1
+  (pen marks: 4 )
+  beat0:
+     0: Spin a curve around an axis and you sweep out a solid, like a vase on a pottery wheel.
+     1: Many real parts are made this way, on a lathe.
+  beat1:
+     0: To find the volume, slice the solid into thin disks.
+     1: A disk at position x has radius equal to the height of the curve, so its face has area pi times r squared.
+  beat2:
+     0: Add up all the disks: the volume is pi times the integral of r of x squared, d x.
+  beat3:
+     0: Example: spin y equals root x from zero to four.
+     1: The radius squared is just x, so the volume is pi times the integral of x from zero to four, which is pi times eight, about twenty five point one cubic units.
+     2: Tank designers, engine designers and anyone shaping parts on a lathe use exactly this.
+
+[s13] WB  Worked example: proving the cone's volume formula
+  step0 board+: Cone: radius $R$, height $H$ || PEN None || edge:  $y = \frac{R}{H}\,x$
+     0: Where does the cone formula, one third pi R squared H, come from?
+     1: Let's derive it.
+     2: Lay the cone on its side.
+     3: Its edge is a straight line through the origin, rising to radius R at length H, so its equation is y equals R over H times x.
+  step1 board+: PEN None || $V = \int_0^H \pi\left(\frac{R}{H}x\right)^2 dx$
+     0: Slice it into thin disks.
+     1: A disk at position x has radius R over H times x, so its volume is pi times that radius squared, times d x.
+     2: Add them up from zero to H.
+  step2 board+: $= \frac{\pi R^2}{H^2}\int_0^H x^2\,dx$ || $= \frac{\pi R^2}{H^2}\cdot\frac{H^3}{3}$ || $V = \frac{1}{3}\pi R^2 H$
+     0: Pull the constants out: pi R squared over H squared, times the integral of x squared.
+     1: That integral is x cubed over three, which at H is H cubed over three.
+     2: Two powers of H cancel, and we're left with one third pi R squared H.
+     3: The cone holds exactly one third of the cylinder around it.
+
+[s14] V  Work and energy: springs and capacitors
+  img: fig:spring
+  • Work = ∫ F dx (force can change along the way)
+  • Spring: F = kx → W = ½kx²
+  • k = 200 N/m, stretch 10 cm → W = 1 J
+  • Same math: capacitor energy = ½CV²
+  (pen marks: 3 )
+  beat0:
+     0: Work is force times distance, but only when the force is constant.
+     1: When the force changes, you integrate: work equals the integral of F d x.
+  beat1:
+     0: A spring pushes back harder the more you stretch it: F equals k x.
+     1: Integrate from zero to x and you get one half k x squared.
+     2: Geometrically, it's the area of the triangle under the force line.
+  beat2:
+     0: Example: a spring with k equals two hundred newtons per meter, stretched ten centimeters.
+     1: The work is one half times two hundred times point one squared, which is one joule.
+  beat3:
+     0: And here's the connection to electronics.
+     1: Charging a capacitor is the same math.
+     2: The voltage grows in proportion to the charge, so the energy stored is one half C V squared.
+     3: Same integral, same triangle, different physics.
+     4: Once you see these patterns, a lot of engineering becomes the same few ideas reused.
+
+[s15] SECTION  Sequences and series
+  beat0:
+     0: Part three.
+     1: Infinite series.
+     2: Can you add up infinitely many numbers and get a finite answer?
+
+[s16] V  Infinite sums can be finite
+  img: fig:zeno / a:bouncing_ball
+  • 1/2 + 1/4 + 1/8 + … = 1
+  • Geometric series: a + ar + ar² + … = a / (1 − r) if |r| < 1
+  • Ball dropped 10 m, bounces to 60%: total distance = 10 + 2·(6/0.4) = 40 m
+  (pen marks: 5 )
+  beat0:
+     0: Look at this square.
+     1: Shade half of it.
+     2: Then half of what's left, a quarter.
+     3: Then an eighth, a sixteenth, and so on forever.
+     4: You never run out of square, and you never go past it either.
+     5: So one half plus one quarter plus one eighth, forever, equals exactly one.
+  beat1:
+     0: That's a geometric series, where each term is the previous one times a fixed ratio r.
+     1: If the ratio is between negative one and one, the sum is the first term divided by one minus r.
+     2: Here that's one half over one minus one half, which is one.
+     3: Notice how much easier the formula is than adding forever.
+  beat2:
+     0: Real example.
+     1: Drop a ball from ten meters, and each bounce reaches sixty percent of the previous height.
+     2: The total distance is the first ten meters down, plus twice each bounce height, up and down.
+     3: The bounces form a geometric series: six, three point six, two point one six, and so on, summing to six over point four, which is fifteen.
+     4: So the total is ten plus two times fifteen: forty meters, even though the ball bounces infinitely many times.
+
+[s17] WB  Worked example: a repeating decimal is a geometric series
+  step0 board+: $0.272727\ldots = \;?$ || $= 0.27 + 0.0027 + 0.000027 + \ldots$
+     0: Here's a neat use of the geometric series formula.
+     1: Write zero point two seven two seven repeating, forever, as a fraction.
+     2: Split it into pieces: point two seven, plus point zero zero two seven, plus point zero zero zero zero two seven, and so on.
+  step1 board+: $a = 0.27$,    $r = 0.01$ || $|r| < 1$, so the sum converges
+     0: Each piece is the previous one times one hundredth.
+     1: So it's geometric, with first term a equals point two seven and ratio r equals point zero one.
+     2: The ratio is less than one, so it converges.
+  step2 board+: $S = \frac{a}{1-r} = \frac{0.27}{0.99} = \frac{27}{99}$ || $= \frac{3}{11}$
+     0: Use the formula, a over one minus r: point two seven over point nine nine, which is twenty seven over ninety nine, which reduces to three elevenths.
+     1: Check it on a calculator: three divided by eleven is point two seven two seven, repeating.
+     2: Every repeating decimal is a geometric series in disguise, which is why every repeating decimal is a fraction.
+
+[s18] V  But some sums blow up — testing convergence
+  img: fig:harmonic / fig:tests
+  • Terms shrinking to 0 is NOT enough
+  • Harmonic series 1 + 1/2 + 1/3 + … diverges
+  • Use convergence tests
+  (pen marks: 10 )
+  beat0:
+     0: Here's the trap.
+     1: The harmonic series, one plus one half plus one third plus one fourth and so on, has terms that shrink to zero.
+     2: Yet the sum grows forever.
+     3: Slowly, like the natural log of n: a hundred terms gives about five point two, a thousand terms gives about seven point five, but it never stops growing.
+     4: Meanwhile, one plus a quarter plus a ninth, the sum of one over n squared, settles down to pi squared over six.
+     5: A famous and surprising result.
+  beat1:
+     0: So how do you know whether a series converges?
+     1: We use tests.
+     2: If the terms don't go to zero, it diverges, period.
+     3: Geometric series converge when the ratio is less than one.
+     4: P series, one over n to the p, converge when p is greater than one.
+     5: The ratio test compares each term to the one before, so for n over two to the n the ratio heads to one half, and it converges.
+     6: Comparison tests bound your series by one you already know.
+     7: And alternating series, with signs flipping and terms shrinking, converge too.
+     8: For example, one minus a half plus a third minus a quarter equals the natural log of two.
+
+[s19] V  Power series: a polynomial that never ends
+  img: fig:geom
+  • 1/(1 − x) = 1 + x + x² + x³ + …
+  • Works only inside the radius of convergence (|x| < 1)
+  • More terms → better match, but only inside that interval
+  (pen marks: 6 )
+  beat0:
+     0: Now the big idea.
+     1: What if the terms of a series contain x?
+     2: Then the series is a function.
+     3: Take the geometric series one plus x plus x squared plus x cubed and so on.
+     4: By our formula, that equals one over one minus x.
+  beat1:
+     0: But only when x is between negative one and one.
+     1: That interval is called the interval of convergence, and half its width is the radius of convergence.
+  beat2:
+     0: Look at the graph.
+     1: Inside the green band, adding more terms makes the polynomial hug the true curve, in black, more and more closely.
+     2: Outside the band, the polynomials fly off.
+     3: A power series is like an infinitely long polynomial, and polynomials are easy for computers, because they only need multiplication and addition.
+
+[s20] V  Taylor series: how your calculator computes sin x
+  img: fig:taylor0 / fig:taylor1 / fig:taylor2 / fig:taylor3 / fig:taylor4
+  (pen marks: 7 )
+  beat0:
+     0: Taylor series let you write almost any smooth function as a power series.
+     1: The recipe: match the function's value, slope, curvature, and every higher derivative at one point.
+     2: For sine around zero, start with just the first term, x.
+     3: That's the tangent line, the small angle approximation.
+     4: It's good near zero, but drifts away quickly.
+  beat1:
+     0: Add the next term, minus x cubed over three factorial.
+     1: Now the curve bends back the right way and matches much farther out.
+  beat2:
+     0: Add plus x to the fifth over five factorial, and it hugs the sine wave across nearly a full hump.
+  beat3:
+     0: With the seventh degree term, it's accurate to the eye from about minus four to four.
+     1: Let's test it numerically.
+     2: Sine of point five: point five, minus point five cubed over six, plus point five to the fifth over one twenty.
+     3: That gives point four seven nine four two seven.
+     4: The true value is point four seven nine four two five five.
+     5: Three terms, six correct digits.
+  beat4:
+     0: This is genuinely how computers do it.
+     1: A math library first uses symmetry to shrink the angle into a small range, then evaluates a short polynomial like this one.
+     2: Similar series give e to the x as one plus x plus x squared over two factorial plus x cubed over three factorial and so on, and cosine as one minus x squared over two factorial plus x to the fourth over four factorial.
+
+[s21] WB  Worked example: computing e by hand
+  step0 board+: $f(x)=e^x$:   $f(0)=f\,{}^{\prime}(0)=f\,{}^{\prime\prime}(0 || $e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{
+     0: Let's use a Taylor series to compute the number e itself, the way a computer might.
+     1: Every derivative of e to the x is e to the x, and at zero they all equal one.
+     2: So the Taylor series around zero is one, plus x, plus x squared over two factorial, plus x cubed over three factorial, and so on.
+  step1 board+: $e = 1 + 1 + \frac{1}{2} + \frac{1}{6} + \frac{1}{24} + \fra
+     0: Set x equal to one.
+     1: Then e is one, plus one, plus one half, plus one sixth, plus one twenty fourth, plus one over one hundred twenty, and so on.
+  step2 board+: $= 2 \;\to\; 2.5 \;\to\; 2.667 \;\to\; 2.708 \;\to\; 2.717$ || true:  $e = 2.71828\ldots$
+     0: Add them up as decimals.
+     1: One plus one is two.
+     2: Plus point five is two point five.
+     3: Plus point one six seven is two point six six seven.
+     4: Plus point zero four two is two point seven zero eight.
+     5: Plus point zero zero eight is two point seven one seven.
+     6: The true value is two point seven one eight two eight.
+     7: Six terms, already three correct decimals, and each new term adds about one more, because factorials grow so fast.
+
+[s22] V  Euler's formula: the bridge to electrical engineering
+  img: fig:euler
+  • Put iθ into the series for eˣ
+  • Real terms → cos θ, imaginary terms → sin θ
+  • e^(iθ) = cos θ + i sin θ
+  • A rotating arrow = a sine wave → phasors
+  (pen marks: 7 )
+  beat0:
+     0: Now something remarkable.
+     1: Take the Taylor series for e to the x, and plug in an imaginary number, i theta, where i squared is negative one.
+  beat1:
+     0: The powers of i cycle: i, negative one, negative i, one.
+     1: Sort the terms, and all the real ones form exactly the series for cosine theta, and all the imaginary ones form the series for sine theta.
+  beat2:
+     0: So e to the i theta equals cosine theta plus i sine theta.
+     1: This is Euler's formula.
+     2: Geometrically, e to the i theta is an arrow of length one, rotated by angle theta, on the complex plane.
+  beat3:
+     0: Let theta increase with time, and the arrow spins around the circle, while its shadow on the horizontal axis traces out a cosine wave.
+     1: That's the key insight behind phasors in your circuits course, where every sine wave voltage becomes a rotating arrow, and calculus turns into algebra.
+     2: We'll come back to this many times.
+
+[s23] V  Polar coordinates: describing shapes by angle
+  img: a:microphone / fig:cardioid
+  • Point = (distance r, angle θ) instead of (x, y)
+  • x = r cos θ, y = r sin θ
+  • Antenna and microphone patterns are polar plots
+  (pen marks: 5 )
+  beat0:
+     0: One more tool.
+     1: Some shapes are easier to describe by angle and distance than by x and y.
+     2: In polar coordinates, a point is given by its distance r from the origin and its angle theta.
+     3: Converting is easy: x is r cosine theta, and y is r sine theta.
+  beat1:
+     0: Here's where engineers see it.
+     1: Microphones like this one are described by a polar pickup pattern.
+     2: This one is a cardioid, a heart shape, with r equals one half times one plus cosine theta.
+     3: Sound from the front, at zero degrees, gets full sensitivity.
+     4: Sound from the back, at one hundred eighty degrees, gets zero.
+     5: That's why a singer's monitor speaker is placed behind the microphone.
+     6: Antenna engineers describe radiation patterns exactly the same way.
+
+[s24] Q  Key takeaways
+  BIG: Integrals **add up pieces** — volumes, work, energy. Series turn functions into **polynomials** computers can evaluate.
+  cap: Next: CPSC 120, Introduction to Programming. Later: Euler's formula returns in Circuits and in Signals & Systems.
+  beat0:
+     0: Let's recap.
+     1: Integration techniques, by parts, trig identities, substitution and partial fractions, let you handle most integrals, and numerical methods handle the rest.
+     2: Integrals compute real quantities: area, volume, work and energy, including RMS voltage and capacitor energy.
+     3: Infinite series can converge to finite values, and convergence tests tell you when.
+     4: Taylor series turn functions into polynomials, which is how computers evaluate them.
+     5: And Euler's formula links exponentials to sines and cosines, which will power your circuits and signals courses.
+     6: Next, we switch gears completely and learn to program.
+     7: See you there.

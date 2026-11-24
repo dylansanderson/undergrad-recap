@@ -1,0 +1,317 @@
+﻿#### L23_cpsc332: CPSC 332 File Structures & Database Systems
+
+[s0] TITLE  File Structures & Database Systems
+  img: a:server_racks
+  beat0:
+     0: Welcome to C P S C three thirty two, file structures and database systems.
+     1: Almost every app you use, from banking to social media to the university's class registration, is a user interface sitting on top of a database.
+     2: In this lecture you'll learn how to model data, how relational tables and SQL work, how to design tables that can't contradict themselves, and how databases stay fast and correct when thousands of people use them at once.
+
+[s1] V  Why a database management system?
+  img: a:ramac / fig:files
+  • Separate files → redundancy and inconsistency
+  • DBMS: one schema, declarative queries
+  • Integrity constraints, concurrent access, crash recovery
+  • Security: who may see and change what
+  beat0:
+     0: This is the I B M three fifty RAMAC from nineteen fifty six, the first commercial hard disk drive: fifty spinning platters storing about five megabytes.
+     1: Random access storage made it possible to look up any record directly, and the question quickly became how to organize that data well.
+  beat1:
+     0: Without a database, each program keeps its own files.
+     1: Payroll has one copy of an employee's details, H R another, the badge system a third.
+     2: Soon the same person has three different phone numbers, and nobody knows which is right.
+     3: A database management system stores each fact once, in one schema shared by all programs.
+     4: You ask questions declaratively, saying what you want rather than how to find it.
+     5: And the D B M S enforces rules, lets many users work at the same time without corrupting data, recovers after crashes, and controls who can see what.
+
+[s2] V  Modeling data: entity–relationship diagrams
+  img: fig:er
+  • Entities (rectangles) with attributes (ovals)
+  • Key attribute underlined: uniquely identifies
+  • Relationships (diamonds) with cardinality 1:1, 1:N, M:N
+  • Relationships can have attributes (grade)
+  (pen marks: 8 )
+  beat0:
+     0: Before creating tables, designers draw an entity relationship diagram.
+     1: Entities are the things you store data about, drawn as rectangles: students and courses.
+  beat1:
+     0: Their attributes are drawn as ovals.
+     1: The key attribute, underlined, uniquely identifies each entity: a student I D, a course I D.
+  beat2:
+     0: Relationships are diamonds.
+     1: A student enrolls in courses.
+     2: The cardinality says how many: one to one, one to many, or many to many.
+     3: Here it's many to many, since each student takes many courses and each course has many students.
+  beat3:
+     0: Notice that grade belongs to the relationship, not to either entity.
+     1: It's not a property of a student or of a course, but of one student taking one course.
+     2: That observation tells us exactly how to build the tables.
+
+[s3] V  The relational model: tables and keys
+  img: fig:tables
+  • Relation = table of rows (tuples) and columns
+  • Primary key: unique, never NULL
+  • Foreign key: refers to a primary key elsewhere
+  • M:N relationship → its own table
+  (pen marks: 6 )
+  beat0:
+     0: In the relational model, invented by Edgar Codd at I B M in nineteen seventy, all data lives in tables, formally called relations.
+     1: Each row is one record and each column one attribute.
+     2: Every table has a primary key, a column or set of columns that's unique and never empty, like the student I D.
+     3: Mapping our E R diagram is mechanical.
+     4: Each entity becomes a table.
+     5: The many to many relationship becomes its own table, enrolls, whose columns are foreign keys pointing to a student and a course, plus the grade.
+     6: Its primary key is the pair: student I D and course I D together.
+     7: Foreign keys enforce referential integrity: the database refuses an enrollment for a student who doesn't exist, and you choose what happens when a referenced row is deleted, for example cascading the delete or blocking it.
+     8: For a one to many relationship, there's no extra table: just put a foreign key on the many side, like a department number in each employee row.
+
+[s4] V  Relational algebra: the math under SQL
+  img: fig:algebra
+  • σ select rows · π project columns
+  • ⋈ join tables on matching values
+  • Set operations ∪, −, ∩
+  • The optimizer rewrites SQL into algebra plans
+  (pen marks: 5 )
+  beat0:
+     0: Under SQL sits relational algebra, a small set of operations on tables, each producing another table.
+     1: Selection, sigma, keeps the rows that satisfy a condition.
+     2: Projection, pi, keeps chosen columns.
+  beat1:
+     0: Join, the bowtie symbol, combines rows from two tables whose values match, like each employee with their department.
+  beat2:
+     0: And the set operations from discrete math, union, difference and intersection, combine tables with the same columns.
+  beat3:
+     0: Because these operations have algebraic laws, such as filtering before joining gives the same answer as joining before filtering, the database's query optimizer can rewrite your query into a much faster equivalent plan.
+     1: That's why you can write SQL declaratively and still get good performance.
+
+[s5] EX  SQL: asking questions
+  CODE:
+    SELECT d.Dname, COUNT(*) AS n, AVG(e.Salary) AS avg_sal
+    FROM Employee e
+      JOIN Department d ON e.Dno = d.Dnumber
+    WHERE e.Salary > 50000
+    GROUP BY d.Dname
+    HAVING COUNT(*) > 2
+    ORDER BY avg_sal DESC;
+  (pen marks: 9 )
+  beat0:
+     0: Here's a typical SQL query.
+     1: Read it in the order the database logically evaluates it.
+     2: From the employee table, join each employee to their department where the department numbers match.
+  beat1:
+     0: WHERE filters individual rows first, before any grouping.
+  beat2:
+     0: GROUP BY collapses the remaining rows into one group per department, and aggregate functions like count and average summarize each group.
+     1: HAVING then filters whole groups, keeping only departments with more than two qualifying employees.
+     2: That's the key difference: WHERE filters rows before grouping, HAVING filters groups after.
+  beat3:
+     0: Finally, SELECT picks the output columns and ORDER BY sorts them, highest average salary first.
+
+[s6] V  Running the query on real rows
+  img: fig:result
+  • WHERE drops Gus (45,000)
+  • GROUP BY → one row per department
+  • HAVING keeps groups with > 2 rows
+  • ORDER BY avg_sal DESC
+  (pen marks: 6 )
+  beat0:
+     0: Let's run it on seven employees.
+     1: WHERE removes Gus, who earns forty five thousand.
+     2: Grouping leaves Engineering with Ana, Ben and Chen, averaging ninety five thousand, and Sales with Dev, Eli and Fay, averaging about sixty thousand six hundred sixty seven.
+     3: Both have three employees, so both pass the HAVING test, and sorting puts Engineering first.
+     4: Support disappears completely, because its only employee was filtered out before grouping.
+     5: Tracing a query on a handful of rows like this is the best way to check that it means what you think it means.
+
+[s7] V  Joins, NULLs and subqueries
+  img: fig:joins
+  • INNER: only matching rows
+  • LEFT/RIGHT/FULL OUTER: keep unmatched rows, fill with NULL
+  • NULL = unknown: use IS NULL, not = NULL
+  • EXISTS, IN, window functions, recursive CTEs
+  (pen marks: 3 )
+  beat0:
+     0: Joins come in flavors.
+     1: An inner join keeps only rows that match in both tables: employees who have a department.
+  beat1:
+     0: A left outer join keeps every row from the left table, filling the right side's columns with NULL where there's no match: every department, even one with no employees.
+     1: Right and full outer joins work the same way for the other side, or both sides.
+  beat2:
+     0: NULL means unknown, and it's tricky.
+     1: Any comparison with NULL is neither true nor false but unknown, so WHERE phone equals NULL never matches anything.
+     2: You must write IS NULL.
+     3: NULLs also catch people in aggregates.
+     4: COUNT star counts every row, but COUNT of a column skips the NULLs, and AVG ignores them too.
+     5: So if three of ten employees have no bonus recorded, COUNT star is ten, COUNT bonus is seven, and the average bonus is over those seven only.
+  beat3:
+     0: SQL goes much further: subqueries with EXISTS and IN, set operations, window functions like ROW NUMBER and RANK that compute per row rankings or running totals without collapsing groups, and recursive common table expressions that can walk hierarchies like an org chart or a graph.
+     1: In this course's assignments, students write self joins, ranking queries with window functions, and even a breadth first search over a tree table.
+
+[s8] WB  Worked example: a join, row by row
+  step0 board+: SELECT o.order_id, c.name, p.name, p.price || FROM Orders o || JOIN Customers c ON o.cust_id = c.cust_id || JOIN Products  p ON o.prod_id = p.prod_id || PEN ('highlight',) on o.cust_id = c.cust_id || PEN ('highlight',) on o.prod_id = p.prod_id
+     0: Using our normalized tables, let's list each order with the customer's name and the product's price.
+     1: That data lives in three tables, so we join them on matching keys.
+  step1 board+: order 1: C1 → Ana,  P1 → Arduino 25 || order 2: C1 → Ana,  P2 → Servo 12 || PEN ('underline',) on order 1: || PEN ('underline',) on order 2: || order 3: C2 → Ben,  P1 → Arduino 25 || PEN ('underline',) on order 3:
+     0: Read the joins like this: for each order, find the customer whose I D matches the order's customer I D, and the product whose I D matches.
+     1: Each order row picks up exactly one customer and one product.
+  step2 board+: WHERE p.price > 20 || PEN ('circle',) on p.price > 20 || PEN ('strike',) on order 2: || ORDER BY c.name; || PEN ('underline',) on ORDER BY c.name || order_id | name | name    | price || 1        | Ana  | Arduino | 25 || 3        | Ben  | Arduino | 25
+     0: Add a WHERE clause to filter, for example only products costing more than twenty, and an ORDER BY to sort.
+     1: The database decides the fastest way to do this; we only describe what we want.
+
+[s9] V  Normalization: store each fact once
+  img: fig:normal
+  • Functional dependency X → Y: X determines Y
+  • 1NF: atomic values · 2NF: no partial dependency on the key
+  • 3NF: no transitive dependency · BCNF: every determinant is a key
+  • Avoid update, insert and delete anomalies
+  (pen marks: 8 )
+  beat0:
+     0: Normalization is a systematic way to design tables that can't contradict themselves.
+     1: It's built on functional dependencies: X determines Y means that whenever two rows agree on X, they must agree on Y.
+     2: A student I D determines the student's name.
+  beat1:
+     0: Look at the red table.
+     1: Its key is student I D plus course I D.
+     2: But name depends only on the student I D, and title only on the course I D.
+     3: Those are partial dependencies, which violates second normal form.
+     4: The symptoms: Ana's name is stored twice, so an update could change one copy and not the other, and you can't even add a new course until someone enrolls in it.
+  beat2:
+     0: The fix is to decompose: a student table, a course table, and an enrollment table holding only the grade.
+     1: Third normal form goes further and removes transitive dependencies, where a non key column depends on another non key column, like a department name depending on a department I D stored in a course row.
+     2: Boyce Codd normal form requires every determinant to be a key.
+  beat3:
+     0: The decomposition must be lossless: joining the tables back together must reproduce exactly the original data.
+     1: Designers sometimes denormalize on purpose for read speed, but they do it knowingly, accepting the cost of keeping copies in sync.
+
+[s10] WB  Worked example: normalizing an orders table
+  step0 board+: one big table || PEN None
+     0: Here's a spreadsheet-style orders table.
+     1: Each row repeats the customer's name and city, and the product's price.
+  step1 board+: PEN None || update anomaly || PEN ('circle',) on update anomaly || customer → city  (not order → city) || PEN ('underline',) on customer → city
+     0: Look at Ana: her city is stored twice.
+     1: If she moves, we must update every one of her orders.
+     2: Miss one, and the database contradicts itself.
+     3: That's an update anomaly.
+     4: The root cause: city depends on the customer, not on the order.
+  step2 board+: PEN None || each fact stored once || orders hold foreign keys || PEN ('check',) on each fact stored once
+     0: The fix is to give each fact its own table.
+     1: Customers stores each name and city once.
+     2: Products stores each price once.
+     3: Orders keeps only keys pointing to them: foreign keys.
+     4: Now Ana's move is a single update, and a price change is a single update.
+  step3 board+: 3NF: the key, the whole key, || and nothing but the key || PEN ('box',) on 3NF: the key
+     0: This is third normal form: every non-key column depends on the key, the whole key, and nothing but the key.
+     1: To get the original view back, we join the tables in a query.
+
+[s11] V  Storage and indexing: the B+ tree
+  img: fig:bplus
+  • Data lives in fixed-size disk pages
+  • Without an index: scan every page
+  • B+ tree: wide, shallow, balanced — 3–4 levels for millions of rows
+  • Hash indexes for equality; column stores for analytics
+  (pen marks: 5 )
+  beat0:
+     0: On disk, a table is stored in fixed size pages, typically a few kilobytes each.
+     1: Without an index, finding one row means scanning every page of the table.
+  beat1:
+     0: The default index structure is the B plus tree, the wide, shallow cousin of the binary search tree from data structures.
+     1: Each node is a whole disk page holding hundreds of keys, so the tree is extremely shallow: three or four levels can index hundreds of millions of rows.
+     2: A lookup reads just three or four pages.
+  beat2:
+     0: All the data pointers live in the leaves, and the leaves are linked together, so a range query, like ages between thirty and fifty, finds the first match and then just walks along the leaves.
+  beat3:
+     0: Hash indexes are even faster for exact matches but can't do ranges.
+     1: And analytics databases often store data by column instead of by row, so a query that averages one column reads only that column.
+     2: One of the papers reviewed in this course proposes a hybrid layout that groups each column together inside a page, for better cache performance.
+
+[s12] WB  Worked example: why an index is so fast
+  step0 board+: $10^9$ rows, 100 rows per page || no index: $10^7$ page reads || PEN ('circle',) on no index
+     0: A table has one billion rows, about a hundred rows per disk page.
+     1: Without an index, finding one customer means scanning every page: ten million page reads.
+  step1 board+: fan-out $\approx 200$ keys per node || PEN ('underline',) on fan-out || $200^3 = 8\times 10^6$,   $200^4 = 1.6\times 10^9$ || PEN ('circle',) on $200^3
+     0: A B plus tree node fills one page and holds about two hundred keys, so each level multiplies the reach by two hundred.
+     1: One level reaches two hundred pages, two levels forty thousand, three levels eight million, four levels one point six billion.
+  step2 board+: $\log_{200}(10^9) \approx 3.9$  so 4 levels || PEN ('circle',) on $\log_{200} || 4 reads instead of 10,000,000
+     0: So four levels are enough for a billion rows: log base two hundred of a billion is about three point nine.
+     1: Four page reads instead of ten million.
+     2: And the top levels stay cached in memory, so in practice it's often just one or two disk reads.
+     3: That's why adding the right index can turn a minutes-long query into milliseconds.
+
+[s13] V  Transactions and ACID
+  img: fig:acid
+  • A transaction: a unit of work that commits or aborts
+  • Atomicity · Consistency · Isolation · Durability
+  • Concurrency: locking (2PL) or multiversioning (MVCC)
+  • Recovery: write-ahead log, undo/redo, checkpoints
+  (pen marks: 9 )
+  beat0:
+     0: Moving a hundred dollars from checking to savings takes two updates.
+     1: If the system crashes between them, money vanishes.
+     2: So databases group the updates into a transaction.
+  beat1:
+     0: Transactions guarantee four properties, ACID.
+     1: Atomicity: all of it happens, or none of it.
+     2: Consistency: every constraint holds before and after.
+     3: Isolation: concurrent transactions don't see each other's half finished work.
+     4: Durability: once committed, it survives a crash.
+  beat2:
+     0: Isolation is provided by concurrency control.
+     1: Two phase locking acquires locks as it goes and releases them only at the end.
+     2: Multiversion concurrency control instead keeps old versions of rows, so readers never block writers.
+     3: Weaker isolation levels trade some correctness, allowing anomalies like non repeatable reads, for more speed.
+  beat3:
+     0: Durability and atomicity come from the write ahead log: every change is recorded in the log, on disk, before the data pages are updated.
+     1: After a crash, the database redoes committed transactions and undoes uncommitted ones from the log.
+     2: Checkpoints keep recovery short.
+
+[s14] WB  Worked example: a transfer, a crash, and the log
+  step0 board+: BEGIN; || UPDATE acct SET bal = bal - 100 WHERE id = 1; || UPDATE acct SET bal = bal + 100 WHERE id = 2; || COMMIT; || PEN ('box',) on COMMIT;
+     0: Here's the bank transfer as real SQL.
+     1: Begin a transaction, subtract a hundred from checking, add a hundred to savings, commit.
+     2: Until the commit, none of it is permanent.
+  step1 board+: LOG: T7 acct1  old 500  new 400 || LOG: T7 acct2  old 200  new 300 || LOG: T7 COMMIT
+     0: Before touching any data page, the database writes each change to the log on disk: transaction seven, account one, old value five hundred, new value four hundred.
+     1: Then account two, old two hundred, new three hundred.
+     2: Then a commit record.
+  step2 board+: crash before COMMIT  →  UNDO with old values || PEN ('circle',) on LOG: T7 acct1
+     0: Now suppose the power fails after the first update, before the commit.
+     1: On restart, the database reads the log.
+     2: Transaction seven has no commit record, so it's undone using the old values: account one goes back to five hundred.
+     3: Atomicity: no money vanished.
+  step3 board+: crash after COMMIT  →  REDO with new values || PEN ('circle',) on LOG: T7 COMMIT || write-ahead: log first, data later
+     0: If the crash comes after the commit record is on disk, but before the data pages were written, the database redoes the change from the new values.
+     1: Durability: a committed transfer is never lost.
+     2: That's the whole trick: log first, data later.
+
+[s15] B  Beyond relational: NoSQL and scale
+  img: a:server_racks
+  • Key-value (Redis), document (MongoDB)
+  • Wide-column (Bigtable, Cassandra), graph (Neo4j)
+  • Scale out across many machines
+  • CAP: during a partition, choose consistency or availability
+  beat0:
+     0: At internet scale, other data models appear.
+     1: Key value stores like Redis are giant distributed hash tables, perfect for caches and sessions.
+     2: Document databases like MongoDB store flexible JSON like records.
+  beat1:
+     0: Wide column stores, descended from Google's Bigtable, another paper reviewed in this course, store enormous sparse tables across thousands of servers.
+     1: Graph databases store relationships directly, for social networks and recommendations.
+  beat2:
+     0: These systems scale out by splitting and replicating data across many machines.
+  beat3:
+     0: But distribution brings a fundamental trade off, the CAP theorem: if the network splits the cluster in two, each side must choose either to keep answering, possibly with stale data, or to stay consistent by refusing some requests.
+     1: Banks lean toward consistency.
+     2: Shopping carts and social feeds lean toward availability.
+     3: Relational databases remain the default for most applications, and SQL is one of the most transferable skills in all of computing.
+
+[s16] Q  Key takeaways
+  BIG: Model with **ER**, store in **normalized tables**, query with **SQL**, find fast with **B+ trees**, stay correct with **ACID**.
+  cap: Next: EGEE 401, Engineering Economics and Professionalism.
+  beat0:
+     0: To recap.
+     1: A database management system stores each fact once and serves many programs safely.
+     2: E R diagrams model entities and relationships, which map mechanically to tables with primary and foreign keys.
+     3: Relational algebra underlies SQL, where WHERE filters rows, GROUP BY and HAVING summarize groups, and joins combine tables.
+     4: Normalization prevents contradictions.
+     5: B plus tree indexes make lookups fast, and ACID transactions keep data correct through concurrency and crashes.
+     6: Next, engineering economics and ethics.
+     7: See you there.

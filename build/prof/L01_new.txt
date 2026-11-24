@@ -1,0 +1,639 @@
+﻿#### L01_math150a: MATH 150A Calculus I
+
+[s0] TITLE  Calculus I
+  img: a:coaster
+  beat0:
+     0: Welcome to Calculus one.
+     1: Calculus is the mathematics of change: how fast something is changing right now, and how much it adds up to over time.
+     2: Every engineering course you'll take later leans on it.
+     3: Circuits, signals, physics, even machine learning.
+     4: So in this lecture we'll build it from scratch: limits, then derivatives, then integrals, with lots of examples and pictures.
+     5: If you've forgotten all of it, that's fine.
+     6: Start here.
+
+[s1] V  Why engineers need calculus
+  img: a:dashboard_digital / a:odometer / fig:two_q
+  • Speedometer: **rate** of change of position
+  • Odometer: speed **added up** over time
+  • Derivative ↔ integral: two sides of one idea
+  beat0:
+     0: Look at a car dashboard.
+     1: The speedometer tells you how fast your position is changing right now, in miles per hour.
+     2: That's a rate of change, and in calculus it's called a derivative.
+  beat1:
+     0: The odometer does the opposite job.
+     1: It adds up your speed over every moment of the trip to get the total distance.
+     2: That running total is called an integral.
+  beat2:
+     0: So calculus asks two big questions.
+     1: On the left: how steep is a curve at one exact point?
+     2: That's the derivative, the slope of the tangent line.
+     3: On the right: how much area is under a curve?
+     4: That's the integral.
+     5: The amazing discovery, which we'll reach at the end of this lecture, is that these two questions are inverses of each other.
+     6: In engineering you'll see this everywhere.
+     7: Current is the rate of change of charge.
+     8: The current through a capacitor is proportional to how fast its voltage changes.
+     9: Energy is power added up over time.
+
+[s2] V  Who invented it?
+  img: a:newton+leibniz / fig:history
+  beat0:
+     0: Calculus was invented twice, independently, in the late sixteen hundreds.
+     1: Isaac Newton in England developed it to explain motion and gravity.
+     2: Gottfried Leibniz in Germany developed it on his own a few years later, and published first.
+  beat1:
+     0: The two men argued bitterly about who deserved credit.
+     1: But Leibniz's notation won, and we still use it today.
+     2: d y over d x for the derivative, and the tall S shaped integral sign, which is a stretched letter S for sum.
+     3: Keep that in mind: an integral is a sum of infinitely many tiny pieces.
+
+[s3] SECTION  Limits
+  beat0:
+     0: Part one.
+     1: Limits.
+     2: Everything in calculus is built on this one idea.
+
+[s4] V  A limit is where a function is heading
+  img: fig:sinc
+  • sin(x)/x is undefined at x = 0 (zero over zero)
+  • x = 0.1 → 0.99833 · x = 0.01 → 0.99998
+  • Written: lim x→0 of sin(x)/x = 1
+  (pen marks: 5 )
+  beat0:
+     0: Here's the function sine of x divided by x.
+     1: Try to plug in zero, and you get zero divided by zero, which is undefined.
+     2: There's literally a hole in the graph at zero.
+  beat1:
+     0: But watch what happens as x gets close to zero.
+     1: At x equals point one, the value is point nine nine eight three.
+     2: At point zero one, it's point nine nine nine nine eight.
+     3: The closer we get, the closer the output gets to one.
+  beat2:
+     0: So we say the limit as x approaches zero of sine x over x equals one.
+     1: A limit doesn't care what happens exactly at the point.
+     2: It asks where the function is heading as you get closer and closer.
+     3: That's the key idea, because the derivative is going to be exactly this kind of zero over zero situation.
+
+[s5] V  Computing limits: fix the zero-over-zero
+  img: fig:hole
+  • Plug in first. If you get a number, done
+  • If you get 0/0: factor, cancel, try again
+  • (x² − 4)/(x − 2) = (x − 2)(x + 2)/(x − 2) = x + 2 → 4
+  (pen marks: 3 )
+  beat0:
+     0: How do you actually compute a limit?
+     1: Step one: just plug the number in.
+     2: If the function is well behaved there, you get a number, and that's the limit.
+  beat1:
+     0: If you get zero over zero, the function is hiding something.
+     1: Usually a common factor in the top and bottom.
+  beat2:
+     0: Example: x squared minus four, over x minus two, as x goes to two.
+     1: Plugging in gives zero over zero.
+     2: But x squared minus four factors into x minus two times x plus two.
+     3: Cancel the x minus two, and you're left with x plus two, which is four when x is two.
+     4: So the limit is four.
+     5: The graph is just the line y equals x plus two, with a single hole punched out at the point two comma four.
+
+[s6] WB  Worked example: a limit that needs a trick
+  step0 board+: $\lim_{x\to 0}\ \frac{\sqrt{x+4}\,-\,2}{x}$ || plug in x = 0:  (2 − 2)/0 = 0/0 || PEN ('circle',) on 0/0 || PEN None
+     0: Let's work one together, step by step.
+     1: Find the limit as x goes to zero of the square root of x plus four, minus two, all over x.
+     2: First, always try plugging in.
+     3: The top is root four minus two, which is zero, and the bottom is zero.
+     4: Zero over zero, so there's a hole hiding here.
+  step1 board+: $= \frac{\sqrt{x+4}-2}{x}\cdot\frac{\sqrt{x+4}+2}{\sqrt{x+4} || PEN ('circle',) on \cdot\frac{\sqrt{x+4}+2} || $= \frac{(x+4)-4}{x\,(\sqrt{x+4}+2)}$ || $= \frac{x}{x\,(\sqrt{x+4}+2)}$ || PEN ('strike',) on $= \frac{x}{x\,(
+     0: Factoring won't work with a square root, so we use a different trick: multiply the top and bottom by the conjugate, root x plus four, plus two.
+     1: On top, that's a difference of squares: x plus four, minus four, which is just x.
+     2: So we get x over x times root x plus four plus two.
+  step2 board+: $= \frac{1}{\sqrt{x+4}+2}$ || $\to \frac{1}{2+2} = \frac{1}{4}$ || PEN None
+     0: Now the x on top cancels the x on the bottom.
+     1: That leaves one over root x plus four, plus two.
+     2: Plug in zero: one over two plus two, which is one quarter.
+     3: On the graph, the curve heads smoothly toward one quarter, with a single missing point exactly at zero.
+
+[s7] WB  When a limit does NOT exist
+  step0 board+: $f(x) = \frac{|x|}{x}$ || PEN None || $\lim_{x\to 0^-} f(x) = -1$
+     0: A question students always ask: does every function have a limit?
+     1: No.
+     2: Look at f of x equals the absolute value of x, divided by x.
+     3: For any negative x, that's negative one.
+     4: Approach zero from the left, and the function is stuck at negative one.
+  step1 board+: PEN None || $\lim_{x\to 0^+} f(x) = +1$ || PEN ('circle',) on 0^+
+     0: For any positive x, it's positive one.
+     1: So approaching from the right gives a different answer.
+     2: The little minus and plus signs on the zero mean from the left and from the right.
+     3: These are called one sided limits.
+  step2 board+: PEN None || left ≠ right  →  limit does not exist || PEN ('underline',) on left ≠ right || $\frac{1}{x^2} \to \infty$ : no finite limit
+     0: The rule: the limit exists only if both one sided limits exist and agree.
+     1: Here they disagree, so the limit does not exist.
+     2: That's a jump.
+     3: A function that blows up to infinity, like one over x squared at zero, also has no limit as a number.
+     4: We just write that it goes to infinity.
+
+[s8] V  Continuity: no holes, jumps, or blow-ups
+  img: fig:cont / fig:ivt
+  • Continuous at a: f(a) exists, the limit exists, and they match
+  • Intermediate Value Theorem: a continuous function crossing from − to + must hit 0
+  • Bisection: halve the interval again and again
+  (pen marks: 11 )
+  beat0:
+     0: A function is continuous at a point if you can draw through it without lifting your pen.
+     1: Formally, three things must be true: f of a exists, the limit exists, and they're equal.
+     2: These three pictures show the three ways that fails: a hole, where the point is missing or misplaced, a jump, and an infinite blow up called an asymptote.
+  beat1:
+     0: Continuous functions have a very useful property called the intermediate value theorem.
+     1: Look at f of x equals x cubed minus x minus one.
+     2: At x equals one it's negative one.
+     3: At x equals two it's positive five.
+     4: Since it's continuous, it must cross zero somewhere in between.
+     5: There has to be a root.
+  beat2:
+     0: And that gives us an algorithm that computers actually use: bisection.
+     1: Check the midpoint, one point five.
+     2: It's positive, so the root is between one and one point five.
+     3: Check one point two five, it's negative, so the root is between one point two five and one point five.
+     4: Each step cuts the interval in half, and after about twenty steps you know the root, one point three two four seven, to six decimal places.
+     5: That's math turning directly into code.
+
+[s9] SECTION  Derivatives
+  beat0:
+     0: Part two.
+     1: Derivatives.
+
+[s10] V  The derivative: zooming in until a curve looks straight
+  img: fig:secant0 / fig:secant1 / fig:secant2 / fig:secant3
+  (pen marks: 9 )
+  beat0:
+     0: Here's the problem.
+     1: Slope is rise over run, and that needs two points.
+     2: But we want the slope of the curve y equals x squared at one point, x equals three.
+     3: So we cheat: take a second point a distance h away, and draw the line through both.
+     4: That's called a secant line.
+     5: With h equals two, the second point is at five, twenty five, so the slope is twenty five minus nine, over two: eight.
+  beat1:
+     0: Move the second point closer.
+     1: With h equals one, the slope is seven.
+  beat2:
+     0: With h equals one half, it's six and a half.
+     1: Do the algebra in general: the slope is three plus h, all squared, minus nine, all over h.
+     2: Expand, and you get six h plus h squared, over h, which is six plus h.
+  beat3:
+     0: Now let h shrink to zero.
+     1: That's a limit!
+     2: Six plus h heads to six.
+     3: So the slope of the tangent line at x equals three is exactly six.
+     4: That's the derivative: f prime of x is the limit, as h goes to zero, of f of x plus h minus f of x, over h.
+     5: It's the instantaneous rate of change.
+     6: Notice we needed limits, because plugging in h equals zero directly gives zero over zero.
+
+[s11] WB  Worked example: a derivative from the definition
+  step0 board+: $f(x)=\frac{1}{x}$ || $f'(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}$ || $=\lim_{h\to 0}\frac{\frac{1}{x+h}-\frac{1}{x}}{h}$ || PEN None
+     0: Let's use the definition ourselves, on a new function: f of x equals one over x.
+     1: Write the definition first: the limit as h goes to zero of f of x plus h, minus f of x, over h.
+     2: Substitute our function: one over x plus h, minus one over x, all over h.
+  step1 board+: $=\lim_{h\to 0}\frac{x-(x+h)}{x\,(x+h)\,h}$ || $=\lim_{h\to 0}\frac{-h}{x\,(x+h)\,h}$ || PEN ('circle',) on \frac{-h}
+     0: Combine the two fractions on top over a common denominator, x times x plus h.
+     1: The numerator becomes x minus x plus h, which is just negative h.
+     2: So the whole thing is negative h over x times x plus h times h.
+  step2 board+: $=\lim_{h\to 0}\frac{-1}{x\,(x+h)}$ || $f'(x) = -\frac{1}{x^2}$ || $f'(2) = -\frac{1}{4}$ || PEN None
+     0: The h's cancel, which is exactly what removes the zero over zero.
+     1: Now let h go to zero: we get negative one over x squared.
+     2: At x equals two, the slope is negative one quarter, and you can see that tangent line on the graph, gently sloping downward.
+
+[s12] WB  Three notations for one idea
+  step0 board+: $f'(x)\ =\ y'\ =\ \frac{dy}{dx}\ =\ \frac{d}{dx}\,f(x)$ || all mean: the slope of f at x || PEN ('box',) on $f'(x)\ =\ y'
+     0: Before we go on, let's clear up the notation, because textbooks mix it freely.
+     1: If y equals f of x, its derivative can be written f prime of x, y prime, d y d x, or d d x of f of x.
+     2: These all mean exactly the same thing: the slope of f at x.
+  step1 board+: $f'$ : short and handy || $\frac{dy}{dx}$ : tiny change in y  over  tiny change in x || $\frac{d}{dx}$ : an instruction, "differentiate"
+     0: Prime notation, from Lagrange, is short and handy.
+     1: Leibniz notation, d y over d x, reminds you it came from a tiny change in y over a tiny change in x.
+     2: And d over d x, on its own, is an instruction: take the derivative of whatever comes next, with respect to x.
+  step2 board+: $\frac{dy}{dx} = \frac{dy}{du}\cdot\frac{du}{dx}$  (looks li || PEN ('circle',) on $\frac{dy}{dx} = \frac{dy}{du}
+     0: One warning.
+     1: d y d x is not really a fraction, because it's a limit.
+     2: But in the chain rule it behaves like one, which is exactly why Leibniz's notation won.
+
+[s13] V  Shortcut rules (so you never use the limit by hand again)
+  img: fig:rules
+  (pen marks: 6 )
+  beat0:
+     0: Computing limits every time would be painful, so we derive rules once and reuse them.
+     1: The power rule: the derivative of x to the n is n times x to the n minus one.
+     2: So x to the fifth becomes five x to the fourth, and our x squared becomes two x, which is six at x equals three, matching what we found.
+     3: Constants just come along for the ride.
+     4: Derivatives of sums are sums of derivatives.
+     5: Products need the product rule: derivative of the first times the second, plus the first times the derivative of the second.
+     6: Quotients have the quotient rule: low d high minus high d low, over low squared.
+     7: And the most important one, the chain rule, for functions inside functions.
+     8: Let's look at that one more closely.
+
+[s14] WB  Worked example: product and quotient rules
+  step0 board+: $y = x^2\,\sin x$ || $(fg)' = f'g + fg'$
+     0: Let's actually use the product rule.
+     1: y equals x squared times sine x.
+     2: Call the first factor f, x squared, and the second g, sine x.
+     3: The rule: f prime g plus f g prime.
+  step1 board+: PEN ('underline',) on $y' = 2x\,\sin x || $y' = 2x\,\sin x + x^2\cos x$
+     0: f prime is two x, so the first term is two x sine x.
+     1: g prime is cosine x, so the second term is x squared cosine x.
+     2: Add them.
+  step2 board+: $y = \frac{x}{x^2+1}$ || $(f/g)' = \frac{f'g - fg'}{g^2}$ || $y' = \frac{(1)(x^2+1) - x\,(2x)}{(x^2+1)^2} = \frac{1 - x^2
+     0: Now a quotient: x over x squared plus one.
+     1: Low d high, minus high d low, over low squared.
+     2: The low is x squared plus one, d high is one.
+     3: The high is x, d low is two x.
+  step3 board+: $(fg)' \neq f'\,g'$ || PEN ('underline',) on $(fg)' \neq f'\,g'$ || test $f = g = x$:  $f'g' = 1$,  but  $(x^2)' = 2x$ || PEN ('underline',) on test $f = g = x$
+     0: And the most common mistake on every first exam: the derivative of a product is not the product of the derivatives.
+     1: Test it on x times x.
+     2: The product of the derivatives is one times one, which is one.
+     3: But x times x is x squared, whose derivative is two x.
+     4: Wrong.
+
+[s15] V  The chain rule: rates multiply
+  img: fig:chain
+  • Function inside a function: y = sin(3x²)
+  • Inner rate × outer rate
+  • Gears: if A turns B 3× as fast, and B turns C 2× as fast, C turns 6× as fast as A
+  (pen marks: 5 )
+  beat0:
+     0: The chain rule handles composition, a function inside another function.
+     1: Take y equals sine of three x squared.
+     2: There's an inner function, u equals three x squared, and an outer function, y equals sine of u.
+  beat1:
+     0: Each stage has its own rate.
+     1: The inner one changes at six x.
+     2: The outer one changes at cosine of u.
+     3: The chain rule says: multiply them.
+     4: So d y d x equals cosine of three x squared, times six x.
+  beat2:
+     0: Think of gears.
+     1: If gear A turns gear B three times as fast, and B turns C twice as fast, then C turns six times as fast as A.
+     2: Rates multiply through the chain.
+     3: You'll use this constantly, including in machine learning, where training a neural network is the chain rule applied millions of times.
+     4: That algorithm is called backpropagation.
+
+[s16] WB  Worked example: the chain rule
+  step0 board+: $y = (3x^2+1)^5$ || inside:  $u = 3x^2+1$,   outside:  $y = u^5$ || PEN ('underline',) on inside:
+     0: Let's differentiate y equals three x squared plus one, all to the fifth power.
+     1: Don't expand it!
+     2: Instead, name the inside: u equals three x squared plus one.
+     3: Then y is just u to the fifth.
+  step1 board+: $\frac{dy}{du} = 5u^4$ || PEN ('circle',) on = 5u^4$ || $\frac{du}{dx} = 6x$ || PEN ('circle',) on = 6x$
+     0: Find each rate separately.
+     1: The outer rate, d y d u, is five u to the fourth.
+     2: The inner rate, d u d x, is six x.
+  step2 board+: $\frac{dy}{dx} = \frac{dy}{du}\cdot\frac{du}{dx} = 5u^4\cdot || PEN ('underline',) on \cdot\frac{du}{dx} = 5u^4 || $\frac{dy}{dx} = 30x\,(3x^2+1)^4$
+     0: The chain rule says multiply them.
+     1: Five u to the fourth times six x.
+     2: Now put u back in terms of x: thirty x times three x squared plus one, to the fourth.
+  step3 board+: at $x=1$:  $30\cdot 1\cdot 4^4 = 30\cdot 256 = 7680$ || PEN ('circle',) on 7680
+     0: Let's get a number.
+     1: At x equals one, the inside is four, four to the fourth is two hundred fifty six, and thirty times two hundred fifty six is seven thousand six hundred eighty.
+     2: Expanding the fifth power by hand would have taken a page.
+     3: The chain rule took three lines.
+
+[s17] V  Derivatives of the special functions
+  img: fig:sincos
+  • (sin x)′ = cos x  ·  (cos x)′ = −sin x
+  • (eˣ)′ = eˣ — its own slope
+  • (ln x)′ = 1/x
+  (pen marks: 6 )
+  beat0:
+     0: Some derivatives you just memorize.
+     1: Look at the sine wave on top.
+     2: At zero it's climbing steeply, slope one.
+     3: At pi over two it's flat at the peak, slope zero.
+     4: At pi it's falling, slope negative one.
+     5: Plot those slopes on the bottom and you trace out the cosine wave.
+     6: So the derivative of sine is cosine.
+  beat1:
+     0: The derivative of cosine is negative sine.
+     1: This pair is why sine waves are everywhere in electrical engineering: differentiate a sine wave and you get another sine wave of the same frequency, just shifted.
+  beat2:
+     0: The exponential function, e to the x, is the only function that's its own derivative.
+     1: Its slope at every point equals its height.
+     2: That's why it describes anything whose growth is proportional to its size, like populations, compound interest, and, with a negative sign, a capacitor discharging.
+  beat3:
+     0: And the natural log, ln x, has derivative one over x.
+
+[s18] SECTION  Using derivatives
+  beat0:
+     0: Part three.
+     1: What can you do with derivatives?
+     2: A lot.
+
+[s19] V  Motion: position → velocity → acceleration
+  img: fig:motion
+  • Throw a ball up at 20 m/s:  s(t) = −4.9t² + 20t
+  • v(t) = s′(t) = −9.8t + 20
+  • a(t) = v′(t) = −9.8 m/s² (gravity)
+  • Top of flight: v = 0 → t = 2.04 s, height 20.4 m
+  (pen marks: 5 )
+  beat0:
+     0: Here's the classic example.
+     1: Throw a ball straight up at twenty meters per second.
+     2: Its height is s of t equals negative four point nine t squared plus twenty t.
+  beat1:
+     0: Velocity is the derivative of position.
+     1: Using the power rule: negative nine point eight t plus twenty.
+  beat2:
+     0: Acceleration is the derivative of velocity: a constant negative nine point eight meters per second squared.
+     1: That's gravity.
+  beat3:
+     0: Where is the ball highest?
+     1: At the top it stops for an instant, so the velocity is zero.
+     2: Solve negative nine point eight t plus twenty equals zero: t is about two point zero four seconds.
+     3: Plug back in: the height is about twenty point four meters.
+     4: Look at the three graphs lined up.
+     5: The slope of each graph is the height of the next one down.
+
+[s20] V  Linear approximation: the tangent line as a shortcut
+  img: fig:linapprox
+  • Near a point, a curve ≈ its tangent line
+  • f(x) ≈ f(a) + f′(a)(x − a)
+  • √4.1 ≈ 2 + ¼(0.1) = 2.025 (true 2.02485)
+  (pen marks: 3 )
+  beat0:
+     0: Zoom in far enough on any smooth curve and it looks like a straight line, its tangent line.
+     1: So near a point, we can replace a complicated function with a simple line.
+  beat1:
+     0: The formula: f of x is approximately f of a, plus f prime of a times x minus a.
+  beat2:
+     0: Example: estimate the square root of four point one without a calculator.
+     1: We know the square root of four is two, and the derivative of root x is one over two root x, which is one quarter at x equals four.
+     2: So root four point one is about two plus one quarter of point one, which is two point zero two five.
+     3: The true value is two point zero two four eight five.
+     4: Very close!
+     5: Engineers use this idea constantly.
+     6: In electronics, transistors are wildly nonlinear, but for small signals we replace them with their tangent line.
+     7: That's called small signal analysis, and it's how amplifiers are designed.
+
+[s21] V  Related rates: the sliding ladder
+  img: fig:ladder
+  • Always true: x² + y² = 100
+  • Differentiate in time: 2x·x′ + 2y·y′ = 0
+  • y′ = −x·x′ / y = −6·1 / 8
+  • **y′ = −0.75 ft/s** (top slides down)
+  (pen marks: 6 )
+  beat0:
+     0: Related rates problems connect how fast different quantities change.
+     1: A ten foot ladder leans against a wall, and the bottom slides away at one foot per second.
+     2: How fast is the top sliding down when the bottom is six feet from the wall?
+     3: First, write an equation that's always true: x squared plus y squared equals one hundred, by Pythagoras.
+     4: Then differentiate both sides with respect to time, using the chain rule: two x times d x d t, plus two y times d y d t, equals zero.
+     5: Why do d x d t and d y d t appear?
+     6: Because x and y both change with time.
+     7: y squared is a function of y, and y is a function of t, so the chain rule multiplies by d y d t.
+     8: This step is called implicit differentiation.
+     9: When x is six, y is eight.
+     10: Plug in: d y d t equals negative x times d x d t over y, which is negative six over eight, or negative point seven five feet per second.
+     11: The negative sign means the top is moving down.
+     12: The recipe always works: relate the quantities, differentiate with respect to time, then plug in numbers last.
+
+[s22] WB  Worked example: a growing ripple
+  step0 board+: PEN None || Given:  dr/dt = 2 cm/s.   Find dA/dt when r = 5 || PEN None
+     0: Here's another related rates problem, worked from scratch.
+     1: A stone drops into a pond and a circular ripple spreads out.
+     2: The radius grows at two centimeters per second.
+     3: How fast is the area growing when the radius is five centimeters?
+  step1 board+: $A = \pi r^2$ || $\frac{dA}{dt} = 2\pi r\,\frac{dr}{dt}$ || PEN ('circle',) on = 2\pi r\,
+     0: Step one: write an equation that's always true.
+     1: The area of a circle is pi r squared.
+     2: Step two: differentiate both sides with respect to time.
+     3: Using the chain rule, d A d t equals two pi r, times d r d t.
+  step2 board+: $= 2\pi\,(5)(2)$ || $\frac{dA}{dt} = 20\pi \approx 62.8\ \mathrm{cm^2/s}$
+     0: Step three, and only now, plug in the numbers: two pi times five times two.
+     1: That's twenty pi, about sixty three square centimeters per second.
+     2: Notice the area grows faster as the ripple gets bigger, even though the radius grows at a steady rate.
+
+[s23] V  Optimization: find the best design
+  img: fig:box
+  • Maximum or minimum → slope is zero
+  • Box from a 12×12 sheet: V = x(12 − 2x)²
+  • V′ = (12 − 2x)(12 − 6x) = 0 → x = 2
+  • Best box: 2 × 8 × 8 = 128 in³
+  (pen marks: 9 )
+  beat0:
+     0: Engineering is full of optimization: least material, lowest power, maximum range.
+     1: Calculus finds the best design, because at a maximum or minimum, the curve is momentarily flat.
+     2: The derivative is zero.
+  beat1:
+     0: Example: take a twelve by twelve inch sheet of cardboard, cut an x by x square from each corner, and fold up the sides into an open box.
+     1: The base is twelve minus two x on each side, and the height is x.
+     2: So the volume is x times twelve minus two x, squared.
+  beat2:
+     0: Take the derivative and factor it: twelve minus two x, times twelve minus six x.
+     1: Set it to zero: x equals six, which gives a flat box with no volume, or x equals two.
+  beat3:
+     0: So cut two inch squares.
+     1: The box is two by eight by eight, for a volume of one hundred twenty eight cubic inches.
+     2: The graph confirms it: the volume peaks exactly where the slope is zero.
+     3: One more habit: when x is limited to a range, here between zero and six, also check the two endpoints.
+     4: Both give zero volume, so x equals two really is the best.
+
+[s24] WB  Worked example: the biggest pen by a river
+  step0 board+: PEN None || 100 m of fence, river on one side. || Maximize the area.
+     0: Let's do a full optimization problem on the board.
+     1: You have one hundred meters of fence to build a rectangular pen along a straight river.
+     2: The river side needs no fence.
+     3: What dimensions give the largest area?
+  step1 board+: PEN None || $A(x) = x\,(100-2x) = 100x - 2x^2$ || PEN None
+     0: Draw it.
+     1: Call the two sides that touch the river x.
+     2: The fence covers x, plus x, plus the far side, so the far side is one hundred minus two x.
+     3: The area is x times one hundred minus two x.
+  step2 board+: $A'(x) = 100 - 4x$ || $100 - 4x = 0 \;\Rightarrow\; x = 25$ || PEN ('circle',) on x = 25
+     0: At the maximum, the slope is zero.
+     1: The derivative is one hundred minus four x.
+     2: Set it equal to zero, and x equals twenty five.
+  step3 board+: $25 \times 50 = 1250\ \mathrm{m^2}$ || check: $A''(x) = -4 < 0$  so it's a maximum || PEN ('check',) on so it's a maximum
+     0: So the sides are twenty five meters and the far side is fifty meters, for an area of twelve hundred fifty square meters.
+     1: Check that it's a maximum: the second derivative is negative four, so the curve bends downward.
+     2: It's a peak, not a valley.
+
+[s25] V  Curve sketching: reading a function from its derivatives
+  img: fig:sketch
+  • f ′ > 0: rising · f ′ < 0: falling
+  • f ′ = 0: possible max or min
+  • f ′′ > 0: cupped up (min) · f ′′ < 0: cupped down (max)
+  • f ′′ changes sign: inflection point
+  (pen marks: 8 )
+  beat0:
+     0: The derivative tells you the shape of a graph without plotting a single point.
+     1: Where f prime is positive, the function is rising.
+     2: Where it's negative, it's falling.
+  beat1:
+     0: Where f prime is zero, the graph is flat: a possible peak or valley.
+     1: For f of x equals x cubed minus three x, f prime is three x squared minus three, which is zero at x equals plus and minus one.
+     2: But careful: a zero slope doesn't guarantee a peak or a valley.
+     3: x cubed is flat at zero and keeps rising straight through it.
+     4: So we need one more test.
+  beat2:
+     0: The second derivative tells you which way the curve bends.
+     1: Here f double prime is six x.
+     2: At x equals negative one it's negative, so the curve is cupped downward: a local maximum, at height two.
+     3: At x equals one it's positive, cupped upward: a local minimum, at negative two.
+  beat3:
+     0: And where the second derivative changes sign, at x equals zero, the curve switches its bend.
+     1: That's called an inflection point.
+
+[s26] V  Newton's method: how calculators find roots
+  img: fig:newton
+  • Guess → follow the tangent line to zero → repeat
+  • x(n+1) = x(n) − f(x(n)) / f′(x(n))
+  • √2: 1 → 1.5 → 1.41667 → 1.414216 (correct digits double each step)
+  (pen marks: 8 )
+  beat0:
+     0: How does a calculator compute the square root of two?
+     1: Often with Newton's method, which uses tangent lines.
+     2: Start with a guess, follow the tangent line down to where it hits zero, and use that as your next guess.
+  beat1:
+     0: The formula is: the next x equals the current x minus f of x over f prime of x.
+  beat2:
+     0: To find root two, solve x squared minus two equals zero.
+     1: Start at one.
+     2: The next guess is one minus negative one over two, which is one point five.
+     3: Then one point four one six six seven.
+     4: Then one point four one four two one six, which is already correct to six digits.
+     5: Each step roughly doubles the number of correct digits.
+     6: Bisection, from earlier, is slower but never fails.
+     7: Newton's method is fast but needs a decent starting guess.
+     8: Choosing between reliable and fast is a trade off you'll make again and again.
+
+[s27] SECTION  Integrals
+  beat0:
+     0: Part four.
+     1: Integrals.
+
+[s28] V  Area by rectangles: Riemann sums
+  img: fig:riemann4 / fig:riemann8 / fig:riemann32
+  • Approximate area with rectangles
+  • More, thinner rectangles → better answer
+  • Limit of infinitely many → the integral ∫
+  (pen marks: 6 )
+  beat0:
+     0: How do you find the area under the curve y equals x squared, from zero to two?
+     1: There's no formula from geometry for that shape.
+     2: So we approximate it with rectangles.
+     3: Four rectangles, each half a unit wide, with each height taken from the curve at the rectangle's right edge, give a total area of three point seven five.
+     4: That's too big, because the rectangles poke above the curve.
+  beat1:
+     0: Use eight thinner rectangles, and the total drops to about three point one nine.
+     1: Closer.
+  beat2:
+     0: With thirty two rectangles, we get about two point seven nine.
+     1: As the number of rectangles goes to infinity, the sum approaches the exact area, eight thirds, about two point six six seven.
+     2: That limit is the definition of the definite integral.
+     3: The integral sign really does mean sum: a sum of infinitely many infinitely thin rectangles.
+
+[s29] V  The Fundamental Theorem of Calculus
+  img: fig:ftc
+  • Antiderivative F: a function whose derivative is f
+  • ∫ from a to b of f(x) dx = F(b) − F(a)
+  • ∫₀² x² dx = [x³/3]₀² = 8/3 exactly
+  • Distance = ∫ speed dt
+  (pen marks: 3 )
+  beat0:
+     0: Adding up infinitely many rectangles sounds impossible to do by hand.
+     1: Here's the miracle that makes it easy.
+     2: First, an antiderivative of f is a function F whose derivative is f.
+     3: Run the derivative backwards.
+  beat1:
+     0: The fundamental theorem of calculus says: the integral of f from a to b equals F of b minus F of a.
+     1: Find an antiderivative, evaluate at the two ends, and subtract.
+  beat2:
+     0: Let's check our rectangle problem.
+     1: An antiderivative of x squared is x cubed over three, because its derivative is x squared.
+     2: Evaluate from zero to two: eight thirds minus zero.
+     3: Exactly eight thirds, the number our rectangles were creeping toward.
+  beat3:
+     0: Here's what it means physically.
+     1: If your speed is three t meters per second, the distance you travel in six seconds is the area under the speed graph.
+     2: The antiderivative is three halves t squared.
+     3: At six seconds that's fifty four meters.
+     4: The speedometer and the odometer, the derivative and the integral, are two sides of the same coin.
+     5: That's why it's called fundamental.
+
+[s30] WB  Why '+ C'? Indefinite vs definite integrals
+  step0 board+: $\frac{d}{dx}\,\frac{x^3}{3} = x^2$ || PEN None || $\frac{d}{dx}(\frac{x^3}{3} + 5) = x^2$
+     0: Every student asks where the plus C comes from.
+     1: Differentiate x cubed over three, and you get x squared.
+     2: But add five, or subtract seven, and the derivative is still x squared, because a constant has slope zero.
+  step1 board+: PEN None || PEN None || $\int x^2\,dx = \frac{x^3}{3} + C$
+     0: So going backwards, we can't know which constant was there.
+     1: The answer is a whole family of curves, each shifted up or down, all with the same slope at every x.
+     2: We write the family as x cubed over three, plus C.
+  step2 board+: $\int_0^2 x^2\,dx = (\frac{8}{3} + C) - (0 + C) = \frac{8}{3 || PEN ('circle',) on $\int_0^2 x^2\,dx || PEN ('check',) on (0 + C) = \frac{8}{3}$
+     0: The d x at the end means: with respect to x.
+     1: It's the width of those thin rectangles.
+     2: Now a definite integral, from zero to two.
+     3: The C appears at both ends, and cancels when we subtract.
+     4: That's why definite integrals never need it.
+  step3 board+: indefinite → a family of functions (+ C) || definite → a number (an area)
+     0: So remember: an indefinite integral, with no limits, is a function, really a family of functions, so it needs plus C.
+     1: A definite integral, with limits, is a number, an area.
+
+[s31] WB  Worked example: an exact area in three lines
+  step0 board+: $\int_0^2 (3x^2 + 2x)\,dx$ || PEN None
+     0: Let's use the fundamental theorem on a fresh example.
+     1: Find the area under y equals three x squared plus two x, from zero to two.
+  step1 board+: $F(x) = x^3 + x^2$ || PEN ('underline',) on $F(x) = x^3 + x^2$ || check: $F'(x) = 3x^2 + 2x$ || PEN ('check',) on check: $F'(x)
+     0: First, find an antiderivative, term by term, using the power rule backwards.
+     1: Three x squared comes from x cubed, and two x comes from x squared.
+     2: So F of x is x cubed plus x squared.
+     3: Check it: the derivative is three x squared plus two x.
+  step2 board+: $= F(2) - F(0) = (8 + 4) - 0$ || $= 12$ || PEN None
+     0: Now evaluate at the top and the bottom and subtract.
+     1: At two: eight plus four, which is twelve.
+     2: At zero: zero.
+     3: So the area is exactly twelve.
+     4: That shaded region would take thousands of rectangles to approximate, and we got it exactly in three lines.
+
+[s32] EX  u-substitution: the chain rule in reverse
+  img: fig:battery
+  CODE:
+    ∫ 2x·cos(x²) dx
+    
+    let u = x²   →   du = 2x dx
+    
+    = ∫ cos(u) du
+    = sin(u) + C
+    = sin(x²) + C
+    
+    check: d/dx sin(x²) = cos(x²)·2x  ✓
+  (pen marks: 8 )
+  beat0:
+     0: Not every integral is a simple power.
+     1: A common trick is substitution, which is the chain rule run backwards.
+     2: Look at the integral of two x times cosine of x squared.
+     3: The inside function is x squared, and its derivative, two x, is sitting right there.
+     4: So let u equal x squared.
+     5: Then d u equals two x d x, and the whole integral becomes the integral of cosine u d u.
+     6: That's sine u, plus a constant.
+     7: Put x back in: sine of x squared, plus C.
+     8: Always check by differentiating.
+     9: The derivative of sine of x squared is cosine of x squared, times two x.
+     10: It matches.
+  beat1:
+     0: And here's an everyday engineering integral.
+     1: On the right is the current drawn from a phone battery: two amps for half an hour, then one amp for half an hour.
+     2: The total charge used is the integral of current over time, which is just the area under this graph.
+     3: Two times one half, plus one times one half: one point five amp hours, or fifteen hundred milliamp hours.
+     4: That's exactly the unit printed on every battery you own.
+
+[s33] Q  Key takeaways
+  BIG: Derivative = **rate** right now. Integral = **total** over time. The Fundamental Theorem says they undo each other.
+  cap: Next: MATH 150B, Calculus II, where we learn many more integration techniques and infinite series.
+  beat0:
+     0: Let's wrap up.
+     1: A limit tells you where a function is heading.
+     2: The derivative is the instantaneous rate of change, the slope of the tangent line, built from a limit.
+     3: Derivatives find velocities, approximations, maximums and minimums.
+     4: The integral adds up infinitely many tiny pieces to find areas and totals.
+     5: And the fundamental theorem of calculus says derivatives and integrals undo each other.
+     6: Every later course will use these tools, so if anything felt shaky, rewatch that section and work the examples yourself with pencil and paper.
+     7: Next up, Calculus two.
+     8: See you there.

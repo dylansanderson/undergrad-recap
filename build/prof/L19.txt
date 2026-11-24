@@ -1,0 +1,332 @@
+﻿#### L19_egcp371: EGCP 371 Signals & Systems
+
+[s0] TITLE  Modeling & Simulation of Signals and Systems
+  img: a:mixing_console
+  beat0:
+     0: Welcome to E G C P three seventy one, signals and systems.
+     1: Audio equalizers, noise cancelling headphones, cell phone radios, image compression, sensor filtering and control systems all rest on the ideas in this course.
+     2: You'll learn to describe signals and systems mathematically, to see signals in terms of their frequencies, to sample them correctly, and to predict whether a system is stable, using MATLAB to simulate it all.
+
+[s1] V  Signals: continuous and discrete
+  img: fig:signals
+  • Continuous x(t) vs discrete x[n] = x(nT)
+  • Building blocks: step, impulse, exponential, sinusoid
+  • Impulse δ(t): infinitely brief, area 1
+  • Sifting: ∫ x(t) δ(t − t₀) dt = x(t₀)
+  (pen marks: 6 )
+  beat0:
+     0: A signal is any quantity that varies with time: a voltage, a sound pressure, a temperature.
+     1: Continuous time signals are defined at every instant.
+     2: Discrete time signals are sequences of samples, x of n, like the numbers an A D C produces.
+  beat1:
+     0: A few building blocks describe almost everything.
+     1: The unit step turns on at time zero.
+     2: The decaying exponential describes capacitor discharges.
+     3: Sinusoids describe anything periodic.
+  beat2:
+     0: The strangest and most useful is the impulse, delta of t: an infinitely brief spike with an area of exactly one.
+     1: Think of it as an idealized hammer tap.
+  beat3:
+     0: Its key property, called sifting: integrating any signal times a shifted impulse picks out the signal's value at that instant.
+     1: That's why, if you know how a system responds to one impulse, you can predict its response to anything.
+
+[s2] V  Systems and the magic of LTI
+  img: fig:lti
+  • Linear: scale & add inputs → outputs scale & add
+  • Time-invariant: behaves the same at any time
+  • Causal (no peeking at the future) · BIBO stable
+  • LTI → completely described by its impulse response h(t)
+  (pen marks: 5 )
+  beat0:
+     0: A system takes an input signal and produces an output signal: an amplifier, a filter, a room's echo, a car's suspension.
+  beat1:
+     0: The most important class is linear and time invariant, L T I.
+     1: Linear means superposition holds: double the input, double the output, and the response to a sum is the sum of the responses.
+     2: Time invariant means the system behaves the same today as tomorrow.
+  beat2:
+     0: We also care whether a system is causal, meaning the output doesn't depend on future inputs, which every real time system must be, and whether it's stable: bounded inputs always give bounded outputs.
+  beat3:
+     0: Here's why L T I systems are so special.
+     1: Any input can be written as a sum of shifted, scaled impulses.
+     2: So if you know the response to one impulse, h of t, you know the response to everything.
+     3: The output is the input convolved with h.
+     4: And in the frequency domain, convolution becomes simple multiplication: Y equals H times X.
+     5: That single fact is the reason transforms exist.
+
+[s3] V  Convolution: flip, shift, multiply, add
+  img: fig:conv0 / fig:conv1 / fig:conv2 / fig:conv3
+  (pen marks: 4 )
+  beat0:
+     0: Convolution sounds intimidating, so let's watch it.
+     1: The input x is a one second rectangular pulse, in blue.
+     2: The system's impulse response is a decaying exponential, like an R C circuit.
+     3: To find the output at time t, flip h around and slide it to position t, the orange curve.
+     4: Multiply the two, and add up the overlapping area.
+     5: At t equals point three, there's only a small overlap.
+  beat1:
+     0: Slide further.
+     1: At point eight, the overlap is bigger, so the output keeps rising.
+  beat2:
+     0: At one point five, the pulse has ended, and the overlap is shrinking.
+     1: The output is now decaying.
+  beat3:
+     0: By two and a half, it's almost gone.
+     1: Plot the area at every position, and you get the purple output: the R C circuit charging during the pulse and discharging afterward, exactly what you'd measure on a scope.
+     2: In discrete time it's the same idea with sums instead of integrals: y of n equals the sum over k of x of k times h of n minus k.
+     3: Every digital filter computes exactly that.
+
+[s4] WB  Worked example: convolution by hand
+  step0 board+: x = [1, 2, 1] || PEN None || h = [1, 1] || PEN None
+     0: Let's convolve two short signals by hand.
+     1: The input x is one, two, one.
+     2: The system's impulse response h is one, one: it adds each sample to the one before it.
+  step1 board+: $y[n] = \sum_k x[k]\,h[n-k]$ || PEN ('underline',) on $y[n] = \sum_k || y[0] = 1·1 = 1 || PEN None || PEN ('circle',) on y[0] = 1·1 = 1
+     0: The output at time n is the sum of x of k times h of n minus k.
+     1: Flip h, slide it along x, multiply the overlapping samples, and add.
+     2: At n equals zero, only x zero overlaps: one times one, so y zero is one.
+  step2 board+: y[1] = 1 + 2 = 3 || PEN None || PEN ('circle',) on y[1] = 1 + 2 = 3 || y[2] = 2 + 1 = 3 || PEN None || PEN ('circle',) on y[2] = 2 + 1 = 3 || y[3] = 1 || PEN None || PEN ('circle',) on y[3] = 1
+     0: At n equals one, two samples overlap: x zero plus x one, one plus two, three.
+     1: At n equals two: x one plus x two, two plus one, three.
+     2: At n equals three, only x two remains: one.
+  step3 board+: y = [1, 3, 3, 1] || length = 3 + 2 − 1 = 4 || PEN ('underline',) on length = 3 + 2
+     0: So y is one, three, three, one.
+     1: Notice the output is one sample longer than the input: three plus two minus one.
+     2: And it's the same arithmetic as multiplying polynomials: one plus two z plus z squared, times one plus z.
+     3: That connection is exactly why transforms turn convolution into multiplication.
+
+[s5] V  Fourier series: any periodic signal is a sum of sines
+  img: a:fourier / fig:fs1 / fig:fs3 / fig:fs9 / fig:fs25
+  (pen marks: 3 )
+  beat0:
+     0: In the early eighteen hundreds, Joseph Fourier claimed that any periodic signal can be written as a sum of sines and cosines at whole number multiples of a fundamental frequency, called harmonics.
+     1: Mathematicians doubted him at first.
+     2: He was right.
+  beat1:
+     0: Let's build a square wave.
+     1: Start with one sine wave at the fundamental frequency.
+     2: It's a rough approximation.
+  beat2:
+     0: Add the third harmonic, at one third the amplitude, and the fifth at one fifth.
+     1: The edges sharpen.
+  beat3:
+     0: Nine terms, and it's clearly square.
+  beat4:
+     0: Twenty five terms, and it hugs the square wave closely.
+     1: A square wave contains only odd harmonics, with amplitudes falling off as one over k.
+     2: But notice the little spikes at each edge, about nine percent of the jump.
+     3: They get narrower with more terms, but never shorter.
+     4: That's the Gibbs phenomenon.
+     5: This is why a digital clock signal, which is roughly a square wave, has energy at many harmonics, and why fast digital signals can cause radio interference at multiples of their clock frequency.
+
+[s6] V  The Fourier transform: seeing frequencies
+  img: fig:spectrum
+  • X(ω) = ∫ x(t) e^(−jωt) dt
+  • Time domain ⇄ frequency domain: same signal, two views
+  • Convolution in time = multiplication in frequency
+  • Frequency response H(jω): gain & phase per frequency
+  (pen marks: 5 )
+  beat0:
+     0: For signals that aren't periodic, the Fourier transform generalizes the series.
+     1: It measures how much of each frequency is present in a signal.
+  beat1:
+     0: Look at this signal.
+     1: In the time domain, on top, it's a messy wiggle.
+     2: In the frequency domain, on the bottom, it's obvious: three tones, at four hundred forty, eight hundred eighty and thirteen twenty hertz, the note A and two of its harmonics.
+     3: Same information, two views.
+     4: Engineers switch between them constantly.
+  beat2:
+     0: The most important property: convolution in time becomes multiplication in frequency.
+     1: So to understand a filter, look at its frequency response, H, and multiply.
+  beat3:
+     0: The frequency response tells you, for each frequency, how much the system amplifies or attenuates it, and how much it shifts its phase.
+     1: An audio equalizer, like the sliders on a mixing console, is just a system whose frequency response you can shape by hand.
+
+[s7] V  Modulation: how radio shares the air
+  img: fig:am
+  • Multiply a message by a carrier cos(2πf_c t)
+  • Its spectrum shifts up to ±f_c
+  • Different stations → different f_c → no overlap
+  • AM radio: 540–1700 kHz; Wi-Fi: 2.4 / 5 GHz
+  (pen marks: 5 )
+  beat0:
+     0: Here's a beautiful application of the Fourier transform.
+     1: Multiply a message signal by a high frequency cosine, the carrier.
+     2: On top, you can see the message, in orange, as the envelope of the fast carrier.
+     3: That's amplitude modulation, or A M.
+  beat1:
+     0: In the frequency domain, multiplying by a cosine simply shifts the message's spectrum up to plus and minus the carrier frequency.
+  beat2:
+     0: So many stations can share the air at the same time, each shifted to its own carrier frequency, as long as their shifted spectra don't overlap.
+     1: A radio receiver uses a band pass filter to pick out one station, then shifts it back down.
+  beat3:
+     0: A M radio stations sit between about five hundred forty and seventeen hundred kilohertz.
+     1: Wi Fi uses carriers around two point four and five gigahertz, with far more sophisticated modulation, but the same principle.
+     2: In this course's second assignment, students generate a carrier, a message and the modulated signal in MATLAB and look at their spectra.
+
+[s8] V  Sampling and aliasing
+  img: fig:alias
+  • Sampling at f_s repeats the spectrum every f_s
+  • Nyquist: need f_s > 2 f_max
+  • Too slow → high frequencies masquerade as low ones
+  • Anti-alias low-pass filter before every ADC
+  (pen marks: 5 )
+  beat0:
+     0: When an A D C samples a signal f s times per second, the sampled signal's spectrum repeats every f s.
+     1: If the signal contains frequencies above half the sampling rate, those copies overlap.
+  beat1:
+     0: So the Nyquist sampling theorem says: to capture a signal whose highest frequency is f max, you must sample faster than two times f max.
+     1: That's why audio CDs sample at forty four point one kilohertz, a bit more than twice the twenty kilohertz upper limit of human hearing.
+  beat2:
+     0: Break the rule and something sneaky happens.
+     1: Here, a nine hertz signal is sampled at only ten hertz.
+     2: The red samples fit a one hertz sine wave perfectly, so that's what you'd reconstruct.
+     3: The high frequency has disguised itself as a low one.
+     4: That's aliasing, and it's the same reason wagon wheels in movies appear to spin backwards.
+  beat3:
+     0: Once aliasing happens, it can't be undone, because the samples are identical.
+     1: So every A D C needs an analog low pass filter in front of it, an anti aliasing filter, to remove frequencies above half the sampling rate before sampling.
+
+[s9] WB  Worked example: a 7 kHz tone sampled at 10 kHz
+  step0 board+: $f = 7\ \mathrm{kHz}$,  $f_s = 10\ \mathrm{kHz}$ || PEN None || need $f_s > 14\ \mathrm{kHz}$! || PEN ('circle',) on need $f_s > 14
+     0: Here's aliasing in action.
+     1: A seven kilohertz tone is sampled at ten kilohertz.
+     2: Nyquist says we need more than twice the highest frequency, fourteen kilohertz.
+     3: We're too slow.
+  step1 board+: PEN None
+     0: Take a sample every tenth of a millisecond.
+     1: These red dots are all the computer ever sees.
+  step2 board+: PEN None || alias $= |7 - 10| = 3\ \mathrm{kHz}$
+     0: But a three kilohertz cosine passes through every single dot.
+     1: The computer can't tell them apart, so the seven kilohertz tone shows up as three kilohertz: the sampling rate minus the signal frequency.
+  step3 board+: filter BEFORE the ADC || PEN ('underline',) on filter BEFORE the ADC
+     0: Once sampled, the damage can't be undone.
+     1: That's why every A D C has an analog low pass filter in front of it, to remove anything above half the sampling rate before sampling.
+
+[s10] V  The Laplace transform: poles decide stability
+  img: fig:splane
+  • X(s) = ∫₀^∞ x(t) e^(−st) dt, s = σ + jω
+  • Derivatives become multiplication by s → ODEs become algebra
+  • H(s) = N(s)/D(s); poles = roots of D(s)
+  • All poles in the left half-plane → stable
+  (pen marks: 7 )
+  beat0:
+     0: The Laplace transform generalizes Fourier by using a complex frequency, s, equals sigma plus j omega.
+     1: Its superpower: differentiation becomes multiplication by s, so the differential equations from math two fifty B turn into algebra.
+     2: Solve for the output, then transform back with partial fractions, the technique from Calculus two.
+  beat1:
+     0: Every L T I system gets a transfer function, H of s, a ratio of polynomials.
+     1: The roots of the denominator are the poles, and they're exactly the eigenvalues from linear algebra.
+     2: Each pole contributes a term to the impulse response.
+     3: A pole at minus two point two gives a smooth exponential decay.
+     4: A pair at minus one plus or minus two j gives a decaying oscillation: the real part sets the decay rate, the imaginary part sets the ringing frequency.
+     5: A pole at plus one gives exponential growth: an unstable system.
+     6: So the rule is simple: a system is stable if and only if all its poles are in the left half of the s plane.
+     7: Every amplifier, power supply, drone flight controller and cruise control is designed around this picture.
+
+[s11] V  Frequency response and Bode plots
+  img: fig:bode_rc
+  • Evaluate H(s) at s = jω
+  • RC low-pass: H = 1 / (1 + jωRC)
+  • 1 kΩ, 100 nF → f_c ≈ 1.6 kHz, then −20 dB/decade
+  • Bode: magnitude in dB and phase vs log frequency
+  (pen marks: 5 )
+  beat0:
+     0: To get a system's frequency response, evaluate its transfer function on the imaginary axis, at s equals j omega.
+     1: Take the simple R C low pass filter: H equals one over one plus j omega R C.
+     2: With one kilohm and one hundred nanofarads, the corner frequency is one over two pi R C, about one point six kilohertz.
+     3: Below that, signals pass almost unchanged.
+     4: At the corner, the gain is minus three decibels, half power, and the phase is minus forty five degrees.
+     5: Above it, the gain falls by twenty decibels for every factor of ten in frequency, and the phase approaches minus ninety degrees.
+     6: A Bode plot shows exactly this: gain in decibels and phase, against frequency on a log scale.
+     7: Engineers sketch Bode plots by hand from the poles and zeros, a skill you'll use for filters, amplifiers and feedback control.
+
+[s12] WB  Worked example: an RC low-pass filter
+  step0 board+: $H(j\omega) = \frac{1}{1 + j\omega RC}$ || $f_c = \frac{1}{2\pi RC} = \frac{1}{2\pi(10^3)(10^{-7})} \ap || PEN None || PEN None || PEN ('circle',) on 1.6\ \mathrm{kHz}
+     0: Take an RC low pass filter with one kilohm and one hundred nanofarads.
+     1: Its frequency response is one over one plus j omega R C.
+     2: The cutoff frequency, where the output falls to minus three decibels, is one over two pi R C: about one point six kilohertz.
+  step1 board+: $|H| = \frac{1}{\sqrt{1 + (f/f_c)^2}}$ || 1 kHz: $|H| = 0.85 \to -1.4\ \mathrm{dB}$ || PEN ('circle',) on 1 kHz:
+     0: The magnitude is one over the square root of one plus f over f c squared.
+     1: At one kilohertz, that's point eight five, or minus one point four decibels.
+     2: Barely touched.
+  step2 board+: 10 kHz: $|H| = 0.16 \to -16\ \mathrm{dB}$ || PEN None || −20 dB per decade above fc || PEN ('underline',) on 20 dB per decade
+     0: At ten kilohertz, it's point one six, or minus sixteen decibels.
+     1: Above the cutoff, the response falls about twenty decibels for every factor of ten in frequency.
+     2: That's how a filter keeps the signal you want and removes high frequency noise.
+
+[s13] V  Discrete time: the Z-transform
+  img: fig:zplane
+  • X(z) = Σ x[n] z⁻ⁿ; z⁻¹ = one-sample delay
+  • y[n] = x[n] + a·y[n−1] → H(z) = 1 / (1 − a z⁻¹)
+  • Stable iff all poles inside the unit circle
+  • Connect: z = e^(sT)
+  (pen marks: 6 )
+  beat0:
+     0: For discrete time signals, the Z transform plays the role of Laplace.
+     1: Its key idea: multiplying by z to the minus one means delay by one sample.
+  beat1:
+     0: So a difference equation, like y of n equals x of n plus a times y of n minus one, becomes H of z equals one over one minus a z to the minus one.
+     1: That has a pole at z equals a.
+  beat2:
+     0: In discrete time, the stability boundary is the unit circle.
+     1: A pole inside it, like point eight, gives an impulse response of point eight to the n, decaying.
+     2: A pole outside it, like one point two, grows forever.
+  beat3:
+     0: The two worlds are connected by z equals e to the s T, which maps the left half of the s plane to the inside of the unit circle.
+     1: In the course assignments, students compute Z transforms and plot poles and zeros in MATLAB, exactly like this.
+
+[s14] WB  Worked example: a one-line digital filter
+  step0 board+: y[n] = x[n] + a * y[n-1]; || impulse in, a = 0.5 || PEN ('circle',) on a * y[n-1]
+     0: Here's a digital filter in one line of code: y of n equals x of n, plus a times y of n minus one.
+     1: Feed it a single one, an impulse, with a equals one half.
+  step1 board+: y = 1, 0.5, 0.25, 0.125, ... || PEN None || PEN ('underline',) on y = 1, 0.5, 0.25 || $H(z) = \frac{1}{1 - a z^{-1}}$:  pole at $z = a$ || PEN ('circle',) on pole at
+     0: The output is one, then half of that, then a quarter, an eighth, decaying forever.
+     1: That's an infinite impulse response.
+     2: Its z transform is one over one minus a z inverse, with a pole at z equals a.
+  step2 board+: $|a| < 1$: stable    $|a| > 1$: blows up || PEN None
+     0: The pole at one half is inside the unit circle, so it's stable.
+     1: Now change a to one point five.
+     2: The output grows: one, one point five, two point two five, three point three seven five, forever.
+     3: A pole outside the unit circle means the filter is unstable.
+     4: One number decides it.
+
+[s15] V  Digital filters, the DFT and the FFT
+  img: fig:filters
+  • FIR: weighted sum of recent inputs — always stable
+  • IIR: feeds back old outputs — sharp, cheap, can go unstable
+  • DFT: spectrum of N samples; FFT computes it in O(N log N)
+  • Frequency resolution = f_s / N
+  (pen marks: 6 )
+  beat0:
+     0: Digital filters are just difference equations running on a processor.
+     1: A finite impulse response, or F I R, filter is a weighted sum of recent inputs.
+     2: The simplest is a moving average: here, averaging nine samples smooths a noisy sensor reading.
+     3: F I R filters are always stable and can have perfectly linear phase.
+  beat1:
+     0: An infinite impulse response, or I I R, filter also feeds back old outputs.
+     1: This one blends eighty five percent of the previous output with fifteen percent of the new input.
+     2: With just one multiply per sample, it smooths as well as a long F I R filter.
+     3: The trade off: I I R filters have poles, so a bad design can be unstable.
+  beat2:
+     0: To analyze sampled data, we use the discrete Fourier transform, the D F T, which computes the spectrum of N samples.
+     1: Done directly, it takes N squared operations.
+     2: The fast Fourier transform, the F F T, computes the same result in N log N, the divide and conquer trick from data structures.
+     3: It's been called one of the most important algorithms of the twentieth century.
+  beat3:
+     0: The frequency resolution is the sample rate divided by N: one second of audio at forty four point one kilohertz resolves frequencies one hertz apart.
+     1: F F Ts run in every phone, Wi Fi chip, M P 3 encoder and spectrum analyzer.
+
+[s16] Q  Key takeaways
+  BIG: LTI systems are defined by **h(t)**. Convolution in time = **multiplication in frequency**. Sample above **2 f_max**. Keep **poles** in the stable region.
+  cap: Next: EGCP 381, Computer Design and Organization — building a CPU.
+  beat0:
+     0: To recap.
+     1: Signals are built from steps, impulses, exponentials and sinusoids.
+     2: L T I systems are completely described by their impulse response, and the output is a convolution.
+     3: Fourier series and transforms reveal the frequencies inside signals, and turn convolution into multiplication.
+     4: Modulation shifts spectra to share the airwaves.
+     5: Sampling must be faster than twice the highest frequency, or aliasing corrupts the data.
+     6: Laplace and Z transforms turn differential and difference equations into algebra, and their poles decide stability.
+     7: And digital filters and the F F T bring all of this into software.
+     8: Next, we design a C P U.
+     9: See you there.

@@ -1,0 +1,587 @@
+﻿README.md	4KB
+CPSC-332 Database Systems\CPSC 332 Syllabus.docx	18KB
+CPSC-332 Database Systems\CPSC-332 Database Systems_summary.pdf	62KB
+CPSC-332 Database Systems\Homework\CPSC 332 Homework #1.docx	23KB
+CPSC-332 Database Systems\Homework\CPSC 332 Homework #4 Answers.docx	25KB
+CPSC-332 Database Systems\Homework\CPSC 332 Homework #4.docx	18KB
+CPSC-332 Database Systems\Homework\Homework 4 - Dylan Sanderson (1).pdf	577KB
+CPSC-332 Database Systems\Homework\Homework 4 - Dylan Sanderson.pdf	322KB
+CPSC-332 Database Systems\Homework\papers\332 paper 1 - dylan sanderson.pdf	62KB
+CPSC-332 Database Systems\Homework\papers\332 paper 2 - dylan sanderson.pdf	69KB
+CPSC-332 Database Systems\Homework\scripts & data\DepartmentStats.csv	0KB
+CPSC-332 Database Systems\Homework\scripts & data\DepartmentStats.ps1.txt	0KB
+CPSC-332 Database Systems\Homework\scripts & data\DepartmentStatus.csv	0KB
+CPSC-332 Database Systems\Lecture Notes\4413.doc	53KB
+CPSC-332 Database Systems\Lecture Notes\Chapter02.ppt	896KB
+CPSC-332 Database Systems\Lecture Notes\Weaving Relations for Cache Performance.pdf	150KB
+CPSC-351 Operating Systems\CPSC 351-04 Fall 2019 Syllabus.pdf	310KB
+CPSC-351 Operating Systems\CPSC-351 Operating Systems_summary.pdf	61KB
+CPSC-351 Operating Systems\Exams & Quizzes\Study-Guide.pdf	758KB
+CPSC-351 Operating Systems\Homework\Analysis.pdf	31KB
+CPSC-351 Operating Systems\Homework\Critical Thinking Process Homework (1) [randomDocs].pdf	155KB
+CPSC-351 Operating Systems\Homework\Critical Thinking Process Homework (1).docx	21KB
+CPSC-351 Operating Systems\Homework\Critical Thinking Process Homework (1).pdf	155KB
+CPSC-351 Operating Systems\Homework\Critical Thinking Process Homework (2).docx	26KB
+CPSC-351 Operating Systems\Homework\Critical Thinking Process Homework (2).pdf	170KB
+CPSC-351 Operating Systems\Homework\Critical Thinking Process Homework (5).pdf	140KB
+CPSC-351 Operating Systems\Homework\Critical Thinking Process Homework.docx	22KB
+CPSC-351 Operating Systems\Homework\Critical Thinking Process Homework.pdf	168KB
+CPSC-351 Operating Systems\Homework\Critical Thinking Process Homework2.pdf	170KB
+CPSC-351 Operating Systems\Homework\HW5-Solutions.docx	23KB
+CPSC-351 Operating Systems\Homework\Thread Safe Stack.pdf	220KB
+CPSC-351 Operating Systems\Homework\time.pdf	140KB
+CPSC-351 Operating Systems\Homework\VMM Simulation Homework.pdf	153KB
+CPSC-351 Operating Systems\Homework\code\sorting.c.pdf	67KB
+CPSC-351 Operating Systems\Lecture Notes\Introduction.pptx	233KB
+CPSC-362 Software Engineering\CPSC-362 Software Engineering_summary.pdf	58KB
+CPSC-362 Software Engineering\Lecture Notes\70d883a0d667f0f3c1f597e5a8e57cce-original.pdf	69KB
+CPSC-362 Software Engineering\Lecture Notes\ch05.pptx	512KB
+CPSC-362 Software Engineering\Lecture Notes\Class Diagram Examples.pdf	278KB
+CPSC-362 Software Engineering\Lecture Notes\Pressman_SEPA_9e_Ch001_PPT.pptx	725KB
+CPSC-362 Software Engineering\Lecture Notes\Software-project-planning.pdf	181KB
+CPSC-362 Software Engineering\Lecture Notes\Use Case  Activity diagram mapping.pdf	163KB
+CPSC-362 Software Engineering\Lecture Notes\Use_Case_Template.pdf	79KB
+CPSC-362 Software Engineering\Projects\FlexinFitness (Android app)\README.md	0KB
+CPSC-362 Software Engineering\Projects\sprint docs\3rd sprint Document 362 Spring2020.pdf	89KB
+CPSC-362 Software Engineering\Projects\sprint docs\Diagrams.docx	226KB
+CPSC-362 Software Engineering\Projects\sprint docs\Second Sprint.docx	410KB
+EGCP-281 Digital Logic Design (VHDL)\EGCP-281 Digital Logic Design (VHDL)_summary.pdf	61KB
+EGCP-281 Digital Logic Design (VHDL)\syllabus-egcp281-0506-spring2019.pdf	111KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab1-281 (1).docx	337KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab1-281.docx	34KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab1prelab-281.pdf	107KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab2-281 (2).docx	361KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab2-281.docx	357KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab3-281 (2).docx	31KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab3-281 [randomDocs].docx	174KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab3-281.docx	33KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab4-281 (2).docx	30KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab4-281.docx	516KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab5-281.docx	33KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab5prelab-281.pdf	49KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\lab6-281.docx	30KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\submission receipts\receipt_lab3-281.docx.pdf	268KB
+EGCP-281 Digital Logic Design (VHDL)\Labs\submission receipts\receipt_lab4-281.docx.pdf	279KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\1-IntroVHDL-281.pdf	165KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\1-IntroVHDL-281.pptx	83KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\2-Testbench-281 (3).pdf	69KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\2-Testbench-281.pdf	150KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\3-CircuitDelays-281.pdf	860KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\3-CircuitDelays-281.pptx	790KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\4-StdLogic_StdLogicVector-281.pdf	135KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\4-StdLogic_StdLogicVector-281.pptx	87KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\5-PortMap-281 (2).pdf	127KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\5-PortMap-281.pdf	221KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\5-PortMap-281.pptx	140KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\6-When_WithSelect-281.pdf	153KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\7-Process_If_Case-281.pdf	215KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\7-Process_If_Case-281.pptx	105KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\vhdl examples\full adder design.txt	0KB
+EGCP-281 Digital Logic Design (VHDL)\Lecture Notes\vhdl examples\full adder test bench.txt	1KB
+EGCP-281 Digital Logic Design (VHDL)\Projects\project_1\project_1.ip_user_files\README.txt	0KB
+EGCP-281 Digital Logic Design (VHDL)\Projects\project_1\project_1.sim\sim_1\behav\xsim.dir\Tb_Ripple_Adder_behav\Compile_Options.txt	0KB
+EGCP-281 Digital Logic Design (VHDL)\Projects\project_1\project_1.sim\sim_1\behav\xsim.dir\Tb_Ripple_Adder_behav\TempBreakPointFile.txt	0KB
+EGCP-281 Digital Logic Design (VHDL)\Projects\project_2\project_2.ip_user_files\README.txt	0KB
+EGCP-281 Digital Logic Design (VHDL)\Projects\project_2\project_2.sim\sim_1\behav\xsim.dir\Tb_clock_divider_behav\Compile_Options.txt	0KB
+EGCP-281 Digital Logic Design (VHDL)\Projects\project_2\project_2.sim\sim_1\behav\xsim.dir\Tb_clock_divider_behav\TempBreakPointFile.txt	0KB
+EGCP-281 Digital Logic Design (VHDL)\Projects\project_3\project3.ip_user_files\README.txt	0KB
+EGCP-281 Digital Logic Design (VHDL)\Reference\Microsemi_ModelSim_Simulation_Frequently_Asked_Questions.pdf	863KB
+EGCP-281 Digital Logic Design (VHDL)\Reference\ModelSim-Tutorial.pdf	977KB
+EGCP-371 Signals & Systems\EGCP 371 Signals and Systems Spring 2020.pdf	568KB
+EGCP-371 Signals & Systems\EGCP-371 Signals & Systems_summary.pdf	59KB
+EGCP-371 Signals & Systems\Exams & Quizzes\Midterm 2 Sample Q Paper.pdf	424KB
+EGCP-371 Signals & Systems\Exams & Quizzes\solution to MT1.docx	54KB
+EGCP-371 Signals & Systems\Homework\Assignment 1 (2).docx	53KB
+EGCP-371 Signals & Systems\Homework\Assignment 1.docx	52KB
+EGCP-371 Signals & Systems\Homework\Assignment 2 (1).docx	887KB
+EGCP-371 Signals & Systems\Homework\Assignment 2.docx	43KB
+EGCP-371 Signals & Systems\Homework\Assignment 3.docx	55KB
+EGCP-371 Signals & Systems\Homework\Assignment 4 (1).docx	156KB
+EGCP-371 Signals & Systems\Homework\Assignment 4.docx	470KB
+EGCP-371 Signals & Systems\Homework\Assignment 4.pdf	455KB
+EGCP-371 Signals & Systems\Homework\Complex Numbers- Questions  Solutions.pdf	73KB
+EGCP-371 Signals & Systems\Homework\Solved CW for z-transforms.pdf	620KB
+EGCP-371 Signals & Systems\Homework\Untitled document.docx	887KB
+EGCP-371 Signals & Systems\Lecture Notes\11. Fourier Series and Transforms.pdf	619KB
+EGCP-371 Signals & Systems\Lecture Notes\2. Introduction 2.pdf	865KB
+EGCP-371 Signals & Systems\Lecture Notes\4. Signal Characteristics (1).pdf	276KB
+EGCP-371 Signals & Systems\Lecture Notes\4. Signal Characteristics.pdf	658KB
+EGCP-371 Signals & Systems\Lecture Notes\5. Sampling and Aliasing.pdf	647KB
+EGCP-371 Signals & Systems\Lecture Notes\7. Laplace Transform.pdf	240KB
+EGCP-371 Signals & Systems\Lecture Notes\9. Z Transform (updated).pdf	266KB
+EGCP-371 Signals & Systems\Lecture Notes\Laplace Transform Extra Notes.pdf	453KB
+EGCP-371 Signals & Systems\Reference\laplace_table.pdf	99KB
+EGCP-371 Signals & Systems\Reference\Z transform Table.pdf	120KB
+EGCP-381 Computer Architecture (VHDL Processor)\EGCP-381 Computer Architecture (VHDL Processor)_summary.pdf	61KB
+EGCP-381 Computer Architecture (VHDL Processor)\Homework\381 HW 2 - Dylan Sanderson.pdf	644KB
+EGCP-381 Computer Architecture (VHDL Processor)\Homework\hw3 381 - dylan sanderson.pdf	329KB
+EGCP-381 Computer Architecture (VHDL Processor)\Labs\381 lab 4 - dylan sanderson.pdf	536KB
+EGCP-381 Computer Architecture (VHDL Processor)\Labs\381 lab 5 -dylan sanderson.pdf	490KB
+EGCP-381 Computer Architecture (VHDL Processor)\Labs\381 Lab 6 - Dylan Sanderson (1).pdf	604KB
+EGCP-381 Computer Architecture (VHDL Processor)\Labs\381 Lab 6 - Dylan Sanderson.pdf	604KB
+EGCP-381 Computer Architecture (VHDL Processor)\Labs\dylan sanderson - 381 - lab 3.pdf	352KB
+EGCP-381 Computer Architecture (VHDL Processor)\Labs\Dylan Sanderson 381 Lab 2.pdf	394KB
+EGCP-381 Computer Architecture (VHDL Processor)\Labs\Lab1-Dylan Sanderson (1).docx	46KB
+EGCP-381 Computer Architecture (VHDL Processor)\Labs\Lab1-Dylan Sanderson.docx	46KB
+EGCP-381 Computer Architecture (VHDL Processor)\Lecture Notes\06-Performance-381.pdf	118KB
+EGCP-381 Computer Architecture (VHDL Processor)\Lecture Notes\07-Pipelining-381.pdf	761KB
+EGCP-381 Computer Architecture (VHDL Processor)\Lecture Notes\AdvancedExamplesVHDL.pdf	895KB
+EGCP-381 Computer Architecture (VHDL Processor)\Lecture Notes\Lecture4.ppt	206KB
+EGCP-381 Computer Architecture (VHDL Processor)\Misc\message (10).txt	2KB
+EGCP-381 Computer Architecture (VHDL Processor)\Misc\message (2).txt	3KB
+EGCP-381 Computer Architecture (VHDL Processor)\Misc\message (5).txt	3KB
+EGCP-381 Computer Architecture (VHDL Processor)\Misc\message (8).txt	2KB
+EGCP-381 Computer Architecture (VHDL Processor)\Misc\message.txt	2KB
+EGCP-381 Computer Architecture (VHDL Processor)\Reference\Cortex-M for Beginners - 2017_EN_v2.pdf	926KB
+EGCP-441 Advanced Electronics (CMOS)\EGCP-441 Advanced Electronics (CMOS)_summary.pdf	63KB
+EGCP-441 Advanced Electronics (CMOS)\EGCP441_Fall 2020.pdf	191KB
+EGCP-441 Advanced Electronics (CMOS)\Exams & Quizzes\quiz 1 Dylan Sanderson.pdf	87KB
+EGCP-441 Advanced Electronics (CMOS)\Exams & Quizzes\quiz2-dylan sanderson.pdf	95KB
+EGCP-441 Advanced Electronics (CMOS)\Exams & Quizzes\quiz_2.pdf	180KB
+EGCP-441 Advanced Electronics (CMOS)\Homework\441 HW3 - Dylan Sanderson.pdf	1,015KB
+EGCP-441 Advanced Electronics (CMOS)\Homework\441-HW2-Dylan Sanderson (2).pdf	350KB
+EGCP-441 Advanced Electronics (CMOS)\Homework\441-HW2-Dylan Sanderson.pdf	350KB
+EGCP-441 Advanced Electronics (CMOS)\Homework\Dylan Sanderson-EGCP441 HW1.pdf	682KB
+EGCP-441 Advanced Electronics (CMOS)\Homework\Homework No 1.pdf	152KB
+EGCP-441 Advanced Electronics (CMOS)\Labs\441 Lab 5 - Dylan Sanderson (1).pdf	342KB
+EGCP-441 Advanced Electronics (CMOS)\Labs\441 Lab 5 - Dylan Sanderson.pdf	207KB
+EGCP-441 Advanced Electronics (CMOS)\Labs\441 Lab 6 - dylan sanderson.pdf	500KB
+EGCP-441 Advanced Electronics (CMOS)\Labs\441 Lab2 - Dylan Sanderson.pdf	510KB
+EGCP-441 Advanced Electronics (CMOS)\Labs\Dylan Sanderson - 441Lab1.pdf	594KB
+EGCP-441 Advanced Electronics (CMOS)\Labs\dylan sanderson-441-lab3.pdf	895KB
+EGCP-441 Advanced Electronics (CMOS)\Labs\egcp 441 - lab 4 - dylan sanderson.pdf	413KB
+EGCP-441 Advanced Electronics (CMOS)\Labs\EGCP 441 – Advanced Electronics for Computer Engineering (Fall 2020) Lab No 7_ Implementation of Combinational Logic.pdf	404KB
+EGCP-441 Advanced Electronics (CMOS)\Labs\Lab No 1.pdf	144KB
+EGCP-441 Advanced Electronics (CMOS)\Labs\Lab6-Report.docx	180KB
+EGCP-441 Advanced Electronics (CMOS)\Labs\Lab6_1.docx	306KB
+EGCP-441 Advanced Electronics (CMOS)\Lecture Notes\EGCP441-Lecture No 2-MOS Device.pdf	377KB
+EGCP-441 Advanced Electronics (CMOS)\Lecture Notes\EGCP441-Lecture No 3-MOSFET I-V Characteristics.pdf	556KB
+EGCP-441 Advanced Electronics (CMOS)\Misc\control_stage2.txt	4KB
+EGCP-441 Advanced Electronics (CMOS)\Misc\control_stage3.txt	6KB
+EGCP-441 Advanced Electronics (CMOS)\Projects\441 Project - Aaron Nguyen, Chris Baker, Dylan Sanderson.pdf	239KB
+EGCP-441 Advanced Electronics (CMOS)\Projects\Final Project.pdf	196KB
+EGCP-441 Advanced Electronics (CMOS)\Projects\441 Project\441 final\Final Project.pdf	196KB
+EGCP-441 Advanced Electronics (CMOS)\Projects\441 Project\441 final\Model.txt	1KB
+EGCP-441 Advanced Electronics (CMOS)\Projects\Final Project Files\Final Project.pdf	196KB
+EGCP-441 Advanced Electronics (CMOS)\Projects\Final Project Files\Model.txt	1KB
+EGCP-441 Advanced Electronics (CMOS)\Reference\Sample Lab Report.docx	386KB
+EGCP-441 Advanced Electronics (CMOS)\Reference\sedra8e_solvedproblems_ch05.pdf	837KB
+EGCP-446 Advanced Digital Design (Verilog)\EGCP-446 Advanced Digital Design (Verilog)_summary.pdf	62KB
+EGCP-446 Advanced Digital Design (Verilog)\Exams & Quizzes\Exam No 1.pdf	398KB
+EGCP-446 Advanced Digital Design (Verilog)\Homework\446 hw 1 dylan sanderson.pdf	361KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\dylan sanderson - 446 lab 1.pdf	176KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\dylan sanderson 446 lab 2.pdf	117KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\Lab No 1.pdf	93KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\Lab No 3.pdf	179KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\Lab No 4-1.pdf	138KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\Lab No 5-1.pdf	330KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\lab3\lab3.ip_user_files\README.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\lab4\lab4.runs\impl_1\htr.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\lab4\lab4.runs\synth_1\htr.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\lab5 (Vivado)\446lab5.ip_user_files\README.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\lab5 (Vivado)\446lab5.runs\impl_1\htr.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\lab5 (Vivado)\446lab5.runs\synth_1\htr.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\lab5 (Vivado)\446lab5.sim\sim_1\behav\xsim\xsim.dir\Top_behav\Compile_Options.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Labs\lab5 (Vivado)\446lab5.sim\sim_1\behav\xsim\xsim.dir\Top_behav\TempBreakPointFile.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Lecture Notes\EGCP446-Lecture No 10.pdf	797KB
+EGCP-446 Advanced Digital Design (Verilog)\Lecture Notes\EGCP446-Lecture No 6.pdf	677KB
+EGCP-446 Advanced Digital Design (Verilog)\Lecture Notes\EGCP446-Lecture No 7.pdf	716KB
+EGCP-446 Advanced Digital Design (Verilog)\Lecture Notes\EGCP446-Lecture No 8.pdf	434KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\446 project - part A.pdf	433KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\446 project part A.pdf	429KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\446 project partA.pdf	459KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\446 Project partB.pdf	418KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\446 project _ part A.pdf	459KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\projectPartA\projectPartA.runs\impl_1\htr.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\projectPartA\projectPartA.runs\synth_1\htr.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\project_3\project_3.ip_user_files\README.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\project_3\project_3.sim\sim_1\behav\xsim\xsim.dir\tb_MooreFSM_behav\Compile_Options.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\project_3\project_3.sim\sim_1\behav\xsim\xsim.dir\tb_MooreFSM_behav\TempBreakPointFile.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\project_4\project_4.ip_user_files\README.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\project_4\project_4.sim\sim_1\behav\xsim\xsim.dir\mealyFSM_behav\Compile_Options.txt	0KB
+EGCP-446 Advanced Digital Design (Verilog)\Projects\project_4\project_4.sim\sim_1\behav\xsim\xsim.dir\mealyFSM_behav\TempBreakPointFile.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\EGCP-447 Cyber-Physical Systems Security_summary.pdf	62KB
+EGCP-447 Cyber-Physical Systems Security\Exams & Quizzes\Final_Exam_Fall_2020_Part_3.pdf	282KB
+EGCP-447 Cyber-Physical Systems Security\Exams & Quizzes\in class quiz.pdf	112KB
+EGCP-447 Cyber-Physical Systems Security\Exams & Quizzes\Quizzes.pdf	844KB
+EGCP-447 Cyber-Physical Systems Security\Homework\447 hw1.pdf	126KB
+EGCP-447 Cyber-Physical Systems Security\Homework\EGCP 447 In Class Assignment - HW Trojans.pdf	217KB
+EGCP-447 Cyber-Physical Systems Security\Homework\EGCP 447 In class assignment Hardware Trojan1.pdf	224KB
+EGCP-447 Cyber-Physical Systems Security\Homework\EGCP 447 In_class assiognment Hardware Trojan.docx	38KB
+EGCP-447 Cyber-Physical Systems Security\Homework\Hardware Trojans Assignment.pdf	151KB
+EGCP-447 Cyber-Physical Systems Security\Homework\Programming Assignment 2.pdf	314KB
+EGCP-447 Cyber-Physical Systems Security\Homework\assignment2\assignment2.ip_user_files\README.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Homework\assignment2\assignment2.sim\sim_1\behav\xsim\xsim.dir\tb_C17_behav\Compile_Options.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Homework\assignment2\assignment2.sim\sim_1\behav\xsim\xsim.dir\tb_C17_behav\TempBreakPointFile.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Labs\Lab_7_FPGA_Lab_2.pdf	96KB
+EGCP-447 Cyber-Physical Systems Security\Labs\Part1Lab2_TB.txt	6KB
+EGCP-447 Cyber-Physical Systems Security\Labs\lab1\lab1.ip_user_files\README.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Labs\lab1\lab1.sim\sim_1\behav\xsim\xsim.dir\full_adder_2_HA_tb_behav\Compile_Options.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Labs\lab1\lab1.sim\sim_1\behav\xsim\xsim.dir\full_adder_2_HA_tb_behav\TempBreakPointFile.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Labs\lab1\lab1.sim\sim_1\behav\xsim\xsim.dir\halfAdder_TB_behav\Compile_Options.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Labs\lab1\lab1.sim\sim_1\behav\xsim\xsim.dir\halfAdder_TB_behav\TempBreakPointFile.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Labs\lab2\lab2.ip_user_files\README.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Labs\lab2\lab2.runs\synth_1\htr.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Labs\lab2\lab2.sim\sim_1\behav\xsim\xsim.dir\tb_fullAdder_behav\Compile_Options.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Labs\lab2\lab2.sim\sim_1\behav\xsim\xsim.dir\tb_fullAdder_behav\TempBreakPointFile.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Labs\lab2\lab2.sim\sim_1\behav\xsim\xsim.dir\tb_fullSubtractor_behav\Compile_Options.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Labs\lab2\lab2.sim\sim_1\behav\xsim\xsim.dir\tb_fullSubtractor_behav\TempBreakPointFile.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Lecture Notes\EGCP447-Lecture Final Exam Review.pdf	974KB
+EGCP-447 Cyber-Physical Systems Security\Lecture Notes\EGCP447-Lecture Midterm Exam Review.pdf	387KB
+EGCP-447 Cyber-Physical Systems Security\Lecture Notes\EGCP447-Lecture No 17 and 18 Hardware Trojans.pdf	4,617KB
+EGCP-447 Cyber-Physical Systems Security\Lecture Notes\EGCP447-Lecture No 20 Internet of Things Security.pdf	14,787KB
+EGCP-447 Cyber-Physical Systems Security\Lecture Notes\lecture slides\Counterfeit Detection and Avoidance.pdf	3,083KB
+EGCP-447 Cyber-Physical Systems Security\Lecture Notes\lecture slides\Hardware Trojans.pdf	2,437KB
+EGCP-447 Cyber-Physical Systems Security\Lecture Notes\lecture slides\IoT.pdf	2,715KB
+EGCP-447 Cyber-Physical Systems Security\Lecture Notes\lecture slides\Logic Locking, Ic Camouflaging, Split Manufacturing .pdf	2,152KB
+EGCP-447 Cyber-Physical Systems Security\Lecture Notes\lecture slides\Quizzes.pdf	844KB
+EGCP-447 Cyber-Physical Systems Security\Lecture Notes\lecture slides\Side channel analysis attacks.pdf	1,873KB
+EGCP-447 Cyber-Physical Systems Security\Projects\Hamming_Encoder\Hamming_Encoder.ip_user_files\README.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Projects\Hamming_Encoder\Hamming_Encoder.sim\sim_1\behav\xsim\xsim.dir\decoder1_behav\Compile_Options.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Projects\Hamming_Encoder\Hamming_Encoder.sim\sim_1\behav\xsim\xsim.dir\decoder1_behav\TempBreakPointFile.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Projects\Hamming_Encoder\Hamming_Encoder.sim\sim_1\behav\xsim\xsim.dir\encoder1_behav\Compile_Options.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Projects\Hamming_Encoder\Hamming_Encoder.sim\sim_1\behav\xsim\xsim.dir\encoder1_behav\TempBreakPointFile.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Projects\Hamming_Encoder\Hamming_Encoder.sim\sim_1\behav\xsim\xsim.dir\tb_decoder1_behav\Compile_Options.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Projects\Hamming_Encoder\Hamming_Encoder.sim\sim_1\behav\xsim\xsim.dir\tb_decoder1_behav\TempBreakPointFile.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Projects\Hamming_Encoder\Hamming_Encoder.sim\sim_1\behav\xsim\xsim.dir\tb_encoder1_behav\Compile_Options.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Projects\Hamming_Encoder\Hamming_Encoder.sim\sim_1\behav\xsim\xsim.dir\tb_encoder1_behav\TempBreakPointFile.txt	0KB
+EGCP-447 Cyber-Physical Systems Security\Projects\term paper\Hardware Trojans in IoT Devices.pptx	1,218KB
+EGCP-447 Cyber-Physical Systems Security\Projects\term paper\Teamwork Contribution Sheet-1.docx	13KB
+EGCP-447 Cyber-Physical Systems Security\Projects\term paper\term paper proposal.pdf	91KB
+EGCP-447 Cyber-Physical Systems Security\Projects\term paper\term paper proposal1.pdf	91KB
+EGCP-447 Cyber-Physical Systems Security\Projects\term paper\TrojReprot_JC_TTpdf.pdf	310KB
+EGCP-447 Cyber-Physical Systems Security\Reference\Designof74HammingEncoderandDecoderUsingVHDL.pdf	211KB
+EGCP-447 Cyber-Physical Systems Security\Reference\electronics-07-00124.pdf	1,810KB
+EGCP-447 Cyber-Physical Systems Security\Reference\Flash Memory for Hardware Security (IEEE S&P 2012).pdf	898KB
+EGCP-447 Cyber-Physical Systems Security\Reference\jsan-08-00042.pdf	2,087KB
+EGCP-447 Cyber-Physical Systems Security\Reference\Xilinx Vivado Tutorial.pdf	943KB
+EGCP-450 Embedded Systems (MSP432 ARM)\EGCP-450 Embedded Systems (MSP432 ARM)_summary.pdf	63KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\450 lab 4 - dylan sanderson.pdf	70KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\dylan sanderson 450 lab 2.pdf	417KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\egcp 450 lab 1 - Dylan Sanderson.pdf	570KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\egcp 450 lab 3 - dylan sanderson.pdf	100KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\EGCP 450 lab 4 - Dylan sanderson.pdf	72KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\EGCP450_lab5_final.docx	18KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\Lab 1_.pdf	115KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\Lab 6 egcp 450.pdf	75KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\lab4.docx	308KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\EGCP_450_Blink_Example\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\GPIO_MSP432asm\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\hi\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\lab1\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\lab3files\Lab3Part1\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\Lab3Part1\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\Lab4\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\Lab5Part1\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\Lab5Part2\Lab5Part2\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\Lab6Part1\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\lol\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\Squarewaves_MSP432asm\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\SSR_MSP432asm\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\SSR_MSP432asm (copy 2)\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS projects\Switch_MSP432asm\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS workspaces\workspace_v10\helloWorld\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS workspaces\workspace_v10\lab1\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS workspaces\workspace_v10\lab3\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Labs\CCS workspaces\workspace_v10\test\targetConfigs\readme.txt	1KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Lecture Notes\02-IntroCortexM_Assembly-450.pptx	745KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Lecture Notes\04-Stacks_Functions_ControlFlow-450.pptx	525KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Lecture Notes\06-IntroIO-450.pptx	900KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Lecture Notes\07-SysTickTimer-450.pdf	349KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Lecture Notes\11-Stack_LocalVars_Recursion-450.pdf	347KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Lecture Notes\13-SyncIO-450.pdf	239KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Misc\message (18).txt	4KB
+EGCP-450 Embedded Systems (MSP432 ARM)\Misc\message.txt	3KB
+EGCP-470 Senior Design I\EGCP-470 Senior Design I_summary.pdf	54KB
+EGCP-470 Senior Design I\Misc\check requests\CheckRequest-IRA - EGCP 470 - Dylan Sanderson.pdf	337KB
+EGCP-470 Senior Design I\Misc\check requests\CheckRequest-IRA - EGCP 470 Dylan Sanderson.pdf	313KB
+EGCP-470 Senior Design I\Misc\check requests\CheckRequest-IRA.pdf	259KB
+EGCP-470 Senior Design I\Projects\EGCP 470 - BiWeekly Report - Team G.pdf	212KB
+EGCP-471 Senior Design II (Object Detection)\EGCP-471 Senior Design II (Object Detection)_summary.pdf	61KB
+EGCP-471 Senior Design II (Object Detection)\Projects\471_Project-main (GitHub repo)\README.md	0KB
+EGCP-471 Senior Design II (Object Detection)\Projects\Haar cascade training\StaplerCascade\classifier\log.txt	612KB
+EGCP-471 Senior Design II (Object Detection)\Projects\Haar cascade training\StaplerCascade (earlier attempt)\classifier\log.txt	527KB
+EGEE-203 Electric Circuits\EE203 outline .pdf	124KB
+EGEE-203 Electric Circuits\EE203COLF19.doc	43KB
+EGEE-203 Electric Circuits\EGEE-203 Electric Circuits_summary.pdf	61KB
+EGEE-203 Electric Circuits\Exams & Quizzes\EE203MT1SolnF19.pdf	845KB
+EGEE-203 Electric Circuits\Exams & Quizzes\EE203Q10SolnF19.pdf	270KB
+EGEE-203 Electric Circuits\Exams & Quizzes\EE203Q11SolnF19.pdf	208KB
+EGEE-203 Electric Circuits\Exams & Quizzes\EE203Q3SolnF19.pdf	140KB
+EGEE-203 Electric Circuits\Exams & Quizzes\EE203Q4SolnF19.pdf	179KB
+EGEE-203 Electric Circuits\Exams & Quizzes\EE203Q6SolnF19.pdf	271KB
+EGEE-203 Electric Circuits\Exams & Quizzes\EE203Q7SolnF19.pdf	176KB
+EGEE-203 Electric Circuits\Exams & Quizzes\EE203Q8SolnF19.pdf	265KB
+EGEE-203 Electric Circuits\Exams & Quizzes\EE203Q9SolnF19.pdf	460KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203MT1SolutionS18.pdf	836KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203MT2SolnS18.pdf	1,035KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203Q10SolnS18.pdf	168KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203Q1SolutionS18.pdf	133KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203Q2SolutionS18.pdf	130KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203Q3SolutionS18.pdf	140KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203Q4SolnS18.pdf	427KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203Q5SolnS18.pdf	223KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203Q6SolnS18.pdf	151KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203Q7SolnS18.pdf	194KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203Q8SolnS18.pdf	189KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\EE203Q9SolnS18.pdf	192KB
+EGEE-203 Electric Circuits\Exams & Quizzes\Spring 2018 quiz & exam solutions\Midterm #1 Solns.pdf	176KB
+EGEE-203 Electric Circuits\Homework\EE203Chapter3Ass3F19.pdf	78KB
+EGEE-203 Electric Circuits\Labs\dylan sanderson - 203L Lab 2.pdf	877KB
+EGEE-203 Electric Circuits\Labs\dylan sanderson 203L Lab 2.pdf	879KB
+EGEE-203 Electric Circuits\Labs\Dylan Sanderson Exp 6 - EGEE 203L.pdf	489KB
+EGEE-203 Electric Circuits\Labs\EGEE 203 - Lab 8 - dylan sanderson.pdf	395KB
+EGEE-203 Electric Circuits\Labs\EGEE 203 - Lab 8.pdf	395KB
+EGEE-203 Electric Circuits\Labs\EGEE 203L - Experiment 1.pdf	501KB
+EGEE-203 Electric Circuits\Labs\EGEE 203L Dylan Sanderson - Experiment 1.pdf	501KB
+EGEE-203 Electric Circuits\Lecture Notes\Thevenin Chart Outline (With Methods).pdf	110KB
+EGEE-203 Electric Circuits\Lecture Notes\Thevenin_Type_1.pptx	281KB
+EGEE-203 Electric Circuits\Reference\Textbook - Hayt Engineering Circuit Analysis 8e.pdf	31,297KB
+EGEE-303 Electronics\1.1. 303 Syllabus and Policies.pdf	126KB
+EGEE-303 Electronics\1.2. 303 Syllabus and Policies.pdf	125KB
+EGEE-303 Electronics\EGEE-303 Electronics_summary.pdf	57KB
+EGEE-303 Electronics\Exams & Quizzes\EGEE-303_Final Exam_Dylan Sanderson.pdf	370KB
+EGEE-303 Electronics\Exams & Quizzes\EGEE_EXAM2_Dylan_Sanderson.pdf	283KB
+EGEE-303 Electronics\Homework\3.1. EGEE 303 HMWK #1.pdf	792KB
+EGEE-303 Electronics\Homework\3.2. EGEE 303 HMWK #5.pdf	802KB
+EGEE-303 Electronics\Homework\3.2. EGEE 303 Homework #5 Statement of Problems.pdf	1,011KB
+EGEE-303 Electronics\Homework\3.2. Statement of Problems for HMWK #3.pdf	713KB
+EGEE-303 Electronics\Homework\3.3. EGEE 303 HMWK #6.pdf	913KB
+EGEE-303 Electronics\Homework\Ee303 a2.pdf	639KB
+EGEE-303 Electronics\Homework\Ee303_HMWK2_Dylan_Sanderson.pdf	639KB
+EGEE-303 Electronics\Homework\HW3_Dylan_Sanderson.pdf	634KB
+EGEE-303 Electronics\Lecture Notes\2.3. FET, 91 Pages.pdf	996KB
+EGEE-303 Electronics\Lecture Notes\2.4. BJT Small Signal, 65 Pages.pdf	759KB
+EGEE-303 Electronics\Lecture Notes\2.6. Op Amps, 22 Pages.pdf	852KB
+EGEE-303 Electronics\Misc\email.docx	15KB
+EGEE-303 Electronics\Misc\message (14).txt	4KB
+EGEE-303 Electronics\Misc\message.txt	3KB
+EGEE-303 Electronics\Projects\4.1. EGEE 303 Project -Dylan Sanderson.pdf	418KB
+EGEE-303 Electronics\Projects\4.1. EGEE 303 Project.docx	81KB
+EGEE-303L Electronics Lab\EGEE-303L Electronics Lab_summary.pdf	59KB
+EGEE-303L Electronics Lab\JYU_EE303L_03_25832_F2020_SYLLABUS.pdf	242KB
+EGEE-303L Electronics Lab\Exams & Quizzes\303L_Q03_JYU.pdf	73KB
+EGEE-303L Electronics Lab\Exams & Quizzes\303L_Q09_CONST_CURRENT.pdf	74KB
+EGEE-303L Electronics Lab\Exams & Quizzes\EGEE303L_F2020_FINAL_JYU.pdf	115KB
+EGEE-303L Electronics Lab\Exams & Quizzes\EGEE303L_JYU_Q04.pdf	64KB
+EGEE-303L Electronics Lab\Exams & Quizzes\quiz 4 .pdf	90KB
+EGEE-303L Electronics Lab\Labs\303 Lab 4 - dylan sanderson (1).pdf	468KB
+EGEE-303L Electronics Lab\Labs\303 Lab 4 - dylan sanderson.pdf	468KB
+EGEE-303L Electronics Lab\Labs\303L - Lab5 - dylan sanderson.pdf	491KB
+EGEE-303L Electronics Lab\Labs\303L - lab8 dylan sanderson (1).pdf	220KB
+EGEE-303L Electronics Lab\Labs\303L - lab8 dylan sanderson.pdf	217KB
+EGEE-303L Electronics Lab\Labs\303L_L05_IC_VS_VCE.pdf	82KB
+EGEE-303L Electronics Lab\Labs\303L_LAB08_VDB_EMITTER_FEEDBACK.pdf	145KB
+EGEE-303L Electronics Lab\Labs\303L_LAB_02B_F2020.pdf	131KB
+EGEE-303L Electronics Lab\Labs\Dylan Sanderson - 303Lab2.pdf	597KB
+EGEE-303L Electronics Lab\Labs\Dylan Sanderson -303Lab 1.docx	146KB
+EGEE-303L Electronics Lab\Labs\egee 303l Lab 7 - dylan sanderson.pdf	187KB
+EGEE-303L Electronics Lab\Labs\EGEE303L - LAB03, F2020, 2020-09-18.pdf	585KB
+EGEE-303L Electronics Lab\Labs\EGEE303L_L02A_F2020.pdf	131KB
+EGEE-303L Electronics Lab\Labs\EGEE303L_L03_F2020.pdf	130KB
+EGEE-303L Electronics Lab\Labs\EGEE303L_LAB01_F2020.pdf	123KB
+EGEE-323 Probability & Random Variables\EGEE-323 Probability & Random Variables_summary.pdf	56KB
+EGEE-323 Probability & Random Variables\Exams & Quizzes\323 Review Solutions Requested for MT-1-20S Prep.pdf	332KB
+EGEE-323 Probability & Random Variables\Exams & Quizzes\323-20F MT-2 Study Guide.pdf	77KB
+EGEE-323 Probability & Random Variables\Exams & Quizzes\323-20F Study Guide.pdf	121KB
+EGEE-323 Probability & Random Variables\Exams & Quizzes\323-20S MT2 Scores.pdf	114KB
+EGEE-323 Probability & Random Variables\Lecture Notes\02-Lesson Outline 323 Sec 1.3b.pdf	663KB
+EGEE-323 Probability & Random Variables\Lecture Notes\05-Lesson OUTLINE 323 Sec 1.5 Independent Events.pdf	580KB
+EGEE-323 Probability & Random Variables\Lecture Notes\06-Lesson OUTLINE 323 Sec 1.6-7 Combined Exp-Permutations-Bernoulli.pdf	546KB
+EGEE-323 Probability & Random Variables\Lecture Notes\07-Lesson OUTLINE 323 Sec 2.0-2 Random Variables - Distribution Functions.pdf	676KB
+EGEE-323 Probability & Random Variables\Lecture Notes\08-Lesson OUTLINE 323 Sec 2.3 Impulse and Density Functions.pdf	891KB
+EGEE-323 Probability & Random Variables\Lecture Notes\09-Lecture OUTLINE Section 2.4.pdf	973KB
+EGEE-323 Probability & Random Variables\Lecture Notes\11 Lecture 323 OUTLINE Section 2.6 -Rev B.pdf	785KB
+EGEE-323 Probability & Random Variables\Lecture Notes\12-Lecture Notes On Item 7 Integral Examples.pdf	549KB
+EGEE-323 Probability & Random Variables\Lecture Notes\12-Lecture OUTLINE 323 Section 3.1-2.pdf	566KB
+EGEE-323 Probability & Random Variables\Lecture Notes\14-Lesson OUTLINE Sec 4.0-2 Multiple Random VariablesC.pdf	794KB
+EGEE-323 Probability & Random Variables\Lecture Notes\15-Lecture OUTLINE Section 4.3 Joint Density Functions.pdf	227KB
+EGEE-323 Probability & Random Variables\Lecture Notes\16-Lecture OUTLINE Sections 4.4 Conditional Joint Probabilty Distributions.pdf	216KB
+EGEE-323 Probability & Random Variables\Misc\message.txt	3KB
+EGEE-401 Engineering Economics\EGEE-401 Engineering Economics_summary.pdf	58KB
+EGEE-401 Engineering Economics\Syllabus 401 19F  Garner 20190824.pdf	572KB
+EGEE-401 Engineering Economics\Exams & Quizzes\24-EGEE 401-19F Study Guide for Final Exam.pdf	422KB
+EGEE-401 Engineering Economics\Exams & Quizzes\401 final hand calcs.pdf	22,399KB
+EGEE-401 Engineering Economics\Exams & Quizzes\401-19F Final Prep Review Solutions.pdf	196KB
+EGEE-401 Engineering Economics\Exams & Quizzes\9-401 MT-1 Prep Solutions Req by Students.pdf	505KB
+EGEE-401 Engineering Economics\Exams & Quizzes\EGCP_401_Final Exam.pdf	390KB
+EGEE-401 Engineering Economics\Exams & Quizzes\exam 2 hand calcs - dylan sanderson.pdf	3,911KB
+EGEE-401 Engineering Economics\Exams & Quizzes\q3 - hand calcs - dylan sanderson.pdf	412KB
+EGEE-401 Engineering Economics\Exams & Quizzes\quiz 2 - dylan sanderson.pdf	50KB
+EGEE-401 Engineering Economics\Homework\1-CFDs for HW-1.pdf	15KB
+EGEE-401 Engineering Economics\Homework\1-Ch1-5-14th Even Prob Ans.pdf	139KB
+EGEE-401 Engineering Economics\Homework\1-Ch3-14th HW Prob Images.pdf	363KB
+EGEE-401 Engineering Economics\Homework\2-CFDs for HW-2.pdf	14KB
+EGEE-401 Engineering Economics\Homework\4-Ch4-14th HW Prob Images.pdf	809KB
+EGEE-401 Engineering Economics\Homework\401 HW2 - dylan sanderson.pdf	154KB
+EGEE-401 Engineering Economics\Lecture Notes\9-Lecture OUTLINE - Ch 6 Levelized CF Analysis.pdf	448KB
+EGEE-401 Engineering Economics\Projects\3-HW Case A Famous Cases Assignment.pdf	428KB
+EGEE-401 Engineering Economics\Projects\EGCP 401 Case Study Project.pdf	77KB
+EGEE-401 Engineering Economics\Projects\Group_Project1.pdf	139KB
+EGEE-401 Engineering Economics\Reference\1-Compound Interest Tables.pdf	639KB
+EGEE-401 Engineering Economics\Reference\19-Tax Template for 12-28b modified.pdf	396KB
+EGEE-401 Engineering Economics\Reference\Textbook - Newnan Engineering Economic Analysis 14e\Newnan D. Engineering Economic Analysis 14ed 2020.pdf	24,584KB
+EGEE-401 Engineering Economics\Reference\Textbook - Newnan Engineering Economic Analysis 14e\Readme-!!! Solutions Manual.txt	1KB
+MATH-250B Differential Equations & Linear Algebra\250b_Schedule_F19.pdf	36KB
+MATH-250B Differential Equations & Linear Algebra\MATH-250B Differential Equations & Linear Algebra_summary.pdf	59KB
+MATH-250B Differential Equations & Linear Algebra\Syllabus_250b_F19.pdf	130KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Info_Exam1_250b.pdf	47KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Info_Exam2_250b.pdf	90KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Info_Exam3_250b (1).pdf	69KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Info_Exam3_250b.pdf	69KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Info_Exam_Final_250b-Sec15.pdf	102KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Solns-Exam1-250B-F19.pdf	266KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Solns-Exam1-review-250B.pdf	120KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Solns-Exam2-250B-F19.pdf	157KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Solns-Exam2-review-250B.pdf	139KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Solns-Exam3-250B-F19.pdf	162KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Solns-Exam3-review-250B.pdf	145KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Solns-Quiz1-250B.pdf	109KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Solns-Quiz2-250B.pdf	126KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\Solns-Quiz3-250B.pdf	120KB
+MATH-250B Differential Equations & Linear Algebra\Exams & Quizzes\third-midterm-solns.pdf	153KB
+MATH-250B Differential Equations & Linear Algebra\Homework\250B_HW_Probs_F19 (10).pdf	83KB
+MATH-250B Differential Equations & Linear Algebra\Homework\250B_HW_Probs_F19 (2).pdf	49KB
+MATH-250B Differential Equations & Linear Algebra\Homework\250B_HW_Probs_F19 (3).pdf	55KB
+MATH-250B Differential Equations & Linear Algebra\Homework\250B_HW_Probs_F19 (4).pdf	55KB
+MATH-250B Differential Equations & Linear Algebra\Homework\250B_HW_Probs_F19 (5).pdf	65KB
+MATH-250B Differential Equations & Linear Algebra\Homework\250B_HW_Probs_F19 (6).pdf	66KB
+MATH-250B Differential Equations & Linear Algebra\Homework\250B_HW_Probs_F19 (7).pdf	81KB
+MATH-250B Differential Equations & Linear Algebra\Homework\250B_HW_Probs_F19 (8).pdf	82KB
+MATH-250B Differential Equations & Linear Algebra\Homework\250B_HW_Probs_F19.pdf	50KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW1-solns.pdf	420KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW10-solns.pdf	647KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW11-solns.pdf	720KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW12-solns.pdf	467KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW13-solns.pdf	750KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW2-solns.pdf	387KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW3-solns.pdf	427KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW5-solns.pdf	426KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW6-solns.pdf	617KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW7-solns.pdf	585KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW8-solns.pdf	321KB
+MATH-250B Differential Equations & Linear Algebra\Homework\HW9-solns.pdf	819KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\1.2-Basic-ideas.pdf	118KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\1.3-Slope-fields.pdf	153KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\1.3-supplement.pdf	217KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\4.2-vector-spaces.pdf	72KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\4.6-bases.pdf	154KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\Ch.3-Determinants.pdf	129KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\Chapter-5-slides-posting.pdf	347KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\slides-1.3_posting.pdf	420KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\slides-1.4.pdf	518KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\slides-1.7-posting.pdf	204KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\slides-2.3_posting.pdf	107KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\slides-2.6.pdf	212KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\slides-Ch3-posting.pdf	218KB
+MATH-250B Differential Equations & Linear Algebra\Lecture Notes\SlopeFieldMatching.pdf	141KB
+Other\Data Structures slides (2020)\18060e20-bde6-4ba5-9d77-d0f64980c65a.pptm	190KB
+Other\Data Structures slides (2020)\27fbce49-7617-4b6f-9365-2f2fdcb5af41.pptm	93KB
+Other\Data Structures slides (2020)\c70dd4ff-d224-4c7a-aafa-7aa1e8f5ece2.pptm	354KB
+Other\Power BI assignment-1\assignment-1-instructions.pdf	28KB
+Other\Power BI assignment-1\Source\Apple-Part1.csv	45KB
+Other\Power BI assignment-1\Source\Apple-Part2.csv	36KB
+Other\R Tweet Analysis Project (Spring 2021)\atcsuf.csv	14KB
+Other\R Tweet Analysis Project (Spring 2021)\Final Report.pdf	75KB
+Other\R Tweet Analysis Project (Spring 2021)\room10.csv	593KB
+Other\R Tweet Analysis Project (Spring 2021)\tidyverse - sustainability.pptx	745KB
+Other\R Tweet Analysis Project (Spring 2021)\projectFiles\Rcode.txt	0KB
+Other\R Tweet Analysis Project (Spring 2021)\projectFiles\room10.csv	593KB
+Other\Unsorted\1592-3159-1-SM.pdf	224KB
+Other\Unsorted\ans-rev1.pdf	659KB
+Other\Unsorted\ans-rev2.pdf	152KB
+Other\Unsorted\FourierSeriesSquareWave.nb	74KB
+Other\Unsorted\Homework3.pdf	85KB
+Other\Unsorted\Hw12.Sol.doc	86KB
+Other\Unsorted\q4- hand calculations.pdf	8KB
+Other\Unsorted\quiz 10.pdf	190KB
+Other\Unsorted\SFML Setup.pdf	116KB
+PHYS-226 Electricity & Magnetism\226 - Syllabus Fall 2019 MW (1 Loss).pdf	113KB
+PHYS-226 Electricity & Magnetism\PHYS-226 Electricity & Magnetism_summary.pdf	60KB
+PHYS-226 Electricity & Magnetism\Exams & Quizzes\226 - Possible Final Exam Problem Solutions.pdf	778KB
+PHYS-226 Electricity & Magnetism\Homework\226 - Problem Sets Complete.pdf	727KB
+PHYS-226 Electricity & Magnetism\Homework\226 Example Problems (2).pdf	85KB
+PHYS-226 Electricity & Magnetism\Homework\226 Example Problems.pdf	84KB
+PHYS-226 Electricity & Magnetism\Homework\226 In Class Problems.pdf	115KB
+PHYS-226 Electricity & Magnetism\Reference\226 - Constants, Conversions  Other Stuff.pdf	82KB
+PHYS-226 Electricity & Magnetism\Reference\226 - Equations D.pdf	62KB
+PHYS-226 Electricity & Magnetism\Reference\Recommendations on Studying Physics.pdf	41KB
+PHYS-226 Electricity & Magnetism\Reference\Textbook - Halliday Fundamentals of Physics 10e.pdf	84,654KB
+PHYS-227 Physics\PHYS-227 Physics_summary.pdf	53KB
+PHYS-227 Physics\Misc\Promo-code227.pdf	185KB
+PHYS-227 Physics\Misc\score227-SR.pdf	33KB
+PHYS-227 Physics\Misc\transcript.txt	3KB
+_Admin\FERPA advising releaseLatest (2).pdf	118KB
+_Admin\FERPA advising releaseLatest.pdf	123KB
+_Admin\final-grades3unit-S19.pdf	223KB
+_Admin\flowchart_fillable_dylanSanderson.pdf	1,721KB
+_Admin\Grades-022419-display.xlsx	15KB
+_Admin\Grades-031719-display.xlsx	17KB
+_Admin\Grades-032419-display.xlsx	17KB
+_Admin\Grades-040819-display.xlsx	18KB
+_Admin\Grades-041519-display.xlsx	18KB
+_Admin\Grades-050919-display.xlsx	20KB
+_Admin\Grades-Final-display (2).xlsx	11KB
+_Admin\Grades-Final-display.xlsx	10KB
+_Admin\IRVINE_to_CSUFULL_for_2018-2019_by_Electrical_Engineering,_B.S..pdf	50KB
+_Admin\OCC_to_CSUFULL_for_2016-2017_by_Electrical_Engineering.pdf	6KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\patents.txt	23KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Apache 2.0 License - English.pdf	96KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Boost 1.0 License - English.pdf	27KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\BSD 3-clause License - English.rtf	2KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\BSIM License - English.rtf	2KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Code Project Open License - English.rtf	14KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\CryptoPP 5.6 License - English.pdf	8KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.0 License Agreement - English.rtf	39KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.0 License Agreement - French.rtf	42KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.0 License Agreement - German.rtf	39KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.0 License Agreement - Japanese.rtf	63KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.0 License Agreement - Korean.rtf	117KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.0 License Agreement - Simplified Chinese.rtf	49KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.6.1 License Agreement - English.rtf	4KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.6.1 License Agreement - French.rtf	6KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.6.1 License Agreement - German.rtf	6KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.6.1 License Agreement - Japanese.rtf	14KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.6.1 License Agreement - Korean.rtf	16KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\DotNet 4.6.1 License Agreement - Simplified Chinese.rtf	9KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\FreeType License - English.txt	7KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\GNU General Public License 2.0 - English.rtf	28KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\GNU Lesser General Public License 2.1 - English.rtf	31KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\HDF5License.rtf	5KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\ICU License.rtf	2KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Lib TIFF License.rtf	1KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\LibPNG License - English.rtf	5KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\LLVM License - English.rtf	43KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\MARS 1.0 License - English.pdf	6KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Mesa 1.0 License - English.pdf	55KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Microsoft Platform SDK Server 2003 SP1 License - English.rtf	91KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Microsoft Public License_license.pdf	28KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Microsoft Visual C++ 2015 Runtime Libraries - English.rtf	58KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\MIT 1.0 License - English.rtf	1KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\MIT-LibXML Style License - English.rtf	2KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\MIT-X LibXML Style License.rtf	1KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\MIT-X License.rtf	1KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\MIT-X YAJL Style License.rtf	1KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Modified BSD 3-clause License - English.rtf	2KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Mozilla Public License 2.0.rtf	17KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\NI CDS - Combined License Agreement - English.rtf	16KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\NI Released License Agreement - English.rtf	376KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\NI Released License Agreement - French.rtf	231KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\NI Released License Agreement - German.rtf	94KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\NI Released License Agreement - Italian.rtf	91KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\NI Released License Agreement - Japanese.rtf	293KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\NI Released License Agreement - Korean.rtf	271KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\NI Released License Agreement - Simplified Chinese.rtf	162KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\NI Released License Agreement - Spanish.rtf	93KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\NICTA 1.0 License - English.pdf	46KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\OPC Classic COM License - English.pdf	40KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\OpenSSL 1.0 License - English.pdf	9KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\PDFSharp 1.0 License - English.pdf	35KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Spice Style MIT License - English.rtf	1KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\STLPort 1.0 License - English.pdf	55KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\Strtod License.rtf	1KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\TaskScheduler_license.pdf	29KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\UPX 1.0 license - English.pdf	29KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\WordNet 2.1 License - English.txt	2KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\wxWindows 3.1 License - English.pdf	29KB
+_Software\NI Circuit Design Suite 14.1 (Multisim installer)\Licenses\zlib License - English.pdf	22KB
